@@ -1,8 +1,8 @@
 {
-  "name": "templates-react",
+  "name": "wallet-leopards-team-FRONTEND",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jekiekolya.github.io/Templates-REACT/",
+  "homepage": "https://jekiekolya.github.io/wallet-leopards-team-FRONTEND/",
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
