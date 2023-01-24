@@ -1,0 +1,92 @@
+@import 'assets/styles/index.scss';
+
+%btnGreen {
+  cursor: pointer;
+  background: var(--btn-green-color);
+  border-radius: 20px;
+  color: var(--btn-text-white);
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+
+  border: 0;
+  position: relative;
+
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translate(0, 0);
+
+  &:hover:not(.active) {
+    box-shadow: 0px 3px 15px 1px var(--btn-green-color-hover);
+  }
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0px 4px 13px 1px var(--btn-green-color-active);
+  }
+}
+
+%btnTransperentBlue {
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  border: 2px solid var(--btn-blue-color);
+  border-radius: 30px;
+  color: var(--btn-text-blue);
+
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.1em;
+
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translate(0, 0);
+
+  &:hover:not(.active) {
+    box-shadow: 0px 3px 10px var(--btn-blue-color-hover);
+  }
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0px 4px 13px var(--btn-blue-color-active);
+  }
+}
+
+%btnGreenPlus {
+  cursor: pointer;
+  background: var(--btn-green-color);
+  border: 2px solid var(--btn-blue-color);
+  border-radius: 30px;
+  color: var(--btn-text-white);
+  box-shadow: var(--green-circle-shadow);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translate(0, 0);
+
+  &:hover:not(.active) {
+    box-shadow: 0px 3px 10px var(--btn-blue-color-hover);
+  }
+  &:active {
+    transform: translateY(-1px);
+    box-shadow: 0px 4px 13px var(--btn-blue-color-active);
+  }
+}
