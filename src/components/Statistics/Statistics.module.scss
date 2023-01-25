@@ -1,14 +1,79 @@
 @import 'assets/styles/index.scss';
 
+.sectionTMP {
+  background: rgba(255, 255, 255, 0.4);
+  //
+  backdrop-filter: blur(25px);
+}
 .title {
   font-family: 'Poppins';
   font-style: normal;
   font-weight: 400;
   font-size: 30px;
   line-height: 45px;
+
+  padding-bottom: 20px;
+  padding-left: 15px;
+}
+
+.mainBox {
+  display: flex;
+  gap: 32px;
 }
 
 .doughnut {
   width: 288px;
   height: 288px;
+}
+
+.select {
+  padding-bottom: 20px;
+  display: flex;
+  gap: 16px;
+  justify-content: space-between;
+}
+.table {
+  border-spacing: 0;
+  border-collapse: separate;
+  // // border-radius: 10px;
+  overflow: hidden;
+  // border: 0;
+  // border-collapse: collapse;
+  // width: 100%;
+  // border: none;
+  width: 395px;
+  // border-radius: 10px;
+}
+.tableTitle {
+  background: #ffffff;
+  // border-radius: 10px 0 0 10px;
+  border-radius: 130px;
+  overflow: hidden;
+  width: 395px;
+  height: 58px;
+  // display: flex;
+
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
+  // padding-bottom: 16px;
+}
+.tr {
+  // display: flex;
+
+  justify-content: space-between;
+  padding-left: 28px;
+  padding-right: 28px;
+}
+.thead {
+  // display: flex;
+  align-items: center;
+}
+
+.tableRows {
+  border-bottom: 1px solid var(--grey-bottom-border-table);
+  box-shadow: 0px 1px 0px var(--box-shadow-table);
+  height: 52px;
 }
