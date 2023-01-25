@@ -1,3 +1,4 @@
+import HomeTabMobile from 'components/HomeTabMobile/HomeTabMobile';
 import HomeTab from 'components/HomeTab/HomeTab';
 
 const HomePage = () => {
