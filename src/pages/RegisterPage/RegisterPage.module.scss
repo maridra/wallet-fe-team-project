@@ -1,0 +1,68 @@
+@import 'assets/styles/index.scss';
+
+.container {
+  @include mq(tab) {
+    display: block;
+    background-color: rgba(231, 234, 242, 1);
+    background-image: url('../../image/Ellipse\ 1.png'), url('../../image/Ellipse\ 2.png');
+    background-repeat: no-repeat;
+    background-position: left bottom, right top;
+  }
+
+  @include mq(desk) {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.form {
+  @include mq(tab) {
+    padding-left: 118px;
+    padding-right: 117px;
+    padding-bottom: 48px;
+    padding-top: 50px;
+  }
+
+  @include mq(desk) {
+    padding-left: 107px;
+    padding-right: 91px;
+    padding-top: 52px;
+    padding-bottom: 52px;
+    margin-left: 31px;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(25px);
+  }
+}
+
+.registerImgWrapper {
+  display: flex;
+  gap: 52px;
+  padding-left: 128px;
+
+  @include mq(desk) {
+    flex-direction: column;
+    align-items: center;
+    padding-left: 90.2px;
+    gap: 32px;
+  }
+}
+
+.registerImg {
+  margin-top: 60px;
+
+  @include mq(desk) {
+    margin-top: 153px;
+  }
+}
+
+.appTitle {
+  margin-top: 163px;
+  font-size: 30px;
+  font-family: Poppins;
+  font-weight: 400;
+  line-height: 1.5;
+
+  @include mq(desk) {
+    margin-top: 0;
+  }
+}
