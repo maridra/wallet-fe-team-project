@@ -112,7 +112,7 @@ export const authSlice = createSlice({
 });
 
 const persistConfig = {
-  key: 'watermelon/slimMom',
+  key: 'leopards/wallet',
   storage,
   // whitelist: ['token'],
   blacklist: ['loading'],

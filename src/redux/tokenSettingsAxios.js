@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = 'https://backendBaseUrl';
+const baseURL = 'https://leaopards-team.onrender.com/api';
 
 export const axiosBaseUrl = axios.create({ baseURL });
 
