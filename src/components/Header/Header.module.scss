@@ -1,140 +1,139 @@
-@import "../../assets//styles//index.scss";
-
-
-
+@import '../../assets/styles/index.scss';
 
 .container {
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0px;
+  width: 100%;
+  max-width: 320px;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 auto;
+
+  @include mq(mob) {
     max-width: 320px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin: 0 auto;
+  }
 
+  @include mq(tab) {
+    padding-left: 32px;
+    padding-right: 32px;
+    max-width: 768px;
+  }
 
-    @include mq(mob) {
-        padding-left: 20px;
-        padding-right: 20px;
-        max-width: 320px;
-    }
-
-    @include mq(tab) {
-        padding-left: 16px;
-        padding-right: 16px;
-        max-width: 768px;
-    }
-
-
-    @include mq(desk) {
-        padding-left: 16px;
-        padding-right: 16px;
-        max-width: 1280px;
-    }
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 0px;
-    margin: 0 auto;
-
-
+  @include mq(desk) {
+    padding-left: 16px;
+    padding-right: 16px;
+    max-width: 1280px;
+  }
 }
 
 .link {
-    display: flex;
+  display: flex;
 
-    &:hover,
-    &:focus {
-        color: #4a56e2;
+  &:hover,
+  &:focus {
+    color: var(--main-accent-color-blue);
+  }
+
+  &__logo {
+    width: 30px;
+    height: 30px;
+
+    @include mq(tab) {
+      width: 40px;
+      height: 40px;
     }
+  }
 
-    &__logo {
-        width: 30px;
-        height: 30px;
+  &__title {
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.5;
+    margin-left: 15px;
+    transition: color 250ms ease;
 
-        @include mq(tab) {
-            width: 40px;
-            height: 40px;
-        }
+    @include mq(tab) {
+      margin-left: 20px;
+      font-size: 30px;
+      line-height: 1.5;
     }
-
-    &__title {
-        font-family: 'Poppins';
-        font-weight: 700;
-        font-size: 22px;
-        line-height: 1.5;
-        margin-left: 20px;
-        transition: color 250ms ease;
-
-
-        @include mq(tab) {
-            margin-left: 32px;
-            font-size: 30px;
-            line-height: 1.5;
-        }
-
-        @include mq(desk) {
-            margin-left: 16px;
-        }
-    }
+  }
 }
 
-
 .user {
-    display: flex;
-    align-items: center;
+  display: flex;
 
-    &__name {
-        margin-right: 12px;
-        padding-right: 12px;
-        border-right: 1px solid;
-        font-weight: 400;
-        font-size: 18px;
-        margin-left: 5px;
-        line-height: 1.5;
-        color: var(--grey-color-icon);
+  @include mq(tab) {
+    border-right: 1px solid;
+    padding-right: 12px;
+    color: var(--grey-color-icon);
+  }
+
+  &__name {
+    font-family: 'Circe';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--grey-color-icon);
+
+    @include mq(tab) {
     }
+  }
 }
 
 .logout {
+  display: flex;
+
+  &__button {
     display: flex;
+    align-items: center;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    color: rgba(189, 189, 189, 1);
+    transition: color 250ms ease;
+    cursor: pointer;
 
-    &__button {
-        display: flex;
-        border: none;
-        background-color: transparent;
-        color: rgba(189, 189, 189, 1);
-        transition: color 250ms ease;
-        cursor: pointer;
-
-
-        &:hover,
-        &:focus {
-            color: var(--text-red-color);
-        }
-
-        &:hover span,
-        &:focus span {
-            color: var(--text-red-color);
-        }
+    @include mq(tab) {
+      padding-left: 12px;
     }
 
-    &__text {
-        display: none;
-        font-weight: 400;
-        font-size: 18px;
-        line-height: 1.5;
-        margin-left: 8px;
-        color: var(--grey-color-icon);
-        transition: color 250ms ease;
-
-        @include mq(tab) {
-            display: block;
-        }
+    &:hover,
+    &:focus {
+      color: var(--text-red-color);
     }
+
+    &:hover span,
+    &:focus span {
+      color: var(--text-red-color);
+    }
+  }
+
+  &__text {
+    display: none;
+    font-family: 'Circe';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    margin-left: 8px;
+    color: var(--grey-color-icon);
+    transition: color 250ms ease;
+
+    @include mq(tab) {
+      display: block;
+      padding-right: 12px;
+    }
+  }
 }
 
 .wrapper {
-    display: flex;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  @include mq(tab) {
+    gap: 0px;
+  }
 }
