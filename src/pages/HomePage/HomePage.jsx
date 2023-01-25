@@ -1,3 +1,4 @@
+import Balance from 'components/Balance/Balance';
 import Currency from 'components/Currency/Currency';
 import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAddTransactions';
 import { useSelector } from 'react-redux';
@@ -20,6 +21,7 @@ const HomePage = () => {
           <div className={s.container}>
             <div className={s.wrapper}>
               {showModalAddTransaction && <ModalAddTransaction />}
+              <Balance />
               <Currency />
               <ButtonAddTransactions></ButtonAddTransactions>
               <div>HomePage</div>
