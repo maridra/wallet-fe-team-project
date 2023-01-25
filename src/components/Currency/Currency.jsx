@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import getCurrency from '../../API/currencyAPI';
-import CurrencyLoader from '../Loader/CurrencyLoader';
+import Loader from '../Loader/Loader';
 
 import css from './currency.module.scss';
 
@@ -11,17 +11,30 @@ const Currency = () => {
   const currencyFetchItem = localStorage.getItem('currencyFetchTime');
   const fetchByMinutes = Math.floor((dateNow - currencyFetchItem) / 60000);
 
-  console.log('object :>> ', fetchByMinutes);
+  let USD = {};
+  let EUR = {};
 
   useEffect(() => {
     if (fetchByMinutes < 60) return;
     getCurrency().then(setCurrency);
-  }, [currency, fetchByMinutes]);
+  }, [fetchByMinutes]);
 
-  const storageCurrencyRate = localStorage?.getItem('currencyData');
-  const parsedCurrencyRate = JSON.parse(storageCurrencyRate);
-  const USD = parsedCurrencyRate.find(el => el.currencyCodeA === 840);
-  const EUR = parsedCurrencyRate.find(el => el.currencyCodeA === 978);
+  const findCurrencyRate = (currency, code) => {
+    return currency.find(el => el.currencyCodeA === code);
+  };
+
+  if (currency) {
+    USD = findCurrencyRate(currency, 840);
+    EUR = findCurrencyRate(currency, 978);
+  }
+
+  const storageCurrency = localStorage?.getItem('currencyData');
+  const parsedCurrency = JSON.parse(storageCurrency);
+
+  if (parsedCurrency) {
+    USD = findCurrencyRate(parsedCurrency, 840);
+    EUR = findCurrencyRate(parsedCurrency, 978);
+  }
 
   return (
     <div className={css.table}>
@@ -32,9 +45,9 @@ const Currency = () => {
           <li>Sale</li>
         </ul>
       </div>
-      {!USD ? (
+      {!currency && !parsedCurrency ? (
         <div className={css.loader}>
-          <CurrencyLoader />
+          <Loader height={'80'} width={'80'} color={'#ffffff'} />
         </div>
       ) : (
         <div className={css.bodyContainer}>
