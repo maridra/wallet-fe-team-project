@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import s from "../RegisterForm/RegisterForm.module.scss";
 import PasswordStrength from "./PasswordStrength";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const RegisterForm = () => {
   const initialValues = {
@@ -65,7 +66,7 @@ const RegisterForm = () => {
             <ErrorMessage name="firstName" component="p" className={s.errorField} />
           </label>
           <button type="submit" className={s.registerBtn}>REGISTER</button>
-          <button type="button" className={s.loginBtn}>LOG IN</button>
+          <Link to="/login" className={s.loginBtn}>LOG IN</Link>
         </Form>
       </Formik>
     </div>
