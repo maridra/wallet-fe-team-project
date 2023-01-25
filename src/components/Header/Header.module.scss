@@ -6,13 +6,12 @@
   align-items: center;
   padding: 20px 0px;
   width: 100%;
-  max-width: 320px;
   padding-left: 20px;
   padding-right: 20px;
   margin: 0 auto;
 
   @include mq(mob) {
-    max-width: 320px;
+    max-width: 480px;
   }
 
   @include mq(tab) {
@@ -92,7 +91,7 @@
     border: none;
     padding: 0;
     background-color: transparent;
-    color: rgba(189, 189, 189, 1);
+    color: var(--text-placeholder-input-grey-color);
     transition: color 250ms ease;
     cursor: pointer;
 
