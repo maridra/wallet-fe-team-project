@@ -1,4 +1,3 @@
-import { Outlet } from 'react-router-dom';
 import s from './HomeTab.module.scss';
 
 const backEnd = [
@@ -28,48 +27,32 @@ const backEnd = [
   },
 ];
 
-function userColorUi(item) {
-  if (item.Type === '+') {
-    return `${s.operationInfo} ${s.operationInfoIncome}`;
-  } else {
-    return `${s.operationInfo} ${s.operationInfoExpence}`;
-  }
-}
-
 const HomeTab = () => {
   return (
-    <ul className={s.operationList}>
-      {backEnd.map(item => (
-        <li className={s.operationItem}>
-          <ul className={s.operationItemUl}>
-            <li className={userColorUi(item)}>
-              <span className={s.mobileTableHeader}>Date</span>
-              <span>{item.Date}</span>
-            </li>
-            <li className={userColorUi(item)}>
-              <span className={s.mobileTableHeader}>Type</span>
-              <span>{item.Type}</span>
-            </li>
-            <li className={userColorUi(item)}>
-              <span className={s.mobileTableHeader}>Category</span>
-              <span>{item.Category}</span>
-            </li>
-            <li className={userColorUi(item)}>
-              <span className={s.mobileTableHeader}>Comment</span>
-              <span>{item.Comment}</span>
-            </li>
-            <li className={userColorUi(item)}>
-              <span className={s.mobileTableHeader}>Sum</span>
-              <span>{item.Sum}</span>
-            </li>
-            <li className={userColorUi(item)}>
-              <span className={s.mobileTableHeader}>Balance</span>
-              <span>{item.Balance}</span>
-            </li>
-          </ul>
-        </li>
-      ))}
-    </ul>
+    <table className={s.table}>
+      <thead>
+        <tr className={s.tableHeader}>
+          <th className={s.tableHeaderItem}>Date</th>
+          <th className={s.tableHeaderItem}>Type</th>
+          <th className={s.tableHeaderItem}>Category</th>
+          <th className={s.tableHeaderItem}>Comment</th>
+          <th className={s.tableHeaderItem}>Sum</th>
+          <th className={s.tableHeaderItem}>Balance</th>
+        </tr>
+      </thead>
+      <tbody>
+        {backEnd.map(item => (
+          <tr className={s.tableHeader}>
+            <th>{item.Date}</th>
+            <th>{item.Type}</th>
+            <th>{item.Category}</th>
+            <th>{item.Comment}</th>
+            <th>{item.Sum}</th>
+            <th>{item.Balance}</th>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   );
 };
 

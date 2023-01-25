@@ -1,0 +1,77 @@
+@import 'assets/styles/index.scss';
+
+.operationList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  max-width: 450px;
+}
+
+.operationItem {
+  height: 282px;
+  outline: 1px solid red;
+  border-radius: 10px;
+  overflow: hidden;
+
+  background-color: #dcdcdf;
+}
+
+.operationItemUl {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.operationInfo {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px 7px 15px;
+  vertical-align: middle;
+
+  background-color: var(--background-white-color);
+}
+
+.operationInfoIncome {
+  border-left: 5px solid #24cca7;
+}
+
+.operationInfoExpence {
+  border-left: 5px solid #ff6596;
+}
+
+.operationInfo:last-child {
+  padding: 12px 20px 8px 15px;
+}
+
+.mobileTableHeader {
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 27px;
+}
+
+.mobileTableInfo {
+  font-family: 'Circe';
+  font-style: normal;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: right;
+}
+
+.mobileTableInfoIncome {
+  font-weight: 700;
+  color: #24cca7;
+}
+
+.mobileTableInfoExpence {
+  font-weight: 700;
+  color: #ff6596;
+}
