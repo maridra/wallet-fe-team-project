@@ -1,0 +1,22 @@
+.balanceContainer {
+  display: inline-block;
+  min-width: 280px;
+  min-height: 80px;
+  padding: 8px 32px;
+  font-size: 12px;
+  text-transform: uppercase;
+  line-height: calc(18 / 12);
+  background-color: rgb(225, 217, 217);
+  color: #a6a6a6;
+  border-radius: 30px;
+}
+
+.balanceAmount {
+  display: flex;
+  margin-top: 12px;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: calc(45 / 30);
+  color: #000000;
+  font-family: 'Poppins';
+}

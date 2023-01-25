@@ -1,5 +1,12 @@
+import Balance from 'components/Balance/Balance';
+
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return (
+    <>
+      <Balance />
+      <div>HomePage</div>
+    </>
+  );
 };
 
 export default HomePage;
