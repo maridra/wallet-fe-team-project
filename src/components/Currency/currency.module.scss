@@ -1,0 +1,65 @@
+@import '../../assets/styles/vars.scss';
+
+.table {
+  max-width: 440px;
+  min-height: 200px;
+  text-align: center;
+  color: var(--text-white-color);
+  background-color: var(--main-accent-color-blue);
+  border-radius: 30px;
+  background-image: url('../../assets/Images/currency/currencyGraf.svg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: contain;
+
+  @media screen and (min-width: 768px) {
+    width: 336px;
+    min-height: 182px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 393px;
+    min-height: 331px;
+  }
+}
+
+.tableHead {
+  margin: 0;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: calc(27 / 18);
+  background: var(--secondary-accent-color-blue);
+  border-radius: 30px 30px 0px 0px;
+}
+
+.tableList {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 12px 20px;
+  list-style: none;
+}
+
+.bodyContainer {
+  padding: 12px 20px;
+}
+
+.bodyList {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 0px 12px 0px;
+  padding: 0;
+  line-height: calc(24 / 16);
+  list-style: none;
+}
+
+.bodyData {
+  padding-left: 10px;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  opacity: 0.5;
+}
