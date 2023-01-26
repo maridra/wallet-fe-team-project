@@ -1,10 +1,10 @@
-// import { useSelector } from 'react-redux';
-// import { setTotalBalance } from 'redux/selectors';
+import { useSelector } from 'react-redux';
+import { financeSelectors } from '../../redux/finance/financeSelectors';
 
 import css from './Balance.module.scss';
 
 const Balance = () => {
-  // const totalBalance = useSelector(setTotalBalance);
+  const totalBalance = useSelector(financeSelectors.setTotalBalance);
 
   return (
     <div className={css.balanceContainer}>
@@ -12,8 +12,7 @@ const Balance = () => {
 
       <div className={css.balanceAmount}>
         <span className={css.balanceLogo}>₴</span>
-        {/* <p>{totalBalance}</p> */}
-        <p> 24 000.00</p>
+        <p>{totalBalance ? totalBalance : '0, 00'}</p>
       </div>
     </div>
   );
