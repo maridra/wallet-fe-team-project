@@ -8,17 +8,16 @@ import scss from './ModalAddTransactionForm.module.scss';
 
 const schema = yup.object().shape({
   sum: yup.number().min(0.01).max(2500000).required(),
-  // date: yup.date().required(),
+  date: yup.string().required(),
 });
 const initialValues = {
   category: '',
   sum: '',
-  // date: '',
 };
 
 const ModalAddTransactionForm = prop => {
   const { checkboxStatus } = prop;
-  // const [date, setDate] = useState('');
+  // const [sum, setSum] = useState('');
 
   // const getDate = e => {
   //   const oldDate = new Date(Date.parse(e._d));
@@ -37,6 +36,36 @@ const ModalAddTransactionForm = prop => {
   //   return setDate(newDate);
   // };
 
+  const handleSubmit = async e => {
+    e.preventDefault();
+
+    const form = e.currentTarget;
+
+    if (!form.elements.category) {
+      const formValues = {
+        sum: form.elements.sum.value,
+        date: form.elements.date.value,
+      };
+      const isValid = await schema.isValid({
+        sum: form.elements.sum.value,
+        date: form.elements.date.value,
+      });
+
+      console.log(isValid);
+      if (isValid) {
+        return console.log(formValues);
+      }
+      return alert('hi');
+    } else {
+      const formValues = {
+        category: form.elements.category.value,
+        sum: form.elements.sum.value,
+        date: form.elements.date.value,
+      };
+      return console.log(formValues);
+    }
+  };
+
   const renderInput = (props, openCalendar) => {
     return (
       <div className={scss.dataBox}>
@@ -47,26 +76,18 @@ const ModalAddTransactionForm = prop => {
           placeholder="date"
           name="date"
           autoComplete="off"
+          readOnly
         ></Field>
         <button className={scss.dataBtn} type="button" onClick={openCalendar}>
           <RiCalendar2Line className={scss.dataBtnIcon}></RiCalendar2Line>
         </button>
-        {/* <ErrorMessage
-          className={scss.errorMessage}
-          name="date"
-          component="div"
-        ></ErrorMessage> */}
       </div>
     );
   };
 
   return (
-    <Formik
-      initialValues={initialValues}
-      // onSubmit={handleSubmit}
-      validationSchema={schema}
-    >
-      <Form className={scss.calculatorForm}>
+    <Formik initialValues={initialValues} validationSchema={schema}>
+      <Form className={scss.calculatorForm} onSubmit={handleSubmit}>
         <div className={scss.calculatorFormInputContainer}>
           {!checkboxStatus && (
             <label>
