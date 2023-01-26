@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
-// import { useSelector, useDispatch } from 'react-redux';
 import { IconContext } from 'react-icons';
 import { IoExitOutline } from 'react-icons/io5';
 import { Logo } from '../../image/Logo';
