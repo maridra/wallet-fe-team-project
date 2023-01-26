@@ -1,18 +1,45 @@
+@import 'assets/styles/index.scss';
 .table {
   width: 704px;
+  background-color: #e7eaf2;
+}
+
+.tableHeaderTh {
 }
 
 .tableHeader {
-  display: flex;
+  background-color: #ffffff;
   width: 704px;
   padding: 15px 20px;
   justify-content: space-between;
+  border-radius: 30px;
+  display: flex;
+}
+
+.tableRow {
+  width: 704px;
+  padding: 15px 20px;
+  justify-content: space-between;
+  display: flex;
+}
+
+.tableRowItem {
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .tableHeaderItem {
-  font-family: 'сirce';
+  font-family: 'Circe';
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 27px;
+}
+
+.tableRowItem:nth-child(-n + 4) {
+  text-align: left;
+  color: red;
 }
