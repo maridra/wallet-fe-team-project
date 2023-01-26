@@ -1,13 +1,21 @@
 @import '../../assets/styles/index.scss';
 
+.header {
+  position: fixed;
+  top: 0;
+
+  width: 100vw;
+
+  background: var(--background-header);
+  z-index: 10000;
+}
+
 .box {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0px;
+  padding: 15px 20px;
   width: 100%;
-  padding-left: 20px;
-  padding-right: 20px;
   margin: 0 auto;
 
   @include mq(mob) {
@@ -29,6 +37,7 @@
 
 .link {
   display: flex;
+  align-items: center;
 
   &:hover,
   &:focus {
@@ -49,14 +58,17 @@
     font-family: 'Poppins';
     font-weight: 700;
     font-size: 22px;
-    line-height: 1.5;
+    // line-height: 1.5;
     margin-left: 15px;
+
+    text-align: center;
+
     transition: color 250ms ease;
 
     @include mq(tab) {
       margin-left: 20px;
       font-size: 30px;
-      line-height: 1.5;
+      line-height: 1.3;
     }
   }
 }

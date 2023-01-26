@@ -15,14 +15,20 @@ const HomePage = () => {
   );
   return (
     <>
-      <div className={s.container}>
-        {showModalAddTransaction && <ModalAddTransaction />}
-        <Currency />
-        <ButtonAddTransactions></ButtonAddTransactions>
-        <div>HomePage</div>
-        {/* <Statistic /> */}
-        {/* <HomeTab /> */}
-        {/* <HomeTabMobile /> */}
+      <div className={s.bg_page}>
+        <div className={s.bg_blur}>
+          <div className={s.container}>
+            <div className={s.wrapper}>
+              {showModalAddTransaction && <ModalAddTransaction />}
+              <Currency />
+              <ButtonAddTransactions></ButtonAddTransactions>
+              <div>HomePage</div>
+              {/* <Statistic /> */}
+              {/* <HomeTab /> */}
+              {/* <HomeTabMobile /> */}
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

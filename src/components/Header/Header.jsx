@@ -8,7 +8,7 @@ import s from './Header.module.scss';
 const Header = () => {
   return (
     <>
-      <header>
+      <header className={s.header}>
         <div className={s.box}>
           <Link to="/" className={s.link}>
             <Logo svg={s.link__logo} />
