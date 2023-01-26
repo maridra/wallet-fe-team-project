@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import s from '../NotFound/NotFound.module.scss';
 
-import sadLeopardIcon from '../../assets/Images/NotFoundPage/sad_leopard.png';
+import sadLeopardIcon from '../../assets/images/NotFoundPage/sad_leopard.png';
 
 export default function NotFound() {
   return (
