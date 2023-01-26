@@ -1,4 +1,10 @@
 import s from './HomeTab.module.scss';
+import React from 'react';
+import financeOperations from 'redux/finance/financeOperations';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import financeSelectors from 'redux/finance/financeSelectors';
+import { useSelector } from 'react-redux';
 
 const backEnd = [
   {
@@ -27,15 +33,30 @@ const backEnd = [
   },
 ];
 
-function colorOfSum(item) {
-  if (item.Type === '+') {
-    return `${s.tableRowItem} ${s.sum} ${s.sumColorIncome}`;
-  } else {
-    return `${s.tableRowItem} ${s.sum} ${s.sumColorExpense}`;
-  }
-}
-
 const HomeTab = () => {
+  const dispatch = useDispatch();
+
+  const transactions = useSelector(financeSelectors.getTransactions);
+
+  function colorOfSum(item) {
+    if (item.transactionType === true) {
+      return `${s.tableRowItem} ${s.sum} ${s.sumColorIncome}`;
+    } else {
+      return `${s.tableRowItem} ${s.sum} ${s.sumColorExpense}`;
+    }
+  }
+
+  function typeChanger(item) {
+    if (item.transactionType === true) {
+      return '+';
+    } else {
+      return '-';
+    }
+  }
+  useEffect(() => {
+    console.log('123');
+    dispatch(financeOperations.updateTransactions());
+  }, [dispatch]);
   return (
     <table className={s.table}>
       <thead className={s.tableHeaderTh}>
@@ -49,10 +70,14 @@ const HomeTab = () => {
         </tr>
       </thead>
       <tbody>
-        {backEnd.map(item => (
+        {transactions.map(item => (
           <tr className={s.tableRow}>
-            <th className={`${s.tableRowItem} ${s.date}`}>{item.Date}</th>
-            <th className={`${s.tableRowItem} ${s.type}`}> {item.Type}</th>
+            <th className={`${s.tableRowItem} ${s.date}`}>
+              {item.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$3.$2.$1')}
+            </th>
+            <th className={`${s.tableRowItem} ${s.type}`}>
+              {typeChanger(item)}
+            </th>
             <th className={`${s.tableRowItem} ${s.category}`}>
               {item.Category}
             </th>

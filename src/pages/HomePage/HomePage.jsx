@@ -6,10 +6,10 @@ import HomeTab from 'components/HomeTab/HomeTab';
 const HomePage = () => {
   return (
     <>
-      <Currency />
+      {/* <Currency /> */}
       <div>HomePage</div>
       {/* <Statistic /> */}
-      {/* <HomeTab /> */}
+      <HomeTab />
       {/* <HomeTabMobile /> */}
     </>
   );
