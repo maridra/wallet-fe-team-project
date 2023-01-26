@@ -1,3 +1,5 @@
+@import '../../assets/styles/vars.scss';
+
 .balanceContainer {
   display: inline-block;
   min-width: 280px;
@@ -6,8 +8,8 @@
   font-size: 12px;
   text-transform: uppercase;
   line-height: calc(18 / 12);
-  background-color: rgb(225, 217, 217);
-  color: #a6a6a6;
+  background-color: var(--modal-background-color-white);
+  color: var(--text-grey-color);
   border-radius: 30px;
 }
 
@@ -18,7 +20,7 @@
   font-weight: 700;
   font-size: 30px;
   line-height: calc(45 / 30);
-  color: #000000;
+  color: var(--text-main-color);
   font-family: 'Poppins';
 }
 
