@@ -33,19 +33,28 @@
 }
 
 .img {
-  width: 600px;
+  width: 300px;
+  @include mq(tab) {
+    width: 600px;
+  }
 }
 
 .title {
   font-weight: 700;
-  font-size: 40px;
+  font-size: 24px;
   line-height: 1.5;
+  @include mq(tab) {
+    font-size: 40px;
+  }
 }
 
 .desc {
   font-weight: 400;
-  font-size: 26px;
+  font-size: 18px;
   line-height: 1.5;
+  @include mq(tab) {
+    font-size: 26px;
+  }
 }
 
 .link {

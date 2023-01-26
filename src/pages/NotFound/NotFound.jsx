@@ -3,8 +3,6 @@ import s from '../NotFound/NotFound.module.scss';
 
 import sadLeopardIcon from '../../assets/Images/NotFoundPage/sad_leopard.png';
 
-console.log(s);
-
 export default function NotFound() {
   return (
     <>
@@ -17,7 +15,7 @@ export default function NotFound() {
               <p className={s.desc}>
                 But does it matter if leopards are already in Ukraine? Click{' '}
                 <Link to="/" className={s.link}>
-                  here{' '}
+                  here
                 </Link>{' '}
                 to get back to home page.
               </p>
