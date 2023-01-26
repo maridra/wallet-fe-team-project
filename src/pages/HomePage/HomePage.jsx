@@ -1,12 +1,21 @@
 import Currency from 'components/Currency/Currency';
+import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAddTransactions';
+import { useSelector } from 'react-redux';
+import { modalSelectors } from 'redux/modal/modalSelectors';
+import ModalAddTransaction from 'components/Modal/ModalAddTransaction/ModalAddTransaction';
 // import Statistic from '../../components/Statistics/Statistics';
 // import HomeTabMobile from 'components/HomeTabMobile/HomeTabMobile';
 // import HomeTab from 'components/HomeTab/HomeTab';
 
 const HomePage = () => {
+  const showModalAddTransaction = useSelector(
+    modalSelectors.showModalAddTransaction
+  );
   return (
     <>
+      {showModalAddTransaction && <ModalAddTransaction />}
       <Currency />
+      <ButtonAddTransactions></ButtonAddTransactions>
       <div>HomePage</div>
       {/* <Statistic /> */}
       {/* <HomeTab /> */}
