@@ -9,8 +9,8 @@ const HomePage = () => {
       <Currency />
       <div>HomePage</div>
       {/* <Statistic /> */}
-      <HomeTab />
-      <HomeTabMobile />
+      {/* <HomeTab /> */}
+      {/* <HomeTabMobile /> */}
     </>
   );
 };
