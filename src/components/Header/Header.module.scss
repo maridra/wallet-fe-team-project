@@ -1,0 +1,138 @@
+@import '../../assets/styles/index.scss';
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0px;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin: 0 auto;
+
+  @include mq(mob) {
+    max-width: 480px;
+  }
+
+  @include mq(tab) {
+    padding-left: 32px;
+    padding-right: 32px;
+    max-width: 768px;
+  }
+
+  @include mq(desk) {
+    padding-left: 16px;
+    padding-right: 16px;
+    max-width: 1280px;
+  }
+}
+
+.link {
+  display: flex;
+
+  &:hover,
+  &:focus {
+    color: var(--main-accent-color-blue);
+  }
+
+  &__logo {
+    width: 30px;
+    height: 30px;
+
+    @include mq(tab) {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &__title {
+    font-family: 'Poppins';
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1.5;
+    margin-left: 15px;
+    transition: color 250ms ease;
+
+    @include mq(tab) {
+      margin-left: 20px;
+      font-size: 30px;
+      line-height: 1.5;
+    }
+  }
+}
+
+.user {
+  display: flex;
+
+  @include mq(tab) {
+    border-right: 1px solid;
+    padding-right: 12px;
+    color: var(--grey-color-icon);
+  }
+
+  &__name {
+    font-family: 'Circe';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--grey-color-icon);
+
+    @include mq(tab) {
+    }
+  }
+}
+
+.logout {
+  display: flex;
+
+  &__button {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 0;
+    background-color: transparent;
+    color: var(--text-placeholder-input-grey-color);
+    transition: color 250ms ease;
+    cursor: pointer;
+
+    @include mq(tab) {
+      padding-left: 12px;
+    }
+
+    &:hover,
+    &:focus {
+      color: var(--text-red-color);
+    }
+
+    &:hover span,
+    &:focus span {
+      color: var(--text-red-color);
+    }
+  }
+
+  &__text {
+    display: none;
+    font-family: 'Circe';
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    margin-left: 8px;
+    color: var(--grey-color-icon);
+    transition: color 250ms ease;
+
+    @include mq(tab) {
+      display: block;
+      padding-right: 12px;
+    }
+  }
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  @include mq(tab) {
+    gap: 0px;
+  }
+}
