@@ -9,7 +9,6 @@ const Balance = () => {
   return (
     <div className={css.balanceContainer}>
       <p>Your balance</p>
-
       <div className={css.balanceAmount}>
         <span className={css.balanceLogo}>₴</span>
         <p>{totalBalance ? totalBalance : '0, 00'}</p>
