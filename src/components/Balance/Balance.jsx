@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { financeSelectors } from '../../redux/finance/financeSelectors';
 
 import css from './Balance.module.scss';
+import {hryvniaLogo} from '../../assets/Images/currency/hryvniaLogo'
 
 const Balance = () => {
   const totalBalance = useSelector(financeSelectors.setTotalBalance);
