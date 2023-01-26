@@ -2,7 +2,7 @@
 // import { finance } from 'redux/selectors';
 
 import css from './Balance.module.scss';
-import HryvniaLogo from './hryvniaLogo.svg';
+// import HryvniaLogo from '../../assets/Images/currency/hryvniaLogo.svg';
 
 const Balance = () => {
   // const totalBalance = useSelector(finance.totalBalance)
@@ -12,14 +12,16 @@ const Balance = () => {
       <p>Your balance</p>
 
       <div className={css.balanceAmount}>
-        <img
+        {/* <img
+          className={css.balanceLogo}
           src={HryvniaLogo}
           alt="hryvniaLogo"
-          width="18"
-          height="18"
-          font-weight="700"
-        />
-        {/* <p>{totalBalance}</p> */} <p>24000.00</p>
+          width="18px"
+          height="18px"
+        /> */}
+        {/* <p>{totalBalance}</p> */}
+        <span className={css.balanceLogo}>₴</span>
+        <p> 24 000.00</p>
       </div>
     </div>
   );
