@@ -14,12 +14,12 @@ const schema = yup.object().shape({
 });
 const initialValues = {
   sum: '',
-  Comment: '',
+  // Comment: '',
 };
 const initialValuesTwo = {
   category: '',
   sum: '',
-  Comment: '',
+  // Comment: '',
 };
 
 const ModalAddTransactionForm = prop => {
@@ -45,7 +45,7 @@ const ModalAddTransactionForm = prop => {
     const { category, sum } = values;
     console.log(category);
     if (checkboxStatus) {
-      const formValues = { sum, date };
+      const formValues = { ...values, date };
       console.log(formValues);
       setCategoryValue('');
       setDate(getDate());
