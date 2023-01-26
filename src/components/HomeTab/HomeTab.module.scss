@@ -1,0 +1,100 @@
+@import 'assets/styles/index.scss';
+.table {
+  width: 704px;
+  background-color: #e7eaf2;
+}
+
+.tableHeader {
+  background-color: #ffffff;
+  width: 704px;
+  padding: 15px 20px;
+  border-radius: 30px;
+  display: flex;
+
+  @include mq(desk) {
+    width: 715px;
+  }
+}
+
+.tableRow {
+  display: flex;
+  width: 704px;
+  height: 54px;
+  padding: 0 20px;
+  align-items: center;
+
+  border-bottom: 1px solid #dcdcdf;
+  box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.6);
+
+  @include mq(desk) {
+    width: 715px;
+  }
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+  box-shadow: none;
+}
+
+.tableRowItem {
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.tableRowItem:nth-child(-n + 4) {
+  text-align: left;
+}
+
+.tableRowItem:nth-last-child(-n + 2) {
+  text-align: right;
+}
+
+.tableTitle {
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.tableTitle:nth-child(-n + 4) {
+  text-align: left;
+}
+
+.tableTitle:nth-last-child(-n + 2) {
+  text-align: right;
+}
+
+.date {
+  width: 98px;
+}
+.type {
+  width: 78px;
+}
+.category {
+  width: 138px;
+}
+.comment {
+  width: 148px;
+
+  @include mq(desk) {
+    width: 159px;
+  }
+}
+.sum {
+  width: 74px;
+}
+.sumColorIncome {
+  color: #24cca7;
+  font-weight: 700;
+}
+.sumColorExpense {
+  color: #ff6596;
+  font-weight: 700;
+}
+.balance {
+  width: 128px;
+}

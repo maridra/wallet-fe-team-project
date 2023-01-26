@@ -5,6 +5,9 @@ import s from "../RegisterForm/RegisterForm.module.scss";
 import PasswordStrength from "./PasswordStrength";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import sprite from "../../image/symbol-defs.svg";
+import { useDispatch } from "react-redux";
+import authOperations from "redux/auth/authOperations";
 
 const RegisterForm = () => {
   const initialValues = {
@@ -15,9 +18,15 @@ const RegisterForm = () => {
   }
 
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = ({ firstName, email, password }) => {
+    const user = {
+      firstName,
+      email,
+      password
+    }
+    dispatch(authOperations.register(user));
   }
 
   const SignUpSchema = Yup.object().shape({
@@ -42,7 +51,11 @@ const RegisterForm = () => {
 
   return (
     <div className={s.container}>
-      <div className={s.logo}></div>
+      <div className={s.logo}>
+        <svg  width="120" height="30"className={s.logoIcon}>
+          <use href={`${sprite}#icon-logo`}></use>
+        </svg>
+      </div>
       <Formik
         initialValues={initialValues}
         onSubmit={onSubmit}
@@ -50,19 +63,31 @@ const RegisterForm = () => {
         <Form className={s.form}>
           <label className={s.label}>
             <Field type="email" name="email" placeholder="E-mail" className={s.input} />
+            <svg width="24" height="24" className={s.inputIcon}>
+              <use href={`${sprite}#icon-email`}></use>
+            </svg>
             <ErrorMessage name="email" component="p" className={s.errorField} />
           </label>
           <label className={s.label}>
             <Field type="password" name="password" placeholder="Password" className={s.input} onInput={e => setPassword(e.target.value)} />
+            <svg width="24" height="24" className={s.inputIcon}>
+              <use href={`${sprite}#icon-password-lock`}></use>
+            </svg>
             <ErrorMessage name="password" component="p" className={s.errorField} />
           </label>
           <label className={s.label}>
             <Field type="password" name="passwordConfirm" placeholder="Confirm password" className={s.input} />
+            <svg width="24" height="24" className={s.inputIcon}>
+              <use href={`${sprite}#icon-password-lock`}></use>
+            </svg>
             <ErrorMessage name="passwordConfirm" component="p" className={s.errorField} />
             <PasswordStrength password={password} />
           </label>
           <label className={s.label}>
             <Field type="text" name="firstName" placeholder="First name" className={s.input} />
+            <svg width="24" height="24" className={s.inputIcon}>
+              <use href={`${sprite}#icon-name`}></use>
+            </svg>
             <ErrorMessage name="firstName" component="p" className={s.errorField} />
           </label>
           <button type="submit" className={s.registerBtn}>REGISTER</button>
