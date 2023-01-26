@@ -10,10 +10,12 @@ import {
 } from 'redux-persist/es/constants';
 
 import { persistedAuthReducer } from './auth/authSlice';
+import { financeReducer } from './finance/financeSlice';
 
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
+    finance: financeReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
