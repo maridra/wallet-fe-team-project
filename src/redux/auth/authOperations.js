@@ -4,14 +4,16 @@ import { axiosBaseUrl, token } from '../tokenSettingsAxios';
 import { Notify } from 'notiflix';
 
 const register = createAsyncThunk(
-  'auth/register',
-  async (credential, thunkAPI) => {
-    const { email, password, firstName } = credential;
-
+  'auth/register', async (user, { rejectWithValue }) => {
     try {
-      await axiosBaseUrl.post('/auth/register', { email, password, firstName });
-      return;
-
+      const { data } = await axiosBaseUrl.post('/auth/register', user);
+      token.set(data.token)
+      return data;
+    } catch (error) {
+      Notify.failure(error.message);
+      return rejectWithValue(error.message);
+    }
+  }
       // Check if user already submit form
 
       // const dataUser = thunkAPI.getState().dailyRate.dataUser;
@@ -20,11 +22,6 @@ const register = createAsyncThunk(
       //   await axiosBaseUrl.post(`/daily-rate/${userID}`, dataUser);
       //   return data;
       // }
-    } catch (e) {
-      Notify.failure(e.message);
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
 );
 
 const logIn = createAsyncThunk('auth/login', async (credential, thunkAPI) => {

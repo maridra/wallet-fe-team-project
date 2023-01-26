@@ -5,38 +5,34 @@ import { persistReducer } from 'redux-persist';
 
 const initialState = {
   user: { firstName: null, email: null },
-  accessToken: null,
-  refreshToken: null,
-  sid: null,
-  isLoggedIn: false,
-  loading: {
-    register: false,
-    logIn: false,
-    registration: false,
-    refresh: false,
-  },
+  token: '',
+  loading: false,
+  error: null,
+  isAuth: false,
 };
+
+const handlePending = (state) => {
+  state.loading = true;
+  state.error = null;
+}
+
+const handleRejected = (state, action) => {
+  state.loading = false;
+  state.error = action.payload;
+}
 
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(authOperations.register.pending, state => {
-        state.loading.registration = true;
-      })
-      .addCase(authOperations.register.rejected, state => {
-        state.loading.registration = false;
-      })
-      .addCase(authOperations.register.fulfilled, (state, { payload }) => {
-        state.user.firstName = payload['user']['firstName'];
-        state.user.email = payload['user']['email'];
-
-        state.accessToken = payload['accessToken'];
-        state.refreshToken = payload['refreshToken'];
-        state.sid = payload['sid'];
-
-        state.loading.register = true;
+      .addCase(authOperations.register.pending, handlePending)
+      .addCase(authOperations.register.rejected, handleRejected)
+      .addCase(authOperations.register.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.loading = false;
+        state.isAuth = true;
       })
 
       .addCase(authOperations.logIn.pending, state => {
@@ -108,7 +104,7 @@ export const authSlice = createSlice({
 const persistConfig = {
   key: 'leopards/wallet',
   storage,
-  // whitelist: ['token'],
+  whitelist: ['token'],
   blacklist: ['loading'],
 };
 
