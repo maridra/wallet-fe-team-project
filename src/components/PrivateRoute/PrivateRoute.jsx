@@ -7,7 +7,7 @@ export default function PublicRoute({ redirectTo, children }) {
   const location = useLocation();
   const isAuth = useSelector(authSelectors.isAuth);
 
-  return !isAuth ? (
+  return isAuth ? (
     children
   ) : (
     <Navigate to={location.state ? location.state.from : redirectTo} />

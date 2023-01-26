@@ -18,6 +18,12 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<Header />}>
             <Route index element={<HomePage />} />
+            {/* <Route
+              index
+              element={
+                <PrivateRoute redirectTo="/login" children={<HomePage />} />
+              }
+            /> */}
           </Route>
           <Route path="*" element={<NotFound />} />
           <Route
