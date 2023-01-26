@@ -11,15 +11,15 @@ const initialState = {
   isAuth: false,
 };
 
-const handlePending = (state) => {
+const handlePending = state => {
   state.loading = true;
   state.error = null;
-}
+};
 
 const handleRejected = (state, action) => {
   state.loading = false;
   state.error = action.payload;
-}
+};
 
 export const authSlice = createSlice({
   name: 'auth',
