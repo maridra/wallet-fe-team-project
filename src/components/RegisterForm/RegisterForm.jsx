@@ -6,6 +6,8 @@ import PasswordStrength from "./PasswordStrength";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import sprite from "../../image/symbol-defs.svg";
+import { useDispatch } from "react-redux";
+import authOperations from "redux/auth/authOperations";
 
 const RegisterForm = () => {
   const initialValues = {
@@ -16,9 +18,15 @@ const RegisterForm = () => {
   }
 
   const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
 
-  const onSubmit = (values) => {
-    console.log(values);
+  const onSubmit = ({ firstName, email, password }) => {
+    const user = {
+      firstName,
+      email,
+      password
+    }
+    dispatch(authOperations.register(user));
   }
 
   const SignUpSchema = Yup.object().shape({

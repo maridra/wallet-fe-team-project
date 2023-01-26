@@ -6,26 +6,20 @@ import { Notify } from 'notiflix';
 const register = createAsyncThunk(
   'auth/register',
   async (credential, thunkAPI) => {
-    const { email, password, username } = credential;
+    const { email, password, firstName } = credential;
 
     try {
-      await axiosBaseUrl.post('/auth/register', { email, password, username });
-      const { data } = await axiosBaseUrl.post('/auth/login', {
-        email,
-        password,
-      });
-      token.set(data.accessToken);
-      if (!thunkAPI.getState().dailyRate.dataUser) {
-        return data;
-      }
+      await axiosBaseUrl.post('/auth/register', { email, password, firstName });
+      return;
 
       // Check if user already submit form
-      const dataUser = thunkAPI.getState().dailyRate.dataUser;
-      const userID = data.user.id;
-      if (thunkAPI.getState().dailyRate.dataUser) {
-        await axiosBaseUrl.post(`/daily-rate/${userID}`, dataUser);
-        return data;
-      }
+
+      // const dataUser = thunkAPI.getState().dailyRate.dataUser;
+      // const userID = data.user.id;
+      // if (thunkAPI.getState().dailyRate.dataUser) {
+      //   await axiosBaseUrl.post(`/daily-rate/${userID}`, dataUser);
+      //   return data;
+      // }
     } catch (e) {
       Notify.failure(e.message);
       return thunkAPI.rejectWithValue(e.message);

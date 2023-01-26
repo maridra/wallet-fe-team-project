@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
 const initialState = {
-  user: { username: null, email: null, id: null },
+  user: { firstName: null, email: null },
   accessToken: null,
   refreshToken: null,
   sid: null,
@@ -29,25 +29,22 @@ export const authSlice = createSlice({
         state.loading.registration = false;
       })
       .addCase(authOperations.register.fulfilled, (state, { payload }) => {
-        state.user.username = payload['user']['username'];
+        state.user.firstName = payload['user']['firstName'];
         state.user.email = payload['user']['email'];
-        state.user.id = payload['user']['id'];
 
         state.accessToken = payload['accessToken'];
         state.refreshToken = payload['refreshToken'];
         state.sid = payload['sid'];
 
-        state.isLoggedIn = true;
-        state.loading.registration = false;
+        state.loading.register = true;
       })
 
       .addCase(authOperations.logIn.pending, state => {
         state.loading.logIn = true;
       })
       .addCase(authOperations.logIn.fulfilled, (state, { payload }) => {
-        state.user.username = payload['user']['username'];
+        state.user.firstName = payload['user']['firstName'];
         state.user.email = payload['user']['email'];
-        state.user.id = payload['user']['id'];
 
         state.accessToken = payload['accessToken'];
         state.refreshToken = payload['refreshToken'];
@@ -64,9 +61,8 @@ export const authSlice = createSlice({
         state.loading.logOut = true;
       })
       .addCase(authOperations.logOut.fulfilled, state => {
-        state.user.username = initialState.user.username;
+        state.user.firstName = initialState.user.firstName;
         state.user.email = initialState.user.email;
-        state.user.id = initialState.user.id;
 
         state.accessToken = initialState.accessToken;
         state.refreshToken = initialState.refreshToken;
@@ -88,9 +84,8 @@ export const authSlice = createSlice({
         state.refreshToken = payload.refreshData['newRefreshToken'];
         state.sid = payload.refreshData['sid'];
 
-        state.user.username = payload.userData['username'];
+        state.user.firstName = payload.userData['username'];
         state.user.email = payload.userData['email'];
-        state.user.id = payload.userData['id'];
 
         state.isLoggedIn = true;
         state.isFetchingCurrentUser = false;
@@ -101,9 +96,8 @@ export const authSlice = createSlice({
         state.refreshToken = initialState.refreshToken;
         state.sid = initialState.sid;
 
-        state.user.username = initialState.user.username;
+        state.user.firstName = initialState.user.firstName;
         state.user.email = initialState.user.email;
-        state.user.id = initialState.user.id;
 
         state.isLoggedIn = initialState.isLoggedIn;
         state.loading.refresh = false;
