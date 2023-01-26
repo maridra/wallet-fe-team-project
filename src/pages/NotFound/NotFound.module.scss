@@ -29,8 +29,26 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
 }
 
 .img {
-  width: 500px;
+  width: 600px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.5;
+}
+
+.desc {
+  font-weight: 400;
+  font-size: 26px;
+  line-height: 1.5;
+}
+
+.link {
+  color: var(--main-accent-color-blue);
+  text-decoration: underline;
 }
