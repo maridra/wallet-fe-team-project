@@ -10,10 +10,12 @@ import {
 } from 'redux-persist/es/constants';
 
 import { persistedAuthReducer } from './auth/authSlice';
+import { modalReducer } from './modal/modalSlice';
 
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
+    modal: modalReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
