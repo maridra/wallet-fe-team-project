@@ -1,32 +1,24 @@
 @import 'assets/styles/index.scss';
 
-.container {
-  min-width: 280px;
-  padding-left: 20px;
-  padding-right: 20px;
+.formContainer{
   padding-top: 32px;
-  background-color: rgba(255, 255, 255, 1);
+  padding-bottom: 36px;
+  background-color: #ffffff;
 
-  @include mq(tab) {
+  @include mq(tab){
+    width: 533px;
+    padding-top: 50px;
+    padding-bottom: 48px;
     padding-left: 65px;
     padding-right: 58.5px;
-    padding-top: 40px;
-    padding-bottom: 66px;
     border-radius: 20px;
-  }
-  
-  @include mq(desk) {
-    width: 533px;
   }
 }
 
 .logo {
-  width: 120px;
-  height: 30px;
-  margin-top: 32px;
+  display: flex;
+  justify-content: center;
   margin-bottom: 60px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .form {
@@ -35,17 +27,15 @@
 }
 
 .input {
-  margin-bottom: 40px;
   height: 32px;
   width: 100%;
-  padding-left: 50px;
-  padding-bottom: 8px;
+  margin-bottom: 40px;
+  padding-left: 54px;
   border: none;
   border-bottom: 1px solid #e0e0e0;
   outline: none;
 
   font-size: 18px;
-  font-family: Circe;
   line-height: 1.5;
 }
 
@@ -70,8 +60,8 @@
 
 .registerBtn {
   @extend %btnGreen;
-  margin-bottom: 20px;
   height: 50px;
+  margin-bottom: 20px;
 
   @include mq(tab) {
     width: 300px;

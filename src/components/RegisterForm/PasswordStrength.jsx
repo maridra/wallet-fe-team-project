@@ -11,13 +11,13 @@ const PasswordStrength = ({ password }) => {
       case 0:
         return 'none';
       case 1:
-        return '#EA1111';
+        return '#FF6596';
       case 2:
-        return '#FFAD00';
+        return '#FED057';
       case 3:
-        return '#9bc158';
+        return '#80d564';
       case 4:
-        return '#00b500';
+        return '#24CCA7';
       default:
         return 'none';
     }
@@ -30,7 +30,7 @@ const PasswordStrength = ({ password }) => {
 
   return (
     <>
-      <div className={s.progress}>
+      <div className={s.progressBar}>
         <div className={s.progress} style={changePasswordColor()}></div>
       </div>
     </>

@@ -37,8 +37,11 @@ const RegisterForm = () => {
       .max(63)
       .required("Required field"),
     password: Yup.string()
+      .matches(/(?=.*[a-z])/, "Must contain at least 1 lowerCase alphabetical character")
+      .matches(/(?=.*[A-Z])/, "Must contain at least 1 UpperCase alphabetical character")
+      .matches(/(?=.*[0-9])/, "Must contain at least 1 numeric character")
       .min(6, "Minimum 6 characters required")
-      .max(12, "Maximum 12")
+      .max(12, "Maximum 12 characters")
       .required("Required field"),
     passwordConfirm: Yup.string()
       .oneOf([Yup.ref('password')], "Passwords don't match!")
@@ -50,7 +53,7 @@ const RegisterForm = () => {
   })
 
   return (
-    <div className={s.container}>
+    <div className={s.formContainer}>
       <div className={s.logo}>
         <svg  width="120" height="30"className={s.logoIcon}>
           <use href={`${sprite}#icon-logo`}></use>
@@ -60,9 +63,9 @@ const RegisterForm = () => {
         initialValues={initialValues}
         onSubmit={onSubmit}
         validationSchema={SignUpSchema}>
-        <Form className={s.form}>
+          <Form className={s.form}>
           <label className={s.label}>
-            <Field type="email" name="email" placeholder="E-mail" className={s.input} />
+              <Field type="email" name="email" placeholder="E-mail" className={s.input} />
             <svg width="24" height="24" className={s.inputIcon}>
               <use href={`${sprite}#icon-email`}></use>
             </svg>
@@ -80,8 +83,8 @@ const RegisterForm = () => {
             <svg width="24" height="24" className={s.inputIcon}>
               <use href={`${sprite}#icon-password-lock`}></use>
             </svg>
-            <ErrorMessage name="passwordConfirm" component="p" className={s.errorField} />
-            <PasswordStrength password={password} />
+              <PasswordStrength password={password} className={s.passwordStrength} />
+             <ErrorMessage name="passwordConfirm" component="p" className={s.errorField} />
           </label>
           <label className={s.label}>
             <Field type="text" name="firstName" placeholder="First name" className={s.input} />
