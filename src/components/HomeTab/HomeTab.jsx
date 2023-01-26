@@ -5,7 +5,7 @@ const backEnd = [
     Date: '04.05.2021',
     Type: '-',
     Category: 'Other',
-    Comment: 'Expence',
+    Comment: 'Expense',
     Sum: '5000',
     Balance: '10000',
   },
@@ -13,7 +13,7 @@ const backEnd = [
     Date: '04.05.2021',
     Type: '-',
     Category: 'Other',
-    Comment: 'Expence',
+    Comment: 'Buy a new car for myself',
     Sum: '5000',
     Balance: '10000',
   },
@@ -21,7 +21,7 @@ const backEnd = [
     Date: '04.05.2021',
     Type: '+',
     Category: 'Other',
-    Comment: 'Expence',
+    Comment: 'Expense',
     Sum: '5000',
     Balance: '10000',
   },
@@ -30,7 +30,7 @@ const backEnd = [
 const HomeTab = () => {
   return (
     <table className={s.table}>
-      <thead>
+      <thead className={s.tableHeaderTh}>
         <tr className={s.tableHeader}>
           <th className={s.tableHeaderItem}>Date</th>
           <th className={s.tableHeaderItem}>Type</th>
@@ -42,13 +42,13 @@ const HomeTab = () => {
       </thead>
       <tbody>
         {backEnd.map(item => (
-          <tr className={s.tableHeader}>
-            <th>{item.Date}</th>
-            <th>{item.Type}</th>
-            <th>{item.Category}</th>
-            <th>{item.Comment}</th>
-            <th>{item.Sum}</th>
-            <th>{item.Balance}</th>
+          <tr className={s.tableRow}>
+            <th className={s.tableRowItem}>{item.Date}</th>
+            <th className={s.tableRowItem}> {item.Type}</th>
+            <th className={s.tableRowItem}>{item.Category}</th>
+            <th className={s.tableRowItem}>{item.Comment}</th>
+            <th className={s.tableRowItem}>{item.Sum}</th>
+            <th className={s.tableRowItem}>{item.Balance}</th>
           </tr>
         ))}
       </tbody>
