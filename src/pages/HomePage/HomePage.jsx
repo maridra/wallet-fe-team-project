@@ -7,19 +7,23 @@ import ModalAddTransaction from 'components/Modal/ModalAddTransaction/ModalAddTr
 // import HomeTabMobile from 'components/HomeTabMobile/HomeTabMobile';
 // import HomeTab from 'components/HomeTab/HomeTab';
 
+import s from '../HomePage/HomePage.module.scss';
+
 const HomePage = () => {
   const showModalAddTransaction = useSelector(
     modalSelectors.showModalAddTransaction
   );
   return (
     <>
-      {showModalAddTransaction && <ModalAddTransaction />}
-      <Currency />
-      <ButtonAddTransactions></ButtonAddTransactions>
-      <div>HomePage</div>
-      {/* <Statistic /> */}
-      {/* <HomeTab /> */}
-      {/* <HomeTabMobile /> */}
+      <div className={s.container}>
+        {showModalAddTransaction && <ModalAddTransaction />}
+        <Currency />
+        <ButtonAddTransactions></ButtonAddTransactions>
+        <div>HomePage</div>
+        {/* <Statistic /> */}
+        {/* <HomeTab /> */}
+        {/* <HomeTabMobile /> */}
+      </div>
     </>
   );
 };

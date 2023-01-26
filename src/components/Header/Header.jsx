@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <>
       <header>
-        <div className={s.container}>
+        <div className={s.box}>
           <Link to="/" className={s.link}>
             <Logo svg={s.link__logo} />
             <p className={s.link__title}>Wallet</p>
