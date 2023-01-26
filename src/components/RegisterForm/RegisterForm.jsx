@@ -17,16 +17,19 @@ const RegisterForm = () => {
     firstName: ''
   }
 
+  const[email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
   const dispatch = useDispatch();
 
-  const onSubmit = ({ firstName, email, password }) => {
-    const user = {
-      firstName,
-      email,
-      password
-    }
-    dispatch(authOperations.register(user));
+  const onSubmit = e => {
+    e.preventDefault();
+    dispatch(authOperations.register({ email, password, firstName }));
+    setEmail('')
+    setPassword('')
+    setConfirmPassword('');
+    setFirstName('');
   }
 
   const SignUpSchema = Yup.object().shape({
@@ -61,25 +64,24 @@ const RegisterForm = () => {
       </div>
       <Formik
         initialValues={initialValues}
-        onSubmit={onSubmit}
         validationSchema={SignUpSchema}>
-          <Form className={s.form}>
+          <Form className={s.form} onSubmit={onSubmit}>
           <label className={s.label}>
-              <Field type="email" name="email" placeholder="E-mail" className={s.input} />
+            <Field type="email" name="email" placeholder="E-mail" className={s.input} value={email} onInput={e => setEmail(e.target.value)} />
             <svg width="24" height="24" className={s.inputIcon}>
               <use href={`${sprite}#icon-email`}></use>
             </svg>
             <ErrorMessage name="email" component="p" className={s.errorField} />
           </label>
           <label className={s.label}>
-            <Field type="password" name="password" placeholder="Password" className={s.input} onInput={e => setPassword(e.target.value)} />
+            <Field type="password" name="password" placeholder="Password" className={s.input} onInput={e => setPassword(e.target.value)} value={password} />
             <svg width="24" height="24" className={s.inputIcon}>
               <use href={`${sprite}#icon-password-lock`}></use>
             </svg>
             <ErrorMessage name="password" component="p" className={s.errorField} />
           </label>
           <label className={s.label}>
-            <Field type="password" name="passwordConfirm" placeholder="Confirm password" className={s.input} />
+            <Field type="password" name="passwordConfirm" placeholder="Confirm password" className={s.input} value={confirmPassword} onInput={e => setConfirmPassword(e.target.value)}/>
             <svg width="24" height="24" className={s.inputIcon}>
               <use href={`${sprite}#icon-password-lock`}></use>
             </svg>
@@ -87,7 +89,7 @@ const RegisterForm = () => {
              <ErrorMessage name="passwordConfirm" component="p" className={s.errorField} />
           </label>
           <label className={s.label}>
-            <Field type="text" name="firstName" placeholder="First name" className={s.input} />
+            <Field type="text" name="firstName" placeholder="First name" className={s.input} value={firstName} onInput={e => setFirstName(e.target.value)} />
             <svg width="24" height="24" className={s.inputIcon}>
               <use href={`${sprite}#icon-name`}></use>
             </svg>
