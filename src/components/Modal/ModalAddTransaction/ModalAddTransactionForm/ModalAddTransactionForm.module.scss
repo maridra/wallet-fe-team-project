@@ -1,18 +1,101 @@
 @import 'assets/styles/index.scss';
 
-.calculatorForm {
-  display: flex;
-  flex-direction: column;
-  padding-top: 40px;
-  gap: 40px;
-}
-
-.calculatorFormInputContainer {
+.addForm {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 40px;
+}
+
+.addFormInputContainer {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  @include mq(mob-only) {
+    flex-direction: column;
+  }
+  @include mq(tab) {
+    flex-wrap: wrap;
+  }
+}
+
+.categoryLabel {
+  position: relative;
+}
+
+.addFormInputCategory {
+  padding: 4px 20px 8px 20px;
+  margin-bottom: 40px;
+  font-size: 18px;
+  line-height: 27px;
+  border: 0;
+  border-bottom: 1px solid #e0e0e0;
+  outline: 0;
+  @include mq(mob-only) {
+    width: 280px;
+    height: 32px;
+  }
+  @include mq(tab) {
+    width: 394px;
+    height: 32px;
+  }
+}
+
+.openMenuBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 0;
+  cursor: pointer;
+
+  &Icon {
+    width: 22px;
+    height: 20px;
+  }
+}
+
+.addFormInputSum {
+  padding: 4px 20px 8px 20px;
+
+  font-size: 18px;
+  line-height: 27px;
+  border: 0;
+  border-bottom: 1px solid #e0e0e0;
+  outline: 0;
+  @include mq(mob-only) {
+    margin-bottom: 40px;
+    width: 280px;
+    height: 32px;
+  }
+  @include mq(tab) {
+    text-align: center;
+    width: 190px;
+    margin-right: 24px;
+  }
+}
+
+.addFormInputDate {
+  font-size: 18px;
+  line-height: 27px;
+  border: 0;
+  border-bottom: 1px solid #e0e0e0;
+  outline: 0;
+  @include mq(mob-only) {
+    padding: 4px 20px 8px 20px;
+    margin-bottom: 40px;
+    width: 280px;
+    height: 32px;
+  }
+  @include mq(tab) {
+    padding: 4px 14px 8px 20px;
+    width: 180px;
+  }
 }
 
 .dataBox {
@@ -28,7 +111,7 @@
   justify-content: center;
   align-items: center;
   background-color: #fff;
-  color: #4A56E2;
+  color: #4a56e2;
   border: 0;
   cursor: pointer;
 
@@ -36,37 +119,52 @@
     width: 24px;
     height: 24px;
   }
+  @include mq(mob-only) {
+    top: 0;
+    right: 20px;
+  }
+  @include mq(tab) {
+    top: 4px;
+    right: 14px;
+  }
 }
 
-.calculatorFormInput {
-  width: 280px;
-  height: 32px;
-  padding: 4px 20px 8px 20px;
+.addFormTextarea {
+  resize: none;
+
+  padding: 4px 20px 2px 20px;
   font-size: 18px;
   line-height: 27px;
   border: 0;
   border-bottom: 1px solid #e0e0e0;
   outline: 0;
-}
-
-.calculatorFormTextarea {
-  width: 280px;
-  height: 84px;
-  padding: 4px 20px 8px 20px;
-  font-size: 18px;
-  line-height: 27px;
-  border: 0;
-  border-bottom: 1px solid #e0e0e0;
-  outline: 0;
+  @include mq(mob-only) {
+    width: 280px;
+    height: 84px;
+  }
+  @include mq(tab) {
+    width: 394px;
+    height: 40px;
+    margin-top: 40px;
+  }
 }
 
 .errorMessage {
+  position: absolute;
   font-size: 9px;
   color: red;
+  @include mq(mob-only) {
+    max-width: 280px;
+    max-height: 10px;
+  }
+}
+.sumBox {
+  position: relative;
 }
 
 .addBtn {
   @extend %btnGreen;
+
   width: 300px;
   padding: 13px 0;
   border-radius: 20px;

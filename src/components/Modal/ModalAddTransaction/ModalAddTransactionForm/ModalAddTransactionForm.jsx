@@ -4,37 +4,57 @@ import Datetime from 'react-datetime';
 import { useState } from 'react';
 import 'react-datetime/css/react-datetime.css';
 import { RiCalendar2Line } from 'react-icons/ri';
+import { FiChevronDown } from 'react-icons/fi';
 import getDate from 'utils/getDate';
 import scss from './ModalAddTransactionForm.module.scss';
+import ModalAddTransactionFormMenu from './ModalAddTransactionFormMenu/ModalAddTransactionFormMenu';
 
 const schema = yup.object().shape({
   sum: yup.number().min(0.01).max(2500000).required(),
 });
 const initialValues = {
-  category: '',
   sum: '',
+  Comment: '',
 };
 const initialValuesTwo = {
+  category: '',
   sum: '',
+  Comment: '',
 };
 
 const ModalAddTransactionForm = prop => {
   const { checkboxStatus } = prop;
   const [date, setDate] = useState(getDate());
+  const [open, setOpen] = useState(false);
+  const [categoryValue, setCategoryValue] = useState('');
 
   const createDate = date => {
     setDate(getDate(date));
   };
 
+  const handleOpen = () => {
+    setOpen(!open);
+  };
+
+  const addValueCategory = e => {
+    console.log(e.currentTarget.textContent);
+    setCategoryValue(e.currentTarget.textContent);
+  };
+
   const handleSubmit = (values, { resetForm }) => {
     const { category, sum } = values;
-    if (category === '') {
+    console.log(category);
+    if (checkboxStatus) {
       const formValues = { sum, date };
       console.log(formValues);
+      setCategoryValue('');
+      setDate(getDate());
       return resetForm();
     }
-    const formValues = { ...values, date };
+    const formValues = { category: categoryValue, ...values, date };
     console.log(formValues);
+    setCategoryValue('');
+    setDate(getDate());
     return resetForm();
   };
 
@@ -43,7 +63,7 @@ const ModalAddTransactionForm = prop => {
       <div className={scss.dataBox}>
         <Field
           {...props}
-          className={scss.calculatorFormInput}
+          className={scss.addFormInputDate}
           type="text"
           placeholder="date"
           name="date"
@@ -63,31 +83,41 @@ const ModalAddTransactionForm = prop => {
       validationSchema={schema}
       onSubmit={handleSubmit}
     >
-      <Form className={scss.calculatorForm}>
-        <div className={scss.calculatorFormInputContainer}>
+      <Form className={scss.addForm}>
+        <div className={scss.addFormInputContainer}>
           {!checkboxStatus && (
-            <label>
+            <label className={scss.categoryLabel}>
               <Field
-                className={scss.calculatorFormInput}
+                className={scss.addFormInputCategory}
                 type="text"
                 placeholder="Select a category"
                 name="category"
+                value={categoryValue}
+                onClick={handleOpen}
+                autoComplete="off"
+                readOnly
               ></Field>
-              <ErrorMessage
-                className={scss.errorMessage}
-                name="category"
-                component="div"
-              ></ErrorMessage>
+              <button
+                className={scss.openMenuBtn}
+                type="button"
+                onClick={handleOpen}
+              >
+                <FiChevronDown className={scss.openMenuBtnIcon}></FiChevronDown>
+              </button>
+              {open && (
+                <ModalAddTransactionFormMenu
+                  onClick={addValueCategory}
+                ></ModalAddTransactionFormMenu>
+              )}
             </label>
           )}
-          <label>
+          <label className={scss.sumBox}>
             <Field
-              className={scss.calculatorFormInput}
+              className={scss.addFormInputSum}
               type="text"
               placeholder="0.00"
               name="sum"
             ></Field>
-
             <ErrorMessage
               className={scss.errorMessage}
               name="sum"
@@ -106,18 +136,14 @@ const ModalAddTransactionForm = prop => {
           </label>
           <label>
             <Field
-              className={scss.calculatorFormTextarea}
+              className={scss.addFormTextarea}
               name="Comment"
               component="textarea"
               placeholder="Comment"
             ></Field>
-            <ErrorMessage
-              className={scss.errorMessage}
-              name="Comment"
-              component="div"
-            ></ErrorMessage>
           </label>
         </div>
+
         <button type="submit" className={scss.addBtn}>
           Add
         </button>
