@@ -27,28 +27,38 @@ const backEnd = [
   },
 ];
 
+function colorOfSum(item) {
+  if (item.Type === '+') {
+    return `${s.tableRowItem} ${s.sum} ${s.sumColorIncome}`;
+  } else {
+    return `${s.tableRowItem} ${s.sum} ${s.sumColorExpense}`;
+  }
+}
+
 const HomeTab = () => {
   return (
     <table className={s.table}>
       <thead className={s.tableHeaderTh}>
         <tr className={s.tableHeader}>
-          <th className={s.tableHeaderItem}>Date</th>
-          <th className={s.tableHeaderItem}>Type</th>
-          <th className={s.tableHeaderItem}>Category</th>
-          <th className={s.tableHeaderItem}>Comment</th>
-          <th className={s.tableHeaderItem}>Sum</th>
-          <th className={s.tableHeaderItem}>Balance</th>
+          <th className={`${s.tableTitle} ${s.date}`}>Date</th>
+          <th className={`${s.tableTitle} ${s.type}`}>Type</th>
+          <th className={`${s.tableTitle} ${s.category}`}>Category</th>
+          <th className={`${s.tableTitle} ${s.comment}`}>Comment</th>
+          <th className={`${s.tableTitle} ${s.sum}`}>Sum</th>
+          <th className={`${s.tableTitle} ${s.balance}`}>Balance</th>
         </tr>
       </thead>
       <tbody>
         {backEnd.map(item => (
           <tr className={s.tableRow}>
-            <th className={s.tableRowItem}>{item.Date}</th>
-            <th className={s.tableRowItem}> {item.Type}</th>
-            <th className={s.tableRowItem}>{item.Category}</th>
-            <th className={s.tableRowItem}>{item.Comment}</th>
-            <th className={s.tableRowItem}>{item.Sum}</th>
-            <th className={s.tableRowItem}>{item.Balance}</th>
+            <th className={`${s.tableRowItem} ${s.date}`}>{item.Date}</th>
+            <th className={`${s.tableRowItem} ${s.type}`}> {item.Type}</th>
+            <th className={`${s.tableRowItem} ${s.category}`}>
+              {item.Category}
+            </th>
+            <th className={`${s.tableRowItem} ${s.comment}`}>{item.Comment}</th>
+            <th className={colorOfSum(item)}>{item.Sum}</th>
+            <th className={`${s.tableRowItem} ${s.balance}`}>{item.Balance}</th>
           </tr>
         ))}
       </tbody>

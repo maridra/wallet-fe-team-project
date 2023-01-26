@@ -14,7 +14,6 @@
 
 .operationItem {
   height: 282px;
-  outline: 1px solid red;
   border-radius: 10px;
   overflow: hidden;
 
@@ -55,14 +54,14 @@
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
-  line-height: 27px;
+  line-height: 1.5;
 }
 
 .mobileTableInfo {
   font-family: 'Circe';
   font-style: normal;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 1.5;
   text-align: right;
 }
 
