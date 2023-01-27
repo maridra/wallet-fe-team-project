@@ -14,7 +14,14 @@ export const App = () => {
   return (
     <>
       <Suspense
-        fallback={<Loader height={'120'} width={'120'} color={'#4A56E2'} />}
+        fallback={
+          <Loader
+            height={'120'}
+            width={'120'}
+            color={'#4A56E2'}
+            center={true}
+          />
+        }
       >
         <Routes>
           <Route path="/" element={<Header />}>
