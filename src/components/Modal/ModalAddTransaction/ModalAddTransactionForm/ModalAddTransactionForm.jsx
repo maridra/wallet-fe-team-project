@@ -40,11 +40,6 @@ const ModalAddTransactionForm = prop => {
     setCategoryValue(e.currentTarget.textContent);
   };
 
-  // const formAddReset = () => {
-  //   setCategoryValue('Other');
-  //   setDate(getDate());
-  // };
-
   const handleSubmit = (values, { resetForm }) => {
     const { sum, comment } = values;
 
