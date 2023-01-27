@@ -14,19 +14,19 @@ const schema = yup.object().shape({
 });
 const initialValues = {
   sum: '',
-  // Comment: '',
+  comment: '',
 };
 const initialValuesTwo = {
   category: '',
   sum: '',
-  // Comment: '',
+  comment: '',
 };
 
 const ModalAddTransactionForm = prop => {
   const { checkboxStatus } = prop;
   const [date, setDate] = useState(getDate());
   const [open, setOpen] = useState(false);
-  const [categoryValue, setCategoryValue] = useState('');
+  const [categoryValue, setCategoryValue] = useState('Other');
 
   const createDate = date => {
     setDate(getDate(date));
@@ -37,24 +37,38 @@ const ModalAddTransactionForm = prop => {
   };
 
   const addValueCategory = e => {
-    console.log(e.currentTarget.textContent);
     setCategoryValue(e.currentTarget.textContent);
   };
 
+  const formAddReset = () => {
+    setCategoryValue('Other');
+    setDate(getDate());
+  };
+
   const handleSubmit = (values, { resetForm }) => {
-    const { category, sum } = values;
-    console.log(category);
+    const { sum, comment } = values;
+
     if (checkboxStatus) {
+      if (comment === '') {
+        const formValues = { sum, date };
+        console.log(formValues);
+        formAddReset();
+        return resetForm();
+      }
       const formValues = { ...values, date };
       console.log(formValues);
-      setCategoryValue('');
-      setDate(getDate());
+      formAddReset();
+      return resetForm();
+    }
+    if (comment === '') {
+      const formValues = { category: categoryValue, sum, date };
+      console.log(formValues);
+      formAddReset();
       return resetForm();
     }
     const formValues = { category: categoryValue, ...values, date };
     console.log(formValues);
-    setCategoryValue('');
-    setDate(getDate());
+    formAddReset();
     return resetForm();
   };
 
@@ -68,6 +82,7 @@ const ModalAddTransactionForm = prop => {
           placeholder="date"
           name="date"
           autoComplete="off"
+          value={date}
           readOnly
         ></Field>
         <button className={scss.dataBtn} type="button" onClick={openCalendar}>
@@ -117,6 +132,7 @@ const ModalAddTransactionForm = prop => {
               type="text"
               placeholder="0.00"
               name="sum"
+              autoComplete="off"
             ></Field>
             <ErrorMessage
               className={scss.errorMessage}
@@ -137,7 +153,7 @@ const ModalAddTransactionForm = prop => {
           <label>
             <Field
               className={scss.addFormTextarea}
-              name="Comment"
+              name="comment"
               component="textarea"
               placeholder="Comment"
             ></Field>

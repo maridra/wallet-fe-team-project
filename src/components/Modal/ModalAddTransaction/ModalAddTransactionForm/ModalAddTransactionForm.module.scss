@@ -33,6 +33,7 @@
   border: 0;
   border-bottom: 1px solid #e0e0e0;
   outline: 0;
+
   @include mq(mob-only) {
     width: 280px;
     height: 32px;
@@ -40,6 +41,45 @@
   @include mq(tab) {
     width: 394px;
     height: 32px;
+  }
+
+  animation: scaleTitle 0.3s ease 1 alternate;
+  @keyframes scaleTitle {
+    0% {
+      transform: scaleX(0);
+    }
+    10% {
+      transform: scaleX(0.1);
+    }
+    20% {
+      transform: scaleX(0.2);
+    }
+    30% {
+      transform: scaleX(0.3);
+    }
+    40% {
+      transform: scaleX(0.4);
+    }
+
+    50% {
+      transform: scaleX(0.5);
+    }
+    60% {
+      transform: scaleX(0.6);
+    }
+    70% {
+      transform: scaleX(0.7);
+    }
+    80% {
+      transform: scaleX(0.8);
+    }
+    90% {
+      transform: scaleX(0.9);
+    }
+
+    100% {
+      transform: scaleX(1);
+    }
   }
 }
 

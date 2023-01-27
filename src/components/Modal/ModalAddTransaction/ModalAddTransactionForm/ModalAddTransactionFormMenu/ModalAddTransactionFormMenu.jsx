@@ -34,6 +34,9 @@ const ModalAddTransactionFormMenu = props => {
       <div className={scss.menuItem} onClick={onClick}>
         Entertainment
       </div>
+      <div className={scss.menuItem} onClick={onClick}>
+        Other
+      </div>
     </div>
   );
 };
