@@ -1,14 +1,16 @@
+import { useSelector } from 'react-redux';
+import { Outlet } from 'react-router-dom';
+import { Suspense } from 'react';
+import Loader from '../../components/Loader/Loader.jsx';
 import Balance from 'components/Balance/Balance';
 import Currency from 'components/Currency/Currency';
 import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAddTransactions';
-import { useSelector } from 'react-redux';
 import { modalSelectors } from 'redux/modal/modalSelectors';
 import ModalAddTransaction from 'components/Modal/ModalAddTransaction/ModalAddTransaction';
 // import Statistic from '../../components/Statistics/Statistics';
 // import HomeTabMobile from 'components/HomeTabMobile/HomeTabMobile';
 // import HomeTab from 'components/HomeTab/HomeTab';
-
-import s from '../HomePage/HomePage.module.scss';
+import Navigation from '../../components/Navigation/Navigation';
 
 const HomePage = () => {
   const showModalAddTransaction = useSelector(
@@ -16,22 +18,18 @@ const HomePage = () => {
   );
   return (
     <>
-      <div className={s.bg_page}>
-        <div className={s.bg_blur}>
-          <div className={s.container}>
-            <div className={s.wrapper}>
-              {showModalAddTransaction && <ModalAddTransaction />}
-              <Balance />
-              <Currency />
-              <ButtonAddTransactions></ButtonAddTransactions>
-              <div>HomePage</div>
-              {/* <Statistic /> */}
-              {/* <HomeTab /> */}
-              {/* <HomeTabMobile /> */}
-            </div>
-          </div>
-        </div>
-      </div>
+      {showModalAddTransaction && <ModalAddTransaction />}
+      <Navigation />
+      <Balance />
+      <Currency />
+      <ButtonAddTransactions></ButtonAddTransactions>
+      <Suspense fallback={<Loader />}>
+        <Outlet />
+      </Suspense>
+      <div>HomePage</div>
+      {/* <Statistic /> */}
+      {/* <HomeTab /> */}
+      {/* <HomeTabMobile /> */}
     </>
   );
 };

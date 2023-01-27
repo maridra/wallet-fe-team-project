@@ -2,7 +2,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { v4 as uuidv4 } from 'uuid';
 
-import scss from './Statistics.module.scss';
+import scss from './StatisticPage.module.scss';
 import { months, years } from '../../assets/variables/selectorData';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -95,87 +95,116 @@ const data = {
   ],
 };
 
-const Statictics = () => {
+const StatisticForm = () => {
+  const textCenter = {
+    id: 'textCenter',
+    beforeDatasetsDraw(chart, args, pluginOptions) {
+      const { ctx } = chart;
+      ctx.save();
+      ctx.font = 'bolder 18px Circe';
+      ctx.fillStyle = 'black';
+      ctx.textBaseLine = 'middle';
+      ctx.textAlign = 'center';
+      ctx.textBaseLine = 'middle';
+      ctx.fillText(
+        // можно сделать через ``
+        '₴ 24 000.00',
+        chart.getDatasetMeta(0).data[0].x,
+        chart.getDatasetMeta(0).data[0].y
+      );
+    },
+  };
   return (
     <>
       <div className={scss.sectionTMP}>
         <h1 className={scss.title}>Statictics</h1>
         <div className={scss.mainBox}>
           <div className={scss.doughnut}>
-            <Doughnut data={data} options={options} />
+            <Doughnut data={data} options={options} plugins={[textCenter]} />
           </div>
           <div>
             <div className={scss.select}>
-              <select>
+              <select className={scss.selectItem}>
                 {months.map(item => (
-                  <option key={uuidv4()} value={item.name}>
+                  <option
+                    className={scss.selectOption}
+                    key={uuidv4()}
+                    value={item.name}
+                  >
                     {item.name}
                   </option>
                 ))}
+                #331763
               </select>
-              <select>
+              <select className={scss.selectItem}>
                 {years.map(item => (
-                  <option key={uuidv4()} value={item.name}>
+                  <option
+                    className={scss.selectOption}
+                    key={uuidv4()}
+                    value={item.name}
+                  >
                     {item.name}
                   </option>
                 ))}
               </select>
             </div>
-            <table className={scss.tableTitle}>
+            {/* table  */}
+            <table className={scss.table}>
               <thead className={scss.thead}>
-                <tr className={scss.tr}>
+                <tr>
                   <th>Category</th>
                   <th>Sum</th>
                 </tr>
               </thead>
-            </table>
-            <table className={scss.table}>
+
               <tbody>
                 <tr className={scss.tableRows}>
-                  <td>Main Expenses</td>
-                  <td>8 700.00</td>
+                  <td className={scss.squareBeforeExpenses}>Main Expenses</td>
+                  <td className={scss.tableRows__rightText}>8 700.00</td>
                 </tr>
                 <tr className={scss.tableRows}>
-                  <td>Products</td>
-                  <td>3 800.74</td>
+                  <td className={scss.squareBeforeProducts}>Products</td>
+                  <td className={scss.tableRows__rightText}>3 800.74</td>
                 </tr>
                 <tr className={scss.tableRows}>
-                  <td>Car</td>
-                  <td>1 500.00</td>
+                  <td className={scss.squareBeforeCar}>Car</td>
+                  <td className={scss.tableRows__rightText}>1 500.00</td>
                 </tr>
                 <tr className={scss.tableRows}>
-                  <td>Self Care</td>
-                  <td>800.00</td>
+                  <td className={scss.squareBeforeSelf}>Self Care</td>
+                  <td className={scss.tableRows__rightText}>800.00</td>
                 </tr>
                 <tr className={scss.tableRows}>
-                  <td>Child care</td>
-                  <td>2208.50</td>
+                  <td className={scss.squareBeforeChild}>Child care</td>
+                  <td className={scss.tableRows__rightText}>2208.50</td>
                 </tr>
                 <tr className={scss.tableRows}>
-                  <td>Household products</td>
-                  <td>300.00</td>
+                  <td className={scss.squareBeforeHousehold}>
+                    Household products
+                  </td>
+                  <td className={scss.tableRows__rightText}>300.00</td>
                 </tr>
                 <tr className={scss.tableRows}>
-                  <td>Education</td>
-                  <td>3 400.00</td>
+                  <td className={scss.squareBeforeEducation}>Education</td>
+                  <td className={scss.tableRows__rightText}>3 400.00</td>
                 </tr>
                 <tr className={scss.tableRows}>
-                  <td>Leisure</td>
-                  <td>1230.00</td>
+                  <td className={scss.squareBeforeLeisure}>Leisure</td>
+                  <td className={scss.tableRows__rightText}>1230.00</td>
                 </tr>
                 <tr className={scss.tableRows}>
-                  <td>Other Expenses</td>
-                  <td>610.00</td>
+                  <td className={scss.squareBeforeOther}>Other Expenses</td>
+                  <td className={scss.tableRows__rightText}>610.00</td>
                 </tr>
               </tbody>
               <tfoot>
                 <tr>
-                  <td>Expenses:</td>
-                  <td>22 549.24</td>
+                  <td className={scss.tableFooter}>Expenses:</td>
+                  <td className={scss.tableFooter__expenses}>22 549.24</td>
                 </tr>
                 <tr>
-                  <td>Income: </td>
-                  <td>27 350.00</td>
+                  <td className={scss.tableFooter}>Income: </td>
+                  <td className={scss.tableFooter__income}>27 350.00</td>
                 </tr>
               </tfoot>
             </table>
@@ -186,4 +215,4 @@ const Statictics = () => {
   );
 };
 
-export default Statictics;
+export default StatisticForm;
