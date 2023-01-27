@@ -10,12 +10,21 @@ const HomeTab = () => {
   const dispatch = useDispatch();
 
   const transactions = useSelector(financeSelectors.getTransactions);
-  const sortedTransactions = [...transactions].sort(function (a, b) {
-    return (
-      Number(b.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$1$2$3')) -
-      Number(a.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$1$2$3'))
-    );
-  });
+  const sortedTransactions = sortingTransaction(transactions);
+
+  function sortingTransaction(transactions) {
+    if (transactions) {
+      const sorted = [...transactions].sort(function (a, b) {
+        return (
+          Number(b.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$1$2$3')) -
+          Number(a.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$1$2$3'))
+        );
+      });
+      return sorted;
+    } else {
+      return [];
+    }
+  }
 
   function colorOfSum(item) {
     if (item.transactionType === true) {
