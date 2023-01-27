@@ -9,9 +9,7 @@ export const getTotalBalance = createAsyncThunk(
 
     if (!currentToken) rejectWithValue();
 
-    token.set(
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZDI0ZDVkZmMyN2RlZDYzOWQyMTUyZCIsImlhdCI6MTY3NDgxNDI0MCwiZXhwIjoxNjc0ODE3ODQwfQ.hSRKLIAZGwOpGDBPJEYr9aTNH9vIawFnr1KdpoYRs2M'
-    );
+    token.set(currentToken);
 
     try {
       const { data } = await axiosBaseUrl.get('/transactions');
