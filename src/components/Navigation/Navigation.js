@@ -1,3 +1,4 @@
+
 import { Fragment } from 'react';
 import Media from 'react-media';
 import s from './Navigation.module.scss';
@@ -66,6 +67,7 @@ const Navigation = () => {
         )}
       </Media>
     </>
+
   );
 };
 export default Navigation;

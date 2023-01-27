@@ -6,6 +6,7 @@ import { IoExitOutline } from 'react-icons/io5';
 import { Logo } from '../../image/Logo';
 import Avatar from '../Avatar/Avatar';
 import s from './Header.module.scss';
+import PageWrapper from 'components/PageWrapper/PageWrapper';
 
 const Header = () => {
   return (
@@ -31,7 +32,9 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <Outlet />
+      <PageWrapper>
+        <Outlet />
+      </PageWrapper>
     </>
   );
 };
