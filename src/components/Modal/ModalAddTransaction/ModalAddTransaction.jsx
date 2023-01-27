@@ -49,6 +49,7 @@ const ModalAddTransaction = () => {
         ></ModalAddTransactionCheckbox>
         <ModalAddTransactionForm
           checkboxStatus={checkboxStatus}
+          onClick={handleCloseModal}
         ></ModalAddTransactionForm>
         <button
           className={scss.closeBtn}

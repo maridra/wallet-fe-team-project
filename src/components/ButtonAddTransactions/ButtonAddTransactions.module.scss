@@ -2,4 +2,11 @@
 
 .openBtn {
   @extend %btnGreen;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  &Icon {
+    width: 20px;
+    height: 20px;
+  }
 }
