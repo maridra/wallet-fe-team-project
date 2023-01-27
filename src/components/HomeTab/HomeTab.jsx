@@ -47,7 +47,7 @@ const HomeTab = () => {
           <th className={`${s.tableTitle} ${s.balance}`}>Balance</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className={s.tableContent}>
         {sortedTransactions.map(item => (
           <tr key={item._id} className={s.tableRow}>
             <th className={`${s.tableRowItem} ${s.date}`}>
