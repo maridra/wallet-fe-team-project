@@ -1,5 +1,11 @@
 import React from 'react';
 
+import PageWrapper from 'components/PageWrapper/PageWrapper';
+
 export default function SettingsPage() {
-  return <div>SettingsPage</div>;
+  return (
+    <PageWrapper>
+      <div>SettingsPage</div>
+    </PageWrapper>
+  );
 }
