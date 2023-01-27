@@ -6,37 +6,16 @@ import { useEffect } from 'react';
 import financeSelectors from 'redux/finance/financeSelectors';
 import { useSelector } from 'react-redux';
 
-const backEnd = [
-  {
-    Date: '04.05.2021',
-    Type: '-',
-    Category: 'Other',
-    Comment: 'Expense',
-    Sum: '5000',
-    Balance: '10000',
-  },
-  {
-    Date: '04.05.2021',
-    Type: '-',
-    Category: 'Other',
-    Comment: 'Buy a new car for myself',
-    Sum: '5000',
-    Balance: '10000',
-  },
-  {
-    Date: '04.05.2021',
-    Type: '+',
-    Category: 'Other',
-    Comment: 'Expense',
-    Sum: '5000',
-    Balance: '10000',
-  },
-];
-
 const HomeTab = () => {
   const dispatch = useDispatch();
 
   const transactions = useSelector(financeSelectors.getTransactions);
+  const sortedTransactions = [...transactions].sort(function (a, b) {
+    return (
+      Number(b.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$1$2$3')) -
+      Number(a.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$1$2$3'))
+    );
+  });
 
   function colorOfSum(item) {
     if (item.transactionType === true) {
@@ -54,7 +33,6 @@ const HomeTab = () => {
     }
   }
   useEffect(() => {
-    console.log('123');
     dispatch(financeOperations.updateTransactions());
   }, [dispatch]);
   return (
@@ -70,8 +48,8 @@ const HomeTab = () => {
         </tr>
       </thead>
       <tbody>
-        {transactions.map(item => (
-          <tr className={s.tableRow}>
+        {sortedTransactions.map(item => (
+          <tr key={item._id} className={s.tableRow}>
             <th className={`${s.tableRowItem} ${s.date}`}>
               {item.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$3.$2.$1')}
             </th>
@@ -79,11 +57,13 @@ const HomeTab = () => {
               {typeChanger(item)}
             </th>
             <th className={`${s.tableRowItem} ${s.category}`}>
-              {item.Category}
+              {item.category.name}
             </th>
-            <th className={`${s.tableRowItem} ${s.comment}`}>{item.Comment}</th>
-            <th className={colorOfSum(item)}>{item.Sum}</th>
-            <th className={`${s.tableRowItem} ${s.balance}`}>{item.Balance}</th>
+            <th className={`${s.tableRowItem} ${s.comment}`}>{item.comment}</th>
+            <th className={colorOfSum(item)}>{item.amount}</th>
+            <th className={`${s.tableRowItem} ${s.balance}`}>
+              {item.remainingBalance}
+            </th>
           </tr>
         ))}
       </tbody>

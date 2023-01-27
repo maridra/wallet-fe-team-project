@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
 const initialState = {
-  data: null,
+  data: [],
 };
 
 export const financeSlice = createSlice({

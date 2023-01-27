@@ -6,10 +6,9 @@ const updateTransactions = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       token.set(
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZDI3MTM3ODgzY2EwM2E1NDZjOThmNyIsImlhdCI6MTY3NDczOTg1MiwiZXhwIjoxNjc0NzQzNDUyfQ.77jQLpjMSIRUHngWkSWscHTvuMvgfUbJWhIa3bQedgI'
+        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZDI3MTM3ODgzY2EwM2E1NDZjOThmNyIsImlhdCI6MTY3NDgxNzgxNSwiZXhwIjoxNjc0ODIxNDE1fQ.xugHS3HEPBmYgFylUI860bhogqsNd62YzIfaOQpEwgA'
       );
       const { data } = await axiosBaseUrl.get('transactions');
-      console.log(data.data.transactions[0]);
 
       return data.data.transactions[0];
     } catch (e) {}
