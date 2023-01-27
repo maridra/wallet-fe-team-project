@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 
 import Avatar from 'components/Avatar/Avatar';
+import Balance from 'components/Balance/Balance';
 import Currency from 'components/Currency/Currency';
 import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAddTransactions';
 import { modalSelectors } from 'redux/modal/modalSelectors';
@@ -22,6 +23,7 @@ const HomePage = () => {
           <div className={s.container}>
             <div className={s.wrapper}>
               {showModalAddTransaction && <ModalAddTransaction />}
+              <Balance />
               <Currency />
               <ButtonAddTransactions></ButtonAddTransactions>
               <div>HomePage</div>
