@@ -10,7 +10,6 @@ import ModalAddTransaction from 'components/Modal/ModalAddTransaction/ModalAddTr
 // import Statistic from '../../components/Statistics/Statistics';
 // import HomeTabMobile from 'components/HomeTabMobile/HomeTabMobile';
 // import HomeTab from 'components/HomeTab/HomeTab';
-import PageWrapper from 'components/PageWrapper/PageWrapper';
 import Navigation from '../../components/Navigation/Navigation';
 
 const HomePage = () => {
@@ -18,7 +17,7 @@ const HomePage = () => {
     modalSelectors.showModalAddTransaction
   );
   return (
-    <PageWrapper>
+    <>
       {showModalAddTransaction && <ModalAddTransaction />}
       <Navigation />
       <Balance />
@@ -31,7 +30,7 @@ const HomePage = () => {
       {/* <Statistic /> */}
       {/* <HomeTab /> */}
       {/* <HomeTabMobile /> */}
-    </PageWrapper>
+    </>
   );
 };
 
