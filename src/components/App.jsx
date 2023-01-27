@@ -7,6 +7,7 @@ import { Header, Loader } from '../components';
 import PublicRoute from './PublicRoute/PublicRoute';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
+const SettingsPage = lazy(() => import('../pages/SettingsPage/SettingsPage'));
 const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
 
@@ -25,6 +26,7 @@ export const App = () => {
                 <PrivateRoute redirectTo="/login" children={<HomePage />} />
               }
             /> */}
+            <Route path="/settings" element={<SettingsPage />} />
           </Route>
           <Route path="*" element={<NotFound />} />
           <Route
