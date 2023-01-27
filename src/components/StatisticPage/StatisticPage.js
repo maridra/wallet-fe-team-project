@@ -2,7 +2,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { v4 as uuidv4 } from 'uuid';
 
-import scss from './Statistics.module.scss';
+import scss from './StatisticPage.module.scss';
 import { months, years } from '../../assets/variables/selectorData';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
