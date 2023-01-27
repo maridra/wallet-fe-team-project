@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosBaseUrl, token } from '../tokenSettingsAxios';
 import { Notify } from 'notiflix';
 
-export const totalBalance = createAsyncThunk(
+export const getTotalBalance = createAsyncThunk(
   '/balance',
   async (_, { rejectWithValue, getState }) => {
     const currentToken = getState().auth.token;
@@ -13,7 +13,6 @@ export const totalBalance = createAsyncThunk(
 
     try {
       const { data } = await axiosBaseUrl.get('/transactions');
-      console.log(data);
       return data;
     } catch (e) {
       Notify.failure(e.message, { position: 'center-top' });
@@ -22,6 +21,6 @@ export const totalBalance = createAsyncThunk(
   }
 );
 
-const financeOperation = { totalBalance };
+const financeOperation = { getTotalBalance };
 
 export default financeOperation;

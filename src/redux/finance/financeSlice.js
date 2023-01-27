@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { totalBalance } from './financeOperation';
+import { getTotalBalance } from './financeOperation';
 
 const initialState = {
   totalBalance: null,
@@ -20,13 +20,14 @@ export const financeSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(totalBalance.pending, handlePending)
-      .addCase(totalBalance.fulfilled, (state, { payload }) => {
-        state.totalBalance = payload.finance;
+      .addCase(getTotalBalance.pending, handlePending)
+      .addCase(getTotalBalance.fulfilled, (state, { payload }) => {
+        const lastTransaction = payload.data.transactions[0].pop();
+        state.totalBalance = lastTransaction.remainingBalance;
         state.isLoading = false;
         state.isLoggedIn = true;
       })
-      .addCase(totalBalance.rejected, handleRejected);
+      .addCase(getTotalBalance.rejected, handleRejected);
   },
 });
 
