@@ -95,11 +95,11 @@ const data = {
   ],
 };
 
-const Statictics = () => {
+const StatisticForm = () => {
   const textCenter = {
     id: 'textCenter',
     beforeDatasetsDraw(chart, args, pluginOptions) {
-      const { ctx, data } = chart;
+      const { ctx } = chart;
       ctx.save();
       ctx.font = 'bolder 18px Circe';
       ctx.fillStyle = 'black';
@@ -124,17 +124,25 @@ const Statictics = () => {
           </div>
           <div>
             <div className={scss.select}>
-              <select>
+              <select className={scss.selectItem}>
                 {months.map(item => (
-                  <option key={uuidv4()} value={item.name}>
+                  <option
+                    className={scss.selectOption}
+                    key={uuidv4()}
+                    value={item.name}
+                  >
                     {item.name}
                   </option>
                 ))}
                 #331763
               </select>
-              <select>
+              <select className={scss.selectItem}>
                 {years.map(item => (
-                  <option key={uuidv4()} value={item.name}>
+                  <option
+                    className={scss.selectOption}
+                    key={uuidv4()}
+                    value={item.name}
+                  >
                     {item.name}
                   </option>
                 ))}
@@ -207,4 +215,4 @@ const Statictics = () => {
   );
 };
 
-export default Statictics;
+export default StatisticForm;

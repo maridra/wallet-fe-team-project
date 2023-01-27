@@ -56,11 +56,88 @@
     height: 288px;
   }
 }
+.selectItem {
+  cursor: pointer;
+  /* Reset */
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font: inherit;
 
+  @include mq(mob-only) {
+    width: 280px;
+    height: 50px;
+    padding-left: 20px;
+  }
+  @include mq(tab) {
+    width: 160px;
+    height: 50px;
+    padding-left: 16px;
+  }
+  @include mq(desk) {
+    width: 182px;
+    height: 50px;
+    padding-left: 20px;
+  }
+
+  border: 1px solid #000000;
+  border-radius: 30px;
+
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  @include mq(mob-only) {
+    background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+      20px center / 18px;
+  }
+  @include mq(tab) {
+    background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+      20px center / 16px;
+  }
+  @include mq(desk) {
+    background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+      20px center / 18px;
+  }
+
+  &:focus {
+    // transform: rotateX(5deg);
+
+    @include mq(mob-only) {
+      background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
+        20px center / 18px;
+    }
+    @include mq(tab) {
+      background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
+        20px center / 16px;
+    }
+    @include mq(desk) {
+      background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
+        20px center / 18px;
+    }
+  }
+}
+
+.selectOption {
+  background: rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(25px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 20px;
+  &:hover {
+    outline: none;
+    background: black;
+  }
+}
 .select {
   padding-bottom: 20px;
   display: flex;
   justify-content: space-between;
+  border-radius: 30px;
+
   @include mq(mob-only) {
     width: 280px;
     gap: 20px;
