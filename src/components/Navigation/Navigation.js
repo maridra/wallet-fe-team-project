@@ -18,8 +18,8 @@ const Navigation = () => {
   return (
     <div>
       <div>
-        <NavItems to="/">Home</NavItems>
-        <NavItems to="/statistic">Statistic</NavItems>
+        <NavItems to="/home">Home</NavItems>
+        <NavItems to="statistic">Statistic</NavItems>
       </div>
     </div>
   );

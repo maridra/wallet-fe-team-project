@@ -1,10 +1,10 @@
 import StatisticForm from '../../components/Statistics/Statistics';
 
-const Statistic = () => {
+const StatisticPage = () => {
   return (
     <>
       <StatisticForm />
     </>
   );
 };
-export default Statistic;
+export default StatisticPage;

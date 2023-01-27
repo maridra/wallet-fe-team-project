@@ -4,7 +4,7 @@ import { financeSelectors } from '../../redux/finance/financeSelectors';
 import { getTotalBalance } from 'redux/finance/financeOperation';
 
 import css from './Balance.module.scss';
-import hryvniaLogo from '../../assets/Images/currency/hryvniaLogo.svg';
+import hryvniaLogo from '../../assets/images/currency/hryvniaLogo.svg';
 
 const Balance = () => {
   const userBalance = useSelector(financeSelectors.setTotalBalance);

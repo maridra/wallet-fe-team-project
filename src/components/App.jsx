@@ -1,4 +1,5 @@
 import LoginPage from 'pages/LoginPage/LoginPage';
+import StatisticPage from 'pages/StatisticPage/StatisticPage';
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Header, Loader } from '../components';
@@ -26,7 +27,10 @@ export const App = () => {
       >
         <Routes>
           <Route path="/" element={<Header />}>
-            <Route index element={<HomePage />} />
+            <Route path="/home" element={<HomePage />}>
+              <Route path="statistic" element={<StatisticPage />} />
+            </Route>
+
             {/* <Route
               index
               element={
