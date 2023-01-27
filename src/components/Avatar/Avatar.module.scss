@@ -1,1 +1,40 @@
 @import '../../assets/styles/index.scss';
+
+.user_avatar {
+  display: inline-block;
+  position: relative;
+
+  &__img {
+    width: 30px;
+    height: 30px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    @include mq(tab) {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &__settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 40%;
+    height: 40%;
+    background-color: var(--background-header);
+    border-radius: 50%;
+  }
+
+  &__icon {
+    width: 90%;
+    color: black;
+  }
+}

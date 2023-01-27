@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 
-import Avatar from 'components/Avatar/Avatar';
 import Balance from 'components/Balance/Balance';
 import Currency from 'components/Currency/Currency';
 import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAddTransactions';
@@ -30,7 +29,6 @@ const HomePage = () => {
               {/* <Statistic /> */}
               {/* <HomeTab /> */}
               {/* <HomeTabMobile /> */}
-              <Avatar />
             </div>
           </div>
         </div>
