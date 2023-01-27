@@ -23,7 +23,7 @@ const initialValuesTwo = {
 };
 
 const ModalAddTransactionForm = prop => {
-  const { checkboxStatus } = prop;
+  const { checkboxStatus,onClick } = prop;
   const [date, setDate] = useState(getDate());
   const [open, setOpen] = useState(false);
   const [categoryValue, setCategoryValue] = useState('Other expenses');
@@ -53,22 +53,26 @@ const ModalAddTransactionForm = prop => {
         const formValues = { sum, date };
         console.log(formValues);
         formAddReset();
+        onClick();
         return resetForm();
       }
       const formValues = { ...values, date };
       console.log(formValues);
       formAddReset();
+      onClick();
       return resetForm();
     }
     if (comment === '') {
       const formValues = { category: categoryValue, sum, date };
       console.log(formValues);
       formAddReset();
+      onClick();
       return resetForm();
     }
     const formValues = { category: categoryValue, ...values, date };
     console.log(formValues);
     formAddReset();
+    onClick();
     return resetForm();
   };
 
