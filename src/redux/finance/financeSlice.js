@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getTotalBalance, financeOperations } from './financeOperation';
+import { getTotalBalance, updateTransactions } from './financeOperation';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
@@ -23,15 +23,12 @@ export const financeSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(financeOperations.pending, handlePending)
-      .addCase(financeOperations.rejected, handleRejected)
-      .addCase(
-        financeOperations.updateTransactions.fulfilled,
-        (state, action) => {
-          state.data = action.payload;
-          state.isLoading = false;
-        }
-      )
+      .addCase(updateTransactions.pending, handlePending)
+      .addCase(updateTransactions.rejected, handleRejected)
+      .addCase(updateTransactions.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.isLoading = false;
+      })
       .addCase(getTotalBalance.pending, handlePending)
       .addCase(getTotalBalance.fulfilled, (state, { payload }) => {
         const lastTransaction = payload.data.transactions[0].pop();

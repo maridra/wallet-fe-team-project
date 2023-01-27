@@ -10,7 +10,6 @@ import {
 } from 'redux-persist/es/constants';
 
 import { persistedAuthReducer } from './auth/authSlice';
-import { persistedFinanceReducer } from './finance/financeSlice';
 import { modalReducer } from './modal/modalSlice';
 import { financeReducer } from './finance/financeSlice';
 

@@ -1,9 +1,9 @@
 import s from './HomeTab.module.scss';
 import React from 'react';
-import financeOperations from 'redux/finance/financeOperations';
+import { updateTransactions } from 'redux/finance/financeOperation';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import financeSelectors from 'redux/finance/financeSelectors';
+import { financeSelectors } from 'redux/finance/financeSelectors';
 import { useSelector } from 'react-redux';
 
 const HomeTab = () => {
@@ -33,7 +33,7 @@ const HomeTab = () => {
     }
   }
   useEffect(() => {
-    dispatch(financeOperations.updateTransactions());
+    dispatch(updateTransactions());
   }, [dispatch]);
   return (
     <table className={s.table}>
