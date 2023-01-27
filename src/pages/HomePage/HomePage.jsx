@@ -9,6 +9,7 @@ import ModalAddTransaction from 'components/Modal/ModalAddTransaction/ModalAddTr
 // import HomeTabMobile from 'components/HomeTabMobile/HomeTabMobile';
 // import HomeTab from 'components/HomeTab/HomeTab';
 import PageWrapper from 'components/PageWrapper/PageWrapper';
+import Navigation from 'components/Navigation/Navigation';
 
 const HomePage = () => {
   const showModalAddTransaction = useSelector(
@@ -17,6 +18,7 @@ const HomePage = () => {
   return (
     <PageWrapper>
       {showModalAddTransaction && <ModalAddTransaction />}
+      <Navigation />
       <Balance />
       <Currency />
       <ButtonAddTransactions></ButtonAddTransactions>
