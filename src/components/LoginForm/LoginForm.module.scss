@@ -1,14 +1,14 @@
 @import 'assets/styles/index.scss';
 
-.formContainer{
-  padding-top: 32px;
-  padding-bottom: 36px;
+.formContainer {
+  padding-top: 107px;
+  padding-bottom: 107px;
   background-color: #ffffff;
 
-  @include mq(tab){
+  @include mq(tab) {
     width: 533px;
-    padding-top: 50px;
-    padding-bottom: 48px;
+    padding-top: 40px;
+    padding-bottom: 62px;
     padding-left: 65px;
     padding-right: 58.5px;
     border-radius: 20px;
@@ -58,7 +58,7 @@
   color: rgb(255, 55, 55);
 }
 
-.registerBtn {
+.loginBtn {
   @extend %btnGreen;
   height: 50px;
   margin-bottom: 20px;
@@ -70,7 +70,7 @@
   }
 }
 
-.loginBtn {
+.registerBtn {
   @extend %btnTransperentBlue;
   height: 50px;
   border-radius: 20px;

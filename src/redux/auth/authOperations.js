@@ -4,10 +4,9 @@ import { axiosBaseUrl, token } from '../tokenSettingsAxios';
 import { Notify } from 'notiflix';
 
 const register = createAsyncThunk(
-  'auth/register', async (user, { rejectWithValue }) => {
+  'auth/register', async (credentials, { rejectWithValue }) => {
     try {
-      const { data } = await axiosBaseUrl.post('/auth/register', user);
-      token.set(data.token)
+      const { data } = await axiosBaseUrl.post('/auth/register', credentials);
       return data;
     } catch (error) {
       Notify.failure(error.message);

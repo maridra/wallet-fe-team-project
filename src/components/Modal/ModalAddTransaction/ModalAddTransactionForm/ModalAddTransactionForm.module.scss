@@ -1,0 +1,73 @@
+@import 'assets/styles/index.scss';
+
+.calculatorForm {
+  display: flex;
+  flex-direction: column;
+  padding-top: 40px;
+  gap: 40px;
+}
+
+.calculatorFormInputContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.dataBox {
+  position: relative;
+}
+
+.dataBtn {
+  position: absolute;
+  top: 0;
+  right: 20px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  color: #4A56E2;
+  border: 0;
+  cursor: pointer;
+
+  &Icon {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.calculatorFormInput {
+  width: 280px;
+  height: 32px;
+  padding: 4px 20px 8px 20px;
+  font-size: 18px;
+  line-height: 27px;
+  border: 0;
+  border-bottom: 1px solid #e0e0e0;
+  outline: 0;
+}
+
+.calculatorFormTextarea {
+  width: 280px;
+  height: 84px;
+  padding: 4px 20px 8px 20px;
+  font-size: 18px;
+  line-height: 27px;
+  border: 0;
+  border-bottom: 1px solid #e0e0e0;
+  outline: 0;
+}
+
+.errorMessage {
+  font-size: 9px;
+  color: red;
+}
+
+.addBtn {
+  @extend %btnGreen;
+  width: 300px;
+  padding: 13px 0;
+  border-radius: 20px;
+}

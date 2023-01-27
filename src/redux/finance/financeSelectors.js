@@ -1,7 +1,9 @@
+const setFinance = state => state.finance;
+const setTotalBalance = state => state.finance.totalBalance;
 const getTransactions = state => state.finance.data;
 
-const financeSelectors = {
+export const financeSelectors = {
+  setFinance,
+  setTotalBalance,
   getTransactions,
 };
-
-export default financeSelectors;

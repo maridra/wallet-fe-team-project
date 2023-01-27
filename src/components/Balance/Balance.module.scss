@@ -1,0 +1,39 @@
+@import '../../assets/styles/vars.scss';
+
+.balanceContainer {
+  display: inline-block;
+  max-width: 440px;
+  min-width: 280px;
+  height: 80px;
+  padding: 8px 32px 11px 32px;
+  font-size: 12px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  background-color: var(--modal-background-color-white);
+  color: var(--text-grey-color);
+  border-radius: 30px;
+
+  @media screen and (min-width: 768px) {
+    width: 336px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    width: 395px;
+  }
+}
+
+.balanceAmount {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: calc(45 / 37);
+  color: var(--text-main-color);
+  font-family: 'Poppins';
+}
+
+.balanceLogo {
+  font-weight: 400;
+  font-family: 'Poppins';
+}

@@ -1,0 +1,29 @@
+@import 'assets/styles/index.scss';
+
+.bg_page {
+  width: 100%;
+  min-height: 100vh;
+
+  background-color: var(--background-grey-color);
+
+  @include mq(tab) {
+    background-image: url('../../image/Ellipse\ 1.png'),
+      url('../../image/Ellipse\ 2.png');
+    background-repeat: no-repeat;
+    background-position: left bottom, right top;
+  }
+}
+
+.bg_blur {
+  width: 100%;
+  min-height: 100vh;
+
+  backdrop-filter: blur(25px);
+}
+
+.wrapper {
+  padding-top: 60px;
+  @include mq(tab) {
+    padding-top: 80px;
+  }
+}

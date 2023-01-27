@@ -1,10 +1,10 @@
-import RegisterForm from "components/RegisterForm/RegisterForm";
+import LoginForm from "components/LoginForm/LoginForm";
+import s from "../LoginPage/LoginPage.module.scss";
+import loginDeskImg from "../../image/loginDesk.png";
+import loginTabImg from "../../image/loginTab.png";
 import Media from "react-media";
-import s from "../RegisterPage/RegisterPage.module.scss";
-import registerDeskImg from "../../image/registerDeskImg.png";
-import registerTabImg from "../../image/registerTabImg.png";
 
-const RegisterPage = () => {
+const LoginPage = () => {
   return (
     <div className={s.back}>
       <div className={s.container}>
@@ -18,7 +18,7 @@ const RegisterPage = () => {
                 {matches.tab && (
                   <div className={s.registerImgWrapper}>
                     <img
-                      src={registerTabImg}
+                      src={loginTabImg}
                       alt="The phone with app on the screen"
                       className={s.registerImg}
                     />
@@ -28,7 +28,7 @@ const RegisterPage = () => {
                 {matches.desk && (
                   <div className={s.registerImgWrapper}>
                     <img
-                      src={registerDeskImg}
+                      src={loginDeskImg}
                       alt="The phone with app on the screen"
                       className={s.registerImg}
                     />
@@ -39,13 +39,12 @@ const RegisterPage = () => {
             )}
           </Media>
           <div className={s.form}>
-            <RegisterForm />
+            <LoginForm />
           </div>
         </div>
       </div>
     </div>
-    
   )
 }
 
-export default RegisterPage;
+export default LoginPage;

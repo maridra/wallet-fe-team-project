@@ -17,16 +17,19 @@ const RegisterForm = () => {
     firstName: ''
   }
 
+  const[email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
   const dispatch = useDispatch();
 
-  const onSubmit = ({ firstName, email, password }) => {
-    const user = {
-      firstName,
-      email,
-      password
-    }
-    dispatch(authOperations.register(user));
+  const onSubmit = e => {
+    e.preventDefault();
+    dispatch(authOperations.register({ email, password, firstName }));
+    setEmail('')
+    setPassword('')
+    setConfirmPassword('');
+    setFirstName('');
   }
 
   const SignUpSchema = Yup.object().shape({
@@ -37,8 +40,11 @@ const RegisterForm = () => {
       .max(63)
       .required("Required field"),
     password: Yup.string()
+      .matches(/(?=.*[a-z])/, "Must contain at least 1 lowerCase alphabetical character")
+      .matches(/(?=.*[A-Z])/, "Must contain at least 1 UpperCase alphabetical character")
+      .matches(/(?=.*[0-9])/, "Must contain at least 1 numeric character")
       .min(6, "Minimum 6 characters required")
-      .max(12, "Maximum 12")
+      .max(12, "Maximum 12 characters")
       .required("Required field"),
     passwordConfirm: Yup.string()
       .oneOf([Yup.ref('password')], "Passwords don't match!")
@@ -50,7 +56,7 @@ const RegisterForm = () => {
   })
 
   return (
-    <div className={s.container}>
+    <div className={s.formContainer}>
       <div className={s.logo}>
         <svg  width="120" height="30"className={s.logoIcon}>
           <use href={`${sprite}#icon-logo`}></use>
@@ -58,33 +64,32 @@ const RegisterForm = () => {
       </div>
       <Formik
         initialValues={initialValues}
-        onSubmit={onSubmit}
         validationSchema={SignUpSchema}>
-        <Form className={s.form}>
+          <Form className={s.form} onSubmit={onSubmit}>
           <label className={s.label}>
-            <Field type="email" name="email" placeholder="E-mail" className={s.input} />
+            <Field type="email" name="email" placeholder="E-mail" className={s.input} value={email} onInput={e => setEmail(e.target.value)} />
             <svg width="24" height="24" className={s.inputIcon}>
               <use href={`${sprite}#icon-email`}></use>
             </svg>
             <ErrorMessage name="email" component="p" className={s.errorField} />
           </label>
           <label className={s.label}>
-            <Field type="password" name="password" placeholder="Password" className={s.input} onInput={e => setPassword(e.target.value)} />
+            <Field type="password" name="password" placeholder="Password" className={s.input} onInput={e => setPassword(e.target.value)} value={password} />
             <svg width="24" height="24" className={s.inputIcon}>
               <use href={`${sprite}#icon-password-lock`}></use>
             </svg>
             <ErrorMessage name="password" component="p" className={s.errorField} />
           </label>
           <label className={s.label}>
-            <Field type="password" name="passwordConfirm" placeholder="Confirm password" className={s.input} />
+            <Field type="password" name="passwordConfirm" placeholder="Confirm password" className={s.input} value={confirmPassword} onInput={e => setConfirmPassword(e.target.value)}/>
             <svg width="24" height="24" className={s.inputIcon}>
               <use href={`${sprite}#icon-password-lock`}></use>
             </svg>
-            <ErrorMessage name="passwordConfirm" component="p" className={s.errorField} />
-            <PasswordStrength password={password} />
+              <PasswordStrength password={password} className={s.passwordStrength} />
+             <ErrorMessage name="passwordConfirm" component="p" className={s.errorField} />
           </label>
           <label className={s.label}>
-            <Field type="text" name="firstName" placeholder="First name" className={s.input} />
+            <Field type="text" name="firstName" placeholder="First name" className={s.input} value={firstName} onInput={e => setFirstName(e.target.value)} />
             <svg width="24" height="24" className={s.inputIcon}>
               <use href={`${sprite}#icon-name`}></use>
             </svg>
