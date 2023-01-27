@@ -28,6 +28,34 @@
   z-index: 50000;
 }
 
+.modal__backdrop_two {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+
+  @include mq(mob-only) {
+    overflow-x: hidden;
+    overflow-y: hidden;
+  }
+  @include mq(tab) {
+    background: var(--modal-background-color-grey);
+    overflow: auto;
+    animation: scaleTitle 0.3s ease 1 alternate;
+    @keyframes scaleTitle {
+      0% {
+        transform: scaleX(0);
+      }
+
+      100% {
+        transform: scaleX(1);
+      }
+    }
+  }
+  z-index: 50000;
+}
+
 .modal__content {
   position: absolute;
   display: flex;
