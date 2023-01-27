@@ -11,8 +11,7 @@ import s from '../Avatar/Avatar.module.scss';
 
 export default function Avatar() {
   const baseUserAvatar =
-    'https://novy.tv/wp-content/uploads/sites/96/2022/11/avatr_002a_g_ukr-ua_4x5_.jpg';
-  // 'https://res.cloudinary.com/dpvkleqce/image/upload/v1674652226/wallet_leopards/zn7ur1gmwynrbmnqgzkj.png';
+    'https://res.cloudinary.com/dpvkleqce/image/upload/v1674652226/wallet_leopards/zn7ur1gmwynrbmnqgzkj.png';
 
   const avatarURL =
     useSelector(authSelectors.userSelector).avatarURL ?? baseUserAvatar;
