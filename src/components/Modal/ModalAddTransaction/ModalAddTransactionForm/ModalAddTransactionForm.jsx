@@ -16,14 +16,14 @@ const initialValues = {
   sum: '',
   comment: '',
 };
-const initialValuesTwo = {
-  category: '',
-  sum: '',
-  comment: '',
-};
+// const initialValuesTwo = {
+//   category: '',
+//   sum: '',
+//   comment: '',
+// };
 
 const ModalAddTransactionForm = prop => {
-  const { checkboxStatus,onClick } = prop;
+  const { checkboxStatus, onClick } = prop;
   const [date, setDate] = useState(getDate());
   const [open, setOpen] = useState(false);
   const [categoryValue, setCategoryValue] = useState('Other expenses');
@@ -40,10 +40,10 @@ const ModalAddTransactionForm = prop => {
     setCategoryValue(e.currentTarget.textContent);
   };
 
-  const formAddReset = () => {
-    setCategoryValue('Other');
-    setDate(getDate());
-  };
+  // const formAddReset = () => {
+  //   setCategoryValue('Other');
+  //   setDate(getDate());
+  // };
 
   const handleSubmit = (values, { resetForm }) => {
     const { sum, comment } = values;
@@ -52,28 +52,24 @@ const ModalAddTransactionForm = prop => {
       if (comment === '') {
         const formValues = { sum, date };
         console.log(formValues);
-        formAddReset();
         onClick();
-        return resetForm();
+        return;
       }
       const formValues = { ...values, date };
       console.log(formValues);
-      formAddReset();
       onClick();
-      return resetForm();
+      return;
     }
     if (comment === '') {
       const formValues = { category: categoryValue, sum, date };
       console.log(formValues);
-      formAddReset();
       onClick();
-      return resetForm();
+      return;
     }
     const formValues = { category: categoryValue, ...values, date };
     console.log(formValues);
-    formAddReset();
     onClick();
-    return resetForm();
+    return;
   };
 
   const renderCalendarInput = (props, openCalendar) => {
@@ -98,7 +94,7 @@ const ModalAddTransactionForm = prop => {
 
   return (
     <Formik
-      initialValues={!checkboxStatus ? initialValues : initialValuesTwo}
+      initialValues={initialValues}
       validationSchema={schema}
       onSubmit={handleSubmit}
     >
