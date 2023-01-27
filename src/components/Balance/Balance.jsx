@@ -22,7 +22,7 @@ const Balance = () => {
         <p>
           {userBalance
             ? userBalance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-            : '0. 00'}
+            : '0.00'}
         </p>
       </div>
     </div>
