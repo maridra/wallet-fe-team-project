@@ -4,7 +4,7 @@ import Datetime from 'react-datetime';
 import { useState } from 'react';
 import 'react-datetime/css/react-datetime.css';
 import { RiCalendar2Line } from 'react-icons/ri';
-import { FiChevronDown } from 'react-icons/fi';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import getDate from 'utils/getDate';
 import scss from './ModalAddTransactionForm.module.scss';
 import ModalAddTransactionFormMenu from './ModalAddTransactionFormMenu/ModalAddTransactionFormMenu';
@@ -112,7 +112,13 @@ const ModalAddTransactionForm = prop => {
                 type="button"
                 onClick={handleOpen}
               >
-                <FiChevronDown className={scss.openMenuBtnIcon}></FiChevronDown>
+                {!open ? (
+                  <FiChevronDown
+                    className={scss.openMenuBtnIcon}
+                  ></FiChevronDown>
+                ) : (
+                  <FiChevronUp className={scss.openMenuBtnIcon}></FiChevronUp>
+                )}
               </button>
               {open && (
                 <ModalAddTransactionFormMenu

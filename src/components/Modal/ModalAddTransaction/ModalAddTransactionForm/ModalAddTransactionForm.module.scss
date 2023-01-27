@@ -70,6 +70,14 @@
     width: 22px;
     height: 20px;
   }
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 22px;
+    height: 20px;
+  }
 }
 
 .addFormInputSum {
@@ -175,15 +183,15 @@
   }
 }
 
-.errorMessage {
-  position: absolute;
-  font-size: 9px;
-  color: red;
-  @include mq(mob-only) {
-    max-width: 280px;
-    max-height: 10px;
-  }
-}
+// .errorMessage {
+//   position: absolute;
+//   font-size: 9px;
+//   color: red;
+//   @include mq(mob-only) {
+//     max-width: 280px;
+//     max-height: 10px;
+//   }
+// }
 
 .error {
   position: absolute;
