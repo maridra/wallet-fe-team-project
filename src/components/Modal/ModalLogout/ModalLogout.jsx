@@ -1,5 +1,6 @@
 import { toggleShowModalLogout } from 'redux/modal/modalSlice';
 import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 import ModalUniversal from '../ModalUniversal';
 import scss from './ModalLogout.module.scss';
 import logo from '../../../assets/Images/NotFoundPage/sad_leopard.png';
@@ -16,6 +17,18 @@ const ModalLogout = () => {
     dispatch(toggleShowModalLogout(false));
   };
 
+  const escKeyDown = e => {
+    if (e.code === 'Escape') {
+      handleCloseModal();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', escKeyDown);
+    return () => {
+      document.removeEventListener('keydown', escKeyDown);
+    };
+  });
   return (
     <ModalUniversal onClose={handleCloseModal} onClick={handleBackdropClick}>
       <div className={scss.box}>
