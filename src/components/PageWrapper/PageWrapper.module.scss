@@ -1,8 +1,8 @@
-@import 'assets/styles/index.scss';
+@import '../../assets/styles/index.scss';
 
 .bg_page {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 
   background-color: var(--background-grey-color);
 
@@ -16,14 +16,14 @@
 
 .bg_blur {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 
   backdrop-filter: blur(25px);
 }
 
 .wrapper {
-  margin-top: 60px;
+  padding-top: 60px;
   @include mq(tab) {
-    margin-top: 80px;
+    padding-top: 80px;
   }
 }

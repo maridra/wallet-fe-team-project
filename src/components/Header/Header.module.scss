@@ -7,7 +7,7 @@
   width: 100vw;
 
   background: var(--background-header);
-  z-index: 10000;
+  z-index: 1000;
 }
 
 .box {
@@ -23,14 +23,12 @@
   }
 
   @include mq(tab) {
-    padding-left: 32px;
-    padding-right: 32px;
+    padding: 20px 32px;
     max-width: 768px;
   }
 
   @include mq(desk) {
-    padding-left: 16px;
-    padding-right: 16px;
+    padding: 20px 16px;
     max-width: 1280px;
   }
 }
@@ -75,11 +73,19 @@
 
 .user {
   display: flex;
+  align-items: center;
+  gap: 8px;
 
   @include mq(tab) {
-    border-right: 1px solid;
-    padding-right: 12px;
+    &:after {
+      content: ' ';
+      width: 1px;
+      height: 30px;
+
+      background-color: var(--grey-color-icon);
+    }
     color: var(--grey-color-icon);
+    gap: 12px;
   }
 
   &__name {
