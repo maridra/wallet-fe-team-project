@@ -1,4 +1,3 @@
-import LoginPage from 'pages/LoginPage/LoginPage';
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Header, Loader } from '../components';
@@ -9,6 +8,7 @@ import PublicRoute from './PublicRoute/PublicRoute';
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
 const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
+const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
 
 export const App = () => {
   return (
@@ -31,7 +31,7 @@ export const App = () => {
             path="/signUp"
             element={<PublicRoute redirectTo="/" children={<RegisterPage />} />}
           />
-          <Route path="/login" element={<LoginPage />} />
+          <Route path="/login" element={<PublicRoute redirectTo="/" children={<LoginPage />} />} />
         </Routes>
       </Suspense>
     </>

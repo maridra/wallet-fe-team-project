@@ -23,16 +23,14 @@ const register = createAsyncThunk(
       // }
 );
 
-const logIn = createAsyncThunk('auth/login', async (credential, thunkAPI) => {
-  const { email, password } = credential;
+const logIn = createAsyncThunk('auth/login', async (credentials, thunkAPI) => {
+  const { email, password } = credentials;
 
   try {
     const { data } = await axiosBaseUrl.post('/auth/login', {
       email,
       password,
     });
-    token.set(data.accessToken);
-
     return data;
   } catch (e) {
     Notify.failure(e.message);

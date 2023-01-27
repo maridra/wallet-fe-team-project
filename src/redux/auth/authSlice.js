@@ -35,20 +35,15 @@ export const authSlice = createSlice({
         state.isAuth = true;
       })
 
-      .addCase(authOperations.logIn.pending, state => {
-        state.loading.logIn = true;
+      .addCase(authOperations.logIn.pending, handlePending)
+      .addCase(authOperations.logIn.rejected, handleRejected)
+      .addCase(authOperations.logIn.fulfilled, (state, action) => {
+        state.user = action.payload.data.user;
+        state.token = action.payload.data.token;
+        state.loading = false;
+        state.isAuth = true;
       })
-      .addCase(authOperations.logIn.fulfilled, (state, { payload }) => {
-        state.user.firstName = payload['user']['firstName'];
-        state.user.email = payload['user']['email'];
-
-        state.isLoggedIn = true;
-        state.loading.logIn = false;
-      })
-      .addCase(authOperations.logIn.rejected, state => {
-        state.loading.logIn = false;
-      })
-
+      
       .addCase(authOperations.logOut.pending, state => {
         state.loading.logOut = true;
       })
@@ -100,8 +95,7 @@ export const authSlice = createSlice({
 const persistConfig = {
   key: 'leopards/wallet',
   storage,
-  whitelist: ['token', 'user'],
-  blacklist: ['loading'],
+  whitelist: ['token', 'user']
 };
 
 export const persistedAuthReducer = persistReducer(
