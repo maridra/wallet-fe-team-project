@@ -1,6 +1,8 @@
+import { useSelector } from 'react-redux';
+
+import Avatar from 'components/Avatar/Avatar';
 import Currency from 'components/Currency/Currency';
 import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAddTransactions';
-import { useSelector } from 'react-redux';
 import { modalSelectors } from 'redux/modal/modalSelectors';
 import ModalAddTransaction from 'components/Modal/ModalAddTransaction/ModalAddTransaction';
 // import Statistic from '../../components/Statistics/Statistics';
@@ -26,6 +28,7 @@ const HomePage = () => {
               {/* <Statistic /> */}
               {/* <HomeTab /> */}
               {/* <HomeTabMobile /> */}
+              <Avatar />
             </div>
           </div>
         </div>
