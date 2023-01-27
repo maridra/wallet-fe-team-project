@@ -1,5 +1,5 @@
 import LoginPage from 'pages/LoginPage/LoginPage';
-import StatisticPage from 'pages/StatisticPage/StatisticPage';
+import StatisticPage from 'pages/StatisticPage/StatisticPage.js';
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Header, Loader } from '../components';
