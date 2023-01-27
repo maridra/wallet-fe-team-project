@@ -6,7 +6,7 @@ import { modalSelectors } from 'redux/modal/modalSelectors';
 import ModalAddTransaction from 'components/Modal/ModalAddTransaction/ModalAddTransaction';
 // import Statistic from '../../components/Statistics/Statistics';
 /* import HomeTabMobile from 'components/HomeTabMobile/HomeTabMobile'; */
-import HomeTab from 'components/HomeTab/HomeTab';
+/* import HomeTab from 'components/HomeTab/HomeTab'; */
 
 import s from '../HomePage/HomePage.module.scss';
 
@@ -26,8 +26,8 @@ const HomePage = () => {
               <ButtonAddTransactions></ButtonAddTransactions>
               <div>HomePage</div>
               {/* <Statistic /> */}
-              <HomeTab />
-              {/*               <HomeTabMobile /> */}
+              {/* <HomeTab /> */}
+              {/*<HomeTabMobile /> */}
             </div>
           </div>
         </div>
