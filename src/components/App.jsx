@@ -1,3 +1,4 @@
+import LoginPage from 'pages/LoginPage/LoginPage';
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Header, Loader } from '../components';
@@ -30,6 +31,7 @@ export const App = () => {
             path="/signUp"
             element={<PublicRoute redirectTo="/" children={<RegisterPage />} />}
           />
+          <Route path="/login" element={<LoginPage />} />
         </Routes>
       </Suspense>
     </>
