@@ -26,7 +26,7 @@ const ModalAddTransactionForm = prop => {
   const { checkboxStatus } = prop;
   const [date, setDate] = useState(getDate());
   const [open, setOpen] = useState(false);
-  const [categoryValue, setCategoryValue] = useState('Other');
+  const [categoryValue, setCategoryValue] = useState('Other expenses');
 
   const createDate = date => {
     setDate(getDate(date));
