@@ -3,7 +3,7 @@ import { axiosBaseUrl, token } from '../tokenSettingsAxios';
 import { Notify } from 'notiflix';
 
 export const totalBalance = createAsyncThunk(
-  'users/current',
+  '/balance',
   async (_, { rejectWithValue, getState }) => {
     const currentToken = getState().auth.token;
 
@@ -12,7 +12,8 @@ export const totalBalance = createAsyncThunk(
     token.set(currentToken);
 
     try {
-      const { data } = await axiosBaseUrl.get('/users/current');
+      const { data } = await axiosBaseUrl.get('/transactions');
+      console.log(data);
       return data;
     } catch (e) {
       Notify.failure(e.message, { position: 'center-top' });

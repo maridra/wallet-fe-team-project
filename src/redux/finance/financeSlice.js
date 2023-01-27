@@ -22,7 +22,7 @@ export const financeSlice = createSlice({
     builder
       .addCase(totalBalance.pending, handlePending)
       .addCase(totalBalance.fulfilled, (state, { payload }) => {
-        state.totalBalance = payload.finance.totalBalance;
+        state.totalBalance = payload.finance;
         state.isLoading = false;
         state.isLoggedIn = true;
       })
