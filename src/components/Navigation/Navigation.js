@@ -18,7 +18,7 @@ const Navigation = () => {
   return (
     <div>
       <div>
-        <NavItems to="/home">Home</NavItems>
+        <NavItems to="/">Home</NavItems>
         <NavItems to="statistic">Statistic</NavItems>
       </div>
     </div>
