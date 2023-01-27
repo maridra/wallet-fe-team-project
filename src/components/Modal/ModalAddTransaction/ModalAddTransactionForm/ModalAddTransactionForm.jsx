@@ -133,6 +133,11 @@ const ModalAddTransactionForm = prop => {
               className={scss.errorMessage}
               name="sum"
               component="div"
+              render={() => (
+                <div className={scss.error}>
+                  Please enter a number between 0.01 to 2500000
+                </div>
+              )}
             ></ErrorMessage>
           </label>
           <label>

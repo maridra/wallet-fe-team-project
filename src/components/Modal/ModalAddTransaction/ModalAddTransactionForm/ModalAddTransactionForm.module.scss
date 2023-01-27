@@ -184,6 +184,18 @@
     max-height: 10px;
   }
 }
+
+.error {
+  position: absolute;
+  bottom: -15px;
+  left: 0;
+  font-size: 9px;
+  color: red;
+  @include mq(mob-only) {
+    max-width: 280px;
+    max-height: 10px;
+  }
+}
 .sumBox {
   position: relative;
 }
