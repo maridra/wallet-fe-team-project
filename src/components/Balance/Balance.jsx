@@ -19,7 +19,11 @@ const Balance = () => {
       <p>Your balance</p>
       <div className={css.balanceAmount}>
         <img src={hryvniaLogo} alt="logo of hryvnia" />
-        <p>{userBalance ? userBalance.toLocaleString('uk') : '0, 00'}</p>
+        <p>
+          {userBalance
+            ? userBalance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+            : '0. 00'}
+        </p>
       </div>
     </div>
   );

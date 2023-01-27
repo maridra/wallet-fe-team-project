@@ -9,10 +9,13 @@ export const getTotalBalance = createAsyncThunk(
 
     if (!currentToken) rejectWithValue();
 
-    token.set(currentToken);
+    token.set(
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzZDI0ZDVkZmMyN2RlZDYzOWQyMTUyZCIsImlhdCI6MTY3NDgxNDI0MCwiZXhwIjoxNjc0ODE3ODQwfQ.hSRKLIAZGwOpGDBPJEYr9aTNH9vIawFnr1KdpoYRs2M'
+    );
 
     try {
       const { data } = await axiosBaseUrl.get('/transactions');
+
       return data;
     } catch (e) {
       Notify.failure(e.message, { position: 'center-top' });
