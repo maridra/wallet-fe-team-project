@@ -22,8 +22,8 @@
 }
 
 .wrapper {
-  margin-top: 60px;
+  padding-top: 60px;
   @include mq(tab) {
-    margin-top: 80px;
+    padding-top: 80px;
   }
 }
