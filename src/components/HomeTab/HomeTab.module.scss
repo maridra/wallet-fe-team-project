@@ -11,7 +11,7 @@
 .tableContent {
   display: block;
   max-height: 60vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 
   &::-webkit-scrollbar {

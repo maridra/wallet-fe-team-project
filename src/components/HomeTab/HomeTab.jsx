@@ -59,20 +59,20 @@ const HomeTab = () => {
       <tbody className={s.tableContent}>
         {sortedTransactions.map(item => (
           <tr key={item._id} className={s.tableRow}>
-            <th className={`${s.tableRowItem} ${s.date}`}>
+            <td className={`${s.tableRowItem} ${s.date}`}>
               {item.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$3.$2.$1')}
-            </th>
-            <th className={`${s.tableRowItem} ${s.type}`}>
+            </td>
+            <td className={`${s.tableRowItem} ${s.type}`}>
               {typeChanger(item)}
-            </th>
-            <th className={`${s.tableRowItem} ${s.category}`}>
-              {item.category.name}
-            </th>
-            <th className={`${s.tableRowItem} ${s.comment}`}>{item.comment}</th>
-            <th className={colorOfSum(item)}>{item.amount}</th>
-            <th className={`${s.tableRowItem} ${s.balance}`}>
+            </td>
+            <td className={`${s.tableRowItem} ${s.category}`}>
+              {item.category?.name ? item.category.name : 'Income'}
+            </td>
+            <td className={`${s.tableRowItem} ${s.comment}`}>{item.comment}</td>
+            <td className={colorOfSum(item)}>{item.amount}</td>
+            <td className={`${s.tableRowItem} ${s.balance}`}>
               {item.remainingBalance}
-            </th>
+            </td>
           </tr>
         ))}
       </tbody>

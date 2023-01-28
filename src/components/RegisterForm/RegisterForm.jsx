@@ -1,13 +1,17 @@
 import React from "react";
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import * as Yup from 'yup';
 import s from "../RegisterForm/RegisterForm.module.scss";
+import { ReactComponent as Email } from "../../image/email.svg";
+import { ReactComponent as PasswordLock } from "../../image/password_lock.svg"
+import { ReactComponent as Name } from "../../image/name.svg";
 import PasswordStrength from "./PasswordStrength";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import sprite from "../../image/symbol-defs.svg";
 import { useDispatch } from "react-redux";
 import authOperations from "redux/auth/authOperations";
+import classNames from "classnames";
 
 const RegisterForm = () => {
   const initialValues = {
@@ -26,10 +30,6 @@ const RegisterForm = () => {
   const onSubmit = e => {
     e.preventDefault();
     dispatch(authOperations.register({ email, password, firstName }));
-    setEmail('')
-    setPassword('')
-    setConfirmPassword('');
-    setFirstName('');
   }
 
   const SignUpSchema = Yup.object().shape({
@@ -65,39 +65,82 @@ const RegisterForm = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={SignUpSchema}>
+        {({errors, touched }) => (
           <Form className={s.form} onSubmit={onSubmit}>
           <label className={s.label}>
-            <Field type="email" name="email" placeholder="E-mail" className={s.input} value={email} onInput={e => setEmail(e.target.value)} />
-            <svg width="24" height="24" className={s.inputIcon}>
-              <use href={`${sprite}#icon-email`}></use>
-            </svg>
-            <ErrorMessage name="email" component="p" className={s.errorField} />
+              <Field
+                type="email"
+                name="email"
+                placeholder="E-mail"
+                className={classNames(s.input, { [s.errorInput]: errors.email && touched.email, [s.validInput]: !errors.email && touched.email })}
+                value={email}
+                onInput={e => setEmail(e.target.value)} />
+              <Email className={s.inputIcon} />
+              {!errors.email && touched.email && <Email className={s.validInputIcon} />}
+              {errors.email && touched.email &&<Email className={s.errorInputIcon} />}
+              {errors.email && touched.email &&
+                <div className={s.errorField}>{errors.email}
+                </div>}
           </label>
           <label className={s.label}>
-            <Field type="password" name="password" placeholder="Password" className={s.input} onInput={e => setPassword(e.target.value)} value={password} />
-            <svg width="24" height="24" className={s.inputIcon}>
-              <use href={`${sprite}#icon-password-lock`}></use>
-            </svg>
-            <ErrorMessage name="password" component="p" className={s.errorField} />
+              <Field
+                type="password"
+                name="password"
+                placeholder="Password"
+                className={classNames(s.input, {
+                  [s.errorInput]: errors.password && touched.password,
+                  [s.validInput]: !errors.password && touched.password
+                })}
+                onInput={e => setPassword(e.target.value)}
+                value={password} />
+               <PasswordLock className={s.inputIcon} />
+              {!errors.password && touched.password && <PasswordLock className={s.validInputIcon} />}
+              {errors.password && touched.password &&<PasswordLock className={s.errorInputIcon} />}
+              {errors.password && touched.password &&
+                <div className={s.errorField}>{errors.password}
+                </div>}
           </label>
           <label className={s.label}>
-            <Field type="password" name="passwordConfirm" placeholder="Confirm password" className={s.input} value={confirmPassword} onInput={e => setConfirmPassword(e.target.value)}/>
-            <svg width="24" height="24" className={s.inputIcon}>
-              <use href={`${sprite}#icon-password-lock`}></use>
-            </svg>
+              <Field
+                type="password"
+                name="passwordConfirm"
+                placeholder="Confirm password"
+                className={classNames(s.input, {
+                  [s.errorInput]: errors.passwordConfirm && touched.passwordConfirm,
+                  [s.validInput]: !errors.passwordConfirm && touched.passwordConfirm
+                })}
+                value={confirmPassword}
+                onInput={e => setConfirmPassword(e.target.value)} />
+              <PasswordLock className={s.inputIcon} />
+              {!errors.passwordConfirm && touched.passwordConfirm && <PasswordLock className={s.validInputIcon} />}
+              {errors.passwordConfirm && touched.passwordConfirm &&<PasswordLock className={s.errorInputIcon} />}
+              {errors.passwordConfirm && touched.passwordConfirm &&
+                <div className={s.errorField}>{errors.passwordConfirm}
+                </div>}
               <PasswordStrength password={password} className={s.passwordStrength} />
-             <ErrorMessage name="passwordConfirm" component="p" className={s.errorField} />
           </label>
           <label className={s.label}>
-            <Field type="text" name="firstName" placeholder="First name" className={s.input} value={firstName} onInput={e => setFirstName(e.target.value)} />
-            <svg width="24" height="24" className={s.inputIcon}>
-              <use href={`${sprite}#icon-name`}></use>
-            </svg>
-            <ErrorMessage name="firstName" component="p" className={s.errorField} />
+              <Field
+                type="text"
+                name="firstName"
+                placeholder="First name"
+                className={classNames(s.input, {
+                  [s.errorInput]: errors.firstName && touched.firstName,
+                  [s.validInput]: !errors.firstName && touched.firstName
+                })}
+                value={firstName}
+                onInput={e => setFirstName(e.target.value)} />
+              <Name className={s.inputIcon} />
+              {!errors.firstName && touched.firstName && <Name className={s.validInputIcon} />}
+              {errors.firstName && touched.firstName &&<Name className={s.errorInputIcon} />}
+              {errors.firstName && touched.firstName &&
+                <div className={s.errorField}>{errors.firstName}
+                </div>}
           </label>
           <button type="submit" className={s.registerBtn}>REGISTER</button>
           <Link to="/login" className={s.loginBtn}>LOG IN</Link>
         </Form>
+        )}
       </Formik>
     </div>
   )

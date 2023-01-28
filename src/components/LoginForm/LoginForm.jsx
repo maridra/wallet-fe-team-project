@@ -1,11 +1,14 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import s from "../LoginForm/LoginForm.module.scss";
 import * as Yup from 'yup';
 import sprite from "../../image/symbol-defs.svg";
+import { ReactComponent as Email } from "../../image/email.svg";
+import { ReactComponent as PasswordLock } from "../../image/password_lock.svg"
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import authOperations from "redux/auth/authOperations";
+import classNames from "classnames";
 
 const LoginForm = () => {
   const initialValues = {
@@ -20,8 +23,6 @@ const LoginForm = () => {
   const onSubmit = e => {
     e.preventDefault();
     dispatch(authOperations.logIn({ email, password }));
-    setEmail('');
-    setPassword('');
   }
 
   const SignUpSchema = Yup.object().shape({
@@ -47,24 +48,45 @@ const LoginForm = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={SignUpSchema}>
-        <Form className={s.form} onSubmit={onSubmit}>
+        {({ errors, touched }) => (
+          <Form className={s.form} onSubmit={onSubmit}>
           <label className={s.label}>
-            <Field type="email" name="email" placeholder="E-mail" className={s.input} value={email} onInput={e => setEmail(e.target.value)} />
-            <svg width="24" height="24" className={s.inputIcon}>
-              <use href={`${sprite}#icon-email`}></use>
-            </svg>
-            <ErrorMessage name="email" component="p" className={s.errorField} />
+              <Field
+                type="email"
+                name="email"
+                placeholder="E-mail"
+                className={classNames(s.input, { [s.errorInput]: errors.email && touched.email, [s.validInput]: !errors.email && touched.email})}
+                value={email}
+                onInput={e => setEmail(e.target.value)} />
+              <Email className={s.inputIcon} />
+              {!errors.email && touched.email && <Email className={s.validInputIcon} />}
+              {errors.email && touched.email &&<Email className={s.errorInputIcon} />}
+              {errors.email && touched.email &&
+                <div className={s.errorField}>{errors.email}
+                </div>}
           </label>
           <label className={s.label}>
-            <Field type="password" name="password" placeholder="Password" className={s.input} value={password} onInput={e => setPassword(e.target.value)}/>
-            <svg width="24" height="24" className={s.inputIcon}>
-              <use href={`${sprite}#icon-password-lock`}></use>
-            </svg>
-            <ErrorMessage name="password" component="p" className={s.errorField} />
+              <Field
+                type="password"
+                name="password"
+                placeholder="Password"
+                className={classNames(s.input, {
+                  [s.errorInput]: errors.password && touched.password,
+                  [s.validInput]: !errors.password && touched.password
+                })}
+                value={password}
+                onInput={e => setPassword(e.target.value)} />
+               <PasswordLock className={s.inputIcon} />
+              {!errors.password && touched.password && <PasswordLock className={s.validInputIcon} />}
+              {errors.password && touched.password &&<PasswordLock className={s.errorInputIcon} />}
+              {errors.password && touched.password &&
+                <div className={s.errorField}>{errors.password}
+                </div>}
           </label>
           <button type="submit" className={s.loginBtn}>LOG IN</button>
           <Link to="/SignUp" className={s.registerBtn}>REGISTER</Link>
         </Form>
+        )}
       </Formik>
     </div>
   )
