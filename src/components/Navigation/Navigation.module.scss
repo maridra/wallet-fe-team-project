@@ -66,7 +66,7 @@
 }
 
 .active__link {
-  // composes: nav__link;
+  composes: nav__link;
   font-weight: 700;
   fill: var(--main-accent-color-blue);
 
