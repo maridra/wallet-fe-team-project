@@ -25,6 +25,7 @@ const HomePage = () => {
     <>
       {showModalAddTransaction && <ModalAddTransaction />}
 
+
       {showModalLogout && <ModalLogout />}
 
       <Navigation />
