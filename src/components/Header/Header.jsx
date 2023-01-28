@@ -4,7 +4,7 @@ import { IconContext } from 'react-icons';
 import { IoExitOutline } from 'react-icons/io5';
 
 import { Logo } from '../../image/Logo';
-import Avatar from '../Avatar/Avatar';
+import HeaderAvatar from '../HeaderAvatar/HeaderAvatar';
 import s from './Header.module.scss';
 import PageWrapper from 'components/PageWrapper/PageWrapper';
 
@@ -20,7 +20,7 @@ const Header = () => {
           <div className={s.wrapper}>
             <div className={s.user}>
               <span className={s.user__name}>Name</span>
-              <Avatar />
+              <HeaderAvatar />
             </div>
 
             <IconContext.Provider value={{ size: '24px' }}>
