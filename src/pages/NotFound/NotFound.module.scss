@@ -34,8 +34,12 @@
 
 .img {
   width: 300px;
+  height: 150px;
+  object-fit: contain;
+
   @include mq(tab) {
     width: 600px;
+    height: 300px;
   }
 }
 
