@@ -1,0 +1,47 @@
+@import 'assets/styles/index.scss';
+
+.form {
+  position: relative;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inputText {
+  margin-left: 20px;
+  margin-bottom: 5px;
+}
+
+.inputStyle {
+  display: block;
+  height: 50px;
+  width: 100%;
+  padding: 0 20px;
+  font-size: 20px;
+  font-weight: 100;
+  border-radius: 25px;
+  background-color: #eaebfc;
+  border: 1px solid var(--grey-color-icon);
+}
+
+.submitButton {
+  display: block;
+  position: absolute;
+  top: 28px;
+  right: 30px;
+
+  height: 55%;
+  width: 20%;
+  background-color: antiquewhite;
+  border-radius: 25px;
+  border: 1px solid var(--grey-color-icon);
+
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.submitButton:hover {
+  background-color: rgb(252, 222, 182);
+  cursor: pointer;
+}
