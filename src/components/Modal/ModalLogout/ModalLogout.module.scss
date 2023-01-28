@@ -10,9 +10,11 @@
 .logo {
   @include mq(mob-only) {
     width: 280px;
+    height: 130px;
   }
   @include mq(tab) {
     width: 380px;
+    height: 175px;
   }
 }
 

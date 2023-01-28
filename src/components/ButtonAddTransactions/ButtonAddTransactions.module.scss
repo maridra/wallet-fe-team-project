@@ -3,11 +3,19 @@
 .openBtn {
   @extend %btnGreen;
   position: fixed;
-  bottom: 52px;
-  right: 52px;
+
   width: 44px;
   height: 44px;
   border-radius: 50%;
+
+  @include mq(mob-only) {
+    bottom: 20px;
+    right: 20px;
+  }
+  @include mq(tab) {
+    bottom: 40px;
+    right: 40px;
+  }
   &Icon {
     width: 20px;
     height: 20px;
