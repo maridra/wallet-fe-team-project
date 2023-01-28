@@ -7,6 +7,8 @@ import Currency from 'components/Currency/Currency';
 import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAddTransactions';
 import { modalSelectors } from 'redux/modal/modalSelectors';
 import ModalAddTransaction from 'components/Modal/ModalAddTransaction/ModalAddTransaction';
+import ModalLogout from 'components/Modal/ModalLogout/ModalLogout';
+
 // import Statistic from '../../components/Statistics/Statistics';
 
 import HomeTabMobile from 'components/HomeTabMobile/HomeTabMobile';
@@ -18,10 +20,16 @@ const HomePage = () => {
   const showModalAddTransaction = useSelector(
     modalSelectors.showModalAddTransaction
   );
+  const showModalLogout = useSelector(modalSelectors.showModalLogout);
   return (
     <>
       {showModalAddTransaction && <ModalAddTransaction />}
+
+
+      {showModalLogout && <ModalLogout />}
+
       <Navigation />
+
       <Balance />
       <Currency />
       <ButtonAddTransactions></ButtonAddTransactions>
