@@ -31,7 +31,7 @@ export const financeSlice = createSlice({
       })
       .addCase(getTotalBalance.pending, handlePending)
       .addCase(getTotalBalance.fulfilled, (state, { payload }) => {
-        const lastTransaction = payload.data.transactions[0].pop();
+        const lastTransaction = payload.data.transactions.pop();
         state.totalBalance = lastTransaction.remainingBalance;
         state.isLoading = false;
         state.isLoggedIn = true;
