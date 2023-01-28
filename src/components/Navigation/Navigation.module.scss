@@ -19,7 +19,7 @@
   width: 44px;
   height: 44px;
   background-color: transparent;
-  transition: all 250ms ease;
+  transition: all 250ms ease-in-out;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -41,7 +41,6 @@
 
   @include mq(tab) {
     display: flex;
-    // justify-content: start;
     align-items: center;
   }
 
@@ -81,7 +80,7 @@
   font-size: 18px;
   line-height: 1.5;
   margin-left: 20px;
-  transition: all 250ms linear;
+          transition: font-weight 250ms ease-in-out;
 }
 
 .svg {
