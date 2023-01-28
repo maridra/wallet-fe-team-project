@@ -1,0 +1,17 @@
+@import '../../assets/styles/index.scss';
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+  padding: 20px;
+
+  background-color: var(--main-background-color);
+  border-radius: 20px;
+
+  @include mq(tab) {
+    padding: 40px;
+  }
+}
