@@ -39,12 +39,6 @@
   fill: var(--secondary-accent-color-blue);
   background-color: transparent;
 
-  @include mq(tab) {
-    display: flex;
-    // justify-content: start;
-    align-items: center;
-  }
-
   &:hover,
   &:focus {
     color: var(--main-accent-color-blue);
@@ -53,6 +47,12 @@
   &:hover,
   &:focus .icon__wrapper {
     fill: var(--main-accent-color-blue);
+  }
+
+  @include mq(tab) {
+    display: flex;
+    // justify-content: start;
+    align-items: center;
   }
 }
 
@@ -66,7 +66,7 @@
 }
 
 .active__link {
-  composes: nav__link;
+  // composes: nav__link;
   font-weight: 700;
   fill: var(--main-accent-color-blue);
 
