@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { IconContext } from 'react-icons';
-import { AiOutlineSetting } from 'react-icons/ai';
+import { FiEdit2 } from 'react-icons/fi';
 
 import { authSelectors } from '../../redux/auth/authSelectors';
 
@@ -16,12 +16,14 @@ export default function SettingsAvatar() {
   const avatarURL =
     useSelector(authSelectors.userSelector).avatarURL ?? baseUserAvatar;
 
+  console.log(s);
+
   return (
     <div className={s.user_avatar}>
       <img className={s.user_avatar__img} src={avatarURL} alt="User avatar" />
       <Link to="/settings" className={s.user_avatar__settings}>
         <IconContext.Provider value={{ className: `${s.user_avatar__icon}` }}>
-          <AiOutlineSetting />
+          <FiEdit2 />
         </IconContext.Provider>
       </Link>
     </div>
