@@ -9,8 +9,17 @@ const register = createAsyncThunk(
       const { data } = await axiosBaseUrl.post('/auth/register', credentials);
       return data;
     } catch (error) {
-      Notify.failure(error.message);
-      return rejectWithValue(error.message);
+      const { data, status } = error.response;
+      if (status === 400) {
+         Notify.failure("Please, check your entered data!");
+      }
+      if (status === 409) {
+         Notify.failure(data.message);
+      }
+      if (status === 500) {
+        Notify.failure("Oops, something wrong on our server :( Please, try again");
+      }
+      return rejectWithValue({ data, status });
     }
   }
       // Check if user already submit form
@@ -23,20 +32,26 @@ const register = createAsyncThunk(
       // }
 );
 
-const logIn = createAsyncThunk('auth/login', async (credential, thunkAPI) => {
-  const { email, password } = credential;
-
+const logIn = createAsyncThunk('auth/login', async (credentials, { rejectWithValue }) => {
+  const { email, password } = credentials;
   try {
     const { data } = await axiosBaseUrl.post('/auth/login', {
       email,
       password,
     });
-    token.set(data.accessToken);
-
     return data;
-  } catch (e) {
-    Notify.failure(e.message);
-    return thunkAPI.rejectWithValue(e.message);
+  } catch (error) {
+    const { data, status } = error.response;
+    if (status === 400) {
+      Notify.failure("Please, check your entered data!");
+    }
+    if (status === 401) {
+      Notify.failure(data.message);
+    }
+    if (status === 500) {
+      Notify.failure("Oops, something wrong on our server :( Please, try again");
+    }
+    return rejectWithValue({ data, status });
   }
 });
 
