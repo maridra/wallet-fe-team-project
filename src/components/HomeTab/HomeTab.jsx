@@ -34,14 +34,6 @@ const HomeTab = () => {
     }
   }
 
-  function categoryMaker(item) {
-    if (item.category?.name) {
-      return item.category.name;
-    } else {
-      return 'Income';
-    }
-  }
-
   function typeChanger(item) {
     if (item.transactionType === true) {
       return '+';
@@ -74,7 +66,7 @@ const HomeTab = () => {
               {typeChanger(item)}
             </td>
             <td className={`${s.tableRowItem} ${s.category}`}>
-              {categoryMaker(item)}
+              {item.category?.name ? item.category.name : 'Income'}
             </td>
             <td className={`${s.tableRowItem} ${s.comment}`}>{item.comment}</td>
             <td className={colorOfSum(item)}>{item.amount}</td>
