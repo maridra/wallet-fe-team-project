@@ -3,11 +3,25 @@ import s from "../LoginForm/LoginForm.module.scss";
 import * as Yup from 'yup';
 import sprite from "../../image/symbol-defs.svg";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
+import authOperations from "redux/auth/authOperations";
 
 const LoginForm = () => {
   const initialValues = {
     email: '',
     password: ''
+  }
+
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const onSubmit = e => {
+    e.preventDefault();
+    dispatch(authOperations.logIn({ email, password }));
+    setEmail('');
+    setPassword('');
   }
 
   const SignUpSchema = Yup.object().shape({
@@ -33,16 +47,16 @@ const LoginForm = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={SignUpSchema}>
-        <Form className={s.form}>
+        <Form className={s.form} onSubmit={onSubmit}>
           <label className={s.label}>
-            <Field type="email" name="email" placeholder="E-mail" className={s.input} />
+            <Field type="email" name="email" placeholder="E-mail" className={s.input} value={email} onInput={e => setEmail(e.target.value)} />
             <svg width="24" height="24" className={s.inputIcon}>
               <use href={`${sprite}#icon-email`}></use>
             </svg>
             <ErrorMessage name="email" component="p" className={s.errorField} />
           </label>
           <label className={s.label}>
-            <Field type="password" name="password" placeholder="Password" className={s.input} />
+            <Field type="password" name="password" placeholder="Password" className={s.input} value={password} onInput={e => setPassword(e.target.value)}/>
             <svg width="24" height="24" className={s.inputIcon}>
               <use href={`${sprite}#icon-password-lock`}></use>
             </svg>

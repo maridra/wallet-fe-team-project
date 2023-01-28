@@ -7,6 +7,7 @@ import { Logo } from '../../image/Logo';
 import { toggleShowModalLogout } from 'redux/modal/modalSlice';
 import Avatar from '../Avatar/Avatar';
 import s from './Header.module.scss';
+import PageWrapper from 'components/PageWrapper/PageWrapper';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,9 @@ const Header = () => {
           </div>
         </div>
       </header>
-      <Outlet />
+      <PageWrapper>
+        <Outlet />
+      </PageWrapper>
     </>
   );
 };
