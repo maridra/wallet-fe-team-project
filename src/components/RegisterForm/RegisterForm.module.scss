@@ -39,9 +39,33 @@
   line-height: 1.5;
 }
 
+.errorInput {
+  border-bottom: 1px solid red;
+}
+
+.validInput {
+  border-bottom: 1px solid var(--text-green-color);
+}
+
 .inputIcon {
   position: absolute;
   left: 10px;
+  color: #e0e0e0;
+  fill: #e0e0e0;
+}
+
+.errorInputIcon {
+  position: absolute;
+  left: 10px;
+  color: red;
+  fill: red;
+}
+
+.validInputIcon {
+  position: absolute;
+  left: 10px;
+  color: var(--text-green-color);
+  fill: var(--text-green-color);
 }
 
 .label {
