@@ -1,9 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getTotalBalance } from './financeOperation';
+import { getTotalBalance, updateTransactions } from './financeOperation';
+import storage from 'redux-persist/lib/storage';
+import { persistReducer } from 'redux-persist';
 
 const initialState = {
   totalBalance: null,
   isLoading: false,
+  data: [],
 };
 
 const handlePending = state => {
@@ -20,6 +23,12 @@ export const financeSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
+      .addCase(updateTransactions.pending, handlePending)
+      .addCase(updateTransactions.rejected, handleRejected)
+      .addCase(updateTransactions.fulfilled, (state, action) => {
+        state.data = action.payload;
+        state.isLoading = false;
+      })
       .addCase(getTotalBalance.pending, handlePending)
       .addCase(getTotalBalance.fulfilled, (state, { payload }) => {
         const lastTransaction = payload.data.transactions[0].pop();
@@ -30,5 +39,15 @@ export const financeSlice = createSlice({
       .addCase(getTotalBalance.rejected, handleRejected);
   },
 });
+
+const persistConfig = {
+  key: 'leopards/finance',
+  storage,
+};
+
+export const persistedFinanceReducer = persistReducer(
+  persistConfig,
+  financeSlice.reducer
+);
 
 export const financeReducer = financeSlice.reducer;

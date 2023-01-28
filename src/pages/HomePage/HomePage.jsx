@@ -8,9 +8,11 @@ import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAd
 import { modalSelectors } from 'redux/modal/modalSelectors';
 import ModalAddTransaction from 'components/Modal/ModalAddTransaction/ModalAddTransaction';
 // import Statistic from '../../components/Statistics/Statistics';
-// import HomeTabMobile from 'components/HomeTabMobile/HomeTabMobile';
-// import HomeTab from 'components/HomeTab/HomeTab';
-import Navigation from '../../components/Navigation/Navigation';
+
+import HomeTabMobile from 'components/HomeTabMobile/HomeTabMobile';
+import HomeTab from 'components/HomeTab/HomeTab';
+import Navigation from 'components/Navigation/Navigation';
+
 
 const HomePage = () => {
   const showModalAddTransaction = useSelector(
@@ -28,8 +30,8 @@ const HomePage = () => {
       </Suspense>
       <div>HomePage</div>
       {/* <Statistic /> */}
-      {/* <HomeTab /> */}
-      {/* <HomeTabMobile /> */}
+      <HomeTab />
+      <HomeTabMobile />
     </>
   );
 };
