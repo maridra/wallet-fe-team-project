@@ -1,4 +1,3 @@
-import LoginPage from 'pages/LoginPage/LoginPage';
 import StatisticPage from 'pages/StatisticPage/StatisticPage.js';
 
 import { lazy, Suspense } from 'react';
@@ -39,7 +38,10 @@ export const App = () => {
             path="/signUp"
             element={<PublicRoute redirectTo="/" children={<RegisterPage />} />}
           />
-          <Route path="/login" element={<PublicRoute redirectTo="/" children={<LoginPage />} />} />
+          <Route
+            path="/login"
+            element={<PublicRoute redirectTo="/" children={<LoginPage />} />}
+          />
         </Routes>
       </Suspense>
     </>
