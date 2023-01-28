@@ -27,7 +27,7 @@ const HomeTabMobile = () => {
   }
 
   function userColorUi(item) {
-    if (item.Type === '+') {
+    if (item.transactionType === true) {
       return `${s.operationInfo} ${s.operationInfoIncome}`;
     } else {
       return `${s.operationInfo} ${s.operationInfoExpence}`;
@@ -35,12 +35,21 @@ const HomeTabMobile = () => {
   }
 
   function colorOfSum(item) {
-    if (item.Type === '+') {
+    if (item.transactionType === true) {
       return `${s.mobileTableInfo} ${s.mobileTableInfoIncome}`;
     } else {
       return `${s.mobileTableInfo} ${s.mobileTableInfoExpence}`;
     }
   }
+
+  function categoryMaker(item) {
+    if (item.category?.name) {
+      return item.category.name;
+    } else {
+      return 'Income';
+    }
+  }
+
   function typeChanger(item) {
     if (item.transactionType === true) {
       return '+';
@@ -68,7 +77,7 @@ const HomeTabMobile = () => {
             </li>
             <li className={userColorUi(item)}>
               <span className={s.mobileTableHeader}>Category</span>
-              <span className={s.mobileTableInfo}>{item.category.name}</span>
+              <span className={s.mobileTableInfo}>{categoryMaker(item)}</span>
             </li>
             <li className={userColorUi(item)}>
               <span className={s.mobileTableHeader}>Comment</span>
