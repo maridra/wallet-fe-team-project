@@ -49,7 +49,6 @@ const HomePage = () => {
             {matches.medium && (
               <>
                 {isCurrency && <Navigate to="/" />}
-                {showModalAddTransaction && <ModalAddTransaction />}
                 <div className={s.financeWrapper}>
                   <div className={s.financeWrapper__dashboard}>
                     <div className={s.financeWrapper__nav}>
@@ -66,7 +65,6 @@ const HomePage = () => {
             {matches.large && (
               <>
                 {isCurrency && <Navigate to="/" />}
-                {showModalAddTransaction && <ModalAddTransaction />}
                 <div className={s.financeWrapper}>
                   <div className={s.financeWrapper__dashboard}>
                     <Navigation />
@@ -81,6 +79,7 @@ const HomePage = () => {
           </>
         )}
       </Media>
+      {showModalAddTransaction && <ModalAddTransaction />}
       <ButtonAddTransactions />
     </div>
   );
