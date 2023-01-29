@@ -1,4 +1,5 @@
 import StatisticPage from 'pages/StatisticPage/StatisticPage.js';
+import CurrencyPage from 'pages/CurrencyPage/CurrencyPage';
 
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
@@ -29,7 +30,8 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<Header />}>
             <Route path="/" element={<HomePage />}>
-              <Route path="statistic" element={<StatisticPage />} />
+              <Route path="/statistic" element={<StatisticPage />} />
+              <Route path="/currency" element={<CurrencyPage />} />
             </Route>
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
