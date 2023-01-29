@@ -8,6 +8,9 @@ import { authSelectors } from '../../../redux/auth/authSelectors';
 import { Link } from 'react-router-dom';
 
 import s from '../SettingsAvatar/SettingsAvatar.module.scss';
+import { useRef } from 'react';
+import { Notify } from 'notiflix';
+import { axiosBaseUrl } from '../../../redux/tokenSettingsAxios';
 
 export default function SettingsAvatar() {
   const baseUserAvatar =
@@ -15,6 +18,40 @@ export default function SettingsAvatar() {
 
   const avatarURL =
     useSelector(authSelectors.userSelector).avatarURL ?? baseUserAvatar;
+
+  const refForm = useRef();
+
+  const handleOnChange = () => {
+    refForm.current.dispatchEvent(
+      new Event('submit', { cancelable: true, bubbles: true })
+    );
+  };
+
+  const handleOnSubmit = e => {
+    e.preventDefault();
+    const userAvatar = e.currentTarget.elements.avatar.value;
+    const userAvatarFile = e.currentTarget.elements.avatar.files[0];
+    const avatarFormat = userAvatar.split('.').at(-1);
+    console.log(avatarFormat === 'png');
+
+    if (avatarFormat !== 'png' && 'jpeg' && 'svg') {
+      Notify.failure('Wrong format! Format have to be: png, jpeg or svg', {
+        position: 'center-top',
+      });
+      return;
+    }
+
+    const data = new FormData();
+    data.append('avatar', userAvatarFile);
+
+    axiosBaseUrl.patch('/users/avatars', data, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+
+    console.log(userAvatarFile);
+  };
 
   return (
     <div>
@@ -27,6 +64,15 @@ export default function SettingsAvatar() {
           </IconContext.Provider>
         </Link>
       </div>
+      <form
+        ref={refForm}
+        encType="multipart/form-data"
+        onSubmit={handleOnSubmit}
+      >
+        <label>
+          <input type="file" name="avatar" onChange={handleOnChange} />
+        </label>
+      </form>
     </div>
   );
 }
