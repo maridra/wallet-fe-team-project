@@ -8,7 +8,7 @@ const toggle = ({ isActive }) => {
   return isActive ? s.active__link : s.nav__link;
 };
 
-const Navigation = ({ children }) => {
+const Navigation = () => {
   return (
     <>
       <Media
@@ -41,7 +41,6 @@ const Navigation = ({ children }) => {
                     </div>
                   </NavLink>
                 </nav>
-                {children}
               </>
             )}
             {matches.medium && (
@@ -65,7 +64,6 @@ const Navigation = ({ children }) => {
                     <p className={s.text}>Statistics</p>
                   </NavLink>
                 </nav>
-                {children}
               </>
             )}
           </Fragment>

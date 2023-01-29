@@ -6,12 +6,14 @@ import { modalSelectors } from 'redux/modal/modalSelectors';
 
 import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAddTransactions';
 import ModalAddTransaction from 'components/Modal/ModalAddTransaction/ModalAddTransaction';
-import StatisticPage from '../../components/StatisticPage/StatisticPage';
+import StatisticPage from '../StatisticPage/StatisticPage';
 import Balance from 'components/Balance/Balance';
 import Currency from 'components/Currency/Currency';
 import HomeTabMobile from 'components/HomeTabMobile/HomeTabMobile';
 import HomeTab from 'components/HomeTab/HomeTab';
 import Navigation from 'components/Navigation/Navigation';
+
+import s from './HomePage.module.scss';
 
 const HomePage = () => {
   let location = useLocation();
@@ -23,40 +25,64 @@ const HomePage = () => {
   );
 
   return (
-    <>
-      <Navigation>
-        <Media
-          queries={{
-            small: '(max-width: 767px)',
-            medium: '(min-width: 768px)',
-          }}
-        >
-          {matches => (
-            <>
-              {matches.small && (
-                <>
+    <div className={s.pageWrapper}>
+      <Media
+        queries={{
+          small: '(max-width: 767px)',
+          medium: '(min-width: 768px) and (max-width: 1279px)',
+          large: '(min-width: 1280px)',
+        }}
+      >
+        {matches => (
+          <>
+            {matches.small && (
+              <>
+                <Navigation />
+                <div className={s.financeWrapper__dashboard}>
                   {!isStatistic && !isCurrency && <Balance />}
-                  {isCurrency && <Currency />}
-                  {isStatistic && <StatisticPage />}
                   {!isStatistic && !isCurrency && <HomeTabMobile />}
-                </>
-              )}
-              {matches.medium && (
-                <>
-                  {isCurrency && <Navigate to="/" />}
-                  {showModalAddTransaction && <ModalAddTransaction />}
-                  <Balance />
-                  <Currency />
+                </div>
+                {isCurrency && <Currency />}
+                {isStatistic && <StatisticPage />}
+              </>
+            )}
+            {matches.medium && (
+              <>
+                {isCurrency && <Navigate to="/" />}
+                {showModalAddTransaction && <ModalAddTransaction />}
+                <div className={s.financeWrapper}>
+                  <div className={s.financeWrapper__dashboard}>
+                    <div className={s.financeWrapper__nav}>
+                      <Navigation />
+                      <Balance />
+                    </div>
+                    <Currency />
+                  </div>
                   {isStatistic && <StatisticPage />}
                   {!isStatistic && <HomeTab />}
-                </>
-              )}
-            </>
-          )}
-        </Media>
-      </Navigation>
+                </div>
+              </>
+            )}
+            {matches.large && (
+              <>
+                {isCurrency && <Navigate to="/" />}
+                {showModalAddTransaction && <ModalAddTransaction />}
+                <div className={s.financeWrapper}>
+                  <div className={s.financeWrapper__dashboard}>
+                    <Navigation />
+                    <Balance />
+                    <Currency />
+                  </div>
+                  {isStatistic && <StatisticPage />}
+                  {!isStatistic && <HomeTab />}
+                </div>
+              </>
+            )}
+          </>
+        )}
+      </Media>
       <ButtonAddTransactions />
-    </>
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import StatisticPage from 'pages/StatisticPage/StatisticPage.js';
+import StatisticPage from 'pages/StatisticPage/StatisticPage';
 import CurrencyPage from 'pages/CurrencyPage/CurrencyPage';
 
 import { lazy, Suspense } from 'react';
