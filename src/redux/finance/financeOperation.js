@@ -9,8 +9,6 @@ export const getTotalBalance = createAsyncThunk(
 
     if (!currentToken) rejectWithValue();
 
-    /* token.set(currentToken); */
-
     try {
       const { data } = await axiosBaseUrl.get('/transactions');
 

@@ -44,13 +44,16 @@
   height: 75%;
   width: 25%;
   min-width: 60px;
-  background-color: #6fe9ce;
+  background-color: var(--btn-green-color);
   border-radius: 25px;
   border: 1px solid var(--grey-color-icon);
 
   font-family: 'Poppins';
   font-weight: 400;
   font-size: 18px;
+
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
   @include mq(desk) {
     width: 15%;
@@ -59,6 +62,7 @@
 }
 
 .submitButton:hover {
-  background-color: #24cca7;
+  background-color: #53cfb4;
+  box-shadow: 0px 3px 15px 1px var(--btn-green-color-hover);
   cursor: pointer;
 }

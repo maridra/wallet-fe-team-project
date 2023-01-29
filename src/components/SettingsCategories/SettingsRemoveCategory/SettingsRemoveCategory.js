@@ -1,6 +1,6 @@
 import React from 'react';
 import s from './SettingsRemoveCategory.module.scss';
-import sprite from '../../image/symbol-defs.svg';
+import sprite from '../../../image/symbol-defs.svg';
 import { useSelector } from 'react-redux';
 import { authSelectors } from 'redux/auth/authSelectors';
 import { useDispatch } from 'react-redux';

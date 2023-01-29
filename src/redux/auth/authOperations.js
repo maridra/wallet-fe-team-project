@@ -1,5 +1,4 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { authSelectors } from './authSelectors';
 import { axiosBaseUrl, token } from '../tokenSettingsAxios';
 import { Notify } from 'notiflix';
 
@@ -44,7 +43,8 @@ const logIn = createAsyncThunk(
         email,
         password,
       });
-      const currentToken = getState().auth.token;
+
+      const currentToken = data.data.token;
       token.set(currentToken);
       return data;
     } catch (error) {
@@ -75,32 +75,26 @@ const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   }
 });
 
-const refresh = createAsyncThunk('auth/refresh', async (_, thunkAPI) => {
-  const refreshToken = authSelectors.refreshToken(thunkAPI.getState());
-  const sid = authSelectors.sid(thunkAPI.getState());
-
-  if (refreshToken === null) return thunkAPI.rejectWithValue(`No token`);
-  token.set(refreshToken);
-
-  try {
-    const { data: refreshData } = await axiosBaseUrl.post('/auth/refresh', {
-      sid,
-    });
-    token.set(refreshData.newAccessToken);
-    const { data: userData } = await axiosBaseUrl.get('/user');
-    return { refreshData, userData };
-  } catch (e) {
-    Notify.failure(e.message);
-    return thunkAPI.rejectWithValue(e.message);
+const refresh = createAsyncThunk(
+  'auth/refresh',
+  async (_, { getState, rejectWithValue }) => {
+    try {
+      const currentToken = getState().auth.token;
+      if (!currentToken) {
+        throw new Error('Error');
+      }
+      token.set(currentToken);
+      return 1;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
-});
+);
 
 const addCategory = createAsyncThunk(
   'auth/addCategory',
   async (credentials, { _, getState }) => {
     const newCategory = credentials;
-    const currentToken = getState().auth.token;
-    token.set(currentToken);
     try {
       const data = await axiosBaseUrl.post('/categories', {
         category: newCategory,
@@ -120,8 +114,6 @@ const removeCategory = createAsyncThunk(
   'auth/removeCategory',
   async (credentials, { _, getState }) => {
     const id = credentials;
-    const currentToken = getState().auth.token;
-    token.set(currentToken);
     try {
       await axiosBaseUrl.delete(`/categories/${id}`);
       const oldCategories = getState().auth.user.categories;
