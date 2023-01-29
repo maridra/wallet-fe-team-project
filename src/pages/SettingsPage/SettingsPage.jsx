@@ -2,6 +2,7 @@ import React from 'react';
 
 import SettingsAvatar from 'components/SettingsAvatar/SettingsAvatar';
 import SettingsWrapper from 'components/SettingsWrapper/SettingsWrapper';
+import CategoriesField from 'components/CategoriesField/CategoriesField';
 
 import s from './SettingsPage.module.scss';
 
@@ -12,10 +13,7 @@ export default function SettingsPage() {
         <SettingsAvatar />
       </SettingsWrapper>
       <SettingsWrapper>
-        <SettingsAvatar />
-      </SettingsWrapper>
-      <SettingsWrapper>
-        <SettingsAvatar />
+        <CategoriesField />
       </SettingsWrapper>
     </div>
   );

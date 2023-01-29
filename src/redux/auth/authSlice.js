@@ -4,7 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
 const initialState = {
-  user: { },
+  user: {},
   token: '',
   loading: false,
   error: null,
@@ -43,7 +43,7 @@ export const authSlice = createSlice({
         state.loading = false;
         state.isAuth = true;
       })
-      
+
       .addCase(authOperations.logOut.pending, state => {
         state.loading.logOut = true;
       })
@@ -88,14 +88,38 @@ export const authSlice = createSlice({
 
         state.isLoggedIn = initialState.isLoggedIn;
         state.loading.refresh = false;
-      });
+      })
+      .addCase(authOperations.addCategory.pending, state => {
+        state.loading = true;
+      })
+      .addCase(authOperations.addCategory.rejected, state => {
+        state.loading = false;
+      })
+      .addCase(authOperations.addCategory.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user.categories = payload;
+      })
+
+      .addCase(authOperations.removeCategory.pending, state => {
+        state.loading = true;
+      })
+      .addCase(authOperations.removeCategory.rejected, state => {
+        state.loading = false;
+      })
+      .addCase(
+        authOperations.removeCategory.fulfilled,
+        (state, { payload }) => {
+          state.loading = false;
+          state.user.categories = payload;
+        }
+      );
   },
 });
 
 const persistConfig = {
   key: 'leopards/wallet',
   storage,
-  whitelist: ['token', 'user']
+  whitelist: ['token', 'user'],
 };
 
 export const persistedAuthReducer = persistReducer(

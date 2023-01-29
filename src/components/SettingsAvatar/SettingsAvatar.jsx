@@ -16,8 +16,6 @@ export default function SettingsAvatar() {
   const avatarURL =
     useSelector(authSelectors.userSelector).avatarURL ?? baseUserAvatar;
 
-  console.log(s);
-
   return (
     <div className={s.user_avatar}>
       <img className={s.user_avatar__img} src={avatarURL} alt="User avatar" />
