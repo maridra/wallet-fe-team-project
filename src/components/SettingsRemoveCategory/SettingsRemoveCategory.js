@@ -1,28 +1,33 @@
 import React from 'react';
 import s from './SettingsRemoveCategory.module.scss';
 import sprite from '../../image/symbol-defs.svg';
-
-const categoriesBackend = [
-  'Main expenses',
-  'Products',
-  'Car',
-  'Self care',
-  'Child care',
-  'Household products',
-  'Education',
-  'Leisure',
-  'Other expenses',
-];
+import { useSelector } from 'react-redux';
+import { authSelectors } from 'redux/auth/authSelectors';
+import { useDispatch } from 'react-redux';
+import authOperations from 'redux/auth/authOperations';
 
 const SettingsRemoveCategory = () => {
+  const categories = useSelector(authSelectors.getCategories);
+  const dispatch = useDispatch();
+
+  function deleteCategory(id) {
+    dispatch(authOperations.removeCategory(id));
+  }
+
   return (
-    <>
-      <h2>Category List:</h2>
+    <div className={s.removeContainer}>
+      <p className={s.advise}>
+        Advice: click on the cross if you want to delete
+      </p>
       <ul className={s.categoriesList}>
-        {categoriesBackend.map(item => (
-          <li className={s.categoriesItem}>
-            {item}
-            <button type="button" className={s.buttonDelete}>
+        {categories.map(item => (
+          <li key={item._id} className={s.categoriesItem} id={item._id}>
+            {item.name}
+            <button
+              onClick={() => deleteCategory(item._id)}
+              type="button"
+              className={s.buttonDelete}
+            >
               <svg className={s.svg}>
                 <use href={`${sprite}#icon-cancel-circle`}></use>
               </svg>
@@ -30,7 +35,7 @@ const SettingsRemoveCategory = () => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 

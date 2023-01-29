@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { axiosBaseUrl, token } from '../tokenSettingsAxios';
+import { axiosBaseUrl } from '../tokenSettingsAxios';
 import { Notify } from 'notiflix';
 
 export const getTotalBalance = createAsyncThunk(
@@ -9,7 +9,7 @@ export const getTotalBalance = createAsyncThunk(
 
     if (!currentToken) rejectWithValue();
 
-    token.set(currentToken);
+    /* token.set(currentToken); */
 
     try {
       const { data } = await axiosBaseUrl.get('/transactions');

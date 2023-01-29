@@ -4,5 +4,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
   width: 100%;
+}
+
+.header {
+  font-size: 35px;
+  @include mq(desk) {
+    font-size: 40px;
+  }
 }

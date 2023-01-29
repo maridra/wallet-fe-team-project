@@ -6,7 +6,7 @@ import s from './CategoriesField.module.scss';
 const CategoriesField = () => {
   return (
     <div className={s.field}>
-      <h2>Categories</h2>
+      <h2 className={s.header}>Categories</h2>
       <SettingsAddCategory />
       <SettingsRemoveCategory />
     </div>

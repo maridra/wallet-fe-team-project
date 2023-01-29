@@ -12,36 +12,53 @@
   margin-bottom: 5px;
 }
 
+.inputWrapper {
+  position: relative;
+}
+
 .inputStyle {
   display: block;
-  height: 50px;
+  height: 60px;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 30% 0 20px;
   font-size: 20px;
   font-weight: 100;
   border-radius: 25px;
-  background-color: #eaebfc;
+  background-color: #efefef;
   border: 1px solid var(--grey-color-icon);
+  font-size: 18px;
+
+  @include mq(desk) {
+    font-size: 22px;
+    padding: 0 20% 0 20px;
+  }
 }
 
 .submitButton {
   display: block;
   position: absolute;
-  top: 28px;
-  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
 
-  height: 55%;
-  width: 20%;
-  background-color: antiquewhite;
+  height: 75%;
+  width: 25%;
+  min-width: 60px;
+  background-color: #6fe9ce;
   border-radius: 25px;
   border: 1px solid var(--grey-color-icon);
 
   font-family: 'Poppins';
   font-weight: 400;
   font-size: 18px;
+
+  @include mq(desk) {
+    width: 15%;
+    right: 30px;
+  }
 }
 
 .submitButton:hover {
-  background-color: rgb(252, 222, 182);
+  background-color: #24cca7;
   cursor: pointer;
 }

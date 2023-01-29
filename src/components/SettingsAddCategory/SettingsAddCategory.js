@@ -1,21 +1,42 @@
 import React from 'react';
 import s from './SettingsAddCategory.module.scss';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import authOperations from 'redux/auth/authOperations';
 
 const SettingsAddCategory = () => {
-  return (
-    <form className={s.form}>
-      <p className={s.inputText}>Type new category here:</p>
-      <input
-        type="text"
-        name="newCategory"
-        id="New category"
-        className={s.inputStyle}
-        autoComplete="off"
-      />
+  const [newCategory, setNewCategory] = useState('');
+  const dispatch = useDispatch();
 
-      <button type="submit" className={s.submitButton}>
-        Add category
-      </button>
+  function setValue(e) {
+    setNewCategory(e.currentTarget.value);
+  }
+
+  const addCategory = e => {
+    e.preventDefault();
+    dispatch(authOperations.addCategory(newCategory));
+    setNewCategory('');
+  };
+
+  return (
+    <form className={s.form} onSubmit={addCategory}>
+      <label>
+        <p className={s.inputText}>Type new category here:</p>
+        <div className={s.inputWrapper}>
+          <input
+            type="text"
+            name="newCategory"
+            id="New category"
+            className={s.inputStyle}
+            autoComplete="off"
+            value={newCategory}
+            onChange={setValue}
+          />
+          <button type="submit" className={s.submitButton}>
+            Add
+          </button>
+        </div>
+      </label>
     </form>
   );
 };

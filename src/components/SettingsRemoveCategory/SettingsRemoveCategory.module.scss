@@ -1,3 +1,23 @@
+.removeContainer {
+  width: 80%;
+}
+
+.header,
+.advise {
+  text-align: center;
+}
+
+.header {
+}
+
+.advise {
+  margin-top: 10px;
+  font-size: 16px;
+  margin-bottom: 5px;
+  font-style: italic;
+  color: grey;
+}
+
 .categoriesList {
   width: 80%;
   display: flex;
@@ -11,27 +31,37 @@
   padding: 10px 50px 10px 15px;
   border: 1px solid grey;
   border-radius: 25px;
+
+  &:has(> .buttonDelete:hover) {
+    border: 1px solid rgb(255, 140, 140);
+    color: rgb(255, 140, 140);
+  }
 }
 
 .buttonDelete {
+  height: 100%;
+  padding: 0;
   position: absolute;
+  width: 40px;
   top: 50%;
   right: 0;
   transform: translateY(-50%);
   background-color: transparent;
   border: none;
+
+  &:hover .svg {
+    fill: rgb(255, 140, 140);
+  }
 }
 
 .svg {
-  position: relative;
+  position: absolute;
   top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
 
   background-color: transparent;
   width: 22px;
   height: 22px;
   border-radius: 7px;
-
-  &:hover {
-    fill: red;
-  }
 }
