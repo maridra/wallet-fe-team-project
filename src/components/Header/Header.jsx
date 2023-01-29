@@ -33,7 +33,7 @@ const Header = () => {
           </Link>
           <div className={s.wrapper}>
             <div className={s.user}>
-              <span className={s.user__name}>{firstName}</span>
+              <p className={s.user__name}>{firstName ? firstName : 'Name'}</p>
               <HeaderAvatar />
             </div>
 
@@ -44,7 +44,7 @@ const Header = () => {
                 onClick={handleAddBtn}
               >
                 <IoExitOutline />
-                <span className={s.logout__text}>Exit</span>
+                <p className={s.logout__text}>Exit</p>
               </button>
             </IconContext.Provider>
           </div>
