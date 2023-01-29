@@ -8,7 +8,7 @@ const toggle = ({ isActive }) => {
   return isActive ? s.active__link : s.nav__link;
 };
 
-const Navigation = () => {
+const Navigation = ({ children }) => {
   return (
     <>
       <Media
@@ -17,50 +17,56 @@ const Navigation = () => {
         {matches => (
           <Fragment>
             {matches.small && (
-              <nav className={s.nav}>
-                <NavLink to="/" className={toggle}>
-                  <div className={s.icon__wrapper}>
-                    <svg className={s.svg}>
-                      <use href={`${sprite}#icon-home`}></use>
-                    </svg>
-                  </div>
-                </NavLink>
-                <NavLink to="/statistic" className={toggle}>
-                  <div className={s.icon__wrapper}>
-                    <svg className={s.svg}>
-                      <use href={`${sprite}#icon-statistics`}></use>
-                    </svg>
-                  </div>
-                </NavLink>
-                <NavLink to="/currency" className={toggle}>
-                  <div className={s.icon__wrapper}>
-                    <svg className={s.svg}>
-                      <use href={`${sprite}#icon-currency`}></use>
-                    </svg>
-                  </div>
-                </NavLink>
-              </nav>
+              <>
+                <nav className={s.nav}>
+                  <NavLink to="/" className={toggle}>
+                    <div className={s.icon__wrapper}>
+                      <svg className={s.svg}>
+                        <use href={`${sprite}#icon-home`}></use>
+                      </svg>
+                    </div>
+                  </NavLink>
+                  <NavLink to="/statistic" className={toggle}>
+                    <div className={s.icon__wrapper}>
+                      <svg className={s.svg}>
+                        <use href={`${sprite}#icon-statistics`}></use>
+                      </svg>
+                    </div>
+                  </NavLink>
+                  <NavLink to="/currency" className={toggle}>
+                    <div className={s.icon__wrapper}>
+                      <svg className={s.svg}>
+                        <use href={`${sprite}#icon-currency`}></use>
+                      </svg>
+                    </div>
+                  </NavLink>
+                </nav>
+                {children}
+              </>
             )}
             {matches.medium && (
-              <nav className={s.nav}>
-                <NavLink to="/" className={toggle}>
-                  <div className={s.icon__wrapper}>
-                    <svg className={s.svg}>
-                      <use href={`${sprite}#icon-home`}></use>
-                    </svg>
-                  </div>
-                  <p className={s.text}>Home</p>
-                </NavLink>
-                <NavLink to="/statistic" className={toggle}>
-                  <div className={s.icon__wrapper}>
-                    <svg className={s.svg}>
-                      <use href={`${sprite}#icon-statistics`}></use>
-                    </svg>
-                  </div>
+              <>
+                <nav className={s.nav}>
+                  <NavLink to="/" className={toggle}>
+                    <div className={s.icon__wrapper}>
+                      <svg className={s.svg}>
+                        <use href={`${sprite}#icon-home`}></use>
+                      </svg>
+                    </div>
+                    <p className={s.text}>Home</p>
+                  </NavLink>
+                  <NavLink to="/statistic" className={toggle}>
+                    <div className={s.icon__wrapper}>
+                      <svg className={s.svg}>
+                        <use href={`${sprite}#icon-statistics`}></use>
+                      </svg>
+                    </div>
 
-                  <p className={s.text}>Statistics</p>
-                </NavLink>
-              </nav>
+                    <p className={s.text}>Statistics</p>
+                  </NavLink>
+                </nav>
+                {children}
+              </>
             )}
           </Fragment>
         )}
