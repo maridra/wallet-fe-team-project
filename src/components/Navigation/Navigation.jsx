@@ -63,6 +63,11 @@ const Navigation = () => {
 
                     <p className={s.text}>Statistics</p>
                   </NavLink>
+                  <div className={s.fonts}>
+                    <p className={s.fonts1}>.</p>
+                    <p className={s.fonts2}>.</p>
+                    <p className={s.fonts3}>.</p>
+                  </div>
                 </nav>
               </>
             )}
