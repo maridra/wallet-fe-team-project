@@ -5,6 +5,7 @@ import { IoExitOutline } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { modalSelectors } from 'redux/modal/modalSelectors';
+import { authSelectors } from 'redux/auth/authSelectors';
 
 import { Logo } from '../../image/Logo';
 import { toggleShowModalLogout } from 'redux/modal/modalSlice';
@@ -16,6 +17,8 @@ import s from './Header.module.scss';
 
 const Header = () => {
   const showModalLogout = useSelector(modalSelectors.showModalLogout);
+  const firstName = useSelector(authSelectors.getFirstName);
+
   const dispatch = useDispatch();
   const handleAddBtn = () => {
     dispatch(toggleShowModalLogout(true));
@@ -30,7 +33,7 @@ const Header = () => {
           </Link>
           <div className={s.wrapper}>
             <div className={s.user}>
-              <span className={s.user__name}>Name</span>
+              <span className={s.user__name}>{firstName}</span>
               <HeaderAvatar />
             </div>
 
