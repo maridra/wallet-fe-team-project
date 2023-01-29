@@ -1,6 +1,6 @@
 import React from 'react';
-import SettingsAddCategory from 'components/SettingsAddCategory/SettingsAddCategory';
-import SettingsRemoveCategory from 'components/SettingsRemoveCategory/SettingsRemoveCategory';
+import SettingsAddCategory from 'components/SettingsCategories/SettingsAddCategory/SettingsAddCategory';
+import SettingsRemoveCategory from 'components/SettingsCategories/SettingsRemoveCategory/SettingsRemoveCategory';
 import s from './CategoriesField.module.scss';
 
 const CategoriesField = () => {
