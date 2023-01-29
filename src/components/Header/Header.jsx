@@ -2,16 +2,23 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 import { IoExitOutline } from 'react-icons/io5';
-import { useDispatch } from 'react-redux';
-import { Logo } from '../../image/Logo';
+import { useDispatch, useSelector } from 'react-redux';
 
+import { modalSelectors } from 'redux/modal/modalSelectors';
+import { authSelectors } from 'redux/auth/authSelectors';
+
+import { Logo } from '../../image/Logo';
 import { toggleShowModalLogout } from 'redux/modal/modalSlice';
 import HeaderAvatar from '../HeaderAvatar/HeaderAvatar';
-
-import s from './Header.module.scss';
+import ModalLogout from 'components/Modal/ModalLogout/ModalLogout';
 import PageWrapper from 'components/PageWrapper/PageWrapper';
 
+import s from './Header.module.scss';
+
 const Header = () => {
+  const showModalLogout = useSelector(modalSelectors.showModalLogout);
+  const firstName = useSelector(authSelectors.getFirstName);
+
   const dispatch = useDispatch();
   const handleAddBtn = () => {
     dispatch(toggleShowModalLogout(true));
@@ -26,7 +33,7 @@ const Header = () => {
           </Link>
           <div className={s.wrapper}>
             <div className={s.user}>
-              <span className={s.user__name}>Name</span>
+              <p className={s.user__name}>{firstName ? firstName : 'Name'}</p>
               <HeaderAvatar />
             </div>
 
@@ -37,12 +44,13 @@ const Header = () => {
                 onClick={handleAddBtn}
               >
                 <IoExitOutline />
-                <span className={s.logout__text}>Exit</span>
+                <p className={s.logout__text}>Exit</p>
               </button>
             </IconContext.Provider>
           </div>
         </div>
       </header>
+      {showModalLogout && <ModalLogout />}
       <PageWrapper>
         <Outlet />
       </PageWrapper>
