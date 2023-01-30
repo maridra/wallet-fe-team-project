@@ -1,4 +1,4 @@
-import StatisticForm from '../../components/StatisticPage/StatisticPage';
+import StatisticForm from '../../components/Statistic/Statistic';
 
 const StatisticPage = () => {
   return (

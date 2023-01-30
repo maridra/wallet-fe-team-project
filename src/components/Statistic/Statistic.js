@@ -2,7 +2,7 @@ import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { v4 as uuidv4 } from 'uuid';
 
-import scss from './StatisticPage.module.scss';
+import scss from './Statistic.module.scss';
 import { months, years } from '../../assets/variables/selectorData';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -198,7 +198,7 @@ const StatisticForm = () => {
                 </tr>
               </tbody>
               <tfoot>
-                <tr>
+                <tr className={scss.footer}>
                   <td className={scss.tableFooter}>Expenses:</td>
                   <td className={scss.tableFooter__expenses}>22 549.24</td>
                 </tr>

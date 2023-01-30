@@ -1,12 +1,8 @@
 @import 'assets/styles/index.scss';
 
 .sectionTMP {
-  // background: rgba(255, 255, 255, 0.4);
-
-  backdrop-filter: blur(25px);
-
   @include mq(mob-only) {
-    width: 280px;
+    max-width: 768px;
   }
   @include mq(tab) {
     width: 704px;
@@ -15,6 +11,7 @@
     width: 715px;
   }
 }
+
 .title {
   font-family: 'Poppins';
   font-style: normal;
@@ -31,6 +28,7 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
+    align-items: center;
   }
   @include mq(tab) {
     display: flex;
@@ -44,8 +42,8 @@
 
 .doughnut {
   @include mq(mob-only) {
-    width: 280px;
-    height: 280px;
+    min-width: 280px;
+    min-height: 280px;
   }
   @include mq(tab) {
     width: 336px;
@@ -65,7 +63,7 @@
   font: inherit;
 
   @include mq(mob-only) {
-    width: 280px;
+    min-width: 280px;
     height: 50px;
     padding-left: 20px;
   }
@@ -125,6 +123,13 @@
   box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(25px);
   /* Note: backdrop-filter has minimal browser support */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  // background-color: $select-background;
+  padding: 8px 15px;
 
   border-radius: 20px;
   &:hover {
@@ -139,7 +144,7 @@
   border-radius: 30px;
 
   @include mq(mob-only) {
-    width: 280px;
+    min-width: 280px;
     gap: 20px;
     flex-direction: column;
   }
@@ -156,11 +161,12 @@
 
 .table {
   border-spacing: 0;
-  border-collapse: separate;
+  border-collapse: collapse;
+
   overflow: hidden;
 
   @include mq(mob-only) {
-    width: 280px;
+    min-width: 280px;
     height: 52px;
   }
   @include mq(tab) {
@@ -208,21 +214,41 @@
 .tableRows {
   border-bottom: 1px solid var(--grey-bottom-border-table);
   box-shadow: 0px 1px 0px var(--box-shadow-table);
+
   height: 52px;
 }
 .tableRows__rightText {
   text-align: right;
   padding-right: 29px;
+  @include mq(mob-only) {
+    padding-right: 20px;
+  }
+  @include mq(tab) {
+    padding-right: 20px;
+  }
+  @include mq(desk) {
+    padding-right: 29px;
+  }
 }
-
+.footer {
+  height: 46px;
+}
 .tableFooter {
   font-family: 'Circe';
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
   line-height: 24px;
-  padding-left: 28px;
-  height: 46px;
+
+  @include mq(mob-only) {
+    padding-left: 20px;
+  }
+  @include mq(tab) {
+    padding-left: 15px;
+  }
+  @include mq(desk) {
+    padding-left: 28px;
+  }
 }
 
 .tableFooter__expenses {
@@ -233,7 +259,17 @@
   line-height: 24px;
   text-align: right;
   color: #ff6596;
-  padding-right: 29px;
+  padding: 0;
+  white-space: nowrap;
+  @include mq(mob-only) {
+    padding-right: 20px;
+  }
+  @include mq(tab) {
+    padding-right: 20px;
+  }
+  @include mq(desk) {
+    padding-right: 29px;
+  }
 }
 
 .tableFooter__income {
@@ -241,128 +277,83 @@
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
-  line-height: 24px;
-  padding-right: 29px;
-  /* identical to box height */
-
+  line-height: 1.5;
   text-align: right;
-
   color: #24cca7;
+  padding: 0;
+  white-space: nowrap;
+  @include mq(mob-only) {
+    padding-right: 20px;
+  }
+  @include mq(tab) {
+    padding-right: 20px;
+  }
+  @include mq(desk) {
+    padding-right: 29px;
+  }
 }
 
 // before elements
 
 .squareBeforeExpenses {
   &:before {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    margin-right: 16px;
-    margin-left: 28px;
-    content: '';
+    @extend %square;
     background-color: var(--main-expenes-color);
-    vertical-align: middle;
   }
 }
 
 .squareBeforeProducts {
   &:before {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    margin-right: 16px;
-    margin-left: 28px;
-    content: '';
+    @extend %square;
     background-color: var(--products-color);
-    vertical-align: middle;
   }
 }
 
 .squareBeforeCar {
   &:before {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    margin-right: 16px;
-    margin-left: 28px;
-    content: '';
+    @extend %square;
     background-color: var(--car-color);
-    vertical-align: middle;
   }
 }
 
 .squareBeforeSelf {
   &:before {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    margin-right: 16px;
-    margin-left: 28px;
-    content: '';
+    @extend %square;
     background-color: var(--self-care-color);
-    vertical-align: middle;
   }
 }
 
 .squareBeforeChild {
   &:before {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    margin-right: 16px;
-    margin-left: 28px;
-    content: '';
+    @extend %square;
     background-color: var(--child-care-color);
-    vertical-align: middle;
   }
 }
 
 .squareBeforeHousehold {
   &:before {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    margin-right: 16px;
-    margin-left: 28px;
-    content: '';
+    @extend %square;
+    float: left;
+    margin-top: 5px;
     background-color: var(--household-products-color);
-    vertical-align: middle;
   }
 }
 .squareBeforeEducation {
   &:before {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    margin-right: 16px;
-    margin-left: 28px;
-    content: '';
+    @extend %square;
     background-color: var(--education-color);
-    vertical-align: middle;
   }
 }
 .squareBeforeLeisure {
   &:before {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    margin-right: 16px;
-    margin-left: 28px;
-    content: '';
+    @extend %square;
     background-color: var(--leisure-color);
-    vertical-align: middle;
   }
 }
 
 .squareBeforeOther {
   &:before {
-    width: 24px;
-    height: 24px;
-    display: inline-block;
-    margin-right: 16px;
-    margin-left: 28px;
-    content: '';
+    @extend %square;
     background-color: var(--other-expenses-color);
-    vertical-align: middle;
   }
 }
