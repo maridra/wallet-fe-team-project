@@ -2,6 +2,7 @@ import { toggleShowModalLogout } from 'redux/modal/modalSlice';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import ModalUniversal from '../ModalUniversal';
+import authOperations from 'redux/auth/authOperations';
 import scss from './ModalLogout.module.scss';
 import logo from '../../../assets/Images/NotFoundPage/sad_leopard.png';
 
@@ -11,6 +12,11 @@ const ModalLogout = () => {
     if (e.currentTarget === e.target) {
       handleCloseModal();
     }
+  };
+
+  const handleYesBtn = () => {
+    dispatch(authOperations.logOut());
+    dispatch(toggleShowModalLogout(false));
   };
 
   const handleCloseModal = () => {
@@ -35,11 +41,7 @@ const ModalLogout = () => {
         <img className={scss.logo} src={logo} alt="logo"></img>
         <h2 className={scss.title}>Do you want to exit?</h2>
         <div className={scss.btnBox}>
-          <button
-            className={scss.yesBtn}
-            type="button"
-            onClick={handleCloseModal}
-          >
+          <button className={scss.yesBtn} type="button" onClick={handleYesBtn}>
             yes
           </button>
           <button

@@ -45,18 +45,14 @@ export const authSlice = createSlice({
       })
 
       .addCase(authOperations.logOut.pending, state => {
-        state.loading.logOut = true;
+        state.loading = true;
       })
       .addCase(authOperations.logOut.fulfilled, state => {
-        state.user.firstName = initialState.user.firstName;
-        state.user.email = initialState.user.email;
-
-        state.accessToken = initialState.accessToken;
-        state.refreshToken = initialState.refreshToken;
-        state.sid = initialState.sid;
-
-        state.isLoggedIn = initialState.isLoggedIn;
-        state.loading.logOut = false;
+        state.user = initialState.user;
+        state.token = initialState.token;
+        state.loading = initialState.loading;
+        state.error = initialState.error;
+        state.isAuth = initialState.isAuth;
       })
       .addCase(authOperations.logOut.rejected, state => {
         state.loading.logOut = false;

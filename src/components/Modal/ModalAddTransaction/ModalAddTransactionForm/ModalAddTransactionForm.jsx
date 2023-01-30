@@ -16,11 +16,6 @@ const initialValues = {
   sum: '',
   comment: '',
 };
-// const initialValuesTwo = {
-//   category: '',
-//   sum: '',
-//   comment: '',
-// };
 
 const ModalAddTransactionForm = prop => {
   const { checkboxStatus, onClick } = prop;

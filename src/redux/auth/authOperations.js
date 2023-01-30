@@ -120,10 +120,14 @@ const removeCategory = createAsyncThunk(
 );
 
 const verifyEmail = createAsyncThunk(
-  'auth/verify/:verificationToken', async(credentials, { rejectWithValue }) => {
+  'auth/verify/:verificationToken',
+  async (credentials, { rejectWithValue }) => {
     const { verificationToken } = credentials;
     try {
-      const { data } = await axiosBaseUrl.get(`/auth/verify/${verificationToken}`, verificationToken);
+      const { data } = await axiosBaseUrl.get(
+        `/auth/verify/${verificationToken}`,
+        verificationToken
+      );
       return data;
     } catch (error) {
       const { data, status } = error.response;
@@ -137,8 +141,8 @@ const verifyEmail = createAsyncThunk(
       }
       return rejectWithValue({ data, status });
     }
-  })
-
+  }
+);
 
 const authOperations = {
   register,
@@ -147,7 +151,7 @@ const authOperations = {
   refresh,
   addCategory,
   removeCategory,
-  verifyEmail
+  verifyEmail,
 };
 
 export default authOperations;
