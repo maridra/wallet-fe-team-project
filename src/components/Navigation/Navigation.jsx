@@ -46,7 +46,7 @@ const Navigation = () => {
             {matches.medium && (
               <>
                 <nav className={s.nav}>
-                  <NavLink to="/" className={toggle} activeClassName={s.test}>
+                  <NavLink to="/" className={toggle}>
                     <div className={s.icon__wrapper}>
                       <svg className={s.svg}>
                         <use href={`${sprite}#icon-home`}></use>

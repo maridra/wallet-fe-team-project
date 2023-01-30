@@ -38,9 +38,6 @@ export default function SettingsAvatar() {
     const userAvatarFile = e.currentTarget.elements.avatar.files[0];
     const avatarFormat = userAvatar.split('.').at(-1);
 
-    console.log(avatarFormat);
-    console.log(avatarFormat === 'svg');
-
     if (
       avatarFormat !== 'png' &&
       avatarFormat !== 'jpeg' &&
