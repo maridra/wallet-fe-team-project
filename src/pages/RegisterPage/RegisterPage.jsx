@@ -3,11 +3,19 @@ import Media from "react-media";
 import s from "../RegisterPage/RegisterPage.module.scss";
 import registerDeskImg from "../../image/registerDeskImg.png";
 import registerTabImg from "../../image/registerTabImg.png";
+import { useSelector } from "react-redux";
+import { modalSelectors } from "redux/modal/modalSelectors";
+import SuccessRegistrationModal from "components/Modal/SuccessRegistrationModal/SuccessRegistrationModal";
 
 const RegisterPage = () => {
+  
+  const showModalSuccessRegistration = useSelector(
+    modalSelectors.showModalSuccessRegistration
+  );
   return (
     <div className={s.back}>
       <div className={s.container}>
+        {showModalSuccessRegistration && <SuccessRegistrationModal />}
         <div className={s.registerContainer}>
           <Media queries={{
             tab: "(min-width: 768px) and (max-width: 1279px)",

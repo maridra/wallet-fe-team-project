@@ -24,14 +24,6 @@ const register = createAsyncThunk(
       return rejectWithValue({ data, status });
     }
   }
-  // Check if user already submit form
-
-  // const dataUser = thunkAPI.getState().dailyRate.dataUser;
-  // const userID = data.user.id;
-  // if (thunkAPI.getState().dailyRate.dataUser) {
-  //   await axiosBaseUrl.post(`/daily-rate/${userID}`, dataUser);
-  //   return data;
-  // }
 );
 
 const logIn = createAsyncThunk(
@@ -127,6 +119,27 @@ const removeCategory = createAsyncThunk(
   }
 );
 
+const verifyEmail = createAsyncThunk(
+  'auth/verify/:verificationToken', async(credentials, { rejectWithValue }) => {
+    const { verificationToken } = credentials;
+    try {
+      const { data } = await axiosBaseUrl.get(`/auth/verify/${verificationToken}`, verificationToken);
+      return data;
+    } catch (error) {
+      const { data, status } = error.response;
+      if (status === 401) {
+        Notify.failure(data.message);
+      }
+      if (status === 500) {
+        Notify.failure(
+          'Oops, something wrong on our server :( Please, try again'
+        );
+      }
+      return rejectWithValue({ data, status });
+    }
+  })
+
+
 const authOperations = {
   register,
   logIn,
@@ -134,6 +147,7 @@ const authOperations = {
   refresh,
   addCategory,
   removeCategory,
+  verifyEmail
 };
 
 export default authOperations;
