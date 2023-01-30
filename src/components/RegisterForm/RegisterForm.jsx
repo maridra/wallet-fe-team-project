@@ -1,36 +1,40 @@
 import React from 'react';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import s from '../RegisterForm/RegisterForm.module.scss';
-import { ReactComponent as Email } from '../../assets/Images/login/email.svg';
-import { ReactComponent as PasswordLock } from '../../assets/Images/login/password_lock.svg';
-import { ReactComponent as Name } from '../../assets/Images/login/name.svg';
-import PasswordStrength from './PasswordStrength';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import sprite from '../../assets/Images/login/symbol-defs.svg';
-import { useDispatch } from 'react-redux';
-import authOperations from 'redux/auth/authOperations';
-import classNames from 'classnames';
+import s from "../RegisterForm/RegisterForm.module.scss";
+import { ReactComponent as Email } from "../../assets/Images/login/email.svg";
+import { ReactComponent as PasswordLock } from "../../assets/Images/login/password_lock.svg"
+import { ReactComponent as Name } from "../../assets/Images/login/name.svg";
+import PasswordStrength from "./PasswordStrength";
+import { Link } from "react-router-dom";
+import sprite from "../../assets/Images/login/symbol-defs.svg";
+import { useDispatch } from "react-redux";
+import authOperations from "redux/auth/authOperations";
+import classNames from "classnames";
+import { toggleShowModalSuccessRegistration } from "redux/modal/modalSlice";
 
 const RegisterForm = () => {
   const initialValues = {
     email: '',
     password: '',
     passwordConfirm: '',
-    firstName: '',
-  };
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [firstName, setFirstName] = useState('');
+    firstName: ''
+  }
   const dispatch = useDispatch();
 
-  const onSubmit = e => {
-    e.preventDefault();
-    dispatch(authOperations.register({ email, password, firstName }));
-  };
+  const onSubmit = ({email, password, firstName}) => {
+    const user = {
+      email,
+      password,
+      firstName
+   }
+    dispatch(authOperations.register(user))
+      .then((response) => {
+        if (response.payload.status === "success") {
+          dispatch(toggleShowModalSuccessRegistration(true))
+        }
+      })
+  }
 
   const SignUpSchema = Yup.object().shape({
     email: Yup.string()
@@ -59,6 +63,7 @@ const RegisterForm = () => {
       .oneOf([Yup.ref('password')], "Passwords don't match!")
       .required('Required field'),
     firstName: Yup.string()
+      .matches(/(^[а-яА-ЯёЁa-zA-Z0-9]+$)/, "Only letters and numbers")
       .min(1)
       .max(12, 'Too long name')
       .required('Required field'),
@@ -71,21 +76,20 @@ const RegisterForm = () => {
           <use href={`${sprite}#icon-logo`}></use>
         </svg>
       </div>
-      <Formik initialValues={initialValues} validationSchema={SignUpSchema}>
-        {({ errors, touched }) => (
-          <Form className={s.form} onSubmit={onSubmit}>
-            <label className={s.label}>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={SignUpSchema}
+        onSubmit={onSubmit}>
+        {({values, errors, touched, handleChange, handleSubmit }) => (
+          <Form className={s.form} onSubmit={handleSubmit}>
+          <label className={s.label}>
               <Field
                 type="email"
                 name="email"
                 placeholder="E-mail"
-                className={classNames(s.input, {
-                  [s.errorInput]: errors.email && touched.email,
-                  [s.validInput]: !errors.email && touched.email,
-                })}
-                value={email}
-                onInput={e => setEmail(e.target.value)}
-              />
+                className={classNames(s.input, { [s.errorInput]: errors.email && touched.email, [s.validInput]: !errors.email && touched.email })}
+                value={values.email}
+                onChange={handleChange} />
               <Email className={s.inputIcon} />
               {!errors.email && touched.email && (
                 <Email className={s.validInputIcon} />
@@ -106,21 +110,16 @@ const RegisterForm = () => {
                   [s.errorInput]: errors.password && touched.password,
                   [s.validInput]: !errors.password && touched.password,
                 })}
-                onInput={e => setPassword(e.target.value)}
-                value={password}
-              />
-              <PasswordLock className={s.inputIcon} />
-              {!errors.password && touched.password && (
-                <PasswordLock className={s.validInputIcon} />
-              )}
-              {errors.password && touched.password && (
-                <PasswordLock className={s.errorInputIcon} />
-              )}
-              {errors.password && touched.password && (
-                <div className={s.errorField}>{errors.password}</div>
-              )}
-            </label>
-            <label className={s.label}>
+                value={values.password}
+                onChange={handleChange} />
+               <PasswordLock className={s.inputIcon} />
+              {!errors.password && touched.password && <PasswordLock className={s.validInputIcon} />}
+              {errors.password && touched.password &&<PasswordLock className={s.errorInputIcon} />}
+              {errors.password && touched.password &&
+                <div className={s.errorField}>{errors.password}
+                </div>}
+          </label>
+          <label className={s.label}>
               <Field
                 type="password"
                 name="passwordConfirm"
@@ -131,25 +130,17 @@ const RegisterForm = () => {
                   [s.validInput]:
                     !errors.passwordConfirm && touched.passwordConfirm,
                 })}
-                value={confirmPassword}
-                onInput={e => setConfirmPassword(e.target.value)}
-              />
+                value={values.confirmPassword}
+                onChange={handleChange} />
               <PasswordLock className={s.inputIcon} />
-              {!errors.passwordConfirm && touched.passwordConfirm && (
-                <PasswordLock className={s.validInputIcon} />
-              )}
-              {errors.passwordConfirm && touched.passwordConfirm && (
-                <PasswordLock className={s.errorInputIcon} />
-              )}
-              {errors.passwordConfirm && touched.passwordConfirm && (
-                <div className={s.errorField}>{errors.passwordConfirm}</div>
-              )}
-              <PasswordStrength
-                password={password}
-                className={s.passwordStrength}
-              />
-            </label>
-            <label className={s.label}>
+              {!errors.passwordConfirm && touched.passwordConfirm && <PasswordLock className={s.validInputIcon} />}
+              {errors.passwordConfirm && touched.passwordConfirm &&<PasswordLock className={s.errorInputIcon} />}
+              {errors.passwordConfirm && touched.passwordConfirm &&
+                <div className={s.errorField}>{errors.passwordConfirm}
+                </div>}
+              <PasswordStrength password={values.password} className={s.passwordStrength} />
+          </label>
+          <label className={s.label}>
               <Field
                 type="text"
                 name="firstName"
@@ -158,9 +149,8 @@ const RegisterForm = () => {
                   [s.errorInput]: errors.firstName && touched.firstName,
                   [s.validInput]: !errors.firstName && touched.firstName,
                 })}
-                value={firstName}
-                onInput={e => setFirstName(e.target.value)}
-              />
+                value={values.firstName}
+                onChange={handleChange} />
               <Name className={s.inputIcon} />
               {!errors.firstName && touched.firstName && (
                 <Name className={s.validInputIcon} />
