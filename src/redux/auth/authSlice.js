@@ -26,6 +26,7 @@ export const authSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
+      // REGISTRATION
       .addCase(authOperations.register.pending, handlePending)
       .addCase(authOperations.register.rejected, handleRejected)
       .addCase(authOperations.register.fulfilled, (state, action) => {
@@ -35,6 +36,7 @@ export const authSlice = createSlice({
         state.isAuth = true;
       })
 
+      // LOGIN
       .addCase(authOperations.logIn.pending, handlePending)
       .addCase(authOperations.logIn.rejected, handleRejected)
       .addCase(authOperations.logIn.fulfilled, (state, action) => {
@@ -44,6 +46,7 @@ export const authSlice = createSlice({
         state.isAuth = true;
       })
 
+      // LOGOUT
       .addCase(authOperations.logOut.pending, state => {
         state.loading.logOut = true;
       })
@@ -62,6 +65,7 @@ export const authSlice = createSlice({
         state.loading.logOut = false;
       })
 
+      // REFRESH
       .addCase(authOperations.refresh.pending, state => {
         state.isAuth = false;
       })
@@ -71,30 +75,33 @@ export const authSlice = createSlice({
       .addCase(authOperations.refresh.rejected, state => {
         state.isAuth = false;
       })
-      .addCase(authOperations.addCategory.pending, state => {
-        state.loading = true;
-      })
-      .addCase(authOperations.addCategory.rejected, state => {
-        state.loading = false;
-      })
+
+      // ADD CATEGORY
+      .addCase(authOperations.addCategory.pending, handlePending)
+      .addCase(authOperations.addCategory.rejected, handleRejected)
       .addCase(authOperations.addCategory.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.user.categories = payload;
       })
 
-      .addCase(authOperations.removeCategory.pending, state => {
-        state.loading = true;
-      })
-      .addCase(authOperations.removeCategory.rejected, state => {
-        state.loading = false;
-      })
+      // REMOVE CATEGORY
+      .addCase(authOperations.removeCategory.pending, handlePending)
+      .addCase(authOperations.removeCategory.rejected, handleRejected)
       .addCase(
         authOperations.removeCategory.fulfilled,
         (state, { payload }) => {
           state.loading = false;
           state.user.categories = payload;
         }
-      );
+      )
+
+      // UPDATE AVATAR
+      .addCase(authOperations.updateAvatar.pending, handlePending)
+      .addCase(authOperations.updateAvatar.rejected, handleRejected)
+      .addCase(authOperations.updateAvatar.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.user.avatarURL = payload;
+      });
   },
 });
 
