@@ -5,6 +5,7 @@ import { persistReducer } from 'redux-persist';
 
 const initialState = {
   user: {},
+  avatarLoading: false,
   token: '',
   loading: false,
   error: null,
@@ -92,12 +93,32 @@ export const authSlice = createSlice({
       )
 
       // UPDATE AVATAR
-      .addCase(authOperations.updateAvatar.pending, handlePending)
-      .addCase(authOperations.updateAvatar.rejected, handleRejected)
+      .addCase(authOperations.updateAvatar.pending, state => {
+        state.avatarLoading = true;
+        state.error = null;
+      })
+      .addCase(authOperations.updateAvatar.rejected, (state, { payload }) => {
+        state.avatarLoading = false;
+        state.error = payload;
+      })
       .addCase(authOperations.updateAvatar.fulfilled, (state, { payload }) => {
-        state.loading = false;
+        state.avatarLoading = false;
         state.user.avatarURL = payload;
-      });
+      })
+
+      // UPDATE AVATAR
+      .addCase(authOperations.updateUserName.pending, state => {
+        state.error = null;
+      })
+      .addCase(authOperations.updateUserName.rejected, (state, { payload }) => {
+        state.error = payload;
+      })
+      .addCase(
+        authOperations.updateUserName.fulfilled,
+        (state, { payload }) => {
+          state.user.firstName = payload;
+        }
+      );
   },
 });
 

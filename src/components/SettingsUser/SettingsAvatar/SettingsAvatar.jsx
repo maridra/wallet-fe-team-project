@@ -23,7 +23,7 @@ export default function SettingsAvatar() {
 
   const avatarURL =
     useSelector(authSelectors.userSelector).avatarURL ?? baseUserAvatar;
-  const isLoading = useSelector(authSelectors.isLoading);
+  const isLoading = useSelector(authSelectors.isAvatarLoading);
 
   // Handle events
   const handleOnChange = () => {

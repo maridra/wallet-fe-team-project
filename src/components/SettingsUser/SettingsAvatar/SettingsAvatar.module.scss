@@ -9,8 +9,8 @@
   width: 150px;
   height: 150px;
 
-  // border-radius: 50%;
-  // border: 1px solid var(--text-modal-grey-color);
+  border-radius: 50%;
+  border: 1px solid var(--text-modal-grey-color);
 
   @include mq(tab) {
     width: 250px;
@@ -47,7 +47,7 @@
 
     cursor: pointer;
 
-    transition: filter 300ms linear, border 300ms linear;
+    transition: filter 150ms linear, border 150ms linear;
 
     &:hover,
     &:focus {

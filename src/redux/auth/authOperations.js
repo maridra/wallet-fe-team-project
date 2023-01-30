@@ -162,6 +162,21 @@ const updateAvatar = createAsyncThunk(
   }
 );
 
+const updateUserName = createAsyncThunk(
+  'auth/updateUserName',
+  async (data, thunkAPI) => {
+    try {
+      const response = await axiosBaseUrl.patch('/users/name', data);
+
+      Notify.success('User name succesfully updated');
+      return response.data.data.user.firstName;
+    } catch (e) {
+      Notify.failure(e.message);
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
 const authOperations = {
   register,
   logIn,
@@ -171,6 +186,7 @@ const authOperations = {
   removeCategory,
   updateAvatar,
   verifyEmail,
+  updateUserName,
 };
 
 export default authOperations;
