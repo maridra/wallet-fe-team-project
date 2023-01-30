@@ -1,7 +1,7 @@
 @import '../../assets/styles/index.scss';
 
 .bg_page {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
 
   background-color: var(--background-grey-color);
@@ -15,7 +15,7 @@
 }
 
 .bg_blur {
-  width: 100vw;
+  width: 100%;
   min-height: 100vh;
 
   backdrop-filter: blur(25px);
