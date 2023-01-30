@@ -9,11 +9,11 @@
   border-radius: 50%;
 
   @include mq(mob-only) {
-    bottom: 20px;
+    top: calc(100vh - 64px);
     right: 20px;
   }
   @include mq(tab) {
-    bottom: 40px;
+    top: calc(100vh - 84px);
     right: 40px;
   }
   &Icon {

@@ -4,7 +4,6 @@ import Media from 'react-media';
 
 import { modalSelectors } from 'redux/modal/modalSelectors';
 
-import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAddTransactions';
 import ModalAddTransaction from 'components/Modal/ModalAddTransaction/ModalAddTransaction';
 import StatisticPage from '../StatisticPage/StatisticPage';
 import Balance from 'components/Balance/Balance';
@@ -80,7 +79,6 @@ const HomePage = () => {
         )}
       </Media>
       {showModalAddTransaction && <ModalAddTransaction />}
-      <ButtonAddTransactions />
     </div>
   );
 };
