@@ -7,8 +7,9 @@
   background-color: #ffffff;
 
   @include mq(tab) {
-    background-color: #E7EAF2;
-    background-image: url('../../image/Ellipse\ 1.png'), url('../../image/Ellipse\ 2.png');
+    background-color: #e7eaf2;
+    background-image: url('../../assets/Images/login/Ellipse\ 1.png'),
+      url('../../assets/Images/login/Ellipse\ 2.png');
     background-repeat: no-repeat;
     background-position: left bottom, right top;
   }

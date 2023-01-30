@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import Media from 'react-media';
 import s from './Navigation.module.scss';
-import sprite from '../../image/symbol-defs.svg';
+import sprite from '../../assets/Images/login/symbol-defs.svg';
 import { NavLink } from 'react-router-dom';
 
 const toggle = ({ isActive }) => {
