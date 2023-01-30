@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { modalSelectors } from 'redux/modal/modalSelectors';
 import { authSelectors } from 'redux/auth/authSelectors';
 
-import { Logo } from '../../image/Logo';
+import { Logo } from '../../assets/Images/login/Logo';
 import { toggleShowModalLogout } from 'redux/modal/modalSlice';
 import HeaderAvatar from '../HeaderAvatar/HeaderAvatar';
 import ModalLogout from 'components/Modal/ModalLogout/ModalLogout';
