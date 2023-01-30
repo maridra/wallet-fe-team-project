@@ -17,10 +17,12 @@ const RegisterPage = () => {
       <div className={s.container}>
         {showModalSuccessRegistration && <SuccessRegistrationModal />}
         <div className={s.registerContainer}>
-          <Media queries={{
-            tab: "(min-width: 768px) and (max-width: 1279px)",
-            desk: "(min-width: 1280px)"
-          }}>
+          <Media
+            queries={{
+              tab: '(min-width: 768px) and (max-width: 1279px)',
+              desk: '(min-width: 1280px)',
+            }}
+          >
             {matches => (
               <>
                 {matches.tab && (
@@ -52,8 +54,7 @@ const RegisterPage = () => {
         </div>
       </div>
     </div>
-    
-  )
-}
+  );
+};
 
 export default RegisterPage;
