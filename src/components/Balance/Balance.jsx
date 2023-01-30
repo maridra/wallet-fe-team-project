@@ -1,18 +1,20 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+/* import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getTotalBalance } from 'redux/finance/financeOperation'; */
+
+import { useSelector } from 'react-redux';
 import { financeSelectors } from '../../redux/finance/financeSelectors';
-import { getTotalBalance } from 'redux/finance/financeOperation';
 
 import css from './Balance.module.scss';
 import hryvniaLogo from '../../assets/Images/currency/hryvniaLogo.svg';
 
 const Balance = () => {
   const userBalance = useSelector(financeSelectors.setTotalBalance);
-  const dispatch = useDispatch();
+  /*   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getTotalBalance());
-  }, [dispatch]);
+  }, [dispatch]); */
 
   return (
     <div className={css.balanceContainer}>

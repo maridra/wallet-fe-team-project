@@ -104,7 +104,7 @@ const addCategory = createAsyncThunk(
       Notify.success('Category succesfully added');
       return newCategories;
     } catch (error) {
-      Notify.failure('It seems like this category is already exist');
+      Notify.failure('It seems like this category already exist');
       return getState().auth.user.categories;
     }
   }
