@@ -1,18 +1,20 @@
-import LoginForm from "components/LoginForm/LoginForm";
-import s from "../LoginPage/LoginPage.module.scss";
-import loginDeskImg from "../../image/loginDesk.png";
-import loginTabImg from "../../image/loginTab.png";
-import Media from "react-media";
+import LoginForm from 'components/LoginForm/LoginForm';
+import s from '../LoginPage/LoginPage.module.scss';
+import loginDeskImg from '../../assets/Images/login/loginDesk.png';
+import loginTabImg from '../../assets/Images/login/loginTab.png';
+import Media from 'react-media';
 
 const LoginPage = () => {
   return (
     <div className={s.back}>
       <div className={s.container}>
         <div className={s.registerContainer}>
-          <Media queries={{
-            tab: "(min-width: 768px) and (max-width: 1279px)",
-            desk: "(min-width: 1280px)"
-          }}>
+          <Media
+            queries={{
+              tab: '(min-width: 768px) and (max-width: 1279px)',
+              desk: '(min-width: 1280px)',
+            }}
+          >
             {matches => (
               <>
                 {matches.tab && (
@@ -44,7 +46,7 @@ const LoginPage = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export default LoginPage;

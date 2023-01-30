@@ -63,31 +63,13 @@ export const authSlice = createSlice({
       })
 
       .addCase(authOperations.refresh.pending, state => {
-        state.loading.refresh = true;
-        state.accessToken = null;
+        state.isAuth = false;
       })
       .addCase(authOperations.refresh.fulfilled, (state, { payload }) => {
-        state.accessToken = payload.refreshData['newAccessToken'];
-        state.refreshToken = payload.refreshData['newRefreshToken'];
-        state.sid = payload.refreshData['sid'];
-
-        state.user.firstName = payload.userData['username'];
-        state.user.email = payload.userData['email'];
-
-        state.isLoggedIn = true;
-        state.isFetchingCurrentUser = false;
-        state.loading.refresh = false;
+        state.isAuth = true;
       })
       .addCase(authOperations.refresh.rejected, state => {
-        state.accessToken = initialState.accessToken;
-        state.refreshToken = initialState.refreshToken;
-        state.sid = initialState.sid;
-
-        state.user.firstName = initialState.user.firstName;
-        state.user.email = initialState.user.email;
-
-        state.isLoggedIn = initialState.isLoggedIn;
-        state.loading.refresh = false;
+        state.isAuth = false;
       })
       .addCase(authOperations.addCategory.pending, state => {
         state.loading = true;

@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import Media from 'react-media';
 import s from './Navigation.module.scss';
-import sprite from '../../image/symbol-defs.svg';
+import sprite from '../../assets/Images/login/symbol-defs.svg';
 import { NavLink } from 'react-router-dom';
 
 const toggle = ({ isActive }) => {
@@ -46,7 +46,7 @@ const Navigation = () => {
             {matches.medium && (
               <>
                 <nav className={s.nav}>
-                  <NavLink to="/" className={toggle}>
+                  <NavLink to="/" className={toggle} activeClassName={s.test}>
                     <div className={s.icon__wrapper}>
                       <svg className={s.svg}>
                         <use href={`${sprite}#icon-home`}></use>
@@ -63,6 +63,11 @@ const Navigation = () => {
 
                     <p className={s.text}>Statistics</p>
                   </NavLink>
+                  <div className={s.fonts}>
+                    <p className={s.fonts1}>.</p>
+                    <p className={s.fonts2}>.</p>
+                    <p className={s.fonts3}>.</p>
+                  </div>
                 </nav>
               </>
             )}
