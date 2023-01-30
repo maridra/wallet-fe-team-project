@@ -2,7 +2,7 @@
 
 .sectionTMP {
   @include mq(mob-only) {
-    max-width: 768px;
+    max-width: 440px;
   }
   @include mq(tab) {
     width: 704px;
@@ -28,7 +28,7 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
-    align-items: center;
+    align-items: stretch;
   }
   @include mq(tab) {
     display: flex;
@@ -42,8 +42,10 @@
 
 .doughnut {
   @include mq(mob-only) {
-    min-width: 280px;
-    min-height: 280px;
+    max-width: 440px;
+    max-height: 440px;
+    display: flex;
+    justify-content: center;
   }
   @include mq(tab) {
     width: 336px;
@@ -54,6 +56,7 @@
     height: 288px;
   }
 }
+
 .selectItem {
   cursor: pointer;
   /* Reset */
@@ -64,6 +67,7 @@
 
   @include mq(mob-only) {
     min-width: 280px;
+
     height: 50px;
     padding-left: 20px;
   }
@@ -158,11 +162,16 @@
     gap: 32px;
   }
 }
-
+.statisticData {
+  @include mq(mob-only) {
+    display: flex;
+    flex-direction: column;
+  }
+}
 .table {
   border-spacing: 0;
   border-collapse: collapse;
-
+  align-items: stretch;
   overflow: hidden;
 
   @include mq(mob-only) {
@@ -332,9 +341,12 @@
 
 .squareBeforeHousehold {
   &:before {
+    @media screen and (max-width: 330px) {
+      margin-top: 5px;
+    }
     @extend %square;
     float: left;
-    margin-top: 5px;
+
     background-color: var(--household-products-color);
   }
 }

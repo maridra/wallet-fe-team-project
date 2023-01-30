@@ -122,7 +122,7 @@ const StatisticForm = () => {
           <div className={scss.doughnut}>
             <Doughnut data={data} options={options} plugins={[textCenter]} />
           </div>
-          <div>
+          <div className={scss.statisticData}>
             <div className={scss.select}>
               <select className={scss.selectItem}>
                 {months.map(item => (
