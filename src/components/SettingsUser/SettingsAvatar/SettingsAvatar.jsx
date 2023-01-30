@@ -1,16 +1,16 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { IconContext } from 'react-icons';
 import { FiEdit2 } from 'react-icons/fi';
 
 import { authSelectors } from '../../../redux/auth/authSelectors';
+import authOperations from '../../../redux/auth/authOperations';
 
 import { Link } from 'react-router-dom';
 
 import s from '../SettingsAvatar/SettingsAvatar.module.scss';
 import { useRef } from 'react';
 import { Notify } from 'notiflix';
-import { axiosBaseUrl } from '../../../redux/tokenSettingsAxios';
 
 export default function SettingsAvatar() {
   const baseUserAvatar =
@@ -20,6 +20,9 @@ export default function SettingsAvatar() {
     useSelector(authSelectors.userSelector).avatarURL ?? baseUserAvatar;
 
   const refForm = useRef();
+
+  const dispatch = useDispatch();
+  const updateAvatar = authOperations.updateAvatar;
 
   const handleOnChange = () => {
     refForm.current.dispatchEvent(
@@ -32,7 +35,6 @@ export default function SettingsAvatar() {
     const userAvatar = e.currentTarget.elements.avatar.value;
     const userAvatarFile = e.currentTarget.elements.avatar.files[0];
     const avatarFormat = userAvatar.split('.').at(-1);
-    console.log(avatarFormat === 'png');
 
     if (avatarFormat !== 'png' && 'jpeg' && 'svg') {
       Notify.failure('Wrong format! Format have to be: png, jpeg or svg', {
@@ -44,13 +46,7 @@ export default function SettingsAvatar() {
     const data = new FormData();
     data.append('avatar', userAvatarFile);
 
-    axiosBaseUrl.patch('/users/avatars', data, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-
-    console.log(userAvatarFile);
+    dispatch(updateAvatar(data));
   };
 
   return (

@@ -36,7 +36,7 @@ const register = createAsyncThunk(
 
 const logIn = createAsyncThunk(
   'auth/login',
-  async (credentials, { rejectWithValue, getState }) => {
+  async (credentials, { rejectWithValue }) => {
     const { email, password } = credentials;
     try {
       const { data } = await axiosBaseUrl.post('/auth/login', {
@@ -127,6 +127,24 @@ const removeCategory = createAsyncThunk(
   }
 );
 
+const updateAvatar = createAsyncThunk(
+  'auth/updateAvatar',
+  async (data, thunkAPI) => {
+    try {
+      const response = await axiosBaseUrl.patch('/users/avatars', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      return response.data.data.avatarURL;
+    } catch (e) {
+      Notify.failure(e.message);
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
 const authOperations = {
   register,
   logIn,
@@ -134,6 +152,7 @@ const authOperations = {
   refresh,
   addCategory,
   removeCategory,
+  updateAvatar,
 };
 
 export default authOperations;
