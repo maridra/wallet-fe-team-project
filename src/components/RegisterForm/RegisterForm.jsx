@@ -2,12 +2,12 @@ import React from 'react';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import s from "../RegisterForm/RegisterForm.module.scss";
-import { ReactComponent as Email } from "../../image/email.svg";
-import { ReactComponent as PasswordLock } from "../../image/password_lock.svg"
-import { ReactComponent as Name } from "../../image/name.svg";
+import { ReactComponent as Email } from "../../assets/Images/login/email.svg";
+import { ReactComponent as PasswordLock } from "../../assets/Images/login/password_lock.svg"
+import { ReactComponent as Name } from "../../assets/Images/login/name.svg";
 import PasswordStrength from "./PasswordStrength";
 import { Link } from "react-router-dom";
-import sprite from "../../image/symbol-defs.svg";
+import sprite from "../../assets/Images/login/symbol-defs.svg";
 import { useDispatch } from "react-redux";
 import authOperations from "redux/auth/authOperations";
 import classNames from "classnames";
