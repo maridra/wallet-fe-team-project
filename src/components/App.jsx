@@ -3,6 +3,7 @@ import StatisticPage from 'pages/StatisticPage/StatisticPage.js';
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Header, Loader } from '../components';
+import CreatePassword from './CreatePassword/CreatePassword';
 import ForgotPassword from './ForgotPassword/ForgotPassword';
 
 // import PrivateRoute from './PrivateRoute/PrivateRoute';
@@ -47,6 +48,12 @@ export const App = () => {
             path="/forgot-password"
             element={
               <PublicRoute redirectTo="/" children={<ForgotPassword />} />
+            }
+          />
+          <Route
+            path="/create-password"
+            element={
+              <PublicRoute redirectTo="/" children={<CreatePassword />} />
             }
           />
         </Routes>
