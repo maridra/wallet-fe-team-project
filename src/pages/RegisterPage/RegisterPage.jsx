@@ -1,16 +1,15 @@
-import RegisterForm from "components/RegisterForm/RegisterForm";
-import Media from "react-media";
-import s from "../RegisterPage/RegisterPage.module.scss";
+import RegisterForm from 'components/RegisterForm/RegisterForm';
+import Media from 'react-media';
+import s from '../RegisterPage/RegisterPage.module.scss';
 import register_tab from '../../assets/Images/login/Register@1x_tab.png';
 import register_tab_2x from '../../assets/Images/login/Register@2x_tab.png';
 import register_desk from '../../assets/Images/login/Register@1x_desk.png';
 import register_desk_2x from '../../assets/Images/login/Register@2x_desk.png';
-import { useSelector } from "react-redux";
-import { modalSelectors } from "redux/modal/modalSelectors";
-import SuccessRegistrationModal from "components/Modal/SuccessRegistrationModal/SuccessRegistrationModal";
+import { useSelector } from 'react-redux';
+import { modalSelectors } from 'redux/modal/modalSelectors';
+import SuccessRegistrationModal from 'components/Modal/SuccessRegistrationModal/SuccessRegistrationModal';
 
 const RegisterPage = () => {
-  
   const showModalSuccessRegistration = useSelector(
     modalSelectors.showModalSuccessRegistration
   );
