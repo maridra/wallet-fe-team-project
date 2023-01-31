@@ -10,6 +10,6 @@ export default function PublicRoute({ redirectTo, children }) {
   return isAuth ? (
     children
   ) : (
-    <Navigate to={location.state ? location.state.from : redirectTo} />
+    <Navigate to={redirectTo} state={{ from: location }} />
   );
 }

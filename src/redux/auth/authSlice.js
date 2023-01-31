@@ -5,6 +5,7 @@ import { persistReducer } from 'redux-persist';
 
 const initialState = {
   user: {},
+  avatarLoading: false,
   token: '',
   loading: false,
   error: null,
@@ -26,6 +27,7 @@ export const authSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
+      // REGISTRATION
       .addCase(authOperations.register.pending, handlePending)
       .addCase(authOperations.register.rejected, handleRejected)
       .addCase(authOperations.register.fulfilled, (state, action) => {
@@ -35,6 +37,7 @@ export const authSlice = createSlice({
         state.isAuth = true;
       })
 
+      // LOGIN
       .addCase(authOperations.logIn.pending, handlePending)
       .addCase(authOperations.logIn.rejected, handleRejected)
       .addCase(authOperations.logIn.fulfilled, (state, action) => {
@@ -44,24 +47,22 @@ export const authSlice = createSlice({
         state.isAuth = true;
       })
 
+      // LOGOUT
       .addCase(authOperations.logOut.pending, state => {
-        state.loading.logOut = true;
+        state.loading = true;
       })
       .addCase(authOperations.logOut.fulfilled, state => {
-        state.user.firstName = initialState.user.firstName;
-        state.user.email = initialState.user.email;
-
-        state.accessToken = initialState.accessToken;
-        state.refreshToken = initialState.refreshToken;
-        state.sid = initialState.sid;
-
-        state.isLoggedIn = initialState.isLoggedIn;
-        state.loading.logOut = false;
+        state.user = initialState.user;
+        state.token = initialState.token;
+        state.loading = initialState.loading;
+        state.error = initialState.error;
+        state.isAuth = initialState.isAuth;
       })
       .addCase(authOperations.logOut.rejected, state => {
         state.loading.logOut = false;
       })
 
+      // REFRESH
       .addCase(authOperations.refresh.pending, state => {
         state.isAuth = false;
       })
@@ -71,28 +72,51 @@ export const authSlice = createSlice({
       .addCase(authOperations.refresh.rejected, state => {
         state.isAuth = false;
       })
-      .addCase(authOperations.addCategory.pending, state => {
-        state.loading = true;
-      })
-      .addCase(authOperations.addCategory.rejected, state => {
-        state.loading = false;
-      })
+
+      // ADD CATEGORY
+      .addCase(authOperations.addCategory.pending, handlePending)
+      .addCase(authOperations.addCategory.rejected, handleRejected)
       .addCase(authOperations.addCategory.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.user.categories = payload;
       })
 
-      .addCase(authOperations.removeCategory.pending, state => {
-        state.loading = true;
-      })
-      .addCase(authOperations.removeCategory.rejected, state => {
-        state.loading = false;
-      })
+      // REMOVE CATEGORY
+      .addCase(authOperations.removeCategory.pending, handlePending)
+      .addCase(authOperations.removeCategory.rejected, handleRejected)
       .addCase(
         authOperations.removeCategory.fulfilled,
         (state, { payload }) => {
           state.loading = false;
           state.user.categories = payload;
+        }
+      )
+
+      // UPDATE AVATAR
+      .addCase(authOperations.updateAvatar.pending, state => {
+        state.avatarLoading = true;
+        state.error = null;
+      })
+      .addCase(authOperations.updateAvatar.rejected, (state, { payload }) => {
+        state.avatarLoading = false;
+        state.error = payload;
+      })
+      .addCase(authOperations.updateAvatar.fulfilled, (state, { payload }) => {
+        state.avatarLoading = false;
+        state.user.avatarURL = payload;
+      })
+
+      // UPDATE AVATAR
+      .addCase(authOperations.updateUserName.pending, state => {
+        state.error = null;
+      })
+      .addCase(authOperations.updateUserName.rejected, (state, { payload }) => {
+        state.error = payload;
+      })
+      .addCase(
+        authOperations.updateUserName.fulfilled,
+        (state, { payload }) => {
+          state.user.firstName = payload;
         }
       );
   },

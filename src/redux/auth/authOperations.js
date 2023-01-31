@@ -28,7 +28,7 @@ const register = createAsyncThunk(
 
 const logIn = createAsyncThunk(
   'auth/login',
-  async (credentials, { rejectWithValue, getState }) => {
+  async (credentials, { rejectWithValue }) => {
     const { email, password } = credentials;
     try {
       const { data } = await axiosBaseUrl.post('/auth/login', {
@@ -83,6 +83,31 @@ const refresh = createAsyncThunk(
   }
 );
 
+const verifyEmail = createAsyncThunk(
+  'auth/verify/:verificationToken',
+  async (credentials, { rejectWithValue }) => {
+    const { verificationToken } = credentials;
+    try {
+      const { data } = await axiosBaseUrl.get(
+        `/auth/verify/${verificationToken}`,
+        verificationToken
+      );
+      return data;
+    } catch (error) {
+      const { data, status } = error.response;
+      if (status === 401) {
+        Notify.failure(data.message);
+      }
+      if (status === 500) {
+        Notify.failure(
+          'Oops, something wrong on our server :( Please, try again'
+        );
+      }
+      return rejectWithValue({ data, status });
+    }
+  }
+);
+
 const addCategory = createAsyncThunk(
   'auth/addCategory',
   async (credentials, { _, getState }) => {
@@ -96,7 +121,7 @@ const addCategory = createAsyncThunk(
       Notify.success('Category succesfully added');
       return newCategories;
     } catch (error) {
-      Notify.failure('It seems like this category is already exist');
+      Notify.failure('It seems like this category already exist');
       return getState().auth.user.categories;
     }
   }
@@ -119,26 +144,38 @@ const removeCategory = createAsyncThunk(
   }
 );
 
-const verifyEmail = createAsyncThunk(
-  'auth/verify/:verificationToken', async(credentials, { rejectWithValue }) => {
-    const { verificationToken } = credentials;
+const updateAvatar = createAsyncThunk(
+  'auth/updateAvatar',
+  async (data, thunkAPI) => {
     try {
-      const { data } = await axiosBaseUrl.get(`/auth/verify/${verificationToken}`, verificationToken);
-      return data;
-    } catch (error) {
-      const { data, status } = error.response;
-      if (status === 401) {
-        Notify.failure(data.message);
-      }
-      if (status === 500) {
-        Notify.failure(
-          'Oops, something wrong on our server :( Please, try again'
-        );
-      }
-      return rejectWithValue({ data, status });
-    }
-  })
+      const response = await axiosBaseUrl.patch('/users/avatars', data, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
 
+      return response.data.data.avatarURL;
+    } catch (e) {
+      Notify.failure(e.message);
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+const updateUserName = createAsyncThunk(
+  'auth/updateUserName',
+  async (data, thunkAPI) => {
+    try {
+      const response = await axiosBaseUrl.patch('/users/name', data);
+
+      Notify.success('User name succesfully updated');
+      return response.data.data.user.firstName;
+    } catch (e) {
+      Notify.failure(e.message);
+      return thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
 
 const authOperations = {
   register,
@@ -147,7 +184,9 @@ const authOperations = {
   refresh,
   addCategory,
   removeCategory,
-  verifyEmail
+  updateAvatar,
+  verifyEmail,
+  updateUserName,
 };
 
 export default authOperations;
