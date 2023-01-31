@@ -10,53 +10,70 @@ import scss from './ModalAddTransactionForm.module.scss';
 import ModalAddTransactionFormMenu from './ModalAddTransactionFormMenu/ModalAddTransactionFormMenu';
 
 const schema = yup.object().shape({
-  sum: yup.number().min(0.01).max(2500000).required(),
+  amount: yup.number().min(0.01).max(2500000).required(),
 });
 const initialValues = {
-  sum: '',
+  amount: '',
   comment: '',
 };
 
 const ModalAddTransactionForm = prop => {
   const { checkboxStatus, onClick } = prop;
+  const [bekDate, setBekDate] = useState('');
   const [date, setDate] = useState(getDate());
   const [open, setOpen] = useState(false);
+  const [categoryId, setCategoryId] = useState('');
   const [categoryValue, setCategoryValue] = useState('Other expenses');
 
-  const createDate = date => {
-    setDate(getDate(date));
+  const createDate = ({ _d }) => {
+    const time = new Date();
+    console.log(time);
+    console.log(time.toISOString());
+    setDate(getDate(_d));
   };
 
   const handleOpen = () => {
     setOpen(!open);
   };
 
-  const addValueCategory = e => {
-    setCategoryValue(e.currentTarget.textContent);
+  const addValueCategory = (_id, name) => {
+    console.log(_id, name);
+    setCategoryId(_id);
+    setCategoryValue(name);
   };
 
   const handleSubmit = (values, { resetForm }) => {
-    const { sum, comment } = values;
+    const { amount, comment } = values;
 
     if (checkboxStatus) {
       if (comment === '') {
-        const formValues = { sum, date };
+        const formValues = { transactionType: checkboxStatus, amount, date };
         console.log(formValues);
         onClick();
         return;
       }
-      const formValues = { ...values, date };
+      const formValues = { transactionType: checkboxStatus, ...values, date };
       console.log(formValues);
       onClick();
       return;
     }
     if (comment === '') {
-      const formValues = { category: categoryValue, sum, date };
+      const formValues = {
+        transactionType: checkboxStatus,
+        category: categoryId,
+        amount,
+        date,
+      };
       console.log(formValues);
       onClick();
       return;
     }
-    const formValues = { category: categoryValue, ...values, date };
+    const formValues = {
+      transactionType: checkboxStatus,
+      category: categoryId,
+      ...values,
+      date,
+    };
     console.log(formValues);
     onClick();
     return;
@@ -117,7 +134,7 @@ const ModalAddTransactionForm = prop => {
               </button>
               {open && (
                 <ModalAddTransactionFormMenu
-                  onClick={addValueCategory}
+                  handleCategory={addValueCategory}
                 ></ModalAddTransactionFormMenu>
               )}
             </label>
@@ -127,12 +144,12 @@ const ModalAddTransactionForm = prop => {
               className={scss.addFormInputSum}
               type="text"
               placeholder="0.00"
-              name="sum"
+              name="amount"
               autoComplete="off"
             ></Field>
             <ErrorMessage
               className={scss.errorMessage}
-              name="sum"
+              name="amount"
               component="div"
               render={() => (
                 <div className={scss.error}>
