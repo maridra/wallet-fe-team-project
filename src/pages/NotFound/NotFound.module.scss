@@ -7,8 +7,8 @@
   background-color: var(--background-grey-color);
 
   @include mq(tab) {
-    background-image: url('../../image/Ellipse\ 1.png'),
-      url('../../image/Ellipse\ 2.png');
+    background-image: url('../../assets/Images/login/Ellipse\ 1.png'),
+      url('../../assets/Images/login/Ellipse\ 2.png');
     background-repeat: no-repeat;
     background-position: left bottom, right top;
   }
@@ -34,8 +34,12 @@
 
 .img {
   width: 300px;
+  height: 150px;
+  object-fit: contain;
+
   @include mq(tab) {
     width: 600px;
+    height: 300px;
   }
 }
 

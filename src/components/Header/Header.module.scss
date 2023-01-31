@@ -6,7 +6,7 @@
 
   width: 100%;
 
-  background: var(--background-header);
+  background: var(--modal-background-color-white);
   z-index: 1000;
 }
 
@@ -92,7 +92,7 @@
     font-family: 'Circe';
     font-weight: 400;
     font-size: 18px;
-    line-height: 1.5;
+    line-height: 1.3;
     color: var(--grey-color-icon);
 
     @include mq(tab) {
@@ -133,7 +133,7 @@
     font-family: 'Circe';
     font-weight: 400;
     font-size: 18px;
-    line-height: 1.5;
+    line-height: 1.3;
     margin-left: 8px;
     color: var(--grey-color-icon);
     transition: color 250ms ease;

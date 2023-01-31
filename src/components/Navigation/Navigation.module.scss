@@ -1,0 +1,161 @@
+@import '../../assets/styles/index.scss';
+
+.nav {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include mq(tab) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.nav__link {
+  fill: var(--secondary-accent-color-blue);
+  background-color: transparent;
+  transition: fill 250ms linear;
+  transition: color 250ms linear;
+
+  @include mq(tab) {
+    display: flex;
+    align-items: center;
+  }
+
+  &:not(:last-child) {
+    margin-right: 32px;
+
+    @include mq(tab) {
+      margin-right: 0;
+      margin-bottom: 12px;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    color: var(--main-accent-color-blue);
+  }
+
+  &:hover,
+  &:focus .icon__wrapper {
+    fill: var(--main-accent-color-blue);
+  }
+
+  & .text {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.5;
+    margin-left: 20px;
+    transition: font-weight 250ms linear;
+  }
+
+  & .icon__wrapper {
+    width: 38px;
+    height: 38px;
+    background-color: transparent;
+    transition: all 250ms linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include mq(tab) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.active__link {
+  fill: var(--main-accent-color-blue);
+  transition: color 250ms linear;
+  background-color: transparent;
+
+  @include mq(tab) {
+    display: flex;
+    align-items: center;
+  }
+
+  & .icon__wrapper {
+    width: 38px;
+    height: 38px;
+    background-color: transparent;
+    transition: all 250ms linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));
+
+    @include mq(tab) {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  &:hover,
+  &:active {
+    color: var(--main-accent-color-blue);
+  }
+
+  &:not(:last-child) {
+    margin-right: 32px;
+
+    @include mq(tab) {
+      margin-right: 0;
+      margin-bottom: 12px;
+    }
+  }
+
+  & .text {
+    font-family: Poppins;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.5;
+    margin-left: 20px;
+    transition: font-weight 250ms linear;
+  }
+}
+
+.svg {
+  background-color: #ffffff;
+  width: 38px;
+  height: 38px;
+  border-radius: 7px;
+  filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));
+
+  @include mq(tab) {
+    width: 24px;
+    height: 24px;
+  }
+}
+.fonts {
+  position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
+}
+.fonts1 {
+  font-family: Poppins;
+  font-weight: 500;
+  font-size: 0;
+  visibility: hidden;
+}
+.fonts2 {
+  font-family: Poppins;
+  font-weight: 600;
+  font-size: 0;
+  visibility: hidden;
+}
+.fonts3 {
+  font-family: Poppins;
+  font-weight: 700;
+  font-size: 0;
+  visibility: hidden;
+}

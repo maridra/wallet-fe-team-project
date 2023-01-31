@@ -7,9 +7,9 @@ import { authSelectors } from '../../redux/auth/authSelectors';
 
 import { Link } from 'react-router-dom';
 
-import s from '../Avatar/Avatar.module.scss';
+import s from '../HeaderAvatar/HeaderAvatar.module.scss';
 
-export default function Avatar() {
+export default function HeaderAvatar() {
   const baseUserAvatar =
     'https://res.cloudinary.com/dpvkleqce/image/upload/v1674652226/wallet_leopards/zn7ur1gmwynrbmnqgzkj.png';
 

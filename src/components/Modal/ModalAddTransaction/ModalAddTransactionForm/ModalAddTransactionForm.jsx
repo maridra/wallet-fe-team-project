@@ -16,11 +16,6 @@ const initialValues = {
   sum: '',
   comment: '',
 };
-// const initialValuesTwo = {
-//   category: '',
-//   sum: '',
-//   comment: '',
-// };
 
 const ModalAddTransactionForm = prop => {
   const { checkboxStatus, onClick } = prop;
@@ -141,7 +136,7 @@ const ModalAddTransactionForm = prop => {
               component="div"
               render={() => (
                 <div className={scss.error}>
-                  Please enter a number between 0.01 to 2500000
+                  Please, enter an amount from 0.01 to 2500000
                 </div>
               )}
             ></ErrorMessage>

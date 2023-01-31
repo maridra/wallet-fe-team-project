@@ -1,0 +1,49 @@
+@import '../../assets/styles/index.scss';
+
+.pageWrapper {
+  padding: 15px 0;
+  @include mq(tab) {
+    padding: 32px 0;
+  }
+}
+
+.financeWrapper {
+  @include mq(tab) {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  @include mq(desk) {
+    display: flex;
+    flex-direction: row;
+    gap: 138px;
+  }
+}
+
+.financeWrapper__dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  margin-top: 15px;
+
+  @include mq(tab) {
+    margin-top: 0px;
+    flex-direction: row;
+  }
+
+  @include mq(desk) {
+    flex-direction: column;
+  }
+}
+
+.financeWrapper__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  @include mq(tab) {
+    gap: 32px;
+  }
+}
