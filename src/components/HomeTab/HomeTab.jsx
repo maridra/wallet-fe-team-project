@@ -4,7 +4,7 @@ import { updateTransactions } from 'redux/finance/financeOperation';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { financeSelectors } from 'redux/finance/financeSelectors';
-import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAddTransactions';
+
 import { useSelector } from 'react-redux';
 
 const HomeTab = () => {
@@ -81,7 +81,6 @@ const HomeTab = () => {
           ))}
         </tbody>
       </table>
-      <ButtonAddTransactions />
     </>
   );
 };

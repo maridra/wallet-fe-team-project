@@ -4,7 +4,7 @@ import financeOperations from 'redux/finance/financeOperation';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { financeSelectors } from 'redux/finance/financeSelectors';
-import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAddTransactions';
+
 import { useSelector } from 'react-redux';
 
 const HomeTabMobile = () => {
@@ -93,7 +93,6 @@ const HomeTabMobile = () => {
           </li>
         ))}
       </ul>
-      <ButtonAddTransactions />
     </>
   );
 };
