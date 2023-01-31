@@ -12,6 +12,8 @@ const initialState = {
   subscription: '',
   totalBalance: '',
   avatarLoading: false,
+  loading: false,
+  error: null,
 };
 
 const handlePending = state => {

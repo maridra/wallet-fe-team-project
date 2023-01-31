@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { IconContext } from 'react-icons';
 import { AiOutlineSetting } from 'react-icons/ai';
 
-import { authSelectors } from '../../redux/auth/authSelectors';
+import { userSelectors } from 'redux/user/userSelectors';
 
 import { Link } from 'react-router-dom';
 
@@ -13,8 +13,7 @@ export default function HeaderAvatar() {
   const baseUserAvatar =
     'https://res.cloudinary.com/dpvkleqce/image/upload/v1674652226/wallet_leopards/zn7ur1gmwynrbmnqgzkj.png';
 
-  const avatarURL =
-    useSelector(authSelectors.userSelector).avatarURL ?? baseUserAvatar;
+  const avatarURL = useSelector(userSelectors.getAvatarURL) ?? baseUserAvatar;
 
   return (
     <div className={s.user_avatar}>
