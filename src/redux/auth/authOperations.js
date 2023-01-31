@@ -112,6 +112,18 @@ const verifyEmail = createAsyncThunk(
   }
 );
 
+const resendVerification = createAsyncThunk(
+  'users/verify', async (credentials, { rejectWithValue }) => {
+  try {
+    const {data} = await axiosBaseUrl.post('/users/verify', credentials);
+    return data;
+  } catch (error) {
+    Notify.failure(error.message);
+    return rejectWithValue(error.message);
+  }
+  }
+)
+
 /* const addCategory = createAsyncThunk(
   'auth/addCategory',
   async (credentials, { _, getState }) => {
@@ -173,6 +185,7 @@ const authOperations = {
   refresh,
   /*   updateAvatar, */
   verifyEmail,
+  resendVerification
 };
 
 export default authOperations;

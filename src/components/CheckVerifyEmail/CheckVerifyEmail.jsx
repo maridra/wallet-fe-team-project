@@ -5,6 +5,9 @@ import { Link, useParams } from "react-router-dom";
 import authOperations from "redux/auth/authOperations";
 import { authSelectors } from "redux/auth/authSelectors";
 import s from "../CheckVerifyEmail/CheckVerifyEmail.module.scss";
+import {ReactComponent as SuccessIcon} from "../../assets/Images/login/success.svg"
+import {ReactComponent as ErrorIcon} from "../../assets/Images/login/error.svg"
+
 
 const CheckVerifyEmail = () => {
   const [verified, setVerified] = useState(false);
@@ -29,17 +32,23 @@ const CheckVerifyEmail = () => {
 
 
   return (
-    <div>
-      {verified ? (
-        <div className={s.containerCheck}>
-          <h1 className={s.textMsg}>Email verified successfully</h1>
-          <Link to="/login">
-            <button className={s.btn}>LOGIN</button>
-          </Link>
+    <div className={s.back}>
+      <div className={s.blur}>
+        <div className={s.container}>
+          {verified ?
+            <div className={s.containerCheck}>
+              <SuccessIcon className={s.successIcon} />
+              <div className={s.wrapper}>
+                <h1 className={s.textMsg}>Email verified successfully</h1>
+                <Link to="/login" className={s.link}>LOGIN</Link>
+              </div>
+            </div>
+            : <div className={s.containerCheck}>
+              <ErrorIcon className={s.errorIcon}/>
+              <h1 className={s.textMsg}>404 Not Found</h1>
+            </div>}
         </div>
-      ) : (
-        <h1 className={s.textMsg}>404 Not Found</h1>
-      )}
+      </div>
     </div>
   )
 }
