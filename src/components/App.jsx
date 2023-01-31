@@ -3,8 +3,6 @@ import StatisticPage from 'pages/StatisticPage/StatisticPage.js';
 import { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Header, Loader } from '../components';
-import CreatePassword from './CreatePassword/CreatePassword';
-import ForgotPassword from './ForgotPassword/ForgotPassword';
 
 // import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
@@ -14,6 +12,12 @@ const SettingsPage = lazy(() => import('../pages/SettingsPage/SettingsPage'));
 const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+const ForgotPasswordPage = lazy(() =>
+  import('../pages/ForgotPassword/ForgotPassword')
+);
+const CreatePasswordPage = lazy(() =>
+  import('../pages/CreatePassword/CreatePassword')
+);
 
 export const App = () => {
   return (
@@ -47,13 +51,13 @@ export const App = () => {
           <Route
             path="/forgot-password"
             element={
-              <PublicRoute redirectTo="/" children={<ForgotPassword />} />
+              <PublicRoute redirectTo="/" children={<ForgotPasswordPage />} />
             }
           />
           <Route
             path="/create-password"
             element={
-              <PublicRoute redirectTo="/" children={<CreatePassword />} />
+              <PublicRoute redirectTo="/" children={<CreatePasswordPage />} />
             }
           />
         </Routes>

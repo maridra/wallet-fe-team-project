@@ -1,20 +1,22 @@
-import s from './ForgotPassword.module.scss';
-import sprite from '../../image/symbol-defs.svg';
-import { Field, Form, Formik } from 'formik';
-import * as Yup from 'yup';
 import { useState } from 'react';
-import classNames from 'classnames';
-import { ReactComponent as Email } from '../../image/email.svg';
-import { Notify } from 'notiflix';
 import { Link } from 'react-router-dom';
+import { Field, Form, Formik } from 'formik';
+import { Notify } from 'notiflix';
+import classNames from 'classnames';
+import * as Yup from 'yup';
+import axios from 'axios';
+
+import { ReactComponent as Email } from '../../image/email.svg';
+import sprite from '../../image/symbol-defs.svg';
+import s from './ForgotPassword.module.scss';
 
 const ForgotPassword = () => {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState(null);
+
   const initialValues = {
     email: '',
   };
-
-  const [email, setEmail] = useState('');
-  const [successResponse, setSuccessResponse] = useState('');
 
   const SignUpSchema = Yup.object().shape({
     email: Yup.string()
@@ -30,27 +32,19 @@ const ForgotPassword = () => {
 
   const onSubmit = e => {
     e.preventDefault();
-    fetch('http://localhost:3000/api/auth/forgot-password', {
-      method: 'POST',
-      crossDomain: true,
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({ email }),
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log('data', data);
-        if (data.status === 'success') {
-          Notify.success(data.message);
-          setSuccessResponse(data.status);
-          return;
-        }
-        Notify.failure(data.message);
-      });
+    if (!email.length) {
+      Notify.warning('E-mail is require!');
+      return;
+    }
+    axios
+      .post('http://localhost:3000/api/auth/forgot-password', {
+        email,
+      })
+      .then(res => setStatus(res.status))
+      .catch(error => Notify.failure(`User with email: ${email}, not found!`));
   };
+
+  console.log('status :>> ', status);
 
   return (
     <div className={s.formContainer}>
@@ -59,7 +53,7 @@ const ForgotPassword = () => {
           <use href={`${sprite}#icon-logo`}></use>
         </svg>
       </div>
-      {successResponse === 'success' ? (
+      {status === 201 ? (
         <div>
           <h1 className={s.title}>
             Check inbox to complete the password reset!
@@ -99,7 +93,7 @@ const ForgotPassword = () => {
                 </label>
 
                 <button type="submit" className={s.loginBtn}>
-                  Send
+                  SEND
                 </button>
               </Form>
             )}
@@ -107,7 +101,7 @@ const ForgotPassword = () => {
         </div>
       )}
       <Link to="/login" className={s.BackBtn}>
-        Back to login page
+        LOG IN
       </Link>
     </div>
   );

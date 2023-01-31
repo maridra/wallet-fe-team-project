@@ -4,11 +4,12 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
 const initialState = {
-  user: { },
+  user: {},
   token: '',
   loading: false,
   error: null,
   isAuth: false,
+  id: null,
 };
 
 const handlePending = state => {
@@ -43,7 +44,7 @@ export const authSlice = createSlice({
         state.loading = false;
         state.isAuth = true;
       })
-      
+
       .addCase(authOperations.logOut.pending, state => {
         state.loading.logOut = true;
       })
@@ -95,7 +96,7 @@ export const authSlice = createSlice({
 const persistConfig = {
   key: 'leopards/wallet',
   storage,
-  whitelist: ['token', 'user']
+  whitelist: ['token', 'user'],
 };
 
 export const persistedAuthReducer = persistReducer(

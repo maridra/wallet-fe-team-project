@@ -1,56 +1,45 @@
+import { useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
+import classNames from 'classnames';
+import axios from 'axios';
 import * as Yup from 'yup';
-import s from '../CreatePassword/CreatePassword.module.scss';
-import sprite from '../../image/symbol-defs.svg';
-import { ReactComponent as PasswordLock } from '../../image/password_lock.svg';
 
 import PasswordStrength from '../RegisterForm/PasswordStrength';
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
 
-import classNames from 'classnames';
-// import { Notify } from 'notiflix';
-import axios from 'axios';
+import { ReactComponent as PasswordLock } from '../../image/password_lock.svg';
+import sprite from '../../image/symbol-defs.svg';
+import s from '../CreatePassword/CreatePassword.module.scss';
+import { Notify } from 'notiflix';
 
 const CreatePassword = () => {
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [status, setStatus] = useState(null);
+  const [searchParams] = useSearchParams();
+
+  const id = searchParams.get('id');
+  const token = searchParams.get('token');
+
   const initialValues = {
     password: '',
     passwordConfirm: '',
   };
 
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-
   const onSubmit = e => {
     e.preventDefault();
-
-    const userData = () => {
-      const data = axios
-        .get(`http://localhost:3000/api/auth/reset-password/`)
-        .then(data => console.log('data', data));
-    };
-
-    userData();
-    // fetch(`http://localhost:3000/api/auth/reset-password/`, {
-    //   method: 'Get',
-    //   crossDomain: true,
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     Accept: 'application/json',
-    //     'Access-Control-Allow-Origin': '*',
-    //   },
-    //   body: JSON.stringify({ password }),
-    // })
-    //   .then(res => res.json())
-    //   .then(data => {
-    //     console.log('data', data);
-    //     if (data.status === 'success') {
-    //       Notify.success(data.message);
-    //       //   setSuccessResponse(data.status);
-    //       return;
-    //     }
-    //     Notify.failure(data.message);
-    //   });
+    if (password.length < 6) {
+      return Notify.warning('Password is require');
+    }
+    if (confirmPassword.length < 6) {
+      return Notify.warning('Confirm Password is require');
+    }
+    axios
+      .post(`http://localhost:3000/api/auth/reset-password/${id}/${token}`, {
+        password,
+      })
+      .then(res => setStatus(res.status))
+      .catch(error => Notify.failure(error.message));
   };
 
   const SignUpSchema = Yup.object().shape({
@@ -79,70 +68,79 @@ const CreatePassword = () => {
           <use href={`${sprite}#icon-logo`}></use>
         </svg>
       </div>
-      <Formik initialValues={initialValues} validationSchema={SignUpSchema}>
-        {({ errors, touched }) => (
-          <Form className={s.form} onSubmit={onSubmit}>
-            <label className={s.label}>
-              <Field
-                type="password"
-                name="password"
-                placeholder="Password"
-                className={classNames(s.input, {
-                  [s.errorInput]: errors.password && touched.password,
-                  [s.validInput]: !errors.password && touched.password,
-                })}
-                onInput={e => setPassword(e.target.value)}
-                value={password}
-              />
-              <PasswordLock className={s.inputIcon} />
-              {!errors.password && touched.password && (
-                <PasswordLock className={s.validInputIcon} />
-              )}
-              {errors.password && touched.password && (
-                <PasswordLock className={s.errorInputIcon} />
-              )}
-              {errors.password && touched.password && (
-                <div className={s.errorField}>{errors.password}</div>
-              )}
-            </label>
-            <label className={s.label}>
-              <Field
-                type="password"
-                name="passwordConfirm"
-                placeholder="Confirm password"
-                className={classNames(s.input, {
-                  [s.errorInput]:
-                    errors.passwordConfirm && touched.passwordConfirm,
-                  [s.validInput]:
-                    !errors.passwordConfirm && touched.passwordConfirm,
-                })}
-                value={confirmPassword}
-                onInput={e => setConfirmPassword(e.target.value)}
-              />
-              <PasswordLock className={s.inputIcon} />
-              {!errors.passwordConfirm && touched.passwordConfirm && (
-                <PasswordLock className={s.validInputIcon} />
-              )}
-              {errors.passwordConfirm && touched.passwordConfirm && (
-                <PasswordLock className={s.errorInputIcon} />
-              )}
-              {errors.passwordConfirm && touched.passwordConfirm && (
-                <div className={s.errorField}>{errors.passwordConfirm}</div>
-              )}
-              <PasswordStrength
-                password={password}
-                className={s.passwordStrength}
-              />
-            </label>
-            <button type="submit" className={s.registerBtn}>
-              Create password
-            </button>
-            <Link to="/login" className={s.loginBtn}>
-              Back to Login
-            </Link>
-          </Form>
-        )}
-      </Formik>
+      {status === 201 ? (
+        <div>
+          <h1 className={s.title}>New password created!</h1>
+          <Link to="/login" className={s.registerBtn}>
+            LOG IN
+          </Link>
+        </div>
+      ) : (
+        <Formik initialValues={initialValues} validationSchema={SignUpSchema}>
+          {({ errors, touched }) => (
+            <Form className={s.form} onSubmit={onSubmit}>
+              <label className={s.label}>
+                <Field
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  className={classNames(s.input, {
+                    [s.errorInput]: errors.password && touched.password,
+                    [s.validInput]: !errors.password && touched.password,
+                  })}
+                  onInput={e => setPassword(e.target.value)}
+                  value={password}
+                />
+                <PasswordLock className={s.inputIcon} />
+                {!errors.password && touched.password && (
+                  <PasswordLock className={s.validInputIcon} />
+                )}
+                {errors.password && touched.password && (
+                  <PasswordLock className={s.errorInputIcon} />
+                )}
+                {errors.password && touched.password && (
+                  <div className={s.errorField}>{errors.password}</div>
+                )}
+              </label>
+              <label className={s.label}>
+                <Field
+                  type="password"
+                  name="passwordConfirm"
+                  placeholder="Confirm password"
+                  className={classNames(s.input, {
+                    [s.errorInput]:
+                      errors.passwordConfirm && touched.passwordConfirm,
+                    [s.validInput]:
+                      !errors.passwordConfirm && touched.passwordConfirm,
+                  })}
+                  value={confirmPassword}
+                  onInput={e => setConfirmPassword(e.target.value)}
+                />
+                <PasswordLock className={s.inputIcon} />
+                {!errors.passwordConfirm && touched.passwordConfirm && (
+                  <PasswordLock className={s.validInputIcon} />
+                )}
+                {errors.passwordConfirm && touched.passwordConfirm && (
+                  <PasswordLock className={s.errorInputIcon} />
+                )}
+                {errors.passwordConfirm && touched.passwordConfirm && (
+                  <div className={s.errorField}>{errors.passwordConfirm}</div>
+                )}
+                <PasswordStrength
+                  password={password}
+                  className={s.passwordStrength}
+                />
+              </label>
+              <button type="submit" className={s.registerBtn}>
+                CREATE PASSWORD
+              </button>
+              <Link to="/login" className={s.loginBtn}>
+                LOG IN
+              </Link>
+            </Form>
+          )}
+        </Formik>
+      )}
     </div>
   );
 };
