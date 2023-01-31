@@ -1,10 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosBaseUrl } from '../tokenSettingsAxios';
 import { Notify } from 'notiflix';
+import hardcoreLogout from 'redux/utils/hardcoreLogout';
 
 export const currentUser = createAsyncThunk(
   'user/current',
-  async (_, thunkAPI) => {
+  async (_, { rejectWithValue, dispatch }) => {
     /*  const token = thunkAPI.getState().auth.token;
 
     if (!token) {
@@ -14,15 +15,16 @@ export const currentUser = createAsyncThunk(
     try {
       const { data } = await axiosBaseUrl.get('users/current');
       return data.data.user;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
+    } catch (e) {
+      hardcoreLogout(e, dispatch);
+      return rejectWithValue(e.message);
     }
   }
 );
 
 const removeCategory = createAsyncThunk(
   'user/removeCategory',
-  async (credentials, { _, getState }) => {
+  async (credentials, { _, getState, dispatch }) => {
     const id = credentials;
     try {
       await axiosBaseUrl.delete(`/categories/${id}`);
@@ -30,7 +32,8 @@ const removeCategory = createAsyncThunk(
       const newCategories = [...oldCategories].filter(item => id !== item._id);
       Notify.success('Category succesfully deleted');
       return newCategories;
-    } catch (error) {
+    } catch (e) {
+      hardcoreLogout(e, dispatch);
       Notify.failure('Opps, something went wrong');
       return getState().user.categories;
     }
@@ -39,7 +42,7 @@ const removeCategory = createAsyncThunk(
 
 const addCategory = createAsyncThunk(
   'user/addCategory',
-  async (credentials, { _, getState }) => {
+  async (credentials, { _, getState, dispatch }) => {
     const newCategory = credentials;
     try {
       const data = await axiosBaseUrl.post('/categories', {
@@ -49,7 +52,8 @@ const addCategory = createAsyncThunk(
       const newCategories = [...oldCategories, data.data.data];
       Notify.success('Category succesfully added');
       return newCategories;
-    } catch (error) {
+    } catch (e) {
+      hardcoreLogout(e, dispatch);
       Notify.failure('It seems like this category already exist');
       return getState().user.categories;
     }
@@ -58,22 +62,23 @@ const addCategory = createAsyncThunk(
 
 const updateUserName = createAsyncThunk(
   'user/updateUserName',
-  async (data, thunkAPI) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const response = await axiosBaseUrl.patch('/users/name', data);
 
       Notify.success('User name succesfully updated');
       return response.data.data.user.firstName;
     } catch (e) {
+      hardcoreLogout(e, dispatch);
       Notify.failure(e.message);
-      return thunkAPI.rejectWithValue(e.message);
+      return rejectWithValue(e.message);
     }
   }
 );
 
 const updateAvatar = createAsyncThunk(
   'user/updateAvatar',
-  async (data, thunkAPI) => {
+  async (data, { rejectWithValue, dispatch }) => {
     try {
       const response = await axiosBaseUrl.patch('/users/avatars', data, {
         headers: {
@@ -83,8 +88,9 @@ const updateAvatar = createAsyncThunk(
 
       return response.data.data.avatarURL;
     } catch (e) {
+      hardcoreLogout(e, dispatch);
       Notify.failure(e.message);
-      return thunkAPI.rejectWithValue(e.message);
+      return rejectWithValue(e.message);
     }
   }
 );

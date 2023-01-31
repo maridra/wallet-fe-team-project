@@ -23,6 +23,14 @@ const handleRejected = (state, action) => {
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
+  reducers: {
+    Unauthorized: {
+      reducer(state) {
+        state.isAuth = false;
+        state.token = null;
+      },
+    },
+  },
   extraReducers: builder => {
     builder
       // REGISTRATION
@@ -32,7 +40,6 @@ export const authSlice = createSlice({
         state.user = action.payload.data.user;
         state.token = action.payload.data.user.verificationToken;
         state.loading = false;
-        state.isAuth = true;
       })
 
       // LOGIN
@@ -46,18 +53,14 @@ export const authSlice = createSlice({
       })
 
       // LOGOUT
-      .addCase(authOperations.logOut.pending, state => {
-        state.loading = true;
-      })
+      .addCase(authOperations.logOut.pending, handlePending)
+      .addCase(authOperations.logOut.rejected, handleRejected)
       .addCase(authOperations.logOut.fulfilled, state => {
         state.user = initialState.user;
         state.token = initialState.token;
         state.loading = initialState.loading;
         state.error = initialState.error;
         state.isAuth = initialState.isAuth;
-      })
-      .addCase(authOperations.logOut.rejected, state => {
-        state.loading.logOut = false;
       })
 
       // REFRESH
@@ -125,6 +128,8 @@ const persistConfig = {
   storage,
   whitelist: ['token', 'user'],
 };
+
+export const { Unauthorized } = authSlice.actions;
 
 export const persistedAuthReducer = persistReducer(
   persistConfig,
