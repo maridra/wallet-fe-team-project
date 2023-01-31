@@ -54,8 +54,7 @@ export const App = () => {
           <Route path="/signUp/verify/:verificationToken" element={<CheckVerifyEmail />}/>
           <Route
             path="/login"
-            element={<PublicRoute redirectTo="/" children={<LoginPage />} />}
-          />
+            element={<LoginPage />} /> 
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>

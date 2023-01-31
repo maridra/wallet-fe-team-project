@@ -38,10 +38,6 @@ const RegisterForm = () => {
 
   const SignUpSchema = Yup.object().shape({
     email: Yup.string()
-      .matches(
-        /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/,
-        'Must be a valid email!'
-      )
       .email('Must be a valid email!')
       .min(10)
       .max(63)
@@ -136,7 +132,7 @@ const RegisterForm = () => {
               {!errors.passwordConfirm && touched.passwordConfirm && <PasswordLock className={s.validInputIcon} />}
               {errors.passwordConfirm && touched.passwordConfirm &&<PasswordLock className={s.errorInputIcon} />}
               {errors.passwordConfirm && touched.passwordConfirm &&
-                <div className={s.errorField}>{errors.passwordConfirm}
+                <div className={s.errorFieldConfirmPassword}>{errors.passwordConfirm}
                 </div>}
               <PasswordStrength password={values.password} className={s.passwordStrength} />
           </label>
@@ -163,10 +159,10 @@ const RegisterForm = () => {
               )}
             </label>
             <button type="submit" className={s.registerBtn}>
-              REGISTER
+              register
             </button>
             <Link to="/login" className={s.loginBtn}>
-              LOG IN
+              log in
             </Link>
           </Form>
         )}
