@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
+import { Notify } from 'notiflix';
 import classNames from 'classnames';
-import axios from 'axios';
 import * as Yup from 'yup';
 
 import PasswordStrength from '../RegisterForm/PasswordStrength';
+import passwordAPI from 'API/passwordRecoveryAPI';
 
 import { ReactComponent as PasswordLock } from '../../assets/Images/login/password_lock.svg';
 import sprite from '../../assets/Images/login/symbol-defs.svg';
 import s from '../CreatePassword/CreatePassword.module.scss';
-import { Notify } from 'notiflix';
-import { baseURL } from 'redux/tokenSettingsAxios';
 
 const CreatePassword = () => {
   const [password, setPassword] = useState('');
@@ -37,11 +36,9 @@ const CreatePassword = () => {
       return Notify.warning('Confirm Password is require');
     }
 
-    axios
-      .post(`${baseURL}/auth/reset-password/${id}/${token}`, {
-        password,
-      })
-      .then(res => setStatus(res.status))
+    passwordAPI
+      .createPasswordAPI(id, token, password)
+      .then(res => setStatus(res.code))
       .catch(error => Notify.failure(error.message));
   };
 
@@ -138,7 +135,7 @@ const CreatePassword = () => {
                 CREATE
               </button>
               <Link to="/login" className={s.loginBtn}>
-                BACK
+                BACK TO LOGIN
               </Link>
             </Form>
           )}

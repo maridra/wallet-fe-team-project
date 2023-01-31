@@ -4,12 +4,12 @@ import { Field, Form, Formik } from 'formik';
 import { Notify } from 'notiflix';
 import classNames from 'classnames';
 import * as Yup from 'yup';
-import axios from 'axios';
+
+import passwordAPI from 'API/passwordRecoveryAPI';
 
 import { ReactComponent as Email } from '../../assets/Images/login/email.svg';
 import sprite from '../../assets/Images/login/symbol-defs.svg';
 import s from './ForgotPassword.module.scss';
-import { baseURL } from 'redux/tokenSettingsAxios';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -33,16 +33,18 @@ const ForgotPassword = () => {
 
   const onSubmit = e => {
     e.preventDefault();
+
     if (!email.length) {
       Notify.warning('E-mail is require!');
       return;
     }
-    axios
-      .post(`${baseURL}/auth/forgot-password`, {
-        email,
-      })
-      .then(res => setStatus(res.status))
-      .catch(error => Notify.failure(`User with email: ${email}, not found!`));
+
+    passwordAPI
+      .forgotPasswordAPI(email)
+      .then(res => setStatus(res.code))
+      .catch(error =>
+        Notify.failure(`User with email: ${email}, not found!`, error)
+      );
   };
 
   return (
@@ -100,7 +102,7 @@ const ForgotPassword = () => {
         </div>
       )}
       <Link to="/login" className={s.BackBtn}>
-        LOG IN
+        BACK TO LOG IN
       </Link>
     </div>
   );
