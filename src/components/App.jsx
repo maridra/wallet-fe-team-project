@@ -7,6 +7,7 @@ import { Header, Loader } from '../components';
 
 import { useDispatch } from 'react-redux';
 import authOperations from 'redux/auth/authOperations';
+/* import userOperations from 'redux/user/userOperations'; */
 
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';

@@ -5,8 +5,8 @@ import classNames from 'classnames';
 import { Notify } from 'notiflix';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { authSelectors } from 'redux/auth/authSelectors';
-import authOperations from '../../../redux/auth/authOperations';
+import { userSelectors } from 'redux/user/userSelectors';
+import userOperations from 'redux/user/userOperations';
 
 import { ReactComponent as Name } from '../../../assets/Images/login/name.svg';
 
@@ -14,7 +14,7 @@ import s from './SettingsUserName.module.scss';
 
 export default function SettingsUserName() {
   const dispatch = useDispatch();
-  const firstName = useSelector(authSelectors.getFirstName);
+  const firstName = useSelector(userSelectors.getFirstName);
 
   const initialValues = {
     newFirstName: firstName,
@@ -22,7 +22,7 @@ export default function SettingsUserName() {
 
   const onSubmit = ({ newFirstName }) => {
     if (newFirstName !== firstName) {
-      dispatch(authOperations.updateUserName({ firstName: newFirstName }));
+      dispatch(userOperations.updateUserName({ firstName: newFirstName }));
       return;
     }
     Notify.info('The name remained unchanged!');

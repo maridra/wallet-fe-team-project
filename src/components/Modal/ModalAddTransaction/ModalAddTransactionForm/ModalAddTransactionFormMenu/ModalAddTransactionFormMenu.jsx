@@ -1,12 +1,10 @@
 import { useSelector } from 'react-redux';
-import { authSelectors } from 'redux/auth/authSelectors';
+import { userSelectors } from 'redux/user/userSelectors';
 import scss from './ModalAddTransactionFormMenu.module.scss';
 
 const ModalAddTransactionFormMenu = props => {
   const { handleCategory } = props;
-  const user = useSelector(authSelectors.userSelector);
-
-  const { categories } = user;
+  const categories = useSelector(userSelectors.getCategories);
 
   return (
     <ul className={scss.menu}>

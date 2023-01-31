@@ -4,8 +4,6 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
 const initialState = {
-  user: {},
-  avatarLoading: false,
   token: '',
   loading: false,
   error: null,
@@ -41,7 +39,7 @@ export const authSlice = createSlice({
       .addCase(authOperations.logIn.pending, handlePending)
       .addCase(authOperations.logIn.rejected, handleRejected)
       .addCase(authOperations.logIn.fulfilled, (state, action) => {
-        state.user = action.payload.data.user;
+        /*         state.user = action.payload.data.user; */
         state.token = action.payload.data.token;
         state.loading = false;
         state.isAuth = true;
@@ -71,17 +69,17 @@ export const authSlice = createSlice({
       })
       .addCase(authOperations.refresh.rejected, state => {
         state.isAuth = false;
-      })
+      });
 
-      // ADD CATEGORY
+    /* // ADD CATEGORY
       .addCase(authOperations.addCategory.pending, handlePending)
       .addCase(authOperations.addCategory.rejected, handleRejected)
       .addCase(authOperations.addCategory.fulfilled, (state, { payload }) => {
         state.loading = false;
         state.user.categories = payload;
-      })
+      }) */
 
-      // REMOVE CATEGORY
+    /*       // REMOVE CATEGORY
       .addCase(authOperations.removeCategory.pending, handlePending)
       .addCase(authOperations.removeCategory.rejected, handleRejected)
       .addCase(
@@ -90,9 +88,9 @@ export const authSlice = createSlice({
           state.loading = false;
           state.user.categories = payload;
         }
-      )
+      ) */
 
-      // UPDATE AVATAR
+    /*       // UPDATE AVATAR
       .addCase(authOperations.updateAvatar.pending, state => {
         state.avatarLoading = true;
         state.error = null;
@@ -104,9 +102,9 @@ export const authSlice = createSlice({
       .addCase(authOperations.updateAvatar.fulfilled, (state, { payload }) => {
         state.avatarLoading = false;
         state.user.avatarURL = payload;
-      })
+      }); */
 
-      // UPDATE AVATAR
+    /*  // UPDATE USERNAME
       .addCase(authOperations.updateUserName.pending, state => {
         state.error = null;
       })
@@ -118,7 +116,7 @@ export const authSlice = createSlice({
         (state, { payload }) => {
           state.user.firstName = payload;
         }
-      );
+      ); */
   },
 });
 
