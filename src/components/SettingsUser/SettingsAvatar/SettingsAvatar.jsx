@@ -3,8 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IconContext } from 'react-icons';
 import { FiEdit2 } from 'react-icons/fi';
 
-import { authSelectors } from '../../../redux/auth/authSelectors';
-import authOperations from '../../../redux/auth/authOperations';
+/* import { authSelectors } from '../../../redux/auth/authSelectors';
+import authOperations from '../../../redux/auth/authOperations'; */
+import userOperations from 'redux/user/userOperations';
+import { userSelectors } from 'redux/user/userSelectors';
 
 import s from '../SettingsAvatar/SettingsAvatar.module.scss';
 import { useRef } from 'react';
@@ -19,11 +21,10 @@ export default function SettingsAvatar() {
   // Create base variables
   const refForm = useRef();
   const dispatch = useDispatch();
-  const updateAvatar = authOperations.updateAvatar;
+  const updateAvatar = userOperations.updateAvatar;
 
-  const avatarURL =
-    useSelector(authSelectors.userSelector).avatarURL ?? baseUserAvatar;
-  const isLoading = useSelector(authSelectors.isAvatarLoading);
+  const avatarURL = useSelector(userSelectors.getAvatarURL) ?? baseUserAvatar;
+  const isLoading = useSelector(userSelectors.isAvatarLoading);
 
   // Handle events
   const handleOnChange = () => {
