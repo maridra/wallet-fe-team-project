@@ -6,10 +6,21 @@
   justify-content: center;
   align-items: center;
 
+  @include mq(mob-only) {
+    gap: 36px;
+  }
+
   @include mq(tab) {
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+
+    padding-top: 12px;
+    padding-left: 3px;
+  }
+
+  @include mq(desk) {
+    padding-top: 0px;
   }
 }
 
@@ -22,21 +33,7 @@
   @include mq(tab) {
     display: flex;
     align-items: center;
-  }
-
-  @include mq(desk) {
     gap: 23px;
-  }
-
-  &:not(:last-child) {
-    margin-right: 32px;
-
-    @include mq(tab) {
-      margin-right: 0;
-      .nav__link:first-child {
-        margin-bottom: 20px;
-      }
-    }
   }
 
   &:hover,
@@ -51,9 +48,9 @@
 
   & .text {
     font-family: 'Poppins', sans-serif;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 18px;
-    line-height: 1.5;
+    line-height: 1;
     // margin-left: 20px;
     transition: font-weight 250ms linear;
   }
@@ -68,8 +65,9 @@
     justify-content: center;
 
     @include mq(tab) {
-      width: 24px;
-      height: 24px;
+      width: 18px;
+      height: 18px;
+      border-radius: 2px;
     }
   }
 }
@@ -82,9 +80,6 @@
   @include mq(tab) {
     display: flex;
     align-items: center;
-  }
-
-  @include mq(desk) {
     gap: 23px;
   }
 
@@ -99,11 +94,6 @@
     filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));
 
     @include mq(tab) {
-      width: 24px;
-      height: 24px;
-    }
-
-    @include mq(desk) {
       width: 18px;
       height: 18px;
       border-radius: 2px;
@@ -142,11 +132,6 @@
   filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 0.5));
 
   @include mq(tab) {
-    width: 24px;
-    height: 24px;
-  }
-
-  @include mq(desk) {
     width: 18px;
     height: 18px;
 
