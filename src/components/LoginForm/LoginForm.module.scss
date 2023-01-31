@@ -19,6 +19,18 @@
   display: flex;
   justify-content: center;
   margin-bottom: 60px;
+
+  @include mq(tab){
+    justify-content: flex-start;
+    margin-left: 101px;
+  }
+}
+
+.logoIcon {
+  @include mq(tab) {
+    width: 181px;
+    height: 40px;
+  }
 }
 
 .form {
@@ -31,12 +43,15 @@
   width: 100%;
   margin-bottom: 40px;
   padding-left: 54px;
+  padding-bottom: 8px;
   border: none;
   border-bottom: 1px solid #e0e0e0;
   outline: none;
 
+  font-family: "Circe";
   font-size: 18px;
   line-height: 1.5;
+  
 }
 
 .errorInput {
@@ -84,20 +99,32 @@
 
 .loginBtn {
   @extend %btnGreen;
+  display: block;
   height: 50px;
   margin-bottom: 20px;
+  padding: 13px 98px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 
   @include mq(tab) {
     width: 300px;
     margin-left: auto;
     margin-right: auto;
+    margin-top: 2px;
   }
 }
 
 .registerBtn {
   @extend %btnTransperentBlue;
+  display: block;
   height: 50px;
   border-radius: 20px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  padding-left: 55px;
+  padding-right: 55px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 
   @include mq(tab) {
     width: 300px;

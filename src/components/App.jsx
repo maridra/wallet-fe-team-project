@@ -51,10 +51,15 @@ export const App = () => {
             </Route>
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
-          <Route path="/signUp" element={<RegisterPage />} />
+          <Route
+            path="/signUp"
+            element={<PublicRoute redirectTo="/" children={<RegisterPage />} />}
+          />
           <Route
             path="/signUp/verify/:verificationToken"
-            element={<CheckVerifyEmail />}
+            element={
+              <PublicRoute redirectTo="/" children={<CheckVerifyEmail />} />
+            }
           />
           <Route
             path="/login"

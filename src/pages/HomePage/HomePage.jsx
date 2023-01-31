@@ -10,7 +10,7 @@ import Balance from 'components/Balance/Balance';
 import Currency from 'components/Currency/Currency';
 import HomeTabMobile from 'components/HomeTabMobile/HomeTabMobile';
 import HomeTab from 'components/HomeTab/HomeTab';
-import Navigation from 'components/Navigation/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 
 import s from './HomePage.module.scss';
 

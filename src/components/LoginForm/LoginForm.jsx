@@ -98,10 +98,10 @@ const LoginForm = () => {
               )}
             </label>
             <button type="submit" className={s.loginBtn}>
-              LOG IN
+              log in
             </button>
             <Link to="/SignUp" className={s.registerBtn}>
-              REGISTER
+              register
             </Link>
           </Form>
         )}
