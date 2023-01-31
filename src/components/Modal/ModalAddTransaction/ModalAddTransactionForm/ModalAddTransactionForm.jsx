@@ -110,6 +110,11 @@ const ModalAddTransactionForm = prop => {
     );
   };
 
+  const today = new Date();
+  const disableFutureDt = current => {
+    return current.isBefore(today);
+  };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -169,17 +174,18 @@ const ModalAddTransactionForm = prop => {
               )}
             ></ErrorMessage>
           </label>
-          <label>
+          <label className={scss.dateBox}>
             <Datetime
               timeFormat={false}
               renderInput={renderCalendarInput}
+              isValidDate={disableFutureDt}
               dateFormat="DD.MM.YYYY"
               closeOnSelect={true}
               initialValue={new Date()}
               onChange={createDate}
             />
           </label>
-          <label>
+          <label className={scss.commentBox}>
             <Field
               className={scss.addFormTextarea}
               name="comment"
