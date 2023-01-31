@@ -1,14 +1,52 @@
 import s from './HomeTabMobile.module.scss';
 import React from 'react';
-import financeOperations from 'redux/finance/financeOperation';
+import financeOperation from 'redux/finance/financeOperation';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { financeSelectors } from 'redux/finance/financeSelectors';
+import { axiosBaseUrl } from '../../redux/tokenSettingsAxios';
 
 import { useSelector } from 'react-redux';
 
-const HomeTabMobile = () => {
+const HomeTabMobile = ({
+  currentPage,
+  setCurrentPage,
+  fetching,
+  setFetching,
+}) => {
   const dispatch = useDispatch();
+
+  async function fetchData(currentPage, dispatch) {
+    const { data } = await axiosBaseUrl.get(
+      `transactions?page=${currentPage}&limit=10`
+    );
+    await dispatch(financeOperation.updateTransactionsNew(data));
+    setCurrentPage(prevState => prevState + 1);
+    setFetching(false);
+  }
+
+  useEffect(() => {
+    if (fetching) {
+      fetchData(currentPage, dispatch);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetching]);
+
+  const scrollHandler = e => {
+    if (
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+      100
+    ) {
+      setFetching(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', scrollHandler);
+
+    return () => window.removeEventListener('scroll', scrollHandler);
+  });
 
   const transactions = useSelector(financeSelectors.getTransactions);
   const sortedTransactions = sortingTransaction(transactions);
@@ -50,9 +88,6 @@ const HomeTabMobile = () => {
       return '-';
     }
   }
-  useEffect(() => {
-    dispatch(financeOperations.updateTransactions());
-  }, [dispatch]);
   return (
     <>
       <ul className={s.operationList}>
