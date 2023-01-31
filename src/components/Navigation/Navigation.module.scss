@@ -9,6 +9,7 @@
   @include mq(tab) {
     flex-direction: column;
     align-items: flex-start;
+    gap: 20px;
   }
 }
 
@@ -23,12 +24,18 @@
     align-items: center;
   }
 
+  @include mq(desk) {
+    gap: 23px;
+  }
+
   &:not(:last-child) {
     margin-right: 32px;
 
     @include mq(tab) {
       margin-right: 0;
-      margin-bottom: 12px;
+      .nav__link:first-child {
+        margin-bottom: 20px;
+      }
     }
   }
 
@@ -47,7 +54,7 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 1.5;
-    margin-left: 20px;
+    // margin-left: 20px;
     transition: font-weight 250ms linear;
   }
 
@@ -77,6 +84,10 @@
     align-items: center;
   }
 
+  @include mq(desk) {
+    gap: 23px;
+  }
+
   & .icon__wrapper {
     width: 38px;
     height: 38px;
@@ -91,6 +102,12 @@
       width: 24px;
       height: 24px;
     }
+
+    @include mq(desk) {
+      width: 18px;
+      height: 18px;
+      border-radius: 2px;
+    }
   }
 
   &:hover,
@@ -98,21 +115,21 @@
     color: var(--main-accent-color-blue);
   }
 
-  &:not(:last-child) {
-    margin-right: 32px;
+  // &:not(:last-child) {
+  //   margin-right: 32px;
 
-    @include mq(tab) {
-      margin-right: 0;
-      margin-bottom: 12px;
-    }
-  }
+  //   @include mq(tab) {
+  //     margin-right: 0;
+  //     margin-bottom: 12px;
+  //   }
+  // }
 
   & .text {
     font-family: Poppins;
     font-weight: 700;
     font-size: 18px;
-    line-height: 1.5;
-    margin-left: 20px;
+    line-height: 1;
+    // margin-left: 20px;
     transition: font-weight 250ms linear;
   }
 }
@@ -128,18 +145,25 @@
     width: 24px;
     height: 24px;
   }
+
+  @include mq(desk) {
+    width: 18px;
+    height: 18px;
+
+    border-radius: 2px;
+  }
 }
 .fonts {
   position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    border: 0;
-    padding: 0;
-    white-space: nowrap;
-    clip-path: inset(100%);
-    clip: rect(0 0 0 0);
-    overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
 }
 .fonts1 {
   font-family: Poppins;
