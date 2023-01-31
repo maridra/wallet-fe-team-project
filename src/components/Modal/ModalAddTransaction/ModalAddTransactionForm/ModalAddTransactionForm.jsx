@@ -110,6 +110,11 @@ const ModalAddTransactionForm = prop => {
     );
   };
 
+  const today = new Date();
+  const disableFutureDt = current => {
+    return current.isBefore(today);
+  };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -173,6 +178,7 @@ const ModalAddTransactionForm = prop => {
             <Datetime
               timeFormat={false}
               renderInput={renderCalendarInput}
+              isValidDate={disableFutureDt}
               dateFormat="DD.MM.YYYY"
               closeOnSelect={true}
               initialValue={new Date()}
