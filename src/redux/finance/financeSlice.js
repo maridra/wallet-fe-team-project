@@ -34,9 +34,9 @@ export const financeSlice = createSlice({
       .addCase(addTransaction.pending, handlePending)
       .addCase(addTransaction.rejected, handleRejected)
       .addCase(addTransaction.fulfilled, (state, action) => {
-        console.log(action.payload);
-        console.log(state.data);
         state.data = [...state.data, { ...action.payload }];
+        state.totalBalance = action.payload.remainingBalance;
+        state.isLoading = false;
       });
     /*       .addCase(getTotalBalance.pending, handlePending)
       .addCase(getTotalBalance.fulfilled, (state, { payload }) => {
