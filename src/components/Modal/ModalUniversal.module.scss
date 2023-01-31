@@ -20,7 +20,9 @@
   }
   z-index: 50000;
 }
-
+body {
+  overflow: hidden;
+}
 .modal__content {
   position: relative;
   display: flex;

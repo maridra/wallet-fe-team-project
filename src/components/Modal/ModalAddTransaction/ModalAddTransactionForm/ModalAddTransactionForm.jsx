@@ -169,7 +169,7 @@ const ModalAddTransactionForm = prop => {
               )}
             ></ErrorMessage>
           </label>
-          <label>
+          <label className={scss.dateBox}>
             <Datetime
               timeFormat={false}
               renderInput={renderCalendarInput}
@@ -179,7 +179,7 @@ const ModalAddTransactionForm = prop => {
               onChange={createDate}
             />
           </label>
-          <label>
+          <label className={scss.commentBox}>
             <Field
               className={scss.addFormTextarea}
               name="comment"
