@@ -2,33 +2,17 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosBaseUrl } from '../tokenSettingsAxios';
 import { Notify } from 'notiflix';
 
-/* export const getTotalBalance = createAsyncThunk(
-  '/balance',
-  async (_, { rejectWithValue, getState }) => {
-    const currentToken = getState().auth.token;
-
-    if (!currentToken) rejectWithValue();
-
+export const updateTransactionsNew = createAsyncThunk(
+  'finance/updateNew',
+  async (credentials, thunkAPI) => {
     try {
-      const { data } = await axiosBaseUrl.get('/transactions');
-
-      return data;
-    } catch (e) {
-      Notify.failure(e.message, { position: 'center-top' });
-      return rejectWithValue(e.message);
-    }
-  }
-); */
-
-export const updateTransactions = createAsyncThunk(
-  'finance/update',
-  async (_, thunkAPI) => {
-    try {
-      const { data } = await axiosBaseUrl.get('transactions');
-      const transactions = data.data.transactions;
-      const remainingBalance = [...transactions].pop().remainingBalance;
-
-      return { transactions, remainingBalance };
+      console.log(credentials);
+      const transactions = [
+        ...credentials.data.transactions,
+        ...thunkAPI.getState().finance.data,
+      ];
+      console.log(transactions);
+      return { transactions };
     } catch (e) {}
   }
 );
@@ -48,6 +32,9 @@ export const addTransaction = createAsyncThunk(
   }
 );
 
-const financeOperation = { updateTransactions, addTransaction };
+const financeOperation = {
+  addTransaction,
+  updateTransactionsNew,
+};
 
 export default financeOperation;
