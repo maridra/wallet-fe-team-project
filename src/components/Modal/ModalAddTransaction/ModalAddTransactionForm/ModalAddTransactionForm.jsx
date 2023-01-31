@@ -39,7 +39,6 @@ const ModalAddTransactionForm = prop => {
   };
 
   const addValueCategory = (_id, name) => {
-    console.log(_id, name);
     setCategoryId(_id);
     setCategoryValue(name);
   };
@@ -54,8 +53,6 @@ const ModalAddTransactionForm = prop => {
           amount: Number(amount),
           date: bekDate,
         };
-
-        console.log(formValues);
         dispatch(financeOperation.addTransaction(formValues));
         onClick();
         return;
@@ -66,7 +63,6 @@ const ModalAddTransactionForm = prop => {
         amount: Number(amount),
         date: bekDate,
       };
-      console.log(formValues);
       dispatch(financeOperation.addTransaction(formValues));
       onClick();
       return;
@@ -78,7 +74,6 @@ const ModalAddTransactionForm = prop => {
         amount: Number(amount),
         date: bekDate,
       };
-      console.log(formValues);
       dispatch(financeOperation.addTransaction(formValues));
       onClick();
       return;
@@ -90,7 +85,6 @@ const ModalAddTransactionForm = prop => {
       amount: Number(amount),
       date: bekDate,
     };
-    console.log(formValues);
     dispatch(financeOperation.addTransaction(formValues));
     onClick();
     return;
