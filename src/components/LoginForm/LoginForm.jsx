@@ -1,9 +1,9 @@
 import { Field, Form, Formik } from 'formik';
 import s from '../LoginForm/LoginForm.module.scss';
 import * as Yup from 'yup';
-import sprite from '../../image/symbol-defs.svg';
-import { ReactComponent as Email } from '../../image/email.svg';
-import { ReactComponent as PasswordLock } from '../../image/password_lock.svg';
+import sprite from '../../assets/Images/login/symbol-defs.svg';
+import { ReactComponent as Email } from '../../assets/Images/login/email.svg';
+import { ReactComponent as PasswordLock } from '../../assets/Images/login/password_lock.svg';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
@@ -105,6 +105,10 @@ const LoginForm = () => {
             </Link>
             <Link to="/forgot-password" className={s.forgotLink}>
               Forgot password?
+              log in
+            </button>
+            <Link to="/SignUp" className={s.registerBtn}>
+              register
             </Link>
           </Form>
         )}

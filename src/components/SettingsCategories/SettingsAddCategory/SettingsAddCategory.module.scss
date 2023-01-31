@@ -1,0 +1,68 @@
+@import 'assets/styles/index.scss';
+
+.form {
+  position: relative;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inputText {
+  margin-left: 20px;
+  margin-bottom: 5px;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.inputStyle {
+  display: block;
+  height: 60px;
+  width: 100%;
+  padding: 0 30% 0 20px;
+  font-size: 20px;
+  font-weight: 100;
+  border-radius: 25px;
+  background-color: #efefef;
+  border: 1px solid var(--grey-color-icon);
+  font-size: 18px;
+
+  @include mq(desk) {
+    font-size: 22px;
+    padding: 0 20% 0 20px;
+  }
+}
+
+.submitButton {
+  display: block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+
+  height: 75%;
+  width: 25%;
+  min-width: 60px;
+  background-color: var(--btn-green-color);
+  border-radius: 25px;
+  border: 1px solid var(--grey-color-icon);
+
+  font-family: 'Poppins';
+  font-weight: 400;
+  font-size: 18px;
+
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+  @include mq(desk) {
+    width: 15%;
+    right: 30px;
+  }
+}
+
+.submitButton:hover {
+  background-color: #53cfb4;
+  box-shadow: 0px 3px 15px 1px var(--btn-green-color-hover);
+  cursor: pointer;
+}

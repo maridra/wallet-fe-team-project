@@ -1,0 +1,369 @@
+@import 'assets/styles/index.scss';
+
+.sectionTMP {
+  // background: rgba(255, 255, 255, 0.4);
+
+  // backdrop-filter: blur(25px);
+
+  @include mq(mob-only) {
+    margin-top: 43px;
+    width: 280px;
+  }
+  @include mq(tab) {
+    width: 704px;
+  }
+  @include mq(desk) {
+    width: 715px;
+  }
+}
+.title {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 45px;
+
+  padding-bottom: 20px;
+  padding-left: 15px;
+}
+
+.mainBox {
+  @include mq(mob-only) {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  @include mq(tab) {
+    display: flex;
+    gap: 32px;
+  }
+  @include mq(desk) {
+    display: flex;
+    gap: 32px;
+  }
+}
+
+.doughnut {
+  @include mq(mob-only) {
+    width: 280px;
+    height: 280px;
+  }
+  @include mq(tab) {
+    width: 336px;
+    height: 336px;
+  }
+  @include mq(desk) {
+    width: 288px;
+    height: 288px;
+  }
+}
+.selectItem {
+  cursor: pointer;
+  /* Reset */
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font: inherit;
+
+  @include mq(mob-only) {
+    width: 280px;
+    height: 50px;
+    padding-left: 20px;
+  }
+  @include mq(tab) {
+    width: 160px;
+    height: 50px;
+    padding-left: 16px;
+  }
+  @include mq(desk) {
+    width: 182px;
+    height: 50px;
+    padding-left: 20px;
+  }
+
+  border: 1px solid #000000;
+  border-radius: 30px;
+
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  @include mq(mob-only) {
+    background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+      20px center / 18px;
+  }
+  @include mq(tab) {
+    background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+      20px center / 16px;
+  }
+  @include mq(desk) {
+    background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+      20px center / 18px;
+  }
+
+  &:focus {
+    // transform: rotateX(5deg);
+
+    @include mq(mob-only) {
+      background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
+        20px center / 18px;
+    }
+    @include mq(tab) {
+      background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
+        20px center / 16px;
+    }
+    @include mq(desk) {
+      background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
+        20px center / 18px;
+    }
+  }
+}
+
+.selectOption {
+  background: rgba(255, 255, 255, 0.7);
+  // box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
+  // backdrop-filter: blur(25px);
+  /* Note: backdrop-filter has minimal browser support */
+
+  border-radius: 20px;
+  &:hover {
+    outline: none;
+    background: black;
+  }
+}
+.select {
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 30px;
+
+  @include mq(mob-only) {
+    width: 280px;
+    gap: 20px;
+    flex-direction: column;
+  }
+  @include mq(tab) {
+    width: 336px;
+    gap: 16px;
+    flex-direction: row;
+  }
+  @include mq(desk) {
+    width: 395px;
+    gap: 32px;
+  }
+}
+
+.table {
+  border-spacing: 0;
+  border-collapse: separate;
+  overflow: hidden;
+
+  @include mq(mob-only) {
+    width: 280px;
+    height: 52px;
+  }
+  @include mq(tab) {
+    width: 336px;
+    height: 50px;
+  }
+  @include mq(desk) {
+    width: 395px;
+  }
+}
+.thead {
+  border-spacing: 0;
+  background: #ffffff;
+  height: 58px;
+  padding: 0;
+  :first-child {
+    border-radius: 30px 0 0 30px;
+    text-align: left;
+
+    @include mq(mob-only) {
+      padding-left: 20px;
+    }
+    @include mq(tab) {
+      padding-left: 20px;
+    }
+    @include mq(desk) {
+      padding-left: 28px;
+    }
+  }
+  :last-child {
+    border-radius: 0 30px 30px 0;
+    text-align: right;
+    @include mq(mob-only) {
+      padding-right: 20px;
+    }
+    @include mq(tab) {
+      padding-right: 20px;
+    }
+    @include mq(desk) {
+      padding-right: 28px;
+    }
+  }
+}
+
+.tableRows {
+  border-bottom: 1px solid var(--grey-bottom-border-table);
+  box-shadow: 0px 1px 0px var(--box-shadow-table);
+  height: 52px;
+}
+.tableRows__rightText {
+  text-align: right;
+  padding-right: 29px;
+}
+
+.tableFooter {
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  padding-left: 28px;
+  height: 46px;
+}
+
+.tableFooter__expenses {
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: right;
+  color: #ff6596;
+  padding-right: 29px;
+}
+
+.tableFooter__income {
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  padding-right: 29px;
+  /* identical to box height */
+
+  text-align: right;
+
+  color: #24cca7;
+}
+
+// before elements
+
+.squareBeforeExpenses {
+  &:before {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    margin-right: 16px;
+    margin-left: 28px;
+    content: '';
+    background-color: var(--main-expenes-color);
+    vertical-align: middle;
+  }
+}
+
+.squareBeforeProducts {
+  &:before {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    margin-right: 16px;
+    margin-left: 28px;
+    content: '';
+    background-color: var(--products-color);
+    vertical-align: middle;
+  }
+}
+
+.squareBeforeCar {
+  &:before {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    margin-right: 16px;
+    margin-left: 28px;
+    content: '';
+    background-color: var(--car-color);
+    vertical-align: middle;
+  }
+}
+
+.squareBeforeSelf {
+  &:before {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    margin-right: 16px;
+    margin-left: 28px;
+    content: '';
+    background-color: var(--self-care-color);
+    vertical-align: middle;
+  }
+}
+
+.squareBeforeChild {
+  &:before {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    margin-right: 16px;
+    margin-left: 28px;
+    content: '';
+    background-color: var(--child-care-color);
+    vertical-align: middle;
+  }
+}
+
+.squareBeforeHousehold {
+  &:before {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    margin-right: 16px;
+    margin-left: 28px;
+    content: '';
+    background-color: var(--household-products-color);
+    vertical-align: middle;
+  }
+}
+.squareBeforeEducation {
+  &:before {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    margin-right: 16px;
+    margin-left: 28px;
+    content: '';
+    background-color: var(--education-color);
+    vertical-align: middle;
+  }
+}
+.squareBeforeLeisure {
+  &:before {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    margin-right: 16px;
+    margin-left: 28px;
+    content: '';
+    background-color: var(--leisure-color);
+    vertical-align: middle;
+  }
+}
+
+.squareBeforeOther {
+  &:before {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    margin-right: 16px;
+    margin-left: 28px;
+    content: '';
+    background-color: var(--other-expenses-color);
+    vertical-align: middle;
+  }
+}

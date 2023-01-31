@@ -1,10 +1,14 @@
-import StatisticPage from 'pages/StatisticPage/StatisticPage.js';
+import StatisticPage from 'pages/StatisticPage/StatisticPage';
+import CurrencyPage from 'pages/CurrencyPage/CurrencyPage';
 
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Header, Loader } from '../components';
 
-// import PrivateRoute from './PrivateRoute/PrivateRoute';
+import { useDispatch } from 'react-redux';
+import authOperations from 'redux/auth/authOperations';
+
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage'));
@@ -19,7 +23,17 @@ const CreatePasswordPage = lazy(() =>
   import('../pages/CreatePassword/CreatePassword')
 );
 
+const CheckVerifyEmail = lazy(() =>
+  import('../components/CheckVerifyEmail/CheckVerifyEmail')
+);
+
 export const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authOperations.refresh());
+  });
+
   return (
     <>
       <Suspense
@@ -33,16 +47,25 @@ export const App = () => {
         }
       >
         <Routes>
-          <Route path="/" element={<Header />}>
+          <Route
+            path="/"
+            element={<PrivateRoute redirectTo="/login" children={<Header />} />}
+          >
             <Route path="/" element={<HomePage />}>
-              <Route path="statistic" element={<StatisticPage />} />
+              <Route path="/statistic" element={<StatisticPage />} />
+              <Route path="/currency" element={<CurrencyPage />} />
             </Route>
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
-          <Route path="*" element={<NotFound />} />
           <Route
             path="/signUp"
             element={<PublicRoute redirectTo="/" children={<RegisterPage />} />}
+          />
+          <Route
+            path="/signUp/verify/:verificationToken"
+            element={
+              <PublicRoute redirectTo="/" children={<CheckVerifyEmail />} />
+            }
           />
           <Route
             path="/login"
@@ -60,6 +83,7 @@ export const App = () => {
               <PublicRoute redirectTo="/" children={<CreatePasswordPage />} />
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </>
