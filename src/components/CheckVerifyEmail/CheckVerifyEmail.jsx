@@ -15,6 +15,8 @@ const CheckVerifyEmail = () => {
   const param = useParams();
   const verificationToken = param.verificationToken;
   const token = useSelector(authSelectors.getToken);
+  const isLoading = useSelector(authSelectors.isLoading);
+  const error = useSelector(authSelectors.isError);
 
   useEffect(() => {
     if (verificationToken === token) {
@@ -35,7 +37,7 @@ const CheckVerifyEmail = () => {
     <div className={s.back}>
       <div className={s.blur}>
         <div className={s.container}>
-          {verified ?
+          {verified && !isLoading &&
             <div className={s.containerCheck}>
               <SuccessIcon className={s.successIcon} />
               <div className={s.wrapper}>
@@ -43,8 +45,9 @@ const CheckVerifyEmail = () => {
                 <Link to="/login" className={s.link}>LOGIN</Link>
               </div>
             </div>
-            : <div className={s.containerCheck}>
-              <ErrorIcon className={s.errorIcon}/>
+          }
+          {(!verified && !isLoading) && (!isLoading && error) && <div className={s.containerCheck}>
+              <ErrorIcon className={s.successIcon}/>
               <h1 className={s.textMsg}>404 Not Found</h1>
             </div>}
         </div>

@@ -6,6 +6,7 @@ const getFirstName = state => state.auth.user?.firstName;
 const isLoading = state => state.auth.loading;
 const getEmail = state => state.auth.user?.email;
 const isVerified = state => state.auth.isVerified;
+const isError = state => state.auth.error;
 /* const isAvatarLoading = state => state.auth.avatarLoading; */
 
 export const authSelectors = {
@@ -16,6 +17,7 @@ export const authSelectors = {
   getFirstName,
   isLoading,
   getEmail,
-  isVerified
+  isVerified,
+  isError
   /*   isAvatarLoading, */
 };
