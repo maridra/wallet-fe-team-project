@@ -31,8 +31,8 @@ export const userSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      /*       .addCase(userOperations.currentUser.pending, handlePending)
-      .addCase(userOperations.currentUser.rejected, handleRejected) */
+      .addCase(userOperations.currentUser.pending, handlePending)
+      .addCase(userOperations.currentUser.rejected, handleRejected)
       .addCase(userOperations.currentUser.fulfilled, (state, action) => {
         state.id = action.payload?._id;
         state.firstName = action.payload?.firstName;

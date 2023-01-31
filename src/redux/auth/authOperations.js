@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosBaseUrl, token } from '../tokenSettingsAxios';
 import { Notify } from 'notiflix';
 import userOperations from 'redux/user/userOperations';
-/* import { useDispatch } from 'react-redux'; */
+import hardcoreLogout from 'redux/utils/hardcoreLogout';
 
 const register = createAsyncThunk(
   'auth/register',
@@ -60,15 +60,19 @@ const logIn = createAsyncThunk(
   }
 );
 
-const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
-  try {
-    await axiosBaseUrl.post('/auth/logout');
-    token.unset();
-  } catch (e) {
-    Notify.failure(e.message);
-    return thunkAPI.rejectWithValue(e.message);
+const logOut = createAsyncThunk(
+  'auth/logout',
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      await axiosBaseUrl.post('/auth/logout');
+      token.unset();
+    } catch (e) {
+      hardcoreLogout(e, dispatch);
+      Notify.failure(e.message);
+      return rejectWithValue(e.message);
+    }
   }
-});
+);
 
 const refresh = createAsyncThunk(
   'auth/refresh',
@@ -81,8 +85,9 @@ const refresh = createAsyncThunk(
       token.set(currentToken);
       dispatch(userOperations.currentUser());
       return 1;
-    } catch (error) {
-      return rejectWithValue(error.message);
+    } catch (e) {
+      hardcoreLogout(e, dispatch);
+      return rejectWithValue(e.message);
     }
   }
 );
