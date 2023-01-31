@@ -33,6 +33,19 @@ export const updateTransactions = createAsyncThunk(
   }
 );
 
-const financeOperation = { updateTransactions };
+export const addTransaction = createAsyncThunk(
+  'finance/addTransaction',
+  async credentials => {
+    try {
+      const { data } = await axiosBaseUrl.post('/transactions', credentials);
+      console.log(data.data.transaction);
+      const transaction = data.data.transaction;
+      console.log(transaction);
+      return transaction;
+    } catch (e) {}
+  }
+);
+
+const financeOperation = { updateTransactions, addTransaction };
 
 export default financeOperation;

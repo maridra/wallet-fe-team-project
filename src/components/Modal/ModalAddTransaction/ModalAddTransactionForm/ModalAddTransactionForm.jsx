@@ -2,12 +2,14 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import Datetime from 'react-datetime';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import 'react-datetime/css/react-datetime.css';
 import { RiCalendar2Line } from 'react-icons/ri';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import getDate from 'utils/getDate';
 import scss from './ModalAddTransactionForm.module.scss';
 import ModalAddTransactionFormMenu from './ModalAddTransactionFormMenu/ModalAddTransactionFormMenu';
+import financeOperation from 'redux/finance/financeOperation';
 
 const schema = yup.object().shape({
   amount: yup.number().min(0.01).max(2500000).required(),
@@ -19,16 +21,16 @@ const initialValues = {
 
 const ModalAddTransactionForm = prop => {
   const { checkboxStatus, onClick } = prop;
-  const [bekDate, setBekDate] = useState('');
+  const [bekDate, setBekDate] = useState(new Date().toISOString());
   const [date, setDate] = useState(getDate());
   const [open, setOpen] = useState(false);
-  const [categoryId, setCategoryId] = useState('');
+  const [categoryId, setCategoryId] = useState('10');
   const [categoryValue, setCategoryValue] = useState('Other expenses');
 
+  const dispatch = useDispatch();
+
   const createDate = ({ _d }) => {
-    const time = new Date();
-    console.log(time);
-    console.log(time.toISOString());
+    setBekDate(_d.toISOString());
     setDate(getDate(_d));
   };
 
@@ -47,13 +49,25 @@ const ModalAddTransactionForm = prop => {
 
     if (checkboxStatus) {
       if (comment === '') {
-        const formValues = { transactionType: checkboxStatus, amount, date };
+        const formValues = {
+          transactionType: checkboxStatus,
+          amount: Number(amount),
+          date: bekDate,
+        };
+
         console.log(formValues);
+        dispatch(financeOperation.addTransaction(formValues));
         onClick();
         return;
       }
-      const formValues = { transactionType: checkboxStatus, ...values, date };
+      const formValues = {
+        transactionType: checkboxStatus,
+        comment,
+        amount: Number(amount),
+        date: bekDate,
+      };
       console.log(formValues);
+      dispatch(financeOperation.addTransaction(formValues));
       onClick();
       return;
     }
@@ -61,20 +75,23 @@ const ModalAddTransactionForm = prop => {
       const formValues = {
         transactionType: checkboxStatus,
         category: categoryId,
-        amount,
-        date,
+        amount: Number(amount),
+        date: bekDate,
       };
       console.log(formValues);
+      dispatch(financeOperation.addTransaction(formValues));
       onClick();
       return;
     }
     const formValues = {
       transactionType: checkboxStatus,
       category: categoryId,
-      ...values,
-      date,
+      comment,
+      amount: Number(amount),
+      date: bekDate,
     };
     console.log(formValues);
+    dispatch(financeOperation.addTransaction(formValues));
     onClick();
     return;
   };
