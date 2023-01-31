@@ -4,8 +4,8 @@ import * as Yup from 'yup';
 import classNames from 'classnames';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { authSelectors } from 'redux/auth/authSelectors';
-import authOperations from '../../../redux/auth/authOperations';
+import { userSelectors } from 'redux/user/userSelectors';
+import userOperations from 'redux/user/userOperations';
 
 import { ReactComponent as Name } from '../../../assets/Images/login/name.svg';
 
@@ -13,14 +13,14 @@ import s from './SettingsUserName.module.scss';
 
 export default function SettingsUserName() {
   const dispatch = useDispatch();
-  const firstName = useSelector(authSelectors.getFirstName);
+  const firstName = useSelector(userSelectors.getFirstName);
 
   const initialValues = {
     firstName: firstName,
   };
 
   const onSubmit = ({ firstName }) => {
-    dispatch(authOperations.updateUserName({ firstName }));
+    dispatch(userOperations.updateUserName({ firstName }));
   };
 
   const SignUpSchema = Yup.object().shape({

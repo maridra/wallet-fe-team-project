@@ -11,9 +11,10 @@ const initialState = {
   categories: [],
   subscription: '',
   totalBalance: '',
+  avatarLoading: false,
 };
 
-/* const handlePending = state => {
+const handlePending = state => {
   state.loading = true;
   state.error = null;
 };
@@ -21,7 +22,7 @@ const initialState = {
 const handleRejected = (state, action) => {
   state.loading = false;
   state.error = action.payload;
-}; */
+};
 
 export const userSlice = createSlice({
   name: 'user',
@@ -38,6 +39,52 @@ export const userSlice = createSlice({
         state.categories = action.payload?.categories;
         state.subscription = action.payload?.subscription;
         state.totalBalance = action.payload?.totalBalance;
+      })
+
+      // REMOVE CATEGORY
+      .addCase(userOperations.removeCategory.pending, handlePending)
+      .addCase(userOperations.removeCategory.rejected, handleRejected)
+      .addCase(
+        userOperations.removeCategory.fulfilled,
+        (state, { payload }) => {
+          state.categories = payload;
+        }
+      )
+
+      // ADD CATEGORY
+      .addCase(userOperations.addCategory.pending, handlePending)
+      .addCase(userOperations.addCategory.rejected, handleRejected)
+      .addCase(userOperations.addCategory.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.categories = payload;
+      })
+
+      // UPDATE USERNAME
+      .addCase(userOperations.updateUserName.pending, state => {
+        state.error = null;
+      })
+      .addCase(userOperations.updateUserName.rejected, (state, { payload }) => {
+        state.error = payload;
+      })
+      .addCase(
+        userOperations.updateUserName.fulfilled,
+        (state, { payload }) => {
+          state.firstName = payload;
+        }
+      )
+
+      // UPDATE AVATAR
+      .addCase(userOperations.updateAvatar.pending, state => {
+        state.avatarLoading = true;
+        state.error = null;
+      })
+      .addCase(userOperations.updateAvatar.rejected, (state, { payload }) => {
+        state.avatarLoading = false;
+        state.error = payload;
+      })
+      .addCase(userOperations.updateAvatar.fulfilled, (state, { payload }) => {
+        state.avatarLoading = false;
+        state.avatarURL = payload;
       });
   },
 });

@@ -112,7 +112,7 @@ const verifyEmail = createAsyncThunk(
   }
 );
 
-const addCategory = createAsyncThunk(
+/* const addCategory = createAsyncThunk(
   'auth/addCategory',
   async (credentials, { _, getState }) => {
     const newCategory = credentials;
@@ -129,9 +129,9 @@ const addCategory = createAsyncThunk(
       return getState().auth.user.categories;
     }
   }
-);
+); */
 
-const removeCategory = createAsyncThunk(
+/* const removeCategory = createAsyncThunk(
   'auth/removeCategory',
   async (credentials, { _, getState }) => {
     const id = credentials;
@@ -147,8 +147,8 @@ const removeCategory = createAsyncThunk(
     }
   }
 );
-
-const updateAvatar = createAsyncThunk(
+ */
+/* const updateAvatar = createAsyncThunk(
   'auth/updateAvatar',
   async (data, thunkAPI) => {
     try {
@@ -164,33 +164,15 @@ const updateAvatar = createAsyncThunk(
       return thunkAPI.rejectWithValue(e.message);
     }
   }
-);
-
-const updateUserName = createAsyncThunk(
-  'auth/updateUserName',
-  async (data, thunkAPI) => {
-    try {
-      const response = await axiosBaseUrl.patch('/users/name', data);
-
-      Notify.success('User name succesfully updated');
-      return response.data.data.user.firstName;
-    } catch (e) {
-      Notify.failure(e.message);
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
+); */
 
 const authOperations = {
   register,
   logIn,
   logOut,
   refresh,
-  addCategory,
-  removeCategory,
-  updateAvatar,
+  /*   updateAvatar, */
   verifyEmail,
-  updateUserName,
 };
 
 export default authOperations;
