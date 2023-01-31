@@ -5,12 +5,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @include mq(mob-only) {
+    padding-bottom: 40px;
+  }
 }
 
 .title {
-  @include mq(mob-only) {
-    font-size: 24px;
-  }
   @include mq(tab) {
     font-size: 30px;
   }
