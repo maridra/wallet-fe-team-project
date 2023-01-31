@@ -20,7 +20,6 @@ const Header = () => {
   const firstName = useSelector(authSelectors.getFirstName);
   const location = useLocation();
   const locationPath = location.pathname;
-  console.log(locationPath);
 
   const dispatch = useDispatch();
   const handleAddBtn = () => {
