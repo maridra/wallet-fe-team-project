@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosBaseUrl } from '../tokenSettingsAxios';
 import { Notify } from 'notiflix';
+import hardcoreLogout from 'redux/utils/hardcoreLogout';
 
 /* export const getTotalBalance = createAsyncThunk(
   '/balance',
@@ -22,20 +23,22 @@ import { Notify } from 'notiflix';
 
 export const updateTransactions = createAsyncThunk(
   'finance/update',
-  async (_, thunkAPI) => {
+  async (_, { dispatch }) => {
     try {
       const { data } = await axiosBaseUrl.get('transactions');
       const transactions = data.data.transactions;
       const remainingBalance = [...transactions].pop().remainingBalance;
 
       return { transactions, remainingBalance };
-    } catch (e) {}
+    } catch (e) {
+      hardcoreLogout(e, dispatch);
+    }
   }
 );
 
 export const addTransaction = createAsyncThunk(
   'finance/addTransaction',
-  async credentials => {
+  async (credentials, { dispatch }) => {
     try {
       const { data } = await axiosBaseUrl.post('/transactions', credentials);
 
@@ -43,6 +46,7 @@ export const addTransaction = createAsyncThunk(
 
       return transaction;
     } catch (e) {
+      hardcoreLogout(e, dispatch);
       Notify.failure(e.message);
     }
   }
