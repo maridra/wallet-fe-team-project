@@ -1,7 +1,11 @@
 import { Doughnut } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { v4 as uuidv4 } from 'uuid';
-
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getStatistic } from '../../redux/statistic/statisticOperation';
+import { connect } from 'react-redux';
+import { statisticSelectors } from 'redux/statistic/statisticSelectors';
 import scss from './Statistic.module.scss';
 import { months, years } from '../../assets/variables/selectorData';
 
@@ -96,6 +100,41 @@ const data = {
 };
 
 const StatisticForm = () => {
+  // const [date, setDate] = useState({ month: 1, year: 2023 });
+  const [year, setYear] = useState();
+  const [month, setMonth] = useState();
+
+  const handleYearChange = event => {
+    setYear(event.target.value);
+  };
+  const dispatch = useDispatch();
+
+  const handleMonthChange = event => {
+    setMonth(event.target.value);
+  };
+
+  const stat = useSelector(statisticSelectors.getStatistic);
+  console.log(stat.queryDate.month);
+
+  console.log(month);
+  useEffect(() => {
+    // dispatch(addDay(moment(e).format('yyyy-MM-DD')));
+    dispatch(getStatistic(month, year));
+  }, [dispatch, month, year]);
+  // const onChange = ({ target }) => {
+  //   setDate(prevState => {
+  //     return { ...prevState, [target.name]: target.value };
+  //   });
+  // };
+
+  // const dispatch = useDispatch();
+
+  // const { year, month } = date;
+
+  // useEffect(() => {
+  //   dispatch(getStatistic({ year: Number(year), month: Number(month) }));
+  // }, [dispatch, month, year]);
+
   const textCenter = {
     id: 'textCenter',
     beforeDatasetsDraw(chart, args, pluginOptions) {
@@ -124,7 +163,11 @@ const StatisticForm = () => {
           </div>
           <div className={scss.statisticData}>
             <div className={scss.select}>
-              <select className={scss.selectItem}>
+              <select
+                className={scss.selectItem}
+                value={month}
+                onChange={handleMonthChange}
+              >
                 {months.map(item => (
                   <option
                     className={scss.selectOption}
@@ -134,9 +177,12 @@ const StatisticForm = () => {
                     {item.name}
                   </option>
                 ))}
-                #331763
               </select>
-              <select className={scss.selectItem}>
+              <select
+                className={scss.selectItem}
+                value={year}
+                onChange={handleYearChange}
+              >
                 {years.map(item => (
                   <option
                     className={scss.selectOption}
@@ -214,5 +260,13 @@ const StatisticForm = () => {
     </>
   );
 };
+const mapStateToProps = state => ({
+  selectedYear: state.selectedYear,
+  selectedMonth: state.selectedMonth,
+});
+const mapDispatchToProps = dispatch => ({
+  onYearSelected: year => dispatch({ type: 'YEAR_SELECTED', year }),
+  onMonthSelected: month => dispatch({ type: 'MONTH_SELECTED', month }),
+});
 
-export default StatisticForm;
+export default connect(mapStateToProps, mapDispatchToProps)(StatisticForm);

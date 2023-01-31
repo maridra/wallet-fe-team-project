@@ -47,6 +47,7 @@
     display: flex;
     justify-content: center;
   }
+
   @include mq(tab) {
     width: 336px;
     height: 336px;
