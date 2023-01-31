@@ -7,10 +7,11 @@ import * as Yup from 'yup';
 
 import PasswordStrength from '../RegisterForm/PasswordStrength';
 
-import { ReactComponent as PasswordLock } from '../../image/password_lock.svg';
-import sprite from '../../image/symbol-defs.svg';
+import { ReactComponent as PasswordLock } from '../../assets/Images/login/password_lock.svg';
+import sprite from '../../assets/Images/login/symbol-defs.svg';
 import s from '../CreatePassword/CreatePassword.module.scss';
 import { Notify } from 'notiflix';
+import { baseURL } from 'redux/tokenSettingsAxios';
 
 const CreatePassword = () => {
   const [password, setPassword] = useState('');
@@ -28,14 +29,16 @@ const CreatePassword = () => {
 
   const onSubmit = e => {
     e.preventDefault();
+
     if (password.length < 6) {
       return Notify.warning('Password is require');
     }
     if (confirmPassword.length < 6) {
       return Notify.warning('Confirm Password is require');
     }
+
     axios
-      .post(`http://localhost:3000/api/auth/reset-password/${id}/${token}`, {
+      .post(`${baseURL}/auth/reset-password/${id}/${token}`, {
         password,
       })
       .then(res => setStatus(res.status))
@@ -132,10 +135,10 @@ const CreatePassword = () => {
                 />
               </label>
               <button type="submit" className={s.registerBtn}>
-                CREATE PASSWORD
+                CREATE
               </button>
               <Link to="/login" className={s.loginBtn}>
-                LOG IN
+                BACK
               </Link>
             </Form>
           )}

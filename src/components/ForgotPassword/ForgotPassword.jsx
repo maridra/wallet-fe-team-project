@@ -6,9 +6,10 @@ import classNames from 'classnames';
 import * as Yup from 'yup';
 import axios from 'axios';
 
-import { ReactComponent as Email } from '../../image/email.svg';
-import sprite from '../../image/symbol-defs.svg';
+import { ReactComponent as Email } from '../../assets/Images/login/email.svg';
+import sprite from '../../assets/Images/login/symbol-defs.svg';
 import s from './ForgotPassword.module.scss';
+import { baseURL } from 'redux/tokenSettingsAxios';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -37,14 +38,12 @@ const ForgotPassword = () => {
       return;
     }
     axios
-      .post('http://localhost:3000/api/auth/forgot-password', {
+      .post(`${baseURL}/auth/forgot-password`, {
         email,
       })
       .then(res => setStatus(res.status))
       .catch(error => Notify.failure(`User with email: ${email}, not found!`));
   };
-
-  console.log('status :>> ', status);
 
   return (
     <div className={s.formContainer}>
