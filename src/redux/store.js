@@ -12,12 +12,14 @@ import {
 import { persistedAuthReducer } from './auth/authSlice';
 import { modalReducer } from './modal/modalSlice';
 import { financeReducer } from './finance/financeSlice';
+import { persistedUserReducer } from './user/userSlice';
 
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     finance: financeReducer,
     modal: modalReducer,
+    user: persistedUserReducer,
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

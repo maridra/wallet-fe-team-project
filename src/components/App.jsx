@@ -7,6 +7,7 @@ import { Header, Loader } from '../components';
 
 import { useDispatch } from 'react-redux';
 import authOperations from 'redux/auth/authOperations';
+/* import userOperations from 'redux/user/userOperations'; */
 
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
@@ -16,7 +17,9 @@ const SettingsPage = lazy(() => import('../pages/SettingsPage/SettingsPage'));
 const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
-const CheckVerifyEmail = lazy(() => import('../components/CheckVerifyEmail/CheckVerifyEmail'));
+const CheckVerifyEmail = lazy(() =>
+  import('../components/CheckVerifyEmail/CheckVerifyEmail')
+);
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -48,10 +51,11 @@ export const App = () => {
             </Route>
             <Route path="/settings" element={<SettingsPage />} />
           </Route>
+          <Route path="/signUp" element={<RegisterPage />} />
           <Route
-            path="/signUp"
-            element={<RegisterPage />} />
-          <Route path="/signUp/verify/:verificationToken" element={<CheckVerifyEmail />}/>
+            path="/signUp/verify/:verificationToken"
+            element={<CheckVerifyEmail />}
+          />
           <Route
             path="/login"
             element={<PublicRoute redirectTo="/" children={<LoginPage />} />}
