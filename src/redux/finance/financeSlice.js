@@ -32,15 +32,13 @@ export const financeSlice = createSlice({
           action.payload?.transactions[0]?.owner?.totalBalance;
         state.isLoggedIn = true;
         state.isLoading = false;
-
-        console.log(action.payload?.transactions[0]?.owner?.totalBalance);
       })
 
       .addCase(addTransaction.pending, handlePending)
       .addCase(addTransaction.rejected, handleRejected)
       .addCase(addTransaction.fulfilled, (state, action) => {
         state.data = [...state.data, { ...action.payload }];
-        state.totalBalance = action.payload?.transaction?.owner?.totalBalance;
+        state.totalBalance = action.payload?.totalBalance;
         state.isLoading = false;
       });
   },
