@@ -88,6 +88,14 @@ const HomeTabMobile = ({
       return '-';
     }
   }
+
+  function dateMaker(item) {
+    const date = item.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, `$3.$2.$1`);
+    const leftPart = date.slice(0, 6);
+    const rightPart = date.slice(-2);
+    const formatDate = leftPart + rightPart;
+    return formatDate;
+  }
   return (
     <>
       <ul className={s.operationList}>
@@ -96,9 +104,7 @@ const HomeTabMobile = ({
             <ul className={s.operationItemUl}>
               <li className={userColorUi(item)}>
                 <span className={s.mobileTableHeader}>Date</span>
-                <span className={s.mobileTableInfo}>
-                  {item.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$3.$2.$1')}
-                </span>
+                <span className={s.mobileTableInfo}>{dateMaker(item)}</span>
               </li>
               <li className={userColorUi(item)}>
                 <span className={s.mobileTableHeader}>Type</span>
