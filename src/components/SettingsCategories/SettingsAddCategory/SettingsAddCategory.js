@@ -14,7 +14,7 @@ const SettingsAddCategory = () => {
 
   const addCategory = e => {
     e.preventDefault();
-    dispatch(userOperations.addCategory(newCategory));
+    dispatch(userOperations.addCategory(newCategory.trim()));
     setNewCategory('');
   };
 
