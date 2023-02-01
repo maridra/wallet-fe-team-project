@@ -102,6 +102,7 @@ const RegisterForm = () => {
                 type="password"
                 name="password"
                 placeholder="Password"
+                autoComplete="true"
                 className={classNames(s.input, {
                   [s.errorInput]: errors.password && touched.password,
                   [s.validInput]: !errors.password && touched.password,
@@ -120,6 +121,7 @@ const RegisterForm = () => {
                 type="password"
                 name="passwordConfirm"
                 placeholder="Confirm password"
+                autoComplete="true"
                 className={classNames(s.input, {
                   [s.errorInput]:
                     errors.passwordConfirm && touched.passwordConfirm,

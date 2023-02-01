@@ -114,3 +114,13 @@
     backdrop-filter: blur(25px);
   }
 }
+
+@media (orientation: landscape) {
+  .back {
+    height: auto;
+  }
+
+  .loginContainer {
+    height: auto;
+  }
+}

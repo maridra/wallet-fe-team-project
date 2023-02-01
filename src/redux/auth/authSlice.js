@@ -82,7 +82,16 @@ export const authSlice = createSlice({
         state.loading = false;
         state.isVerified = true;
         state.token = null;
+      })
+    
+    //ResendVerification
+      .addCase(authOperations.resendVerification.pending, handlePending)
+      .addCase(authOperations.resendVerification.rejected, handleRejected)
+      .addCase(authOperations.resendVerification.fulfilled, (state, action) => {
+        state.loading = false;
+        state.token = action.payload.data.user.verificationToken;
       });
+
 
     /* // ADD CATEGORY
       .addCase(authOperations.addCategory.pending, handlePending)
