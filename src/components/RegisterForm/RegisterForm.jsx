@@ -136,7 +136,7 @@ const RegisterForm = () => {
           </label>
           <label className={s.label}>
               <Field
-                type={type}
+                type="password"
                 name="passwordConfirm"
                 placeholder="Confirm password"
                 autoComplete="true"
