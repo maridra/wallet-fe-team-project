@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import authOperations from 'redux/auth/authOperations';
 import classNames from 'classnames';
+import { BiHide, BiShow } from "react-icons/bi";
 
 const LoginForm = () => {
   const initialValues = {
@@ -24,6 +25,17 @@ const LoginForm = () => {
     e.preventDefault();
     dispatch(authOperations.logIn({ email, password }));
   };
+
+  const [type, setType] = useState('password');
+
+  const showPassword = () => {
+    setType("text")
+  }
+
+  const hidePassword = () => {
+    setType("password")
+  }
+
 
   const SignUpSchema = Yup.object().shape({
     email: Yup.string()
@@ -76,7 +88,7 @@ const LoginForm = () => {
             </label>
             <label className={s.label}>
               <Field
-                type="password"
+                type={type}
                 name="password"
                 placeholder="Password"
                 autoComplete="true"
@@ -97,6 +109,11 @@ const LoginForm = () => {
               {errors.password && touched.password && (
                 <div className={s.errorField}>{errors.password}</div>
               )}
+              {(type === "password")
+                ? <span className={s.hideIcon}>
+                <BiHide className={s.icon} onMouseDown={showPassword} /></span>
+                : <span className={s.showIcon} onMouseUp={hidePassword}>
+                <BiShow className={s.icon} /></span>}
             </label>
             <button type="submit" className={s.loginBtn}>
               log in

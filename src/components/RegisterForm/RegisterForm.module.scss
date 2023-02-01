@@ -103,6 +103,13 @@
   color: rgb(255, 55, 55);
 }
 
+.passwordIcon{
+  position: absolute;
+  cursor: pointer;
+  right: 10px;
+  top: 3px;
+}
+
 .registerBtn {
   @extend %btnGreen;
   height: 50px;
@@ -139,4 +146,25 @@
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+}
+
+.hideIcon {
+  position: absolute;
+  cursor: pointer;
+  right: 6px;
+  top: 3px;
+  color: #e0e0e0;
+}
+
+.showIcon {
+  position: absolute;
+  cursor: pointer;
+  right: 6px;
+  top: 3px;
+  color: var(--text-green-color);
 }

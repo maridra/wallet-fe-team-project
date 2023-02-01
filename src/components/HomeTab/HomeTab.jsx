@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import s from './HomeTab.module.scss';
 import React from 'react';
 import financeOperation from 'redux/finance/financeOperation';
@@ -20,6 +21,7 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
     setCurrentPage(prevState => prevState + 1);
     setFetching(false);
   }
+
   useEffect(() => {
     if (fetching) {
       fetchData(currentPage, dispatch);
@@ -36,6 +38,13 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
       setFetching(true);
     }
   };
+
+  const checkTransactions = useSelector(financeSelectors.getTransactions);
+  useEffect(() => {
+    if (checkTransactions.length < 20) {
+      dispatch(financeOperation.updateTransactions());
+    }
+  }, []);
 
   const transactions = useSelector(financeSelectors.getTransactions);
   const sortedTransactions = sortingTransaction(transactions);

@@ -33,7 +33,7 @@ const SuccessRegistrationModal = () => {
         <div className={s.successBox}>
           <SuccessIcon className={s.successIcon} />
           <h1 className={s.successText}>Registration successful</h1>
-          <p className={s.successText}>We have sent you a verification link on your registered e-mail.</p>
+          <p className={s.successText}>We have sent you a verification link to your registered e-mail.</p>
           <p className={s.errorText}>If you didn't receive the link, please click below.</p>
           <button type="button" className={s.resendBtn} onClick={resendLetter}>resend</button>
           <p className={s.msg}>{msg}</p>

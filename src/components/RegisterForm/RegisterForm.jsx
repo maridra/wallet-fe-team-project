@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import s from "../RegisterForm/RegisterForm.module.scss";
@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import authOperations from "redux/auth/authOperations";
 import classNames from "classnames";
 import { toggleShowModalSuccessRegistration } from "redux/modal/modalSlice";
+import { BiHide, BiShow } from "react-icons/bi";
 
 const RegisterForm = () => {
   const initialValues = {
@@ -34,6 +35,16 @@ const RegisterForm = () => {
           dispatch(toggleShowModalSuccessRegistration(true))
         }
       })
+  }
+
+  const [type, setType] = useState('password');
+
+  const showPassword = () => {
+    setType("text")
+  }
+
+  const hidePassword = () => {
+    setType("password")
   }
 
   const SignUpSchema = Yup.object().shape({
@@ -99,7 +110,7 @@ const RegisterForm = () => {
             </label>
             <label className={s.label}>
               <Field
-                type="password"
+                type={type}
                 name="password"
                 placeholder="Password"
                 autoComplete="true"
@@ -115,6 +126,11 @@ const RegisterForm = () => {
               {errors.password && touched.password &&
                 <div className={s.errorField}>{errors.password}
                 </div>}
+              {(type === "password")
+                ? <span className={s.hideIcon}>
+                <BiHide className={s.icon} onMouseDown={showPassword} /></span>
+                : <span className={s.showIcon} onMouseUp={hidePassword}>
+                <BiShow className={s.icon} /></span>}
           </label>
           <label className={s.label}>
               <Field
