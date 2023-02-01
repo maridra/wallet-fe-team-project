@@ -34,7 +34,7 @@ const removeCategory = createAsyncThunk(
       return newCategories;
     } catch (e) {
       hardcoreLogout(e, dispatch);
-      Notify.failure('Opps, something went wrong');
+      Notify.failure(e.response.data.message);
       return getState().user.categories;
     }
   }
@@ -54,7 +54,7 @@ const addCategory = createAsyncThunk(
       return newCategories;
     } catch (e) {
       hardcoreLogout(e, dispatch);
-      Notify.failure('It seems like this category already exist');
+      Notify.failure(e.response.data.message);
       return getState().user.categories;
     }
   }
