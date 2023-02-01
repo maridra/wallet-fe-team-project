@@ -1,7 +1,7 @@
 export const months = [
   {
     id: 1,
-    name: 'January ',
+    name: 'January',
   },
   { id: 2, name: 'February' },
   { id: 3, name: 'March' },

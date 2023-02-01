@@ -17,17 +17,13 @@ import { statisticReducer } from './statistic/statisticSlice';
 
 import { persistedUserReducer } from './user/userSlice';
 
-
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     finance: financeReducer,
     modal: modalReducer,
-
     statistic: statisticReducer,
-
     user: persistedUserReducer,
-
   },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({

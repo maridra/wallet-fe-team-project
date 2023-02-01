@@ -26,83 +26,27 @@ const options = {
   },
 };
 
-const data = {
-  labels: [
-    'Main expenses',
-    'Products',
-    'Car',
-    'Self care',
-    'Child care',
-    'Household products',
-    'Education',
-    'Leisure',
-    'Other expenses',
-  ],
-  datasets: [
-    {
-      label: 'Total',
-      data: [8700, 3800.74, 1500, 800, 2208.5, 300, 3400, 1230, 610],
-      backgroundColor: [
-        'rgba(254, 208, 87, 1)',
-        'rgba(255, 216, 208, 1)',
-        'rgba(253, 148, 152, 1)',
-        'rgba(197, 186, 255, 1)',
-        'rgba(110, 120, 232, 1)',
-        'rgba(74, 86, 226, 1)',
-        'rgba(129, 225, 255, 1)',
-        'rgba(36, 204, 167, 1)',
-        'rgba(0, 173, 132, 1)',
-      ],
-      borderColor: [
-        'rgba(254, 208, 87, 1)',
-        'rgba(255, 216, 208, 1)',
-        'rgba(253, 148, 152, 1)',
-        'rgba(197, 186, 255, 1)',
-        'rgba(110, 120, 232, 1)',
-        'rgba(74, 86, 226, 1)',
-        'rgba(129, 225, 255, 1)',
-        'rgba(36, 204, 167, 1)',
-        'rgba(0, 173, 132, 1)',
-      ],
-      borderWidth: 1,
-      cutout: '70%',
-    },
-    // {
-    //   display: false,
-    //   label: '% of Total',
-    //   data: [8700, 3800.74, 1500, 800, 2208.5, 300, 3400, 1230, 610],
-    //   backgroundColor: [
-    //     'rgba(254, 208, 87, 1)',
-    //     'rgba(255, 216, 208, 1)',
-    //     'rgba(253, 148, 152, 1)',
-    //     'rgba(197, 186, 255, 1)',
-    //     'rgba(110, 120, 232, 1)',
-    //     'rgba(74, 86, 226, 1)',
-    //     'rgba(129, 225, 255, 1)',
-    //     'rgba(36, 204, 167, 1)',
-    //     'rgba(0, 173, 132, 1)',
-    //   ],
-    //   borderColor: [
-    //     'rgba(254, 208, 87, 1)',
-    //     'rgba(255, 216, 208, 1)',
-    //     'rgba(253, 148, 152, 1)',
-    //     'rgba(197, 186, 255, 1)',
-    //     'rgba(110, 120, 232, 1)',
-    //     'rgba(74, 86, 226, 1)',
-    //     'rgba(129, 225, 255, 1)',
-    //     'rgba(36, 204, 167, 1)',
-    //     'rgba(0, 173, 132, 1)',
-    //   ],
-    //   borderWidth: 1,
-    //   cutout: '70%',
-    // },
-  ],
-};
-
 const StatisticForm = () => {
-  // const [date, setDate] = useState({ month: 1, year: 2023 });
-  const [year, setYear] = useState();
-  const [month, setMonth] = useState();
+  let date = new Date();
+  const newMonths = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ];
+  const numberOfMonth = date.getMonth();
+
+  const [year, setYear] = useState(date.getFullYear());
+  const [month, setMonth] = useState(newMonths[numberOfMonth]);
+  const [newMonth, setNewMonth] = useState(date.getMonth());
 
   const handleYearChange = event => {
     setYear(event.target.value);
@@ -110,56 +54,73 @@ const StatisticForm = () => {
   const dispatch = useDispatch();
 
   const handleMonthChange = event => {
+    let value = event.target.value;
     setMonth(event.target.value);
+    setNewMonth(newMonths.indexOf(value));
   };
 
   const stat = useSelector(statisticSelectors.getStatistic);
-  console.log(stat.queryDate.month);
+  console.log('stat', stat);
+  console.log('balance', stat.totalBalance);
 
-  console.log(month);
-  useEffect(() => {
-    // dispatch(addDay(moment(e).format('yyyy-MM-DD')));
-    dispatch(getStatistic(month, year));
-  }, [dispatch, month, year]);
-  // const onChange = ({ target }) => {
-  //   setDate(prevState => {
-  //     return { ...prevState, [target.name]: target.value };
-  //   });
-  // };
-
-  // const dispatch = useDispatch();
-
-  // const { year, month } = date;
-
-  // useEffect(() => {
-  //   dispatch(getStatistic({ year: Number(year), month: Number(month) }));
-  // }, [dispatch, month, year]);
-
-  const textCenter = {
-    id: 'textCenter',
-    beforeDatasetsDraw(chart, args, pluginOptions) {
-      const { ctx } = chart;
-      ctx.save();
-      ctx.font = 'bolder 18px Circe';
-      ctx.fillStyle = 'black';
-      ctx.textBaseLine = 'middle';
-      ctx.textAlign = 'center';
-      ctx.textBaseLine = 'middle';
-      ctx.fillText(
-        // можно сделать через ``
-        '₴ 24 000.00',
-        chart.getDatasetMeta(0).data[0].x,
-        chart.getDatasetMeta(0).data[0].y
-      );
-    },
+  const data = {
+    labels: stat.expensesByPeriod.map(item => item.name),
+    datasets: [
+      {
+        label: 'Total',
+        data: stat.expensesByPeriod.map(item => item.amount),
+        backgroundColor: [
+          'rgba(254, 208, 87, 1)',
+          'rgba(255, 216, 208, 1)',
+          'rgba(253, 148, 152, 1)',
+          'rgba(197, 186, 255, 1)',
+          'rgba(110, 120, 232, 1)',
+          'rgba(74, 86, 226, 1)',
+          'rgba(129, 225, 255, 1)',
+          'rgba(36, 204, 167, 1)',
+          'rgba(0, 173, 132, 1)',
+        ],
+        borderColor: [
+          'rgba(254, 208, 87, 1)',
+          'rgba(255, 216, 208, 1)',
+          'rgba(253, 148, 152, 1)',
+          'rgba(197, 186, 255, 1)',
+          'rgba(110, 120, 232, 1)',
+          'rgba(74, 86, 226, 1)',
+          'rgba(129, 225, 255, 1)',
+          'rgba(36, 204, 167, 1)',
+          'rgba(0, 173, 132, 1)',
+        ],
+        borderWidth: 1,
+        cutout: '70%',
+      },
+    ],
   };
+
+  useEffect(() => {
+    dispatch(getStatistic({ month: newMonth + 1, year }));
+  }, [dispatch, newMonth, year]);
+
   return (
     <>
       <div className={scss.sectionTMP}>
         <h1 className={scss.title}>Statistics</h1>
         <div className={scss.mainBox}>
+          {/* <DoughnutForm stat={stat} /> */}
           <div className={scss.doughnut}>
-            <Doughnut data={data} options={options} plugins={[textCenter]} />
+            <Doughnut
+              data={data}
+              options={options}
+              // plugins={[coolFunction(stat)]}
+            />
+            <div className={scss.doughnutMonth}>
+              {stat.expensesPerMonth
+                ? `₴ ${stat.expensesPerMonth.toLocaleString('uk-ua', {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}`
+                : 'No transaction for this period'}
+            </div>
           </div>
           <div className={scss.statisticData}>
             <div className={scss.select}>
@@ -206,7 +167,9 @@ const StatisticForm = () => {
               <tbody>
                 <tr className={scss.tableRows}>
                   <td className={scss.squareBeforeExpenses}>Main Expenses</td>
-                  <td className={scss.tableRows__rightText}>8 700.00</td>
+                  <td className={scss.tableRows__rightText}>
+                    {/* `{$stat.totalExpenses}` */}
+                  </td>
                 </tr>
                 <tr className={scss.tableRows}>
                   <td className={scss.squareBeforeProducts}>Products</td>
@@ -246,11 +209,25 @@ const StatisticForm = () => {
               <tfoot>
                 <tr className={scss.footer}>
                   <td className={scss.tableFooter}>Expenses:</td>
-                  <td className={scss.tableFooter__expenses}>22 549.24</td>
+                  <td className={scss.tableFooter__expenses}>
+                    {stat.expensesPerMonth
+                      ? stat.expensesPerMonth.toLocaleString('uk-ua', {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })
+                      : 0}
+                  </td>
                 </tr>
                 <tr>
                   <td className={scss.tableFooter}>Income: </td>
-                  <td className={scss.tableFooter__income}>27 350.00</td>
+                  <td className={scss.tableFooter__income}>
+                    {stat.incomePerMonth
+                      ? stat.incomePerMonth.toLocaleString('uk-ua', {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })
+                      : 0}
+                  </td>
                 </tr>
               </tfoot>
             </table>
