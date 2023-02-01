@@ -14,24 +14,6 @@ const SettingsRemoveCategory = () => {
     dispatch(userOperations.removeCategory(id));
   }
 
-  function addDeleteButton(item) {
-    if (item._id === '10') {
-      return;
-    }
-
-    return (
-      <button
-        onClick={() => deleteCategory(item._id)}
-        type="button"
-        className={s.buttonDelete}
-      >
-        <svg className={s.svg}>
-          <use href={`${sprite}#icon-cancel-circle`}></use>
-        </svg>
-      </button>
-    );
-  }
-
   return (
     <div className={s.removeContainer}>
       <p className={s.advise}>
@@ -41,7 +23,17 @@ const SettingsRemoveCategory = () => {
         {categories.map(item => (
           <li key={item._id} className={s.categoriesItem} id={item._id}>
             {item.name}
-            {addDeleteButton(item)}
+            {item._id !== '10' ? (
+              <button
+                onClick={() => deleteCategory(item._id)}
+                type="button"
+                className={s.buttonDelete}
+              >
+                <svg className={s.svg}>
+                  <use href={`${sprite}#icon-cancel-circle`}></use>
+                </svg>
+              </button>
+            ) : null}
           </li>
         ))}
       </ul>
