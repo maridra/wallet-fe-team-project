@@ -2,28 +2,34 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import authOperations from "redux/auth/authOperations";
 import { authSelectors } from "redux/auth/authSelectors";
-import ModalUniversal from "../ModalUniversal";
 import s from "../SuccessRegistrationModal/SuccessRegistrationModal.module.scss";
-import {ReactComponent as SuccessIcon} from "../../../assets/Images/login/success.svg"
+import { ReactComponent as SuccessIcon } from "../../../assets/Images/login/success.svg";
+import { createPortal } from "react-dom";
+
+const modalRoot = document.querySelector('#modal-root');
+
 
 const SuccessRegistrationModal = () => {
   const dispatch = useDispatch();
   const [msg, setMsg] = useState('');
-
+  
   const email = useSelector(authSelectors.getEmail);
 
   const resendLetter = () => {
     dispatch(authOperations.resendVerification({ email }))
       .then((response) => {
         if (response.payload.status === "success") {
-          setMsg("The link has beeen sent. Check your email.")
+          setMsg("The link has beeen sent. Check your email.");
         }
-    })
+        if (response.payload === "Request failed with status code 409") {
+          setMsg(`User with email - ${email}, already verified`)
+        }
+      })
   }
 
-  return (
-    <>
-      <ModalUniversal>
+  return createPortal(
+    <div className={s.modal__backdrop}>
+      <div className={s.modal__content}>
         <div className={s.successBox}>
           <SuccessIcon className={s.successIcon} />
           <h1 className={s.successText}>Registration successful</h1>
@@ -32,8 +38,9 @@ const SuccessRegistrationModal = () => {
           <button type="button" className={s.resendBtn} onClick={resendLetter}>resend</button>
           <p className={s.msg}>{msg}</p>
         </div>
-      </ModalUniversal>
-    </>
+      </div>
+    </div>,
+    modalRoot
   )
 }
 

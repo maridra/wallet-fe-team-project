@@ -39,6 +39,8 @@
   justify-content: center;
   max-width: 480px;
   height: 100vh;
+  padding-top: 32px;
+  padding-bottom: 36px;
 
   @include mq(tab) {
     flex-direction: column;
@@ -113,5 +115,14 @@
     padding-bottom: 52px;
     background-color: rgba(255, 255, 255, 0.4);
     backdrop-filter: blur(25px);
+  }
+}
+
+@media (orientation: landscape) {
+  .back {
+    height: auto;
+  }
+  .registerContainer{
+    height: auto;
   }
 }
