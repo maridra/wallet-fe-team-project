@@ -17,6 +17,9 @@ import { statisticReducer } from './statistic/statisticSlice';
 
 import { persistedUserReducer } from './user/userSlice';
 
+import { statisticReducer } from './statistic/statisticSlice';
+import { persistedUserReducer } from './user/userSlice';
+
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,

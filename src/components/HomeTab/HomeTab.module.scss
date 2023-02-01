@@ -44,7 +44,7 @@
 .tableRow {
   display: flex;
   width: 704px;
-  height: 54px;
+  height: 52px;
   padding: 0 20px;
   align-items: center;
 
@@ -73,6 +73,10 @@
   text-align: left;
 }
 
+.tableRowItem:nth-child(2) {
+  padding-left: 16px;
+}
+
 .tableRowItem:nth-last-child(-n + 2) {
   text-align: right;
 }
@@ -94,24 +98,48 @@
 }
 
 .date {
-  width: 98px;
-}
-.type {
-  width: 78px;
-}
-.category {
-  width: 138px;
-}
-.comment {
-  width: 148px;
+  width: 103px;
 
   @include mq(desk) {
-    width: 159px;
+    width: 110px;
+  }
+}
+.type {
+  width: 83px;
+
+  @include mq(desk) {
+    width: 83px;
+  }
+}
+.category {
+  width: 140px;
+
+  @include mq(desk) {
+    width: 146px;
+  }
+}
+.comment {
+  width: 153px;
+
+  @include mq(desk) {
+    width: 153px;
   }
 }
 .sum {
-  width: 74px;
+  width: 65px;
+
+  @include mq(desk) {
+    width: 75px;
+  }
 }
+.balance {
+  width: 120px;
+
+  @include mq(desk) {
+    width: 110px;
+  }
+}
+
 .sumColorIncome {
   color: #24cca7;
   font-weight: 700;
@@ -119,7 +147,4 @@
 .sumColorExpense {
   color: #ff6596;
   font-weight: 700;
-}
-.balance {
-  width: 128px;
 }
