@@ -93,7 +93,7 @@ const LoginForm = () => {
             </label>
             <label className={s.label}>
               <Field
-                type="password"
+                type={type}
                 name="password"
                 placeholder="Password"
                 autoComplete="true"
