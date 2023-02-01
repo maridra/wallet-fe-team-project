@@ -9,9 +9,7 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import authOperations from 'redux/auth/authOperations';
 import classNames from 'classnames';
-import { Icon } from 'react-icons-kit'
-import {eye} from 'react-icons-kit/feather/eye'
-import {eyeOff} from 'react-icons-kit/feather/eyeOff'
+import { BiHide, BiShow } from "react-icons/bi";
 
 const LoginForm = () => {
   const initialValues = {
@@ -28,19 +26,16 @@ const LoginForm = () => {
     dispatch(authOperations.logIn({ email, password }));
   };
 
-  const [type, setType]=useState('password');
-  const [icon, setIcon]=useState(eyeOff);
+  const [type, setType] = useState('password');
 
-  const handleToggle=()=>{    
-    if(type==='password'){
-      setIcon(eye);      
-      setType('text');
-    }
-    else{
-      setIcon(eyeOff);     
-      setType('password');
-    }
+  const showPassword = () => {
+    setType("text")
   }
+
+  const hidePassword = () => {
+    setType("password")
+  }
+
 
   const SignUpSchema = Yup.object().shape({
     email: Yup.string()
@@ -114,8 +109,11 @@ const LoginForm = () => {
               {errors.password && touched.password && (
                 <div className={s.errorField}>{errors.password}</div>
               )}
-            <span onClick={handleToggle} className={s.passwordIcon}><Icon icon={icon} size={20}/></span>
-
+              {(type === "password")
+                ? <span className={s.hideIcon}>
+                <BiHide className={s.icon} onMouseDown={showPassword} /></span>
+                : <span className={s.showIcon} onMouseUp={hidePassword}>
+                <BiShow className={s.icon} /></span>}
             </label>
             <button type="submit" className={s.loginBtn}>
               log in

@@ -147,3 +147,24 @@
     margin-right: auto;
   }
 }
+
+.icon {
+  width: 25px;
+  height: 25px;
+}
+
+.hideIcon {
+  position: absolute;
+  cursor: pointer;
+  right: 6px;
+  top: 3px;
+  color: #e0e0e0;
+}
+
+.showIcon {
+  position: absolute;
+  cursor: pointer;
+  right: 6px;
+  top: 3px;
+  color: var(--text-green-color);
+}

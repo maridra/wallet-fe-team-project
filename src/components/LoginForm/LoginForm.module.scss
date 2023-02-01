@@ -1,8 +1,8 @@
 @import 'assets/styles/index.scss';
 
 .formContainer {
-  padding-top: 107px;
-  padding-bottom: 107px;
+  padding-top: 70px;
+  padding-bottom: 20px;
   background-color: #ffffff;
 
   @include mq(tab) {
@@ -151,4 +151,25 @@
   &:hover {
     color: var(--text-green-color);
   }
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+}
+
+.hideIcon {
+  position: absolute;
+  cursor: pointer;
+  right: 6px;
+  top: 3px;
+  color: #e0e0e0;
+}
+
+.showIcon {
+  position: absolute;
+  cursor: pointer;
+  right: 6px;
+  top: 3px;
+  color: var(--text-green-color);
 }
