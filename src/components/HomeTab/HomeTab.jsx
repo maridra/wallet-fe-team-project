@@ -69,6 +69,14 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
       return '-';
     }
   }
+
+  function dateMaker(item) {
+    const date = item.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, `$3.$2.$1`);
+    const leftPart = date.slice(0, 6);
+    const rightPart = date.slice(-2);
+    const formatDate = leftPart + rightPart;
+    return formatDate;
+  }
   return (
     <>
       <table className={s.table}>
@@ -90,9 +98,7 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
           {sortedTransactions.map(item => (
             <tr key={item._id} className={s.tableRow}>
               <td className={`${s.tableRowItem} ${s.date}`}>
-                {item.date
-                  .replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$3.$2.$1')
-                  .slice(0, -2)}
+                {dateMaker(item)}
               </td>
               <td className={`${s.tableRowItem} ${s.type}`}>
                 {typeChanger(item)}
