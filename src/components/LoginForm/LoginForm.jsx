@@ -79,6 +79,7 @@ const LoginForm = () => {
                 type="password"
                 name="password"
                 placeholder="Password"
+                autoComplete="true"
                 className={classNames(s.input, {
                   [s.errorInput]: errors.password && touched.password,
                   [s.validInput]: !errors.password && touched.password,
