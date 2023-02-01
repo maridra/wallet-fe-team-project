@@ -3,6 +3,7 @@ import s from './SettingsAddCategory.module.scss';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import userOperations from 'redux/user/userOperations';
+import { Notify } from 'notiflix';
 
 const SettingsAddCategory = () => {
   const [newCategory, setNewCategory] = useState('');
@@ -14,7 +15,10 @@ const SettingsAddCategory = () => {
 
   const addCategory = e => {
     e.preventDefault();
-    dispatch(userOperations.addCategory(newCategory));
+    if (newCategory.trim() === '') {
+      return Notify.failure('The category is not allowed to be empty');
+    }
+    dispatch(userOperations.addCategory(newCategory.trim()));
     setNewCategory('');
   };
 
