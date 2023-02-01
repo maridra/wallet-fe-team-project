@@ -28,7 +28,8 @@ export const financeSlice = createSlice({
       .addCase(updateTransactionsNew.rejected, handleRejected)
       .addCase(updateTransactionsNew.fulfilled, (state, action) => {
         state.data = action.payload?.transactions;
-        state.totalBalance = action.payload?.remainingBalance;
+        state.totalBalance =
+          action.payload?.transactions[0]?.owner?.totalBalance;
         state.isLoggedIn = true;
         state.isLoading = false;
       })
@@ -36,8 +37,8 @@ export const financeSlice = createSlice({
       .addCase(addTransaction.pending, handlePending)
       .addCase(addTransaction.rejected, handleRejected)
       .addCase(addTransaction.fulfilled, (state, action) => {
-        state.data = [...state.data, { ...action.payload }];
-        state.totalBalance = action.payload.remainingBalance;
+        state.data = [...state.data, { ...action.payload.transaction }];
+        state.totalBalance = action.payload?.totalBalance;
         state.isLoading = false;
       });
   },

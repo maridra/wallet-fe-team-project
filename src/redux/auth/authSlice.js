@@ -27,8 +27,11 @@ export const authSlice = createSlice({
   reducers: {
     Unauthorized: {
       reducer(state) {
-        state.isAuth = false;
-        state.token = null;
+        state.token = initialState.token;
+        state.loading = initialState.loading;
+        state.error = initialState.error;
+        state.isAuth = initialState.isAuth;
+        state.isVerified = initialState.isVerified;
       },
     },
   },
@@ -51,17 +54,19 @@ export const authSlice = createSlice({
         state.token = action.payload.data.token;
         state.loading = false;
         state.isAuth = true;
+        state.isVerified = true;
       })
 
       // LOGOUT
       .addCase(authOperations.logOut.pending, handlePending)
       .addCase(authOperations.logOut.rejected, handleRejected)
       .addCase(authOperations.logOut.fulfilled, state => {
-        state.user = initialState.user;
+        // state.user = initialState.user;
         state.token = initialState.token;
         state.loading = initialState.loading;
         state.error = initialState.error;
         state.isAuth = initialState.isAuth;
+        state.isVerified = initialState.isVerified;
       })
 
       // REFRESH
@@ -136,7 +141,7 @@ export const authSlice = createSlice({
 const persistConfig = {
   key: 'leopards/wallet',
   storage,
-  whitelist: ['token', 'user'],
+  whitelist: ['token', 'user', 'isVerified'],
 };
 
 export const { Unauthorized } = authSlice.actions;

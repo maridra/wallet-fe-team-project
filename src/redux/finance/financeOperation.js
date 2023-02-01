@@ -41,9 +41,7 @@ export const addTransaction = createAsyncThunk(
     try {
       const { data } = await axiosBaseUrl.post('/transactions', credentials);
 
-      const transaction = data.data.transaction;
-
-      return transaction;
+      return data.data;
     } catch (e) {
       hardcoreLogout(e, dispatch);
       Notify.failure(e.message);
