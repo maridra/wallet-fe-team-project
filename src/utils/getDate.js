@@ -1,7 +1,7 @@
 const getDate = e => {
   let oldDate;
   if (e) {
-    oldDate = new Date(Date.parse(e._d));
+    oldDate = new Date(Date.parse(e));
   } else {
     oldDate = new Date();
   }

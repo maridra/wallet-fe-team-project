@@ -156,7 +156,7 @@ const StatisticForm = () => {
   return (
     <>
       <div className={scss.sectionTMP}>
-        <h1 className={scss.title}>Statictics</h1>
+        <h1 className={scss.title}>Statistics</h1>
         <div className={scss.mainBox}>
           <div className={scss.doughnut}>
             <Doughnut data={data} options={options} plugins={[textCenter]} />

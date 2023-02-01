@@ -2,62 +2,90 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import Datetime from 'react-datetime';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import 'react-datetime/css/react-datetime.css';
 import { RiCalendar2Line } from 'react-icons/ri';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 import getDate from 'utils/getDate';
 import scss from './ModalAddTransactionForm.module.scss';
 import ModalAddTransactionFormMenu from './ModalAddTransactionFormMenu/ModalAddTransactionFormMenu';
+import financeOperation from 'redux/finance/financeOperation';
 
 const schema = yup.object().shape({
-  sum: yup.number().min(0.01).max(2500000).required(),
+  amount: yup.number().min(0.01).max(2500000).required(),
 });
 const initialValues = {
-  sum: '',
+  amount: '',
   comment: '',
 };
 
 const ModalAddTransactionForm = prop => {
   const { checkboxStatus, onClick } = prop;
+  const [bekDate, setBekDate] = useState(new Date().toISOString());
   const [date, setDate] = useState(getDate());
   const [open, setOpen] = useState(false);
+  const [categoryId, setCategoryId] = useState('10');
   const [categoryValue, setCategoryValue] = useState('Other expenses');
 
-  const createDate = date => {
-    setDate(getDate(date));
+  const dispatch = useDispatch();
+
+  const createDate = ({ _d }) => {
+    setBekDate(_d.toISOString());
+    setDate(getDate(_d));
   };
 
   const handleOpen = () => {
     setOpen(!open);
   };
 
-  const addValueCategory = e => {
-    setCategoryValue(e.currentTarget.textContent);
+  const addValueCategory = (_id, name) => {
+    setCategoryId(_id);
+    setCategoryValue(name);
   };
 
   const handleSubmit = (values, { resetForm }) => {
-    const { sum, comment } = values;
+    const { amount, comment } = values;
 
     if (checkboxStatus) {
       if (comment === '') {
-        const formValues = { sum, date };
-        console.log(formValues);
+        const formValues = {
+          transactionType: checkboxStatus,
+          amount: Number(amount),
+          date: bekDate,
+        };
+        dispatch(financeOperation.addTransaction(formValues));
         onClick();
         return;
       }
-      const formValues = { ...values, date };
-      console.log(formValues);
+      const formValues = {
+        transactionType: checkboxStatus,
+        comment,
+        amount: Number(amount),
+        date: bekDate,
+      };
+      dispatch(financeOperation.addTransaction(formValues));
       onClick();
       return;
     }
     if (comment === '') {
-      const formValues = { category: categoryValue, sum, date };
-      console.log(formValues);
+      const formValues = {
+        transactionType: checkboxStatus,
+        category: categoryId,
+        amount: Number(amount),
+        date: bekDate,
+      };
+      dispatch(financeOperation.addTransaction(formValues));
       onClick();
       return;
     }
-    const formValues = { category: categoryValue, ...values, date };
-    console.log(formValues);
+    const formValues = {
+      transactionType: checkboxStatus,
+      category: categoryId,
+      comment,
+      amount: Number(amount),
+      date: bekDate,
+    };
+    dispatch(financeOperation.addTransaction(formValues));
     onClick();
     return;
   };
@@ -80,6 +108,11 @@ const ModalAddTransactionForm = prop => {
         </button>
       </div>
     );
+  };
+
+  const today = new Date();
+  const disableFutureDt = current => {
+    return current.isBefore(today);
   };
 
   return (
@@ -117,7 +150,7 @@ const ModalAddTransactionForm = prop => {
               </button>
               {open && (
                 <ModalAddTransactionFormMenu
-                  onClick={addValueCategory}
+                  handleCategory={addValueCategory}
                 ></ModalAddTransactionFormMenu>
               )}
             </label>
@@ -127,12 +160,12 @@ const ModalAddTransactionForm = prop => {
               className={scss.addFormInputSum}
               type="text"
               placeholder="0.00"
-              name="sum"
+              name="amount"
               autoComplete="off"
             ></Field>
             <ErrorMessage
               className={scss.errorMessage}
-              name="sum"
+              name="amount"
               component="div"
               render={() => (
                 <div className={scss.error}>
@@ -141,17 +174,18 @@ const ModalAddTransactionForm = prop => {
               )}
             ></ErrorMessage>
           </label>
-          <label>
+          <label className={scss.dateBox}>
             <Datetime
               timeFormat={false}
               renderInput={renderCalendarInput}
+              isValidDate={disableFutureDt}
               dateFormat="DD.MM.YYYY"
               closeOnSelect={true}
               initialValue={new Date()}
               onChange={createDate}
             />
           </label>
-          <label>
+          <label className={scss.commentBox}>
             <Field
               className={scss.addFormTextarea}
               name="comment"

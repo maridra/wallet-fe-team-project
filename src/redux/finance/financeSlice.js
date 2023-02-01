@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { updateTransactions } from './financeOperation';
+import { addTransaction, updateTransactionsNew } from './financeOperation';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 
@@ -23,22 +23,23 @@ export const financeSlice = createSlice({
   initialState,
   extraReducers: builder => {
     builder
-      .addCase(updateTransactions.pending, handlePending)
-      .addCase(updateTransactions.rejected, handleRejected)
-      .addCase(updateTransactions.fulfilled, (state, action) => {
-        state.data = action.payload.transactions;
-        state.totalBalance = action.payload.remainingBalance;
+
+      .addCase(updateTransactionsNew.pending, handlePending)
+      .addCase(updateTransactionsNew.rejected, handleRejected)
+      .addCase(updateTransactionsNew.fulfilled, (state, action) => {
+        state.data = action.payload?.transactions;
+        state.totalBalance = action.payload?.remainingBalance;
         state.isLoggedIn = true;
+        state.isLoading = false;
+      })
+
+      .addCase(addTransaction.pending, handlePending)
+      .addCase(addTransaction.rejected, handleRejected)
+      .addCase(addTransaction.fulfilled, (state, action) => {
+        state.data = [...state.data, { ...action.payload }];
+        state.totalBalance = action.payload.remainingBalance;
         state.isLoading = false;
       });
-    /*       .addCase(getTotalBalance.pending, handlePending)
-      .addCase(getTotalBalance.fulfilled, (state, { payload }) => {
-        const lastTransaction = payload.data.transactions.pop();
-        state.totalBalance = lastTransaction.remainingBalance;
-        state.isLoading = false;
-        state.isLoggedIn = true;
-      })
-      .addCase(getTotalBalance.rejected, handleRejected); */
   },
 });
 
