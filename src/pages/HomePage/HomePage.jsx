@@ -16,8 +16,8 @@ import Navigation from '../../components/Navigation/Navigation';
 import s from './HomePage.module.scss';
 
 const HomePage = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [fetching, setFetching] = useState(true);
+  const [currentPage, setCurrentPage] = useState(2);
+  const [fetching, setFetching] = useState(false);
   let location = useLocation();
   const isStatistic = location.pathname === '/statistic';
   const isCurrency = location.pathname === '/currency';

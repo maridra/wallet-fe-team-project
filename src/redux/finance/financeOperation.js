@@ -24,11 +24,10 @@ export const updateTransactions = createAsyncThunk(
   'finance/update',
   async (_, { dispatch }) => {
     try {
-      const { data } = await axiosBaseUrl.get('transactions');
+      const { data } = await axiosBaseUrl.get(`transactions?page=1&limit=20`);
       const transactions = data.data.transactions;
-      const remainingBalance = [...transactions].pop().remainingBalance;
 
-      return { transactions, remainingBalance };
+      return { transactions };
     } catch (e) {
       hardcoreLogout(e, dispatch);
     }
@@ -52,6 +51,7 @@ export const addTransaction = createAsyncThunk(
 const financeOperation = {
   addTransaction,
   updateTransactionsNew,
+  updateTransactions,
 };
 
 export default financeOperation;
