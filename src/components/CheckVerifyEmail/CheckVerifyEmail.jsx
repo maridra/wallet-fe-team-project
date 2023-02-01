@@ -7,7 +7,7 @@ import { authSelectors } from "redux/auth/authSelectors";
 import s from "../CheckVerifyEmail/CheckVerifyEmail.module.scss";
 import {ReactComponent as SuccessIcon} from "../../assets/Images/login/success.svg"
 import {ReactComponent as ErrorIcon} from "../../assets/Images/login/error.svg"
-
+import PageWrapper from "components/PageWrapper/PageWrapper";
 
 const CheckVerifyEmail = () => {
   const [verified, setVerified] = useState(false);
@@ -16,7 +16,6 @@ const CheckVerifyEmail = () => {
   const verificationToken = param.verificationToken;
   const token = useSelector(authSelectors.getToken);
   const isLoading = useSelector(authSelectors.isLoading);
-  const error = useSelector(authSelectors.isError);
 
   useEffect(() => {
     if (verificationToken === token) {
@@ -34,25 +33,23 @@ const CheckVerifyEmail = () => {
 
 
   return (
-    <div className={s.back}>
-      <div className={s.blur}>
-        <div className={s.container}>
-          {verified && !isLoading &&
-            <div className={s.containerCheck}>
-              <SuccessIcon className={s.successIcon} />
-              <div className={s.wrapper}>
-                <h1 className={s.textMsg}>Email verified successfully</h1>
-                <Link to="/login" className={s.link}>LOGIN</Link>
-              </div>
+    <>
+      <PageWrapper>
+        {verified && !isLoading &&
+          <div className={s.containerCheck}>
+            <SuccessIcon className={s.successIcon} />
+            <div className={s.wrapper}>
+              <h1 className={s.textMsg}>Email verified successfully</h1>
+              <Link to="/login" className={s.link}>LOGIN</Link>
             </div>
-          }
-          {(!verified && !isLoading) && (!isLoading && error) && <div className={s.containerCheck}>
-              <ErrorIcon className={s.successIcon}/>
-              <h1 className={s.textMsg}>404 Not Found</h1>
-            </div>}
-        </div>
-      </div>
-    </div>
+          </div>
+        }
+        {(!verified && !isLoading) && (!isLoading && !token) && <div className={s.containerCheck}>
+          <ErrorIcon className={s.successIcon} />
+        <h1 className={s.textMsg}>404 Not Found</h1>
+        </div>}
+      </PageWrapper>
+    </>
   )
 }
 

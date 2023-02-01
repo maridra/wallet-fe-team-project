@@ -1,35 +1,5 @@
 @import 'assets/styles/index.scss';
 
-.back {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  background-color: #ffffff;
-
-  @include mq(tab) {
-    background-color: #e7eaf2;
-    background-image:
-      url('../../assets/Images/login/Ellipse\ 1.png'),
-      url('../../assets/Images/login/Ellipse\ 2.png');
-    background-repeat: no-repeat;
-    background-position: left bottom, right top;
-  }
-
-  @include mq(desk) {
-    height: 100vh;
-    background-image:
-      url('../../assets/Images/login/Ellipse\ 1_desk.png'),
-      url('../../assets/Images/login/Ellipse\ 2_desk.png');
-  }
-}
-
-.blur {
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(25px);
-}
-
 .successIcon {
   width: 100px;
   height: 100px;
@@ -43,6 +13,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin-top: -80px;
   gap: 40px;
 }
 
