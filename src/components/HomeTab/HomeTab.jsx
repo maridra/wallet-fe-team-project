@@ -90,7 +90,9 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
           {sortedTransactions.map(item => (
             <tr key={item._id} className={s.tableRow}>
               <td className={`${s.tableRowItem} ${s.date}`}>
-                {item.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$3.$2.$1')}
+                {item.date
+                  .replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$3.$2.$1')
+                  .slice(0, -2)}
               </td>
               <td className={`${s.tableRowItem} ${s.type}`}>
                 {typeChanger(item)}
