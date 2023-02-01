@@ -23,15 +23,17 @@ const SettingsRemoveCategory = () => {
         {categories.map(item => (
           <li key={item._id} className={s.categoriesItem} id={item._id}>
             {item.name}
-            <button
-              onClick={() => deleteCategory(item._id)}
-              type="button"
-              className={s.buttonDelete}
-            >
-              <svg className={s.svg}>
-                <use href={`${sprite}#icon-cancel-circle`}></use>
-              </svg>
-            </button>
+            {item._id !== '10' ? (
+              <button
+                onClick={() => deleteCategory(item._id)}
+                type="button"
+                className={s.buttonDelete}
+              >
+                <svg className={s.svg}>
+                  <use href={`${sprite}#icon-cancel-circle`}></use>
+                </svg>
+              </button>
+            ) : null}
           </li>
         ))}
       </ul>
