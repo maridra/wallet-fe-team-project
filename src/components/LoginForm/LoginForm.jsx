@@ -103,6 +103,9 @@ const LoginForm = () => {
             <Link to="/SignUp" className={s.registerBtn}>
               register
             </Link>
+            <Link to="/forgot-password" className={s.forgotLink}>
+              Forgot password?
+            </Link>
           </Form>
         )}
       </Formik>

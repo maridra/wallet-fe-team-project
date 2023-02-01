@@ -17,6 +17,13 @@ const SettingsPage = lazy(() => import('../pages/SettingsPage/SettingsPage'));
 const NotFound = lazy(() => import('../pages/NotFound/NotFound'));
 const RegisterPage = lazy(() => import('../pages/RegisterPage/RegisterPage'));
 const LoginPage = lazy(() => import('../pages/LoginPage/LoginPage'));
+const ForgotPasswordPage = lazy(() =>
+  import('../pages/ForgotPassword/ForgotPassword')
+);
+const CreatePasswordPage = lazy(() =>
+  import('../pages/CreatePassword/CreatePassword')
+);
+
 const CheckVerifyEmail = lazy(() =>
   import('../components/CheckVerifyEmail/CheckVerifyEmail')
 );
@@ -64,6 +71,18 @@ export const App = () => {
           <Route
             path="/login"
             element={<PublicRoute redirectTo="/" children={<LoginPage />} />}
+          />
+          <Route
+            path="/forgot-password"
+            element={
+              <PublicRoute redirectTo="/" children={<ForgotPasswordPage />} />
+            }
+          />
+          <Route
+            path="/create-password"
+            element={
+              <PublicRoute redirectTo="/" children={<CreatePasswordPage />} />
+            }
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
