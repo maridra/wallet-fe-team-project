@@ -12,9 +12,7 @@ import { useDispatch } from "react-redux";
 import authOperations from "redux/auth/authOperations";
 import classNames from "classnames";
 import { toggleShowModalSuccessRegistration } from "redux/modal/modalSlice";
-import { Icon } from 'react-icons-kit'
-import {eye} from 'react-icons-kit/feather/eye'
-import {eyeOff} from 'react-icons-kit/feather/eyeOff'
+import { BiHide, BiShow } from "react-icons/bi";
 
 const RegisterForm = () => {
   const initialValues = {
@@ -39,18 +37,14 @@ const RegisterForm = () => {
       })
   }
 
-  const [type, setType]=useState('password');
-  const [icon, setIcon]=useState(eyeOff);
+  const [type, setType] = useState('password');
 
-  const handleToggle=()=>{    
-    if(type==='password'){
-      setIcon(eye);      
-      setType('text');
-    }
-    else{
-      setIcon(eyeOff);     
-      setType('password');
-    }
+  const showPassword = () => {
+    setType("text")
+  }
+
+  const hidePassword = () => {
+    setType("password")
   }
 
   const SignUpSchema = Yup.object().shape({
@@ -132,7 +126,11 @@ const RegisterForm = () => {
               {errors.password && touched.password &&
                 <div className={s.errorField}>{errors.password}
                 </div>}
-              <span onClick={handleToggle} className={s.passwordIcon}><Icon icon={icon} size={20}/></span>
+              {(type === "password")
+                ? <span className={s.hideIcon}>
+                <BiHide className={s.icon} onMouseDown={showPassword} /></span>
+                : <span className={s.showIcon} onMouseUp={hidePassword}>
+                <BiShow className={s.icon} /></span>}
           </label>
           <label className={s.label}>
               <Field
