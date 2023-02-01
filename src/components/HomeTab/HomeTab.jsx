@@ -1,14 +1,41 @@
 import s from './HomeTab.module.scss';
 import React from 'react';
-import { updateTransactions } from 'redux/finance/financeOperation';
+import financeOperation from 'redux/finance/financeOperation';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { financeSelectors } from 'redux/finance/financeSelectors';
-import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAddTransactions';
+import { useRef } from 'react';
 import { useSelector } from 'react-redux';
+import { axiosBaseUrl } from '../../redux/tokenSettingsAxios';
 
-const HomeTab = () => {
+const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
   const dispatch = useDispatch();
+  const transactionArea = useRef();
+
+  async function fetchData(currentPage, dispatch) {
+    const { data } = await axiosBaseUrl.get(
+      `transactions?page=${currentPage}&limit=20`
+    );
+    await dispatch(financeOperation.updateTransactionsNew(data));
+    setCurrentPage(prevState => prevState + 1);
+    setFetching(false);
+  }
+  useEffect(() => {
+    if (fetching) {
+      fetchData(currentPage, dispatch);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetching]);
+
+  const scrollHandler = e => {
+    if (
+      e.target.scrollHeight -
+        (e.target.scrollTop + transactionArea.current.clientHeight) <
+      100
+    ) {
+      setFetching(true);
+    }
+  };
 
   const transactions = useSelector(financeSelectors.getTransactions);
   const sortedTransactions = sortingTransaction(transactions);
@@ -42,9 +69,6 @@ const HomeTab = () => {
       return '-';
     }
   }
-  useEffect(() => {
-    dispatch(updateTransactions());
-  }, [dispatch]);
   return (
     <>
       <table className={s.table}>
@@ -58,11 +82,17 @@ const HomeTab = () => {
             <th className={`${s.tableTitle} ${s.balance}`}>Balance</th>
           </tr>
         </thead>
-        <tbody className={s.tableContent}>
+        <tbody
+          className={s.tableContent}
+          onScroll={scrollHandler}
+          ref={transactionArea}
+        >
           {sortedTransactions.map(item => (
             <tr key={item._id} className={s.tableRow}>
               <td className={`${s.tableRowItem} ${s.date}`}>
-                {item.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$3.$2.$1')}
+                {item.date
+                  .replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$3.$2.$1')
+                  .slice(0, -2)}
               </td>
               <td className={`${s.tableRowItem} ${s.type}`}>
                 {typeChanger(item)}
@@ -81,7 +111,6 @@ const HomeTab = () => {
           ))}
         </tbody>
       </table>
-      <ButtonAddTransactions />
     </>
   );
 };

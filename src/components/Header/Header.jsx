@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useLocation } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 import { IoExitOutline } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { ButtonAddTransactions } from 'components/ButtonAddTransactions/ButtonAddTransactions';
 import { modalSelectors } from 'redux/modal/modalSelectors';
-import { authSelectors } from 'redux/auth/authSelectors';
+import { userSelectors } from 'redux/user/userSelectors';
 
 import { Logo } from '../../assets/Images/login/Logo';
 import { toggleShowModalLogout } from 'redux/modal/modalSlice';
@@ -17,7 +17,9 @@ import s from './Header.module.scss';
 
 const Header = () => {
   const showModalLogout = useSelector(modalSelectors.showModalLogout);
-  const firstName = useSelector(authSelectors.getFirstName);
+  const firstName = useSelector(userSelectors.getFirstName);
+  const location = useLocation();
+  const locationPath = location.pathname;
 
   const dispatch = useDispatch();
   const handleAddBtn = () => {
@@ -51,6 +53,7 @@ const Header = () => {
         </div>
       </header>
       {showModalLogout && <ModalLogout />}
+      {locationPath === '/' && <ButtonAddTransactions />}
       <PageWrapper>
         <Outlet />
       </PageWrapper>

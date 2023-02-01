@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosBaseUrl, token } from '../tokenSettingsAxios';
 import { Notify } from 'notiflix';
+import userOperations from 'redux/user/userOperations';
+import hardcoreLogout from 'redux/utils/hardcoreLogout';
 
 const register = createAsyncThunk(
   'auth/register',
@@ -28,7 +30,7 @@ const register = createAsyncThunk(
 
 const logIn = createAsyncThunk(
   'auth/login',
-  async (credentials, { rejectWithValue }) => {
+  async (credentials, { rejectWithValue, dispatch }) => {
     const { email, password } = credentials;
     try {
       const { data } = await axiosBaseUrl.post('/auth/login', {
@@ -38,6 +40,7 @@ const logIn = createAsyncThunk(
 
       const currentToken = data.data.token;
       token.set(currentToken);
+      dispatch(userOperations.currentUser());
       return data;
     } catch (error) {
       const { data, status } = error.response;
@@ -57,28 +60,35 @@ const logIn = createAsyncThunk(
   }
 );
 
-const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
-  try {
-    await axiosBaseUrl.post('/auth/logout');
-    token.unset();
-  } catch (e) {
-    Notify.failure(e.message);
-    return thunkAPI.rejectWithValue(e.message);
+const logOut = createAsyncThunk(
+  'auth/logout',
+  async (_, { rejectWithValue, dispatch }) => {
+    try {
+      await axiosBaseUrl.post('/auth/logout');
+      token.unset();
+    } catch (e) {
+      hardcoreLogout(e, dispatch);
+      Notify.failure(e.message);
+      return rejectWithValue(e.message);
+    }
   }
-});
+);
 
 const refresh = createAsyncThunk(
   'auth/refresh',
-  async (_, { getState, rejectWithValue }) => {
+  async (_, { getState, rejectWithValue, dispatch }) => {
     try {
       const currentToken = getState().auth.token;
-      if (!currentToken) {
+      const isVerified = getState().auth.isVerified;
+      if (!currentToken || !isVerified) {
         throw new Error('Error');
       }
       token.set(currentToken);
+      dispatch(userOperations.currentUser());
       return 1;
-    } catch (error) {
-      return rejectWithValue(error.message);
+    } catch (e) {
+      hardcoreLogout(e, dispatch);
+      return rejectWithValue(e.message);
     }
   }
 );
@@ -108,7 +118,20 @@ const verifyEmail = createAsyncThunk(
   }
 );
 
-const addCategory = createAsyncThunk(
+const resendVerification = createAsyncThunk(
+  'users/verify',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosBaseUrl.post('/users/verify', credentials);
+      return data;
+    } catch (error) {
+      Notify.failure(error.message);
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+/* const addCategory = createAsyncThunk(
   'auth/addCategory',
   async (credentials, { _, getState }) => {
     const newCategory = credentials;
@@ -125,9 +148,9 @@ const addCategory = createAsyncThunk(
       return getState().auth.user.categories;
     }
   }
-);
+); */
 
-const removeCategory = createAsyncThunk(
+/* const removeCategory = createAsyncThunk(
   'auth/removeCategory',
   async (credentials, { _, getState }) => {
     const id = credentials;
@@ -143,8 +166,8 @@ const removeCategory = createAsyncThunk(
     }
   }
 );
-
-const updateAvatar = createAsyncThunk(
+ */
+/* const updateAvatar = createAsyncThunk(
   'auth/updateAvatar',
   async (data, thunkAPI) => {
     try {
@@ -160,33 +183,16 @@ const updateAvatar = createAsyncThunk(
       return thunkAPI.rejectWithValue(e.message);
     }
   }
-);
-
-const updateUserName = createAsyncThunk(
-  'auth/updateUserName',
-  async (data, thunkAPI) => {
-    try {
-      const response = await axiosBaseUrl.patch('/users/name', data);
-
-      Notify.success('User name succesfully updated');
-      return response.data.data.user.firstName;
-    } catch (e) {
-      Notify.failure(e.message);
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-);
+); */
 
 const authOperations = {
   register,
   logIn,
   logOut,
   refresh,
-  addCategory,
-  removeCategory,
-  updateAvatar,
+  /*   updateAvatar, */
   verifyEmail,
-  updateUserName,
+  resendVerification,
 };
 
 export default authOperations;

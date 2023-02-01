@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useLocation, Navigate } from 'react-router-dom';
 import Media from 'react-media';
+import { useState } from 'react';
 
 import { modalSelectors } from 'redux/modal/modalSelectors';
 
@@ -10,11 +11,13 @@ import Balance from 'components/Balance/Balance';
 import Currency from 'components/Currency/Currency';
 import HomeTabMobile from 'components/HomeTabMobile/HomeTabMobile';
 import HomeTab from 'components/HomeTab/HomeTab';
-import Navigation from 'components/Navigation/Navigation';
+import Navigation from '../../components/Navigation/Navigation';
 
 import s from './HomePage.module.scss';
 
 const HomePage = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [fetching, setFetching] = useState(true);
   let location = useLocation();
   const isStatistic = location.pathname === '/statistic';
   const isCurrency = location.pathname === '/currency';
@@ -39,7 +42,14 @@ const HomePage = () => {
                 <Navigation />
                 <div className={s.financeWrapper__dashboard}>
                   {!isStatistic && !isCurrency && <Balance />}
-                  {!isStatistic && !isCurrency && <HomeTabMobile />}
+                  {!isStatistic && !isCurrency && (
+                    <HomeTabMobile
+                      currentPage={currentPage}
+                      setCurrentPage={setCurrentPage}
+                      fetching={fetching}
+                      setFetching={setFetching}
+                    />
+                  )}
                 </div>
                 {isCurrency && <Currency />}
                 {isStatistic && <StatisticPage />}
@@ -57,7 +67,14 @@ const HomePage = () => {
                     <Currency />
                   </div>
                   {isStatistic && <StatisticPage />}
-                  {!isStatistic && <HomeTab />}
+                  {!isStatistic && (
+                    <HomeTab
+                      currentPage={currentPage}
+                      setCurrentPage={setCurrentPage}
+                      fetching={fetching}
+                      setFetching={setFetching}
+                    />
+                  )}
                 </div>
               </>
             )}
@@ -71,7 +88,14 @@ const HomePage = () => {
                     <Currency />
                   </div>
                   {isStatistic && <StatisticPage />}
-                  {!isStatistic && <HomeTab />}
+                  {!isStatistic && (
+                    <HomeTab
+                      currentPage={currentPage}
+                      setCurrentPage={setCurrentPage}
+                      fetching={fetching}
+                      setFetching={setFetching}
+                    />
+                  )}
                 </div>
               </>
             )}

@@ -2,7 +2,7 @@ import React from 'react';
 import s from './SettingsAddCategory.module.scss';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import authOperations from 'redux/auth/authOperations';
+import userOperations from 'redux/user/userOperations';
 
 const SettingsAddCategory = () => {
   const [newCategory, setNewCategory] = useState('');
@@ -14,7 +14,7 @@ const SettingsAddCategory = () => {
 
   const addCategory = e => {
     e.preventDefault();
-    dispatch(authOperations.addCategory(newCategory));
+    dispatch(userOperations.addCategory(newCategory));
     setNewCategory('');
   };
 

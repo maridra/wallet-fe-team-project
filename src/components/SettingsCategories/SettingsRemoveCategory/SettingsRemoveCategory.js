@@ -2,16 +2,16 @@ import React from 'react';
 import s from './SettingsRemoveCategory.module.scss';
 import sprite from '../../../assets/Images/login/symbol-defs.svg';
 import { useSelector } from 'react-redux';
-import { authSelectors } from 'redux/auth/authSelectors';
+import { userSelectors } from 'redux/user/userSelectors';
 import { useDispatch } from 'react-redux';
-import authOperations from 'redux/auth/authOperations';
+import userOperations from 'redux/user/userOperations';
 
 const SettingsRemoveCategory = () => {
-  const categories = useSelector(authSelectors.getCategories);
+  const categories = useSelector(userSelectors.getCategories);
   const dispatch = useDispatch();
 
   function deleteCategory(id) {
-    dispatch(authOperations.removeCategory(id));
+    dispatch(userOperations.removeCategory(id));
   }
 
   return (

@@ -29,6 +29,8 @@
   background: #ffffff;
   box-shadow: var(--modal-box-shadow);
   min-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
 
   @include mq(mob-only) {
     width: 100vw;

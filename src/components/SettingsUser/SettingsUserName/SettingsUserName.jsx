@@ -2,10 +2,11 @@ import React from 'react';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import classNames from 'classnames';
+import { Notify } from 'notiflix';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { authSelectors } from 'redux/auth/authSelectors';
-import authOperations from '../../../redux/auth/authOperations';
+import { userSelectors } from 'redux/user/userSelectors';
+import userOperations from 'redux/user/userOperations';
 
 import { ReactComponent as Name } from '../../../assets/Images/login/name.svg';
 
@@ -13,18 +14,22 @@ import s from './SettingsUserName.module.scss';
 
 export default function SettingsUserName() {
   const dispatch = useDispatch();
-  const firstName = useSelector(authSelectors.getFirstName);
+  const firstName = useSelector(userSelectors.getFirstName);
 
   const initialValues = {
-    firstName: firstName,
+    newFirstName: firstName,
   };
 
-  const onSubmit = ({ firstName }) => {
-    dispatch(authOperations.updateUserName({ firstName }));
+  const onSubmit = ({ newFirstName }) => {
+    if (newFirstName !== firstName) {
+      dispatch(userOperations.updateUserName({ firstName: newFirstName }));
+      return;
+    }
+    Notify.info('The name remained unchanged!');
   };
 
   const SignUpSchema = Yup.object().shape({
-    firstName: Yup.string()
+    newFirstName: Yup.string()
       .matches(/(^[а-яА-ЯёЁa-zA-Z0-9]+$)/, 'Only letters and numbers')
       .min(1)
       .max(12, 'Too long name')
@@ -42,21 +47,21 @@ export default function SettingsUserName() {
           <label className={s.label}>
             <Field
               type="text"
-              name="firstName"
+              name="newFirstName"
               placeholder="First name"
               className={classNames(s.input, {
-                [s.errorInput]: errors.firstName && touched.firstName,
-                [s.validInput]: !errors.firstName && touched.firstName,
+                [s.errorInput]: errors.newFirstName && touched.newFirstName,
+                [s.validInput]: !errors.newFirstName && touched.newFirstName,
               })}
-              value={values.firstName}
+              value={values.newFirstName}
               onChange={handleChange}
             />
             <Name className={classNames(s.inputIcon, s.validInputIcon)} />
-            {errors.firstName && touched.firstName && (
+            {errors.newFirstName && touched.newFirstName && (
               <Name className={classNames(s.inputIcon, s.errorInputIcon)} />
             )}
-            {errors.firstName && touched.firstName && (
-              <div className={s.errorField}>{errors.firstName}</div>
+            {errors.newFirstName && touched.newFirstName && (
+              <div className={s.errorField}>{errors.newFirstName}</div>
             )}
           </label>
           <button type="submit" className={s.submitBtn}>
