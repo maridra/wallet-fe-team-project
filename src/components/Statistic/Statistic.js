@@ -61,7 +61,6 @@ const StatisticForm = () => {
 
   const stat = useSelector(statisticSelectors.getStatistic);
   console.log('stat', stat);
-  console.log('balance', stat.totalBalance);
 
   const data = {
     labels: stat.expensesByPeriod.map(item => item.name),
@@ -70,7 +69,7 @@ const StatisticForm = () => {
         label: 'Total',
         data: stat.expensesByPeriod.map(item => item.amount),
         backgroundColor: [
-          'rgba(254, 208, 87, 1)',
+          '#FED057',
           'rgba(255, 216, 208, 1)',
           'rgba(253, 148, 152, 1)',
           'rgba(197, 186, 255, 1)',
@@ -163,10 +162,9 @@ const StatisticForm = () => {
                   <th>Sum</th>
                 </tr>
               </thead>
-
               <tbody>
                 {stat.expensesByPeriod.map(item => (
-                  <tr className={scss.tableRows}>
+                  <tr className={scss.tableRows} key={uuidv4()}>
                     <td className={scss.squareBeforeExpenses} id={item.name}>
                       {item.name}
                     </td>
