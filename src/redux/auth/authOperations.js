@@ -79,7 +79,8 @@ const refresh = createAsyncThunk(
   async (_, { getState, rejectWithValue, dispatch }) => {
     try {
       const currentToken = getState().auth.token;
-      if (!currentToken) {
+      const isVerified = getState().auth.isVerified;
+      if (!currentToken || !isVerified) {
         throw new Error('Error');
       }
       token.set(currentToken);
@@ -118,16 +119,17 @@ const verifyEmail = createAsyncThunk(
 );
 
 const resendVerification = createAsyncThunk(
-  'users/verify', async (credentials, { rejectWithValue }) => {
-  try {
-    const {data} = await axiosBaseUrl.post('/users/verify', credentials);
-    return data;
-  } catch (error) {
-    Notify.failure(error.message);
-    return rejectWithValue(error.message);
+  'users/verify',
+  async (credentials, { rejectWithValue }) => {
+    try {
+      const { data } = await axiosBaseUrl.post('/users/verify', credentials);
+      return data;
+    } catch (error) {
+      Notify.failure(error.message);
+      return rejectWithValue(error.message);
+    }
   }
-  }
-)
+);
 
 /* const addCategory = createAsyncThunk(
   'auth/addCategory',
@@ -190,7 +192,7 @@ const authOperations = {
   refresh,
   /*   updateAvatar, */
   verifyEmail,
-  resendVerification
+  resendVerification,
 };
 
 export default authOperations;
