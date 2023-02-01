@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { axiosBaseUrl } from '../tokenSettingsAxios';
 import { Notify } from 'notiflix';
-import hardcoreLogout from 'redux/utils/hardcoreLogout';
+import hardcoreLogout from '../utils/hardcoreLogout';
 
 export const currentUser = createAsyncThunk(
   'user/current',
