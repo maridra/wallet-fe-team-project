@@ -103,6 +103,13 @@
   color: rgb(255, 55, 55);
 }
 
+.passwordIcon{
+  position: absolute;
+  cursor: pointer;
+  right: 10px;
+  top: 3px;
+}
+
 .registerBtn {
   @extend %btnGreen;
   height: 50px;

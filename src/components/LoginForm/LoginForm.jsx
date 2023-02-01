@@ -9,6 +9,9 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import authOperations from 'redux/auth/authOperations';
 import classNames from 'classnames';
+import { Icon } from 'react-icons-kit'
+import {eye} from 'react-icons-kit/feather/eye'
+import {eyeOff} from 'react-icons-kit/feather/eyeOff'
 
 const LoginForm = () => {
   const initialValues = {
@@ -24,6 +27,20 @@ const LoginForm = () => {
     e.preventDefault();
     dispatch(authOperations.logIn({ email, password }));
   };
+
+  const [type, setType]=useState('password');
+  const [icon, setIcon]=useState(eyeOff);
+
+  const handleToggle=()=>{    
+    if(type==='password'){
+      setIcon(eye);      
+      setType('text');
+    }
+    else{
+      setIcon(eyeOff);     
+      setType('password');
+    }
+  }
 
   const SignUpSchema = Yup.object().shape({
     email: Yup.string()
@@ -76,7 +93,7 @@ const LoginForm = () => {
             </label>
             <label className={s.label}>
               <Field
-                type="password"
+                type={type}
                 name="password"
                 placeholder="Password"
                 autoComplete="true"
@@ -97,6 +114,8 @@ const LoginForm = () => {
               {errors.password && touched.password && (
                 <div className={s.errorField}>{errors.password}</div>
               )}
+            <span onClick={handleToggle} className={s.passwordIcon}><Icon icon={icon} size={20}/></span>
+
             </label>
             <button type="submit" className={s.loginBtn}>
               log in
