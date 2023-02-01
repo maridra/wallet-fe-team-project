@@ -330,6 +330,8 @@
 
 // before elements
 
+#Main expenses {
+}
 .squareBeforeExpenses {
   &:before {
     @extend %square;

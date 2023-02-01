@@ -165,11 +165,22 @@ const StatisticForm = () => {
               </thead>
 
               <tbody>
-                <tr className={scss.tableRows}>
+                {stat.expensesByPeriod.map(item => (
+                  <tr className={scss.tableRows}>
+                    <td className={scss.squareBeforeExpenses} id={item.name}>
+                      {item.name}
+                    </td>
+                    <td className={scss.tableRows__rightText}>
+                      {item.amount.toLocaleString('uk-ua', {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </td>
+                  </tr>
+                ))}
+                {/* <tr className={scss.tableRows}>
                   <td className={scss.squareBeforeExpenses}>Main Expenses</td>
-                  <td className={scss.tableRows__rightText}>
-                    {/* `{$stat.totalExpenses}` */}
-                  </td>
+                  <td className={scss.tableRows__rightText}></td>
                 </tr>
                 <tr className={scss.tableRows}>
                   <td className={scss.squareBeforeProducts}>Products</td>
@@ -204,7 +215,7 @@ const StatisticForm = () => {
                 <tr className={scss.tableRows}>
                   <td className={scss.squareBeforeOther}>Other Expenses</td>
                   <td className={scss.tableRows__rightText}>610.00</td>
-                </tr>
+                </tr> */}
               </tbody>
               <tfoot>
                 <tr className={scss.footer}>
