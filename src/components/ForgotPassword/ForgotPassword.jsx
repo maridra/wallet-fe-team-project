@@ -10,13 +10,10 @@ import passwordAPI from 'API/passwordRecoveryAPI';
 import { ReactComponent as Email } from '../../assets/Images/login/email.svg';
 import sprite from '../../assets/Images/login/symbol-defs.svg';
 import s from './ForgotPassword.module.scss';
-import { useSelector } from 'react-redux';
-import { authSelectors } from 'redux/auth/authSelectors';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState(null);
-  const verified = useSelector(authSelectors.isVerified);
 
   const initialValues = {
     email: '',
@@ -42,17 +39,10 @@ const ForgotPassword = () => {
       return;
     }
 
-    if (!verified) {
-      Notify.warning(`Email: ${email} not verified!`);
-      return;
-    }
-
     passwordAPI
       .forgotPasswordAPI(email)
       .then(res => setStatus(res.code))
-      .catch(error =>
-        Notify.failure(`User with email: ${email}, not found!`, error)
-      );
+      .catch(error => Notify.failure(error.message));
   };
 
   return (
