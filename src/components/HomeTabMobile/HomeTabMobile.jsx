@@ -31,6 +31,14 @@ const HomeTabMobile = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetching]);
+  
+  const checkTransactions = useSelector(financeSelectors.getTransactions);
+  useEffect(() => {
+    if (checkTransactions.length < 10) {
+      dispatch(financeOperation.updateTransactions());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const scrollHandler = e => {
     if (
