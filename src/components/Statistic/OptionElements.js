@@ -8,12 +8,7 @@ export const SelectForStatisticMonth = props => {
   // const categories = useSelector(userSelectors.getCategories);
 
   return (
-    <ul
-      className={scss.menuMonth}
-      // onBlur={() => {
-      //   console.log('input', 'onMouseDown ');
-      // }}
-    >
+    <ul className={scss.menuMonth}>
       {months.map(({ id, name }) => (
         <li
           className={scss.menuItem}

@@ -386,9 +386,10 @@
 .openAllTranscation {
   position: absolute;
   display: flex;
-  align-items: baseline;
-  justify-content: center;
 
+  justify-content: flex-start;
+
+  gap: 10px;
   background-color: transparent;
   border: 0;
   width: 300px;
@@ -400,18 +401,27 @@
   line-height: 24px;
   @include mq(mob-only) {
     top: -48px;
-    right: -10px;
+    // right: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
   }
   @include mq(tab) {
     top: 356px;
-    right: 382px;
+    right: 370px;
   }
   @include mq(desk) {
     top: 310px;
-    right: 430px;
+    right: 410px;
   }
 }
-
+.textAllTransaction {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
 // @include mq(mob-only) {
 //   width: 280px;
 //   height: 280px;
