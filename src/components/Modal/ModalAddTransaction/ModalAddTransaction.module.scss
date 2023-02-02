@@ -12,6 +12,12 @@
 }
 
 .title {
+  @include mq(mob-only) {
+    font-family: 'Poppins';
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 36px;
+  }
   @include mq(tab) {
     font-size: 30px;
   }
@@ -20,7 +26,7 @@
 .checkboxInfo {
   display: flex;
   align-items: center;
-  margin-top: 42px;
+  margin-top: 40px;
   gap: 24px;
 }
 
@@ -83,6 +89,7 @@
 .closeBtn {
   @extend %btnTransperentBlue;
   width: 300px;
+  height: 50px;
   padding: 13px 0;
   margin-top: 20px;
   text-transform: uppercase;
