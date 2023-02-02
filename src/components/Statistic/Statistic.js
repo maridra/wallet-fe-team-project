@@ -57,6 +57,22 @@ const StatisticForm = () => {
     setOpenYear(false);
   };
 
+  // useEffect(() => {
+  //   document.addEventListener('click', handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener('click', handleClickOutside);
+  //   };
+  // });
+
+  // const handleClickOutside = event => {
+  //   if (!event.target.closest('.select-for-statistic-month') && openMonth) {
+  //     setOpenMonth(false);
+  //   }
+  //   if (!event.target.closest('.select-for-statistic-year') && openYear) {
+  //     setOpenYear(false);
+  //   }
+  // };
+
   const handleOpenYearSelect = () => {
     setOpenYear(!openYear);
     setOpenMonth(false);
@@ -75,13 +91,7 @@ const StatisticForm = () => {
     handleOpenMonthSelect();
   };
 
-  // const handleBackdropClick = e => {
-  //   if (e.currentTarget === e.target) {
-  //     handleOpenMonthSelect();
-  //   }
-  // };
   const stat = useSelector(statisticSelectors.getStatistic);
-  console.log('stat', stat);
 
   const data = {
     labels: stat.expensesByPeriod.map(item => item.name),
@@ -197,6 +207,7 @@ const StatisticForm = () => {
               {openMonth && (
                 <SelectForStatisticMonth
                   handleMonth={handleMonthChange}
+                  // onClick={handleClickOutside}
                 ></SelectForStatisticMonth>
               )}
               {openYear && (
