@@ -79,10 +79,10 @@ const StatisticForm = () => {
     handleOpenMonthSelect();
   };
 
-  const blurHandler = () => {
-    // setOpenMonth(false);
-    // setOpenYear(!openYear);
-  };
+  // const blurHandler = () => {
+  // setOpenMonth(false);
+  // setOpenYear(!openYear);
+  // };
 
   const stat = useSelector(statisticSelectors.getStatistic);
 
@@ -157,6 +157,7 @@ const StatisticForm = () => {
               </>
             )}
           </div>
+
           <div className={scss.statisticData}>
             <button
               className={scss.openAllTranscation}
@@ -164,33 +165,35 @@ const StatisticForm = () => {
               onClick={handleOpenAllTransactions}
             >
               {!openAllTransactions ? (
-                <>
-                  <IconContext.Provider
-                    value={{
-                      size: '25px',
-                    }}
-                  >
-                    <IoStatsChartSharp
-                      className={scss.openAllTranscationIcon}
-                    ></IoStatsChartSharp>
-                  </IconContext.Provider>
+                <div className={scss.textAllTransaction}>
+                  <div>
+                    <IconContext.Provider
+                      value={{
+                        size: '23px',
+                        color: '#4a56e2',
+                      }}
+                    >
+                      <IoStatsChartSharp></IoStatsChartSharp>
+                    </IconContext.Provider>
+                  </div>
                   <div className={scss.allTransactionText}>
                     Show transactions for the entire period
                   </div>
-                </>
+                </div>
               ) : (
-                <>
-                  <IconContext.Provider
-                    value={{
-                      size: '25px',
-                    }}
-                  >
-                    <IoStatsChartOutline
-                      className={scss.openAllTranscationIcon}
-                    ></IoStatsChartOutline>
-                  </IconContext.Provider>
+                <div className={scss.textAllTransaction}>
+                  <div>
+                    <IconContext.Provider
+                      value={{
+                        size: '23px',
+                        color: 'rgba(110, 120, 232, 1)',
+                      }}
+                    >
+                      <IoStatsChartOutline></IoStatsChartOutline>
+                    </IconContext.Provider>
+                  </div>
                   <div>Show less</div>
-                </>
+                </div>
               )}
             </button>
             {!openAllTransactions ? (
