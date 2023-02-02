@@ -367,7 +367,26 @@
     right: 225px;
   }
 }
+.doughnutMonthNoValue {
+  border-radius: 50%;
+  border: 43px solid rgb(215, 215, 235);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include mq(mob-only) {
+    width: 280px;
+    height: 280px;
+  }
 
+  @include mq(tab) {
+    width: 336px;
+    height: 336px;
+  }
+  @include mq(desk) {
+    width: 288px;
+    height: 288px;
+  }
+}
 .openMenuBtnYear {
   @extend %openMenuBtn;
 

@@ -106,12 +106,14 @@ const StatisticForm = () => {
           <div className={scss.doughnut}>
             <Doughnut data={data} options={options} />
             <div className={scss.doughnutMonth}>
-              {stat.expensesPerMonth
-                ? `₴ ${stat.expensesPerMonth.toLocaleString('uk-ua', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}`
-                : 'No transaction for this period'}
+              {stat.expensesPerMonth ? (
+                `₴ ${stat.expensesPerMonth.toLocaleString('uk-ua', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}`
+              ) : (
+                <div className={scss.doughnutMonthNoValue}>₴ 0</div>
+              )}
             </div>
           </div>
           <div className={scss.statisticData}>
