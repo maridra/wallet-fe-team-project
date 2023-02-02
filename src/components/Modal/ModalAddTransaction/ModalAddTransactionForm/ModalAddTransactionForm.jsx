@@ -92,6 +92,7 @@ const ModalAddTransactionForm = prop => {
   };
 
   // const CloseBlur = () => {
+  //   addValueCategory();
   //   setOpen(false);
   // };
 

@@ -80,8 +80,8 @@ const StatisticForm = () => {
   };
 
   const blurHandler = () => {
-    setOpenMonth(false);
-    setOpenYear(false);
+    // setOpenMonth(false);
+    // setOpenYear(!openYear);
   };
 
   const stat = useSelector(statisticSelectors.getStatistic);
@@ -194,7 +194,7 @@ const StatisticForm = () => {
               )}
             </button>
             {!openAllTransactions ? (
-              <div onBlur={blurHandler}>
+              <div>
                 <SelectElements
                   valueMonth={month}
                   valueYear={year}
@@ -204,8 +204,6 @@ const StatisticForm = () => {
                   openYear={openYear}
                   handleMonthChange={handleMonthChange}
                   handleYearChange={handleYearChange}
-                  // onBlur={(blurHandlerMonth, blurHandlerYear)}
-                  // onBlur={blurHandlerYear}
                 />
               </div>
             ) : (
