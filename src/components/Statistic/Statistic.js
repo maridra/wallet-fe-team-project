@@ -235,10 +235,12 @@ const StatisticForm = () => {
                       {item.name}
                     </td>
                     <td className={scss.tableRows__rightText}>
-                      {item.amount.toLocaleString('uk-ua', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}
+                      {item.amount
+                        .toLocaleString('uk-ua', {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })
+                        .replace(/,/g, '.')}
                     </td>
                   </tr>
                 ))}
