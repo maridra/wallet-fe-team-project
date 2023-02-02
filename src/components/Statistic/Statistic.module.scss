@@ -117,35 +117,36 @@
   font-size: 16px;
   line-height: 24px;
   color: #000000;
-  @include mq(mob-only) {
-    background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
-      20px center / 18px;
-  }
-  @include mq(tab) {
-    background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
-      20px center / 16px;
-  }
-  @include mq(desk) {
-    background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
-      20px center / 18px;
-  }
+  background: transparent;
+  // @include mq(mob-only) {
+  //   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+  //     20px center / 18px;
+  // }
+  // @include mq(tab) {
+  //   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+  //     20px center / 16px;
+  // }
+  // @include mq(desk) {
+  //   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+  //     20px center / 18px;
+  // }
 
-  &:focus {
-    // transform: rotateX(5deg);
+  // &:focus {
+  // transform: rotateX(5deg);
 
-    @include mq(mob-only) {
-      background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
-        20px center / 18px;
-    }
-    @include mq(tab) {
-      background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
-        20px center / 16px;
-    }
-    @include mq(desk) {
-      background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
-        20px center / 18px;
-    }
-  }
+  //   @include mq(mob-only) {
+  //     background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
+  //       20px center / 18px;
+  //   }
+  //   @include mq(tab) {
+  //     background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
+  //       20px center / 16px;
+  //   }
+  //   @include mq(desk) {
+  //     background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
+  //       20px center / 18px;
+  //   }
+  // }
 }
 
 .selectOption {
@@ -172,7 +173,7 @@
   display: flex;
   justify-content: space-between;
   border-radius: 30px;
-
+  position: relative;
   @include mq(mob-only) {
     min-width: 280px;
     gap: 20px;
@@ -199,6 +200,7 @@
   border-collapse: collapse;
   align-items: stretch;
   overflow: hidden;
+  padding: 0;
 
   @include mq(mob-only) {
     min-width: 280px;
@@ -212,11 +214,13 @@
     width: 395px;
   }
 }
+
 .thead {
   border-spacing: 0;
   background: #ffffff;
   height: 58px;
   padding: 0;
+  border: none;
   :first-child {
     border-radius: 30px 0 0 30px;
     text-align: left;
@@ -328,72 +332,78 @@
   }
 }
 
-// before elements
+//selector from mod
+.addFormInputCategory {
+  padding: 4px 20px 8px 20px;
+  margin-bottom: 40px;
+  font-size: 18px;
+  line-height: 27px;
+  border: 0;
+  border-bottom: 1px solid #e0e0e0;
+  outline: 0;
 
-#Main expenses {
-}
-.squareBeforeExpenses {
-  &:before {
-    @extend %square;
-    background-color: var(--main-expenes-color);
+  @include mq(mob-only) {
+    width: 100%;
+    height: 32px;
   }
-}
-
-.squareBeforeProducts {
-  &:before {
-    @extend %square;
-    background-color: var(--products-color);
-  }
-}
-
-.squareBeforeCar {
-  &:before {
-    @extend %square;
-    background-color: var(--car-color);
+  @include mq(tab) {
+    width: 394px;
+    height: 32px;
   }
 }
 
-.squareBeforeSelf {
-  &:before {
-    @extend %square;
-    background-color: var(--self-care-color);
+.openMenuBtnMonth {
+  @extend %openMenuBtn;
+  @include mq(mob-only) {
+    top: 10px;
+    right: 11px;
+  }
+  @include mq(tab) {
+    top: 10px;
+    right: 185px;
+  }
+  @include mq(desk) {
+    top: 10px;
+    right: 225px;
+  }
+}
+.doughnutMonthNoValue {
+  border-radius: 50%;
+  border: 43px solid rgb(215, 215, 235);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include mq(mob-only) {
+    width: 280px;
+    height: 280px;
+  }
+
+  @include mq(tab) {
+    width: 336px;
+    height: 336px;
+  }
+  @include mq(desk) {
+    width: 288px;
+    height: 288px;
+  }
+}
+.openMenuBtnYear {
+  @extend %openMenuBtn;
+
+  @include mq(mob-only) {
+    top: 82px;
+    right: 10px;
+  }
+  @include mq(tab) {
+    top: 10px;
+    right: 10px;
+  }
+  @include mq(desk) {
+    top: 10px;
+    right: 10px;
   }
 }
 
-.squareBeforeChild {
-  &:before {
-    @extend %square;
-    background-color: var(--child-care-color);
-  }
-}
-
-.squareBeforeHousehold {
-  &:before {
-    @media screen and (max-width: 330px) {
-      margin-top: 5px;
-    }
-    @extend %square;
-    float: left;
-
-    background-color: var(--household-products-color);
-  }
-}
-.squareBeforeEducation {
-  &:before {
-    @extend %square;
-    background-color: var(--education-color);
-  }
-}
-.squareBeforeLeisure {
-  &:before {
-    @extend %square;
-    background-color: var(--leisure-color);
-  }
-}
-
-.squareBeforeOther {
-  &:before {
-    @extend %square;
-    background-color: var(--other-expenses-color);
-  }
+.squareBefore {
+  @extend %square;
 }

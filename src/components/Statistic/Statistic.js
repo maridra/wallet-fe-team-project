@@ -7,7 +7,9 @@ import { getStatistic } from '../../redux/statistic/statisticOperation';
 import { connect } from 'react-redux';
 import { statisticSelectors } from 'redux/statistic/statisticSelectors';
 import scss from './Statistic.module.scss';
-import { months, years } from '../../assets/variables/selectorData';
+import { SelectForStatisticMonth, SelectForStatisticYear } from './Select';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { IconContext } from 'react-icons';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -47,18 +49,37 @@ const StatisticForm = () => {
   const [year, setYear] = useState(date.getFullYear());
   const [month, setMonth] = useState(newMonths[numberOfMonth]);
   const [newMonth, setNewMonth] = useState(date.getMonth());
+  const [openMonth, setOpenMonth] = useState(false);
+  const [openYear, setOpenYear] = useState(false);
 
-  const handleYearChange = event => {
-    setYear(event.target.value);
+  const handleOpenMonthSelect = () => {
+    setOpenMonth(!openMonth);
+    setOpenYear(false);
+  };
+
+  const handleOpenYearSelect = () => {
+    setOpenYear(!openYear);
+    setOpenMonth(false);
+  };
+
+  const handleYearChange = name => {
+    setYear(name);
+    handleOpenYearSelect();
   };
   const dispatch = useDispatch();
 
-  const handleMonthChange = event => {
-    let value = event.target.value;
-    setMonth(event.target.value);
-    setNewMonth(newMonths.indexOf(value));
+  const handleMonthChange = name => {
+    // let value = event.target.value;
+    setMonth(name);
+    setNewMonth(newMonths.indexOf(name));
+    handleOpenMonthSelect();
   };
 
+  // const handleBackdropClick = e => {
+  //   if (e.currentTarget === e.target) {
+  //     handleOpenMonthSelect();
+  //   }
+  // };
   const stat = useSelector(statisticSelectors.getStatistic);
   console.log('stat', stat);
 
@@ -68,28 +89,8 @@ const StatisticForm = () => {
       {
         label: 'Total',
         data: stat.expensesByPeriod.map(item => item.amount),
-        backgroundColor: [
-          '#FED057',
-          'rgba(255, 216, 208, 1)',
-          'rgba(253, 148, 152, 1)',
-          'rgba(197, 186, 255, 1)',
-          'rgba(110, 120, 232, 1)',
-          'rgba(74, 86, 226, 1)',
-          'rgba(129, 225, 255, 1)',
-          'rgba(36, 204, 167, 1)',
-          'rgba(0, 173, 132, 1)',
-        ],
-        borderColor: [
-          'rgba(254, 208, 87, 1)',
-          'rgba(255, 216, 208, 1)',
-          'rgba(253, 148, 152, 1)',
-          'rgba(197, 186, 255, 1)',
-          'rgba(110, 120, 232, 1)',
-          'rgba(74, 86, 226, 1)',
-          'rgba(129, 225, 255, 1)',
-          'rgba(36, 204, 167, 1)',
-          'rgba(0, 173, 132, 1)',
-        ],
+        backgroundColor: stat.expensesByPeriod.map(item => item.color),
+        borderColor: stat.expensesByPeriod.map(item => item.color),
         borderWidth: 1,
         cutout: '70%',
       },
@@ -99,60 +100,110 @@ const StatisticForm = () => {
   useEffect(() => {
     dispatch(getStatistic({ month: newMonth + 1, year }));
   }, [dispatch, newMonth, year]);
-
   return (
     <>
       <div className={scss.sectionTMP}>
         <h1 className={scss.title}>Statistics</h1>
         <div className={scss.mainBox}>
-          {/* <DoughnutForm stat={stat} /> */}
           <div className={scss.doughnut}>
-            <Doughnut
-              data={data}
-              options={options}
-              // plugins={[coolFunction(stat)]}
-            />
+            <Doughnut data={data} options={options} />
             <div className={scss.doughnutMonth}>
-              {stat.expensesPerMonth
-                ? `₴ ${stat.expensesPerMonth.toLocaleString('uk-ua', {
-                    minimumFractionDigits: 2,
-                    maximumFractionDigits: 2,
-                  })}`
-                : 'No transaction for this period'}
+              {stat.expensesPerMonth ? (
+                `₴ ${stat.expensesPerMonth.toLocaleString('uk-ua', {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}`
+              ) : (
+                <div className={scss.doughnutMonthNoValue}>₴ 0</div>
+              )}
             </div>
           </div>
           <div className={scss.statisticData}>
             <div className={scss.select}>
-              <select
+              <input
                 className={scss.selectItem}
+                type="text"
+                placeholder="Select a month"
+                name="month"
                 value={month}
-                onChange={handleMonthChange}
-              >
-                {months.map(item => (
-                  <option
-                    className={scss.selectOption}
-                    key={uuidv4()}
-                    value={item.name}
-                  >
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-              <select
+                onClick={handleOpenMonthSelect}
+                autoComplete="off"
+                readOnly
+              ></input>
+              <input
                 className={scss.selectItem}
+                type="text"
+                placeholder="Select a year"
+                name="year"
                 value={year}
-                onChange={handleYearChange}
+                onClick={handleOpenYearSelect}
+                autoComplete="off"
+                readOnly
+              ></input>
+              <button
+                className={scss.openMenuBtnMonth}
+                type="button"
+                onClick={handleOpenMonthSelect}
               >
-                {years.map(item => (
-                  <option
-                    className={scss.selectOption}
-                    key={uuidv4()}
-                    value={item.name}
+                {!openMonth ? (
+                  <IconContext.Provider
+                    value={{
+                      size: '25px',
+                    }}
                   >
-                    {item.name}
-                  </option>
-                ))}
-              </select>
+                    <FiChevronDown
+                      className={scss.openMenuBtnMonthIcon}
+                    ></FiChevronDown>
+                  </IconContext.Provider>
+                ) : (
+                  <IconContext.Provider
+                    value={{
+                      size: '25px',
+                    }}
+                  >
+                    <FiChevronUp
+                      className={scss.openMenuBtnMonthIcon}
+                    ></FiChevronUp>
+                  </IconContext.Provider>
+                )}
+              </button>
+              <button
+                className={scss.openMenuBtnYear}
+                type="button"
+                onClick={handleOpenYearSelect}
+              >
+                {!openYear ? (
+                  <IconContext.Provider
+                    value={{
+                      size: '25px',
+                    }}
+                  >
+                    <FiChevronDown
+                      className={scss.openMenuBtnYearIcon}
+                    ></FiChevronDown>
+                  </IconContext.Provider>
+                ) : (
+                  <IconContext.Provider
+                    value={{
+                      size: '25px',
+                    }}
+                  >
+                    <FiChevronUp
+                      className={scss.openMenuBtnYearIcon}
+                    ></FiChevronUp>
+                  </IconContext.Provider>
+                )}
+              </button>
+              {openMonth && (
+                <SelectForStatisticMonth
+                  handleMonth={handleMonthChange}
+                ></SelectForStatisticMonth>
+              )}
+              {openYear && (
+                <SelectForStatisticYear
+                  handleYear={handleYearChange}
+                ></SelectForStatisticYear>
+              )}
             </div>
             {/* table  */}
             <table className={scss.table}>
@@ -165,7 +216,11 @@ const StatisticForm = () => {
               <tbody>
                 {stat.expensesByPeriod.map(item => (
                   <tr className={scss.tableRows} key={uuidv4()}>
-                    <td className={scss.squareBeforeExpenses} id={item.name}>
+                    <td id={item.name}>
+                      <div
+                        className={scss.squareBefore}
+                        style={{ backgroundColor: `${item.color}` }}
+                      ></div>
                       {item.name}
                     </td>
                     <td className={scss.tableRows__rightText}>
@@ -176,44 +231,6 @@ const StatisticForm = () => {
                     </td>
                   </tr>
                 ))}
-                {/* <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeExpenses}>Main Expenses</td>
-                  <td className={scss.tableRows__rightText}></td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeProducts}>Products</td>
-                  <td className={scss.tableRows__rightText}>3 800.74</td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeCar}>Car</td>
-                  <td className={scss.tableRows__rightText}>1 500.00</td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeSelf}>Self Care</td>
-                  <td className={scss.tableRows__rightText}>800.00</td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeChild}>Child care</td>
-                  <td className={scss.tableRows__rightText}>2208.50</td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeHousehold}>
-                    Household products
-                  </td>
-                  <td className={scss.tableRows__rightText}>300.00</td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeEducation}>Education</td>
-                  <td className={scss.tableRows__rightText}>3 400.00</td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeLeisure}>Leisure</td>
-                  <td className={scss.tableRows__rightText}>1230.00</td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeOther}>Other Expenses</td>
-                  <td className={scss.tableRows__rightText}>610.00</td>
-                </tr> */}
               </tbody>
               <tfoot>
                 <tr className={scss.footer}>

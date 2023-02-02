@@ -1,0 +1,41 @@
+@import 'assets/styles/index.scss';
+
+.menuMonth {
+  @extend %menu;
+  top: 50px;
+}
+
+.menuYear {
+  @extend %menu;
+
+  @include mq(mob-only) {
+    top: 120px;
+    right: 0;
+  }
+  @include mq(tab) {
+    top: 50px;
+    right: 0;
+  }
+  @include mq(desk) {
+    top: 50px;
+    right: 0;
+  }
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  height: 44px;
+  font-size: 18px;
+  line-height: 27px;
+  // backdrop-filter: var(--filter-dropdown);
+  // background-color: var(--background-color-dropdown);
+  // box-shadow: var(--shadow-dropdown);
+  &:hover,
+  &:focus {
+    background-color: #ffffff;
+    // color: #ff6596;
+    cursor: pointer;
+  }
+}
