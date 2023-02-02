@@ -60,7 +60,6 @@ const HomeTabMobile = ({
   const sortedTransactions = sortingTransaction(transactions);
 
   function sortingTransaction(transactions) {
-    console.log(transactions);
     if (transactions) {
       const sorted = [...transactions].sort(function (a, b) {
         return (
