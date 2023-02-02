@@ -31,7 +31,7 @@ const HomeTabMobile = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetching]);
-  
+
   const checkTransactions = useSelector(financeSelectors.getTransactions);
   useEffect(() => {
     if (checkTransactions.length < 10) {
@@ -61,7 +61,7 @@ const HomeTabMobile = ({
 
   function sortingTransaction(transactions) {
     if (transactions) {
-      const sorted = [...transactions].sort(function (a, b) {
+      const sorted = [...transactions](function (a, b) {
         return (
           Number(b.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$1$2$3')) -
           Number(a.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$1$2$3'))
