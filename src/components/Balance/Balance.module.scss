@@ -5,7 +5,7 @@
   max-width: 440px;
   min-width: 280px;
   height: 80px;
-  padding: 8px 32px 11px 32px;
+  padding: 10px 32px 22px 38px;
   font-size: 12px;
   text-transform: uppercase;
   line-height: 1.2;
@@ -24,7 +24,7 @@
 
 .balanceAmount {
   display: flex;
-  gap: 10px;
+  gap: 9px;
   margin-top: 12px;
   font-weight: 700;
   font-size: 30px;
@@ -34,6 +34,5 @@
 }
 
 .balanceLogo {
-  font-weight: 400;
-  font-family: 'Poppins';
+  padding-bottom: 2px;
 }
