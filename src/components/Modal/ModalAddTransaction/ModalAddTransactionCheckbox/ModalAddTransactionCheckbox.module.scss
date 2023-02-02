@@ -7,6 +7,9 @@
   margin-top: 40px;
   gap: 24px;
   margin-bottom: 40px;
+  @include mq(tab) {
+    margin-bottom: 42px;
+  }
 }
 
 .checkboxText {

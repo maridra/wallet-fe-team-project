@@ -11,7 +11,6 @@ import getDate from 'utils/getDate';
 import scss from './ModalAddTransactionForm.module.scss';
 import ModalAddTransactionFormMenu from './ModalAddTransactionFormMenu/ModalAddTransactionFormMenu';
 import financeOperation from 'redux/finance/financeOperation';
-import { IconContext } from 'react-icons';
 
 const schema = yup.object().shape({
   amount: yup.number().min(0.01).max(2500000).required(),
