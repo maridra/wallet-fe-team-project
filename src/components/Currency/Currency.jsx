@@ -3,7 +3,7 @@ import { Notify } from 'notiflix';
 import getCurrency from '../../API/currencyAPI';
 import Loader from '../Loader/Loader';
 
-import css from './currency.module.scss';
+import css from './Сurrency.module.scss';
 
 const Currency = () => {
   const [currency, setCurrency] = useState(null);
@@ -45,8 +45,8 @@ const Currency = () => {
       <div className={css.tableHead}>
         <ul className={css.tableList}>
           <li>Currency</li>
-          <li>Purchase</li>
-          <li>Sale</li>
+          <li className={css.tablePurchase}>Purchase</li>
+          <li className={css.tableSale}>Sale</li>
         </ul>
       </div>
       {!currency && !parsedCurrency ? (
