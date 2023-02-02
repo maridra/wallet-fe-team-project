@@ -117,35 +117,36 @@
   font-size: 16px;
   line-height: 24px;
   color: #000000;
-  @include mq(mob-only) {
-    background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
-      20px center / 18px;
-  }
-  @include mq(tab) {
-    background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
-      20px center / 16px;
-  }
-  @include mq(desk) {
-    background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
-      20px center / 18px;
-  }
+  background: transparent;
+  // @include mq(mob-only) {
+  //   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+  //     20px center / 18px;
+  // }
+  // @include mq(tab) {
+  //   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+  //     20px center / 16px;
+  // }
+  // @include mq(desk) {
+  //   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+  //     20px center / 18px;
+  // }
 
-  &:focus {
-    // transform: rotateX(5deg);
+  // &:focus {
+  // transform: rotateX(5deg);
 
-    @include mq(mob-only) {
-      background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
-        20px center / 18px;
-    }
-    @include mq(tab) {
-      background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
-        20px center / 16px;
-    }
-    @include mq(desk) {
-      background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
-        20px center / 18px;
-    }
-  }
+  //   @include mq(mob-only) {
+  //     background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
+  //       20px center / 18px;
+  //   }
+  //   @include mq(tab) {
+  //     background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
+  //       20px center / 16px;
+  //   }
+  //   @include mq(desk) {
+  //     background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
+  //       20px center / 18px;
+  //   }
+  // }
 }
 
 .selectOption {
@@ -352,15 +353,15 @@
   @extend %openMenuBtn;
   @include mq(mob-only) {
     top: 10px;
-    right: 180px;
+    right: 11px;
   }
   @include mq(tab) {
     top: 10px;
-    right: 180px;
+    right: 185px;
   }
   @include mq(desk) {
     top: 10px;
-    right: 180px;
+    right: 225px;
   }
 }
 
@@ -368,7 +369,7 @@
   @extend %openMenuBtn;
 
   @include mq(mob-only) {
-    top: 10px;
+    top: 82px;
     right: 10px;
   }
   @include mq(tab) {
@@ -384,16 +385,3 @@
 .squareBefore {
   @extend %square;
 }
-
-// @include mq(mob-only) {
-//   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
-//     20px center / 18px;
-// }
-// @include mq(tab) {
-//   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
-//     20px center / 16px;
-// }
-// @include mq(desk) {
-//   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
-//     20px center / 18px;
-// }

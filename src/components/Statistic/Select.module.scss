@@ -7,8 +7,19 @@
 
 .menuYear {
   @extend %menu;
-  top: 50px;
-  right: 0;
+
+  @include mq(mob-only) {
+    top: 120px;
+    right: 0;
+  }
+  @include mq(tab) {
+    top: 50px;
+    right: 0;
+  }
+  @include mq(desk) {
+    top: 50px;
+    right: 0;
+  }
 }
 
 .menuItem {
@@ -21,7 +32,7 @@
   &:hover,
   &:focus {
     background-color: #ffffff;
-    color: #ff6596;
+    // color: #ff6596;
     cursor: pointer;
   }
 }

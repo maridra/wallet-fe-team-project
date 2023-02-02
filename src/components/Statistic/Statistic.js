@@ -9,6 +9,7 @@ import { statisticSelectors } from 'redux/statistic/statisticSelectors';
 import scss from './Statistic.module.scss';
 import { SelectForStatisticMonth, SelectForStatisticYear } from './Select';
 import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { IconContext } from 'react-icons';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -136,13 +137,25 @@ const StatisticForm = () => {
                 onClick={handleOpenMonthSelect}
               >
                 {!openMonth ? (
-                  <FiChevronDown
-                    className={scss.openMenuBtnMonthIcon}
-                  ></FiChevronDown>
+                  <IconContext.Provider
+                    value={{
+                      size: '25px',
+                    }}
+                  >
+                    <FiChevronDown
+                      className={scss.openMenuBtnMonthIcon}
+                    ></FiChevronDown>
+                  </IconContext.Provider>
                 ) : (
-                  <FiChevronUp
-                    className={scss.openMenuBtnMonthIcon}
-                  ></FiChevronUp>
+                  <IconContext.Provider
+                    value={{
+                      size: '25px',
+                    }}
+                  >
+                    <FiChevronUp
+                      className={scss.openMenuBtnMonthIcon}
+                    ></FiChevronUp>
+                  </IconContext.Provider>
                 )}
               </button>
               <button
@@ -151,13 +164,25 @@ const StatisticForm = () => {
                 onClick={handleOpenYearSelect}
               >
                 {!openYear ? (
-                  <FiChevronDown
-                    className={scss.openMenuBtnYearIcon}
-                  ></FiChevronDown>
+                  <IconContext.Provider
+                    value={{
+                      size: '25px',
+                    }}
+                  >
+                    <FiChevronDown
+                      className={scss.openMenuBtnYearIcon}
+                    ></FiChevronDown>
+                  </IconContext.Provider>
                 ) : (
-                  <FiChevronUp
-                    className={scss.openMenuBtnYearIcon}
-                  ></FiChevronUp>
+                  <IconContext.Provider
+                    value={{
+                      size: '25px',
+                    }}
+                  >
+                    <FiChevronUp
+                      className={scss.openMenuBtnYearIcon}
+                    ></FiChevronUp>
+                  </IconContext.Provider>
                 )}
               </button>
               {openMonth && (
