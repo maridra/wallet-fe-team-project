@@ -14,7 +14,10 @@ const Balance = () => {
         <img src={hryvniaLogo} alt="logo of hryvnia" />
         <p>
           {userBalance
-            ? userBalance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+            ? (Math.round(userBalance * 100) / 100)
+                .toFixed(2)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
             : '0.00'}
         </p>
       </div>

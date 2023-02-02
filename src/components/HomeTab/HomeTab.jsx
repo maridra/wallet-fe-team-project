@@ -139,9 +139,11 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
                 <td className={`${s.tableRowItem} ${s.comment}`}>
                   {item.comment}
                 </td>
-                <td className={colorOfSum(item)}>{item.amount}</td>
+                <td className={colorOfSum(item)}>
+                  {(Math.round(item.amount * 100) / 100).toFixed(2)}
+                </td>
                 <td className={`${s.tableRowItem} ${s.balance}`}>
-                  {item.remainingBalance}
+                  {(Math.round(item.remainingBalance * 100) / 100).toFixed(2)}
                 </td>
               </tr>
             ))}
