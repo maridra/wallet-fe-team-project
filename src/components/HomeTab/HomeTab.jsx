@@ -91,7 +91,7 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
   return (
     <>
       {isLoading ? (
-        <>
+        <div className={s.loadingWrapper}>
           <table className={s.table}>
             <thead className={s.tableHeaderTh}>
               <tr className={s.tableHeader}>
@@ -107,7 +107,7 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
           <div className={s.loader}>
             <Loader height={'80'} width={'80'} />
           </div>
-        </>
+        </div>
       ) : (
         <table className={s.table}>
           <thead className={s.tableHeaderTh}>
