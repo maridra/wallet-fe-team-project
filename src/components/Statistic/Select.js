@@ -8,7 +8,7 @@ export const SelectForStatisticMonth = props => {
   // const categories = useSelector(userSelectors.getCategories);
 
   return (
-    <ul className={scss.menu}>
+    <ul className={scss.menuMonth}>
       {months.map(({ id, name }) => (
         <li
           className={scss.menuItem}
@@ -27,7 +27,7 @@ export const SelectForStatisticYear = props => {
   // const categories = useSelector(userSelectors.getCategories);
 
   return (
-    <ul className={scss.menu}>
+    <ul className={scss.menuYear}>
       {years.map(({ id, name }) => (
         <li className={scss.menuItem} onClick={() => handleYear(name)} key={id}>
           {name}

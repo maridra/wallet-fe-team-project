@@ -131,29 +131,33 @@ const StatisticForm = () => {
                 readOnly
               ></input>
               <button
-                className={scss.openMenuBtn}
+                className={scss.openMenuBtnMonth}
                 type="button"
                 onClick={handleOpenMonthSelect}
               >
                 {!openMonth ? (
                   <FiChevronDown
-                    className={scss.openMenuBtnIcon}
+                    className={scss.openMenuBtnMonthIcon}
                   ></FiChevronDown>
                 ) : (
-                  <FiChevronUp className={scss.openMenuBtnIcon}></FiChevronUp>
+                  <FiChevronUp
+                    className={scss.openMenuBtnMonthIcon}
+                  ></FiChevronUp>
                 )}
               </button>
               <button
-                className={scss.openMenuBtn}
+                className={scss.openMenuBtnYear}
                 type="button"
                 onClick={handleOpenYearSelect}
               >
                 {!openYear ? (
                   <FiChevronDown
-                    className={scss.openMenuBtnIcon}
+                    className={scss.openMenuBtnYearIcon}
                   ></FiChevronDown>
                 ) : (
-                  <FiChevronUp className={scss.openMenuBtnIcon}></FiChevronUp>
+                  <FiChevronUp
+                    className={scss.openMenuBtnYearIcon}
+                  ></FiChevronUp>
                 )}
               </button>
               {openMonth && (
@@ -166,36 +170,6 @@ const StatisticForm = () => {
                   handleYear={handleYearChange}
                 ></SelectForStatisticYear>
               )}
-              {/* <select
-                className={scss.selectItem}
-                value={month}
-                onChange={handleMonthChange}
-              >
-                {months.map(item => (
-                  <option
-                    className={scss.selectOption}
-                    key={uuidv4()}
-                    value={item.name}
-                  >
-                    {item.name}
-                  </option>
-                ))}
-              </select>
-              <select
-                className={scss.selectItem}
-                value={year}
-                onChange={handleYearChange}
-              >
-                {years.map(item => (
-                  <option
-                    className={scss.selectOption}
-                    key={uuidv4()}
-                    value={item.name}
-                  >
-                    {item.name}
-                  </option>
-                ))}
-              </select> */}
             </div>
             {/* table  */}
             <table className={scss.table}>
@@ -208,11 +182,11 @@ const StatisticForm = () => {
               <tbody>
                 {stat.expensesByPeriod.map(item => (
                   <tr className={scss.tableRows} key={uuidv4()}>
-                    <td
-                      className={scss.squareBeforeExpenses}
-                      id={item.name}
-                      style={{ backgroundColor: `${item.color}` }}
-                    >
+                    <td id={item.name}>
+                      <div
+                        className={scss.squareBefore}
+                        style={{ backgroundColor: `${item.color}` }}
+                      ></div>
                       {item.name}
                     </td>
                     <td className={scss.tableRows__rightText}>
@@ -223,44 +197,6 @@ const StatisticForm = () => {
                     </td>
                   </tr>
                 ))}
-                {/* <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeExpenses}>Main Expenses</td>
-                  <td className={scss.tableRows__rightText}></td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeProducts}>Products</td>
-                  <td className={scss.tableRows__rightText}>3 800.74</td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeCar}>Car</td>
-                  <td className={scss.tableRows__rightText}>1 500.00</td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeSelf}>Self Care</td>
-                  <td className={scss.tableRows__rightText}>800.00</td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeChild}>Child care</td>
-                  <td className={scss.tableRows__rightText}>2208.50</td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeHousehold}>
-                    Household products
-                  </td>
-                  <td className={scss.tableRows__rightText}>300.00</td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeEducation}>Education</td>
-                  <td className={scss.tableRows__rightText}>3 400.00</td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeLeisure}>Leisure</td>
-                  <td className={scss.tableRows__rightText}>1230.00</td>
-                </tr>
-                <tr className={scss.tableRows}>
-                  <td className={scss.squareBeforeOther}>Other Expenses</td>
-                  <td className={scss.tableRows__rightText}>610.00</td>
-                </tr> */}
               </tbody>
               <tfoot>
                 <tr className={scss.footer}>

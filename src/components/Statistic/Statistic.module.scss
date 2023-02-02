@@ -328,7 +328,7 @@
   }
 }
 
-//selector frommod
+//selector from mod
 .addFormInputCategory {
   padding: 4px 20px 8px 20px;
   margin-bottom: 40px;
@@ -347,95 +347,19 @@
     height: 32px;
   }
 }
-.openMenuBtn {
-  position: absolute;
+
+.openMenuBtnMonth {
+  @extend %openMenuBtn;
   top: 0;
   right: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff;
-  border: 0;
-  cursor: pointer;
-
-  &Icon {
-    width: 22px;
-    height: 20px;
-  }
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 22px;
-    height: 20px;
-  }
 }
 
-// before elements
-
-.squareBeforeExpenses {
-  &:before {
-    @extend %square;
-    background-color: var(--main-expenes-color);
-  }
+.openMenuBtnYear {
+  @extend %openMenuBtn;
+  top: 0;
+  right: 0;
 }
 
-.squareBeforeProducts {
-  &:before {
-    @extend %square;
-    background-color: var(--products-color);
-  }
-}
-
-.squareBeforeCar {
-  &:before {
-    @extend %square;
-    background-color: var(--car-color);
-  }
-}
-
-.squareBeforeSelf {
-  &:before {
-    @extend %square;
-    background-color: var(--self-care-color);
-  }
-}
-
-.squareBeforeChild {
-  &:before {
-    @extend %square;
-    background-color: var(--child-care-color);
-  }
-}
-
-.squareBeforeHousehold {
-  &:before {
-    @media screen and (max-width: 330px) {
-      margin-top: 5px;
-    }
-    @extend %square;
-    float: left;
-
-    background-color: var(--household-products-color);
-  }
-}
-.squareBeforeEducation {
-  &:before {
-    @extend %square;
-    background-color: var(--education-color);
-  }
-}
-.squareBeforeLeisure {
-  &:before {
-    @extend %square;
-    background-color: var(--leisure-color);
-  }
-}
-
-.squareBeforeOther {
-  &:before {
-    @extend %square;
-    background-color: var(--other-expenses-color);
-  }
+.squareBefore {
+  @extend %square;
 }
