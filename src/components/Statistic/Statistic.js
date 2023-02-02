@@ -79,6 +79,11 @@ const StatisticForm = () => {
     handleOpenMonthSelect();
   };
 
+  const blurHandler = () => {
+    setOpenMonth(false);
+    setOpenYear(false);
+  };
+
   const stat = useSelector(statisticSelectors.getStatistic);
 
   const data = {
@@ -108,16 +113,6 @@ const StatisticForm = () => {
       },
     ],
   };
-
-  // const password = document.querySelector('input[type="password"]');
-
-  // password.addEventListener('focus', event => {
-  //   event.target.style.background = 'pink';
-  // });
-
-  // password.addEventListener('blur', event => {
-  //   event.target.style.background = '';
-  // });
 
   useEffect(() => {
     dispatch(getStatistic({ month: newMonth + 1, year }));
@@ -199,7 +194,7 @@ const StatisticForm = () => {
               )}
             </button>
             {!openAllTransactions ? (
-              <>
+              <div onBlur={blurHandler}>
                 <SelectElements
                   valueMonth={month}
                   valueYear={year}
@@ -209,20 +204,13 @@ const StatisticForm = () => {
                   openYear={openYear}
                   handleMonthChange={handleMonthChange}
                   handleYearChange={handleYearChange}
+                  // onBlur={(blurHandlerMonth, blurHandlerYear)}
+                  // onBlur={blurHandlerYear}
                 />
-              </>
+              </div>
             ) : (
               <div className={scss.selectClosed}>
-                <SelectElements
-                  valueMonth={month}
-                  valueYear={year}
-                  onClickMonth={handleOpenMonthSelect}
-                  onClickYear={handleOpenYearSelect}
-                  openMonth={openMonth}
-                  openYear={openYear}
-                  handleMonthChange={handleMonthChange}
-                  handleYearChange={handleYearChange}
-                />
+                <SelectElements />
               </div>
             )}
             {/* table  */}

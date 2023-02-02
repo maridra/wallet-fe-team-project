@@ -1,6 +1,6 @@
 // import { useSelector } from 'react-redux';
 // import { userSelectors } from 'redux/user/userSelectors';
-import scss from './Select.module.scss';
+import scss from './OptionElement.module.scss';
 import { months, years } from '../../assets/variables/selectorData';
 
 export const SelectForStatisticMonth = props => {
@@ -8,7 +8,12 @@ export const SelectForStatisticMonth = props => {
   // const categories = useSelector(userSelectors.getCategories);
 
   return (
-    <ul className={scss.menuMonth}>
+    <ul
+      className={scss.menuMonth}
+      // onBlur={() => {
+      //   console.log('input', 'onMouseDown ');
+      // }}
+    >
       {months.map(({ id, name }) => (
         <li
           className={scss.menuItem}

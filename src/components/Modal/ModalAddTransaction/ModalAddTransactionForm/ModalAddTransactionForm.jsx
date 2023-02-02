@@ -91,9 +91,9 @@ const ModalAddTransactionForm = prop => {
     return;
   };
 
-  const CloseBlur = () => {
-    handleOpen();
-  };
+  // const CloseBlur = () => {
+  //   setOpen(false);
+  // };
 
   const renderCalendarInput = (props, openCalendar) => {
     return (
@@ -139,7 +139,6 @@ const ModalAddTransactionForm = prop => {
                 onClick={handleOpen}
                 autoComplete="off"
                 readOnly
-                onBlur={CloseBlur}
               ></Field>
 
               <button
@@ -195,7 +194,6 @@ const ModalAddTransactionForm = prop => {
               onChange={createDate}
             />
           </label>
-
           <Field
             className={scss.addFormTextarea}
             name="comment"
@@ -203,7 +201,6 @@ const ModalAddTransactionForm = prop => {
             placeholder="Comment"
           ></Field>
         </div>
-
         <button type="submit" className={scss.addBtn}>
           Add
         </button>

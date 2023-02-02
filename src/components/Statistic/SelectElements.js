@@ -18,14 +18,6 @@ export const SelectElements = props => {
     handleYearChange,
   } = props;
 
-  const blurHandlerMonth = () => {
-    onClickMonth();
-  };
-
-  const blurHandlerYear = () => {
-    onClickYear();
-  };
-
   return (
     <div className={scss.select}>
       <input
@@ -37,7 +29,6 @@ export const SelectElements = props => {
         onClick={onClickMonth}
         autoComplete="off"
         readOnly
-        onBlur={blurHandlerMonth}
       ></input>
       <input
         className={scss.selectItem}
@@ -48,7 +39,6 @@ export const SelectElements = props => {
         onClick={onClickYear}
         autoComplete="off"
         readOnly
-        onBlur={blurHandlerYear}
       ></input>
       <button
         className={scss.openMenuBtnMonth}
@@ -101,6 +91,7 @@ export const SelectElements = props => {
       {openMonth && (
         <SelectForStatisticMonth
           handleMonth={handleMonthChange}
+
           // onClick={handleClickOutside}
         ></SelectForStatisticMonth>
       )}
