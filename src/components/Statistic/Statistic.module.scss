@@ -350,16 +350,50 @@
 
 .openMenuBtnMonth {
   @extend %openMenuBtn;
-  top: 0;
-  right: 0;
+  @include mq(mob-only) {
+    top: 10px;
+    right: 180px;
+  }
+  @include mq(tab) {
+    top: 10px;
+    right: 180px;
+  }
+  @include mq(desk) {
+    top: 10px;
+    right: 180px;
+  }
 }
 
 .openMenuBtnYear {
   @extend %openMenuBtn;
-  top: 0;
-  right: 0;
+
+  @include mq(mob-only) {
+    top: 10px;
+    right: 10px;
+  }
+  @include mq(tab) {
+    top: 10px;
+    right: 10px;
+  }
+  @include mq(desk) {
+    top: 10px;
+    right: 10px;
+  }
 }
 
 .squareBefore {
   @extend %square;
 }
+
+// @include mq(mob-only) {
+//   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+//     20px center / 18px;
+// }
+// @include mq(tab) {
+//   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+//     20px center / 16px;
+// }
+// @include mq(desk) {
+//   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
+//     20px center / 18px;
+// }
