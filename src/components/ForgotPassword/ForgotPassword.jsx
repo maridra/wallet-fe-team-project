@@ -35,13 +35,13 @@ const ForgotPassword = () => {
     e.preventDefault();
 
     if (!email.length) {
-      Notify.warning('E-mail is require!');
+      Notify.warning('E-mail is require field!');
       return;
     }
 
     passwordAPI
       .forgotPasswordAPI(email)
-      .then(res => setStatus(res.code))
+      .then(res => setStatus(res))
       .catch(error => Notify.failure(error.message));
   };
 
@@ -52,7 +52,7 @@ const ForgotPassword = () => {
           <use href={`${sprite}#icon-logo`}></use>
         </svg>
       </div>
-      {status === 201 ? (
+      {status?.code === 201 ? (
         <div>
           <h1 className={s.title}>
             Check inbox to complete the password reset!

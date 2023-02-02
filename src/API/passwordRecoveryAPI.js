@@ -7,10 +7,10 @@ async function forgotPasswordAPI(email) {
     const response = await axios.post(`${baseURL}/auth/forgot-password`, {
       email,
     });
-
     return response.data;
   } catch (error) {
-    Notify.failure(error.message);
+    const errorMessage = error.response.data.message.toString();
+    Notify.failure(errorMessage);
   }
 }
 
@@ -25,7 +25,8 @@ async function createPasswordAPI(id, token, password) {
 
     return response.data;
   } catch (error) {
-    Notify.failure(error.message);
+    const errorMessage = error.response.data.message.toString();
+    Notify.failure(errorMessage);
   }
 }
 const passwordAPI = { forgotPasswordAPI, createPasswordAPI };

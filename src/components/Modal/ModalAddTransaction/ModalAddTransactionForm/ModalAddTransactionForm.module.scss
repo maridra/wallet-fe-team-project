@@ -9,7 +9,7 @@
   max-width: 480px;
   @include mq(mob-only) {
     width: 100%;
-    padding: 0 20px;
+    padding: 0 10px;
   }
 }
 
@@ -37,6 +37,9 @@
 .addFormInputCategory {
   padding: 4px 20px 8px 20px;
   margin-bottom: 40px;
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 400;
   font-size: 18px;
   line-height: 27px;
   border: 0;
@@ -48,6 +51,7 @@
     height: 32px;
   }
   @include mq(tab) {
+    padding: 4px 20px 8px 8px;
     width: 394px;
     height: 32px;
   }
@@ -66,8 +70,8 @@
 
 .openMenuBtn {
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 0px;
+  right: 11px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -78,14 +82,23 @@
   &Icon {
     width: 22px;
     height: 20px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 22px;
+      height: 20px;
+    }
   }
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 22px;
-    height: 20px;
+  @include mq(mob-only) {
+    top: 0px;
+    right: 11px;
+  }
+  @include mq(tab) {
+    top: 4px;
+    right: 0px;
   }
 }
 .sumBox {
@@ -109,8 +122,10 @@
   }
   @include mq(tab) {
     text-align: center;
-    width: 190px;
-    margin-right: 24px;
+    width: 182px;
+    height: 32px;
+    padding-right: 10px;
+    margin-right: 32px;
   }
 }
 
@@ -121,19 +136,21 @@
 }
 
 .addFormInputDate {
+  font-weight: 400;
   font-size: 18px;
   line-height: 27px;
   border: 0;
   border-bottom: 1px solid #e0e0e0;
   outline: 0;
   @include mq(mob-only) {
-    padding: 4px 20px 8px 20px;
+    padding: 0 17px 8px 20px;
     margin-bottom: 40px;
     width: 100%;
     height: 32px;
   }
   @include mq(tab) {
     padding: 4px 14px 8px 20px;
+    height: 32px;
     width: 180px;
   }
 }
@@ -144,8 +161,7 @@
 
 .dataBtn {
   position: absolute;
-  top: 0;
-  right: 20px;
+
   display: flex;
 
   justify-content: center;
@@ -156,30 +172,27 @@
   cursor: pointer;
 
   &Icon {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
   }
   @include mq(mob-only) {
-    top: 0;
-    right: 20px;
+    top: 0px;
+    right: 12px;
   }
   @include mq(tab) {
-    top: 4px;
-    right: 14px;
-  }
-}
-.commentBox {
-  @include mq(mob-only) {
-    width: 100%;
+    top: 0px;
+    right: 6px;
   }
 }
 
 .addFormTextarea {
   resize: none;
-
-  padding: 4px 20px 2px 20px;
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 400;
   font-size: 18px;
-  line-height: 27px;
+
+  line-height: calc(27 / 18);
   border: 0;
   border-bottom: 1px solid #e0e0e0;
   outline: 0;
@@ -198,13 +211,16 @@
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
   }
   @include mq(mob-only) {
+    padding: 0 17px 8px 20px;
     width: 100%;
     height: 84px;
   }
   @include mq(tab) {
+    padding: 0 17px 8px 8px;
     width: 394px;
-    height: 40px;
+    height: 32px;
     margin-top: 40px;
+    overflow: hidden;
   }
 }
 
@@ -235,8 +251,12 @@
 
 .addBtn {
   @extend %btnGreen;
-
+  font-size: 18px;
+  line-height: 27px;
+  text-align: center;
+  letter-spacing: 0.1em;
   width: 300px;
+  height: 50px;
   padding: 13px 0;
   border-radius: 20px;
   text-transform: uppercase;

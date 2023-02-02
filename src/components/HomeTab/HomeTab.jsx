@@ -8,10 +8,12 @@ import { financeSelectors } from 'redux/finance/financeSelectors';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { axiosBaseUrl } from '../../redux/tokenSettingsAxios';
+import { Loader } from 'components';
 
 const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
   const dispatch = useDispatch();
   const transactionArea = useRef();
+  const isLoading = useSelector(financeSelectors.isLoading);
 
   async function fetchData(currentPage, dispatch) {
     const { data } = await axiosBaseUrl.get(
@@ -88,44 +90,66 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
   }
   return (
     <>
-      <table className={s.table}>
-        <thead className={s.tableHeaderTh}>
-          <tr className={s.tableHeader}>
-            <th className={`${s.tableTitle} ${s.date}`}>Date</th>
-            <th className={`${s.tableTitle} ${s.type}`}>Type</th>
-            <th className={`${s.tableTitle} ${s.category}`}>Category</th>
-            <th className={`${s.tableTitle} ${s.comment}`}>Comment</th>
-            <th className={`${s.tableTitle} ${s.sum}`}>Sum</th>
-            <th className={`${s.tableTitle} ${s.balance}`}>Balance</th>
-          </tr>
-        </thead>
-        <tbody
-          className={s.tableContent}
-          onScroll={scrollHandler}
-          ref={transactionArea}
-        >
-          {sortedTransactions.map(item => (
-            <tr key={item._id} className={s.tableRow}>
-              <td className={`${s.tableRowItem} ${s.date}`}>
-                {dateMaker(item)}
-              </td>
-              <td className={`${s.tableRowItem} ${s.type}`}>
-                {typeChanger(item)}
-              </td>
-              <td className={`${s.tableRowItem} ${s.category}`}>
-                {item.category?.name ? item.category.name : 'Income'}
-              </td>
-              <td className={`${s.tableRowItem} ${s.comment}`}>
-                {item.comment}
-              </td>
-              <td className={colorOfSum(item)}>{item.amount}</td>
-              <td className={`${s.tableRowItem} ${s.balance}`}>
-                {item.remainingBalance}
-              </td>
+      {isLoading ? (
+        <div className={s.loadingWrapper}>
+          <table className={s.table}>
+            <thead className={s.tableHeaderTh}>
+              <tr className={s.tableHeader}>
+                <th className={`${s.tableTitle} ${s.date}`}>Date</th>
+                <th className={`${s.tableTitle} ${s.type}`}>Type</th>
+                <th className={`${s.tableTitle} ${s.category}`}>Category</th>
+                <th className={`${s.tableTitle} ${s.comment}`}>Comment</th>
+                <th className={`${s.tableTitle} ${s.sum}`}>Sum</th>
+                <th className={`${s.tableTitle} ${s.balance}`}>Balance</th>
+              </tr>
+            </thead>
+          </table>
+          <div className={s.loader}>
+            <Loader height={'80'} width={'80'} />
+          </div>
+        </div>
+      ) : (
+        <table className={s.table}>
+          <thead className={s.tableHeaderTh}>
+            <tr className={s.tableHeader}>
+              <th className={`${s.tableTitle} ${s.date}`}>Date</th>
+              <th className={`${s.tableTitle} ${s.type}`}>Type</th>
+              <th className={`${s.tableTitle} ${s.category}`}>Category</th>
+              <th className={`${s.tableTitle} ${s.comment}`}>Comment</th>
+              <th className={`${s.tableTitle} ${s.sum}`}>Sum</th>
+              <th className={`${s.tableTitle} ${s.balance}`}>Balance</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody
+            className={s.tableContent}
+            onScroll={scrollHandler}
+            ref={transactionArea}
+          >
+            {sortedTransactions.map(item => (
+              <tr key={item._id} className={s.tableRow}>
+                <td className={`${s.tableRowItem} ${s.date}`}>
+                  {dateMaker(item)}
+                </td>
+                <td className={`${s.tableRowItem} ${s.type}`}>
+                  {typeChanger(item)}
+                </td>
+                <td className={`${s.tableRowItem} ${s.category}`}>
+                  {item.category?.name ? item.category.name : 'Income'}
+                </td>
+                <td className={`${s.tableRowItem} ${s.comment}`}>
+                  {item.comment}
+                </td>
+                <td className={colorOfSum(item)}>
+                  {(Math.round(item.amount * 100) / 100).toFixed(2)}
+                </td>
+                <td className={`${s.tableRowItem} ${s.balance}`}>
+                  {(Math.round(item.remainingBalance * 100) / 100).toFixed(2)}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </>
   );
 };

@@ -4,8 +4,9 @@ import Datetime from 'react-datetime';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import 'react-datetime/css/react-datetime.css';
+
 import { RiCalendar2Line } from 'react-icons/ri';
-import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
+import { HiOutlineChevronDown, HiOutlineChevronUp } from 'react-icons/hi';
 import getDate from 'utils/getDate';
 import scss from './ModalAddTransactionForm.module.scss';
 import ModalAddTransactionFormMenu from './ModalAddTransactionFormMenu/ModalAddTransactionFormMenu';
@@ -135,19 +136,23 @@ const ModalAddTransactionForm = prop => {
                 autoComplete="off"
                 readOnly
               ></Field>
+
               <button
                 className={scss.openMenuBtn}
                 type="button"
                 onClick={handleOpen}
               >
                 {!open ? (
-                  <FiChevronDown
+                  <HiOutlineChevronDown
                     className={scss.openMenuBtnIcon}
-                  ></FiChevronDown>
+                  ></HiOutlineChevronDown>
                 ) : (
-                  <FiChevronUp className={scss.openMenuBtnIcon}></FiChevronUp>
+                  <HiOutlineChevronUp
+                    className={scss.openMenuBtnIcon}
+                  ></HiOutlineChevronUp>
                 )}
               </button>
+
               {open && (
                 <ModalAddTransactionFormMenu
                   handleCategory={addValueCategory}
@@ -185,14 +190,13 @@ const ModalAddTransactionForm = prop => {
               onChange={createDate}
             />
           </label>
-          <label className={scss.commentBox}>
-            <Field
-              className={scss.addFormTextarea}
-              name="comment"
-              component="textarea"
-              placeholder="Comment"
-            ></Field>
-          </label>
+
+          <Field
+            className={scss.addFormTextarea}
+            name="comment"
+            component="textarea"
+            placeholder="Comment"
+          ></Field>
         </div>
 
         <button type="submit" className={scss.addBtn}>
