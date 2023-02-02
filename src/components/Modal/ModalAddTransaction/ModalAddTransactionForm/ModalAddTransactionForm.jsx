@@ -91,6 +91,10 @@ const ModalAddTransactionForm = prop => {
     return;
   };
 
+  const CloseBlur = () => {
+    handleOpen();
+  };
+
   const renderCalendarInput = (props, openCalendar) => {
     return (
       <div className={scss.dataBox}>
@@ -135,6 +139,7 @@ const ModalAddTransactionForm = prop => {
                 onClick={handleOpen}
                 autoComplete="off"
                 readOnly
+                onBlur={CloseBlur}
               ></Field>
 
               <button
