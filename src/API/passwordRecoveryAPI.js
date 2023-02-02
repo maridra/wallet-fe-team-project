@@ -4,19 +4,13 @@ import { baseURL } from 'redux/tokenSettingsAxios';
 
 async function forgotPasswordAPI(email) {
   try {
-    const response = await axios.post(
-      `http://localhost:3000/api/auth/forgot-password`,
-      {
-        email,
-      }
-    );
-    // const response = await axios.post(`${baseURL}/auth/forgot-password`, {
-    //   email,
-    // });
-    console.log('email', response);
+    const response = await axios.post(`${baseURL}/auth/forgot-password`, {
+      email,
+    });
     return response.data;
   } catch (error) {
-    Notify.failure(error.message);
+    const errorMessage = error.response.data.message.toString();
+    Notify.failure(errorMessage);
   }
 }
 
@@ -31,7 +25,8 @@ async function createPasswordAPI(id, token, password) {
 
     return response.data;
   } catch (error) {
-    Notify.failure(error.message);
+    const errorMessage = error.response.data.message.toString();
+    Notify.failure(errorMessage);
   }
 }
 const passwordAPI = { forgotPasswordAPI, createPasswordAPI };
