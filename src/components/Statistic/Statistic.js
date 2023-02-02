@@ -80,8 +80,13 @@ const StatisticForm = () => {
   };
 
   // const blurHandler = () => {
+
   // setOpenMonth(false);
   // setOpenYear(!openYear);
+
+  //   setOpenMonth(false);
+  //   setOpenYear(!openYear);
+
   // };
 
   const stat = useSelector(statisticSelectors.getStatistic);
