@@ -1,8 +1,10 @@
 @import '../../assets/styles/index.scss';
 
 .table {
+  min-width: 280px;
   max-width: 440px;
-  min-height: 200px;
+  min-height: 174px;
+  padding-right: 2px;
   text-align: center;
   color: var(--text-white-color);
   background-color: var(--main-accent-color-blue);
@@ -12,16 +14,16 @@
   background-position: bottom;
   background-size: contain;
 
-  @media screen and (max-width: 768px) {
+  @include mq(mob-only) {
     margin-top: 0px;
   }
 
-  @media screen and (min-width: 768px) {
+  @include mq(tab) {
     width: 336px;
     min-height: 182px;
   }
 
-  @media screen and (min-width: 1280px) {
+  @include mq(desk) {
     width: 393px;
     min-height: 331px;
   }
@@ -40,12 +42,38 @@
   display: flex;
   justify-content: space-between;
   margin: 0;
-  padding: 12px 20px;
+  padding: 12px 12px 12px 20px;
   list-style: none;
+
+  @include mq(desk) {
+    padding: 17px 64px 16px 44px;
+  }
+}
+
+.tablePurchase {
+  padding-right: 16px;
+  @include mq(tab) {
+    padding-right: 30px;
+  }
+  @include mq(desk) {
+    padding-right: 24px;
+  }
+}
+
+.tableSale {
+  @include mq(tab-only) {
+    padding-right: 12px;
+  }
+  @include mq(desk) {
+    padding-left: 4px;
+  }
 }
 
 .bodyContainer {
   padding: 12px 20px;
+  @include mq(desk) {
+    padding: 22px;
+  }
 }
 
 .bodyList {
@@ -55,10 +83,15 @@
   padding: 0;
   line-height: calc(24 / 16);
   list-style: none;
+
+  @include mq(desk) {
+    justify-content: space-around;
+    margin-bottom: 20px;
+  }
 }
 
 .bodyData {
-  padding-left: 10px;
+  padding-left: 3px;
 }
 
 .loader {
