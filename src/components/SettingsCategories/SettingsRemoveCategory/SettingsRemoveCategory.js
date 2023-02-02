@@ -8,6 +8,13 @@ import userOperations from 'redux/user/userOperations';
 
 const SettingsRemoveCategory = () => {
   const categories = useSelector(userSelectors.getCategories);
+  const itemToReplace = categories.findIndex(i => i.name === 'Other expenses');
+  const sortedCategory = [
+    ...categories,
+    [...categories].splice(itemToReplace, 1).pop(),
+  ];
+  sortedCategory.splice(itemToReplace, 1);
+
   const dispatch = useDispatch();
 
   function deleteCategory(id) {
@@ -20,9 +27,17 @@ const SettingsRemoveCategory = () => {
         Advice: click on the cross if you want to delete
       </p>
       <ul className={s.categoriesList}>
-        {categories.map(item => (
-          <li key={item._id} className={s.categoriesItem} id={item._id}>
-            {item.name}
+        {sortedCategory.map(item => (
+          <li
+            key={item._id}
+            className={
+              item._id !== '10'
+                ? s.categoriesItem
+                : `${s.otherExpenses} ${s.categoriesItem}`
+            }
+            id={item._id}
+          >
+            <p>{item.name}</p>
             {item._id !== '10' ? (
               <button
                 onClick={() => deleteCategory(item._id)}
