@@ -79,10 +79,10 @@ const StatisticForm = () => {
     handleOpenMonthSelect();
   };
 
-  const blurHandler = () => {
-    // setOpenMonth(false);
-    // setOpenYear(!openYear);
-  };
+  // const blurHandler = () => {
+  //   setOpenMonth(false);
+  //   setOpenYear(!openYear);
+  // };
 
   const stat = useSelector(statisticSelectors.getStatistic);
 
