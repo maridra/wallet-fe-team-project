@@ -200,6 +200,7 @@
   border-collapse: collapse;
   align-items: stretch;
   overflow: hidden;
+  padding: 0;
 
   @include mq(mob-only) {
     min-width: 280px;
@@ -213,11 +214,13 @@
     width: 395px;
   }
 }
+
 .thead {
   border-spacing: 0;
   background: #ffffff;
   height: 58px;
   padding: 0;
+  border: none;
   :first-child {
     border-radius: 30px 0 0 30px;
     text-align: left;

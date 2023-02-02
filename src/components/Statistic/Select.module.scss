@@ -29,6 +29,9 @@
   height: 44px;
   font-size: 18px;
   line-height: 27px;
+  // backdrop-filter: var(--filter-dropdown);
+  // background-color: var(--background-color-dropdown);
+  // box-shadow: var(--shadow-dropdown);
   &:hover,
   &:focus {
     background-color: #ffffff;

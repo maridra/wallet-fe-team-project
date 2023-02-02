@@ -73,6 +73,11 @@ const StatisticForm = () => {
     handleOpenMonthSelect();
   };
 
+  // const handleBackdropClick = e => {
+  //   if (e.currentTarget === e.target) {
+  //     handleOpenMonthSelect();
+  //   }
+  // };
   const stat = useSelector(statisticSelectors.getStatistic);
   console.log('stat', stat);
 
