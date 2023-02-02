@@ -42,9 +42,7 @@ const ForgotPassword = () => {
     passwordAPI
       .forgotPasswordAPI(email)
       .then(res => setStatus(res.code))
-      .catch(error =>
-        Notify.failure(`User with email: ${email}, not found!`, error)
-      );
+      .catch(error => Notify.failure(error.message));
   };
 
   return (

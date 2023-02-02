@@ -22,6 +22,7 @@ async function createPasswordAPI(id, token, password) {
         password,
       }
     );
+
     return response.data;
   } catch (error) {
     Notify.failure(error.message);
