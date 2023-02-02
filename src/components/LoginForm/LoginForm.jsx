@@ -111,8 +111,8 @@ const LoginForm = () => {
               )}
               {(type === "password")
                 ? <span className={s.hideIcon}>
-                <BiHide className={s.icon} onMouseDown={showPassword} /></span>
-                : <span className={s.showIcon} onMouseUp={hidePassword}>
+                <BiHide className={s.icon} onMouseDown={showPassword} onTouchStart={showPassword}/></span>
+                : <span className={s.showIcon} onMouseUp={hidePassword} onTouchEnd={hidePassword}>
                 <BiShow className={s.icon} /></span>}
             </label>
             <button type="submit" className={s.loginBtn}>
