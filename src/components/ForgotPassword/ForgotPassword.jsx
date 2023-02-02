@@ -41,7 +41,8 @@ const ForgotPassword = () => {
 
     passwordAPI
       .forgotPasswordAPI(email)
-      .then(res => setStatus(res.code))
+      // .then(res => setStatus(res))
+      .then(res => console.log('res', res))
       .catch(error => Notify.failure(error.message));
   };
 
