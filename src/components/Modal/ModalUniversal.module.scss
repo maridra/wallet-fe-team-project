@@ -40,7 +40,7 @@
   }
   @include mq(tab) {
     width: 540px;
-    padding: 40px 80px;
+    padding: 40px 73px 60px 73px;
     align-items: center;
     border-radius: 15px;
     animation: scaleTitle 0.3s ease 1 alternate;

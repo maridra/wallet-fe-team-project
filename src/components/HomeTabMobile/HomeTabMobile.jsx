@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { financeSelectors } from 'redux/finance/financeSelectors';
 import { axiosBaseUrl } from '../../redux/tokenSettingsAxios';
+import { Loader } from 'components';
 
 import { useSelector } from 'react-redux';
 
@@ -15,10 +16,11 @@ const HomeTabMobile = ({
   setFetching,
 }) => {
   const dispatch = useDispatch();
+  const isLoading = useSelector(financeSelectors.isLoading);
 
   async function fetchData(currentPage, dispatch) {
     const { data } = await axiosBaseUrl.get(
-      `transactions?page=${currentPage}&limit=10`
+      `transactions?page=${currentPage}&limit=20`
     );
     await dispatch(financeOperation.updateTransactionsNew(data));
     setCurrentPage(prevState => prevState + 1);
@@ -60,7 +62,6 @@ const HomeTabMobile = ({
   const sortedTransactions = sortingTransaction(transactions);
 
   function sortingTransaction(transactions) {
-    console.log(transactions);
     if (transactions) {
       const sorted = [...transactions].sort(function (a, b) {
         return (
@@ -108,40 +109,46 @@ const HomeTabMobile = ({
   return (
     <>
       <ul className={s.operationList}>
-        {sortedTransactions.map(item => (
-          <li key={item._id} className={s.operationItem}>
-            <ul className={s.operationItemUl}>
-              <li className={userColorUi(item)}>
-                <span className={s.mobileTableHeader}>Date</span>
-                <span className={s.mobileTableInfo}>{dateMaker(item)}</span>
-              </li>
-              <li className={userColorUi(item)}>
-                <span className={s.mobileTableHeader}>Type</span>
-                <span className={s.mobileTableInfo}>{typeChanger(item)}</span>
-              </li>
-              <li className={userColorUi(item)}>
-                <span className={s.mobileTableHeader}>Category</span>
-                <span className={s.mobileTableInfo}>
-                  {item.category?.name ? item.category.name : 'Income'}
-                </span>
-              </li>
-              <li className={userColorUi(item)}>
-                <span className={s.mobileTableHeader}>Comment</span>
-                <span className={s.mobileTableInfo}>{item.comment}</span>
-              </li>
-              <li className={userColorUi(item)}>
-                <span className={s.mobileTableHeader}>Sum</span>
-                <span className={colorOfSum(item)}>{item.amount}</span>
-              </li>
-              <li className={userColorUi(item)}>
-                <span className={s.mobileTableHeader}>Balance</span>
-                <span className={s.mobileTableInfo}>
-                  {item.remainingBalance}
-                </span>
-              </li>
-            </ul>
+        {isLoading ? (
+          <li className={s.loader}>
+            <Loader height={'80'} width={'80'} />
           </li>
-        ))}
+        ) : (
+          sortedTransactions.map(item => (
+            <li key={item._id} className={s.operationItem}>
+              <ul className={s.operationItemUl}>
+                <li className={userColorUi(item)}>
+                  <span className={s.mobileTableHeader}>Date</span>
+                  <span className={s.mobileTableInfo}>{dateMaker(item)}</span>
+                </li>
+                <li className={userColorUi(item)}>
+                  <span className={s.mobileTableHeader}>Type</span>
+                  <span className={s.mobileTableInfo}>{typeChanger(item)}</span>
+                </li>
+                <li className={userColorUi(item)}>
+                  <span className={s.mobileTableHeader}>Category</span>
+                  <span className={s.mobileTableInfo}>
+                    {item.category?.name ? item.category.name : 'Income'}
+                  </span>
+                </li>
+                <li className={userColorUi(item)}>
+                  <span className={s.mobileTableHeader}>Comment</span>
+                  <span className={s.mobileTableInfo}>{item.comment}</span>
+                </li>
+                <li className={userColorUi(item)}>
+                  <span className={s.mobileTableHeader}>Sum</span>
+                  <span className={colorOfSum(item)}>{item.amount}</span>
+                </li>
+                <li className={userColorUi(item)}>
+                  <span className={s.mobileTableHeader}>Balance</span>
+                  <span className={s.mobileTableInfo}>
+                    {item.remainingBalance}
+                  </span>
+                </li>
+              </ul>
+            </li>
+          ))
+        )}
       </ul>
     </>
   );

@@ -8,8 +8,8 @@ export const updateTransactionsNew = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const transactions = [
-        ...credentials.data.transactions,
         ...thunkAPI.getState().finance.data,
+        ...credentials.data.transactions,
       ];
 
       return { transactions };
@@ -36,11 +36,31 @@ export const updateTransactions = createAsyncThunk(
 
 export const addTransaction = createAsyncThunk(
   'finance/addTransaction',
-  async (credentials, { dispatch }) => {
+  async (credentials, { dispatch, getState }) => {
     try {
-      const { data } = await axiosBaseUrl.post('/transactions', credentials);
+      const dateToday = new Date()
+        .toISOString()
+        .replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$1$2$3');
+      const dateTransactions = Number(
+        credentials.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$1$2$3')
+      );
 
-      return data.data;
+      if (dateTransactions < dateToday) {
+        await axiosBaseUrl.post('/transactions', credentials);
+        const { data } = await axiosBaseUrl.get(`transactions?page=1&limit=20`);
+        const rdyTransactions = data.data.transactions;
+        const totalBalance = rdyTransactions[0].remainingBalance;
+
+        return { rdyTransactions, totalBalance };
+      } else {
+        const { data } = await axiosBaseUrl.post('/transactions', credentials);
+        const transaction = data.data.transaction;
+        const transactions = getState().finance.data;
+        const rdyTransactions = [transaction, ...transactions];
+        const totalBalance = data.data.totalBalance;
+
+        return { rdyTransactions, totalBalance };
+      }
     } catch (e) {
       hardcoreLogout(e, dispatch);
       Notify.failure(e.message);

@@ -28,8 +28,12 @@ export const financeSlice = createSlice({
   extraReducers: builder => {
     builder
 
-      .addCase(updateTransactionsNew.pending, handlePending)
-      .addCase(updateTransactionsNew.rejected, handleRejected)
+      .addCase(updateTransactionsNew.pending, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(updateTransactionsNew.rejected, (state, action) => {
+        state.error = action.payload;
+      })
       .addCase(updateTransactionsNew.fulfilled, (state, action) => {
         state.data = action.payload?.transactions;
         state.totalBalance =
@@ -51,8 +55,8 @@ export const financeSlice = createSlice({
       .addCase(addTransaction.pending, handlePending)
       .addCase(addTransaction.rejected, handleRejected)
       .addCase(addTransaction.fulfilled, (state, action) => {
-        state.data = [...state.data, { ...action.payload.transaction }];
-        state.totalBalance = action.payload?.totalBalance;
+        state.data = action.payload.rdyTransactions;
+        state.totalBalance = action.payload.totalBalance;
         state.isLoading = false;
       });
   },
