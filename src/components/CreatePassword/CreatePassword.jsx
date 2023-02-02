@@ -38,7 +38,8 @@ const CreatePassword = () => {
 
     passwordAPI
       .createPasswordAPI(id, token, password)
-      .then(res => setStatus(res.code));
+      .then(res => setStatus(res.code))
+      .catch(error => Notify.failure(error.message));
   };
 
   const SignUpSchema = Yup.object().shape({

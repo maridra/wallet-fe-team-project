@@ -39,7 +39,10 @@ const ForgotPassword = () => {
       return;
     }
 
-    passwordAPI.forgotPasswordAPI(email).then(res => setStatus(res));
+    passwordAPI
+      .forgotPasswordAPI(email)
+      .then(res => setStatus(res))
+      .catch(error => Notify.failure(error.message));
   };
 
   return (

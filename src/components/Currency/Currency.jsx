@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Notify } from 'notiflix';
 import getCurrency from '../../API/currencyAPI';
 import Loader from '../Loader/Loader';
 
@@ -16,7 +17,10 @@ const Currency = () => {
 
   useEffect(() => {
     if (fetchByMinutes < 60) return;
-    getCurrency().then(setCurrency);
+
+    getCurrency()
+      .then(setCurrency)
+      .catch(error => Notify.failure(error.message));
   }, [fetchByMinutes]);
 
   const findCurrencyRate = (currency, code) => {
