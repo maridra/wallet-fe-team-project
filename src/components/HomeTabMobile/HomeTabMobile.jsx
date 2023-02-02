@@ -18,7 +18,7 @@ const HomeTabMobile = ({
 
   async function fetchData(currentPage, dispatch) {
     const { data } = await axiosBaseUrl.get(
-      `transactions?page=${currentPage}&limit=10`
+      `transactions?page=${currentPage}&limit=20`
     );
     await dispatch(financeOperation.updateTransactionsNew(data));
     setCurrentPage(prevState => prevState + 1);
