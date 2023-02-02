@@ -7,7 +7,8 @@ import { getStatistic } from '../../redux/statistic/statisticOperation';
 import { connect } from 'react-redux';
 import { statisticSelectors } from 'redux/statistic/statisticSelectors';
 import scss from './Statistic.module.scss';
-import { months, years } from '../../assets/variables/selectorData';
+import { SelectForStatisticMonth, SelectForStatisticYear } from './Select';
+import { FiChevronDown, FiChevronUp } from 'react-icons/fi';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -47,16 +48,28 @@ const StatisticForm = () => {
   const [year, setYear] = useState(date.getFullYear());
   const [month, setMonth] = useState(newMonths[numberOfMonth]);
   const [newMonth, setNewMonth] = useState(date.getMonth());
+  const [openMonth, setOpenMonth] = useState(false);
+  const [openYear, setOpenYear] = useState(false);
 
-  const handleYearChange = event => {
-    setYear(event.target.value);
+  const handleOpenMonthSelect = () => {
+    setOpenMonth(!openMonth);
+  };
+
+  const handleOpenYearSelect = () => {
+    setOpenYear(!openYear);
+  };
+
+  const handleYearChange = name => {
+    setYear(name);
+    handleOpenYearSelect();
   };
   const dispatch = useDispatch();
 
-  const handleMonthChange = event => {
-    let value = event.target.value;
-    setMonth(event.target.value);
-    setNewMonth(newMonths.indexOf(value));
+  const handleMonthChange = name => {
+    // let value = event.target.value;
+    setMonth(name);
+    setNewMonth(newMonths.indexOf(name));
+    handleOpenMonthSelect();
   };
 
   const stat = useSelector(statisticSelectors.getStatistic);
@@ -68,28 +81,8 @@ const StatisticForm = () => {
       {
         label: 'Total',
         data: stat.expensesByPeriod.map(item => item.amount),
-        backgroundColor: [
-          '#FED057',
-          'rgba(255, 216, 208, 1)',
-          'rgba(253, 148, 152, 1)',
-          'rgba(197, 186, 255, 1)',
-          'rgba(110, 120, 232, 1)',
-          'rgba(74, 86, 226, 1)',
-          'rgba(129, 225, 255, 1)',
-          'rgba(36, 204, 167, 1)',
-          'rgba(0, 173, 132, 1)',
-        ],
-        borderColor: [
-          'rgba(254, 208, 87, 1)',
-          'rgba(255, 216, 208, 1)',
-          'rgba(253, 148, 152, 1)',
-          'rgba(197, 186, 255, 1)',
-          'rgba(110, 120, 232, 1)',
-          'rgba(74, 86, 226, 1)',
-          'rgba(129, 225, 255, 1)',
-          'rgba(36, 204, 167, 1)',
-          'rgba(0, 173, 132, 1)',
-        ],
+        backgroundColor: stat.expensesByPeriod.map(item => item.color),
+        borderColor: stat.expensesByPeriod.map(item => item.color),
         borderWidth: 1,
         cutout: '70%',
       },
@@ -99,19 +92,13 @@ const StatisticForm = () => {
   useEffect(() => {
     dispatch(getStatistic({ month: newMonth + 1, year }));
   }, [dispatch, newMonth, year]);
-
   return (
     <>
       <div className={scss.sectionTMP}>
         <h1 className={scss.title}>Statistics</h1>
         <div className={scss.mainBox}>
-          {/* <DoughnutForm stat={stat} /> */}
           <div className={scss.doughnut}>
-            <Doughnut
-              data={data}
-              options={options}
-              // plugins={[coolFunction(stat)]}
-            />
+            <Doughnut data={data} options={options} />
             <div className={scss.doughnutMonth}>
               {stat.expensesPerMonth
                 ? `₴ ${stat.expensesPerMonth.toLocaleString('uk-ua', {
@@ -123,7 +110,63 @@ const StatisticForm = () => {
           </div>
           <div className={scss.statisticData}>
             <div className={scss.select}>
-              <select
+              <input
+                className={scss.selectItem}
+                type="text"
+                placeholder="Select a month"
+                name="month"
+                value={month}
+                onClick={handleOpenMonthSelect}
+                autoComplete="off"
+                readOnly
+              ></input>
+              <input
+                className={scss.selectItem}
+                type="text"
+                placeholder="Select a year"
+                name="year"
+                value={year}
+                onClick={handleOpenYearSelect}
+                autoComplete="off"
+                readOnly
+              ></input>
+              <button
+                className={scss.openMenuBtn}
+                type="button"
+                onClick={handleOpenMonthSelect}
+              >
+                {!openMonth ? (
+                  <FiChevronDown
+                    className={scss.openMenuBtnIcon}
+                  ></FiChevronDown>
+                ) : (
+                  <FiChevronUp className={scss.openMenuBtnIcon}></FiChevronUp>
+                )}
+              </button>
+              <button
+                className={scss.openMenuBtn}
+                type="button"
+                onClick={handleOpenYearSelect}
+              >
+                {!openYear ? (
+                  <FiChevronDown
+                    className={scss.openMenuBtnIcon}
+                  ></FiChevronDown>
+                ) : (
+                  <FiChevronUp className={scss.openMenuBtnIcon}></FiChevronUp>
+                )}
+              </button>
+              {openMonth && (
+                <SelectForStatisticMonth
+                  handleMonth={handleMonthChange}
+                ></SelectForStatisticMonth>
+              )}
+              {openYear && (
+                <SelectForStatisticYear
+                  handleYear={handleYearChange}
+                ></SelectForStatisticYear>
+              )}
+              {/* <select
                 className={scss.selectItem}
                 value={month}
                 onChange={handleMonthChange}
@@ -152,7 +195,7 @@ const StatisticForm = () => {
                     {item.name}
                   </option>
                 ))}
-              </select>
+              </select> */}
             </div>
             {/* table  */}
             <table className={scss.table}>
@@ -165,7 +208,11 @@ const StatisticForm = () => {
               <tbody>
                 {stat.expensesByPeriod.map(item => (
                   <tr className={scss.tableRows} key={uuidv4()}>
-                    <td className={scss.squareBeforeExpenses} id={item.name}>
+                    <td
+                      className={scss.squareBeforeExpenses}
+                      id={item.name}
+                      style={{ backgroundColor: `${item.color}` }}
+                    >
                       {item.name}
                     </td>
                     <td className={scss.tableRows__rightText}>
