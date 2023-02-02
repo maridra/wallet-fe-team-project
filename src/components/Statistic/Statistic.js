@@ -138,8 +138,8 @@ const StatisticForm = () => {
               <>
                 <Doughnut data={AllData} options={options} />
                 <div className={scss.doughnutMonth}>
-                  {stat.expensesPerMonth ? (
-                    `₴ ${stat.expensesPerMonth
+                  {stat.totalExpenses ? (
+                    `₴ ${stat.totalExpenses
                       .toLocaleString('uk-ua', {
                         minimumFractionDigits: 2,
                         maximumFractionDigits: 2,
