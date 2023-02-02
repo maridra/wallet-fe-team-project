@@ -1,5 +1,4 @@
 import { useEffect } from 'react';
-// import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 import authOperations from 'redux/auth/authOperations';
@@ -10,27 +9,14 @@ import { ReactComponent as ErrorIcon } from '../../assets/Images/login/error.svg
 import PageWrapper from 'components/PageWrapper/PageWrapper';
 
 const CheckVerifyEmail = () => {
-  // const [verified, setVerified] = useState(false);
   const dispatch = useDispatch();
   const param = useParams();
   const verificationToken = param.verificationToken;
-  // const token = useSelector(authSelectors.getToken);
   const isLoading = useSelector(authSelectors.isLoading);
   const isVerified = useSelector(authSelectors.isVerified);
 
   useEffect(() => {
-    // if (verificationToken === token) {
     dispatch(authOperations.verifyEmail({ verificationToken }));
-    // .then(response => {
-    //   const { status } = response.payload;
-    //   if (status === 'success') {
-    //     setVerified(true);
-    //   }
-    // })
-    // .catch(() => {
-    //   setVerified(false);
-    // });
-    // }
   }, [dispatch, verificationToken]);
 
   return (

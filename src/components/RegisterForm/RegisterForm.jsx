@@ -46,23 +46,16 @@ const RegisterForm = () => {
   const hidePassword = () => {
     setType("password")
   }
-
+  
   const SignUpSchema = Yup.object().shape({
     email: Yup.string()
+      .matches(/^\w+[\w-.]*\w@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/, "Must be a valid email (latin letters). For example: example123@example.com")
       .email('Must be a valid email!')
       .min(10)
       .max(63)
       .required('Required field'),
     password: Yup.string()
-      .matches(
-        /(?=.*[a-z])/,
-        'Must contain at least 1 lowerCase alphabetical character'
-      )
-      .matches(
-        /(?=.*[A-Z])/,
-        'Must contain at least 1 UpperCase alphabetical character'
-      )
-      .matches(/(?=.*[0-9])/, 'Must contain at least 1 numeric character')
+      .matches(/(^[а-яА-Яa-zA-Z0-9]+$)/, "Can only include numbers and latin letters")
       .min(6, 'Minimum 6 characters required')
       .max(12, 'Maximum 12 characters')
       .required('Required field'),
@@ -70,7 +63,7 @@ const RegisterForm = () => {
       .oneOf([Yup.ref('password')], "Passwords don't match!")
       .required('Required field'),
     firstName: Yup.string()
-      .matches(/(^[а-яА-ЯёЁa-zA-Z0-9]+$)/, "Only letters and numbers")
+      .matches(/(^[а-яА-Яa-zA-Z0-9а-щА-ЩЬьЮюЯяЇїІіЄєҐґ]+$)/, "Can only include numbers and letters")
       .min(1)
       .max(12, 'Too long name')
       .required('Required field'),
