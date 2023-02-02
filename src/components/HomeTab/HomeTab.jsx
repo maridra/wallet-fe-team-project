@@ -51,7 +51,7 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
 
   function sortingTransaction(transactions) {
     if (transactions) {
-      const sorted = [...transactions].reverse().sort(function (a, b) {
+      const sorted = [...transactions].sort(function (a, b) {
         return (
           Number(b.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$1$2$3')) -
           Number(a.date.replace(/^(\d+)-(\d+)-(\d+)\D.+$/, '$1$2$3'))
