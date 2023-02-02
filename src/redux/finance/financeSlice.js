@@ -28,8 +28,12 @@ export const financeSlice = createSlice({
   extraReducers: builder => {
     builder
 
-      .addCase(updateTransactionsNew.pending, handlePending)
-      .addCase(updateTransactionsNew.rejected, handleRejected)
+      .addCase(updateTransactionsNew.pending, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(updateTransactionsNew.rejected, (state, action) => {
+        state.error = action.payload;
+      })
       .addCase(updateTransactionsNew.fulfilled, (state, action) => {
         state.data = action.payload?.transactions;
         state.totalBalance =
