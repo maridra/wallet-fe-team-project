@@ -54,10 +54,12 @@ const StatisticForm = () => {
 
   const handleOpenMonthSelect = () => {
     setOpenMonth(!openMonth);
+    setOpenYear(false);
   };
 
   const handleOpenYearSelect = () => {
     setOpenYear(!openYear);
+    setOpenMonth(false);
   };
 
   const handleYearChange = name => {
