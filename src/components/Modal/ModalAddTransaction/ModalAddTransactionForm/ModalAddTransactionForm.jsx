@@ -42,7 +42,6 @@ const ModalAddTransactionForm = prop => {
   };
 
   const handleOpen = e => {
-    console.log('Hi');
     setOpen(true);
   };
 
@@ -162,7 +161,6 @@ const ModalAddTransactionForm = prop => {
                 <ModalAddTransactionFormMenu
                   handleCategory={addValueCategory}
                   handleBlur={handleClose}
-                  handleOpen={handleOpen}
                 ></ModalAddTransactionFormMenu>
               )}
             </label>
