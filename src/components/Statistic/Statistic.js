@@ -232,11 +232,13 @@ const StatisticForm = () => {
                   ? stat.expensesByPeriod.map(item => (
                       <tr className={scss.tableRows} key={uuidv4()}>
                         <td id={item.name}>
-                          <div
-                            className={scss.squareBefore}
-                            style={{ backgroundColor: `${item.color}` }}
-                          ></div>
-                          {item.name}
+                          <div className={scss.squareAndText}>
+                            <div
+                              className={scss.squareBefore}
+                              style={{ backgroundColor: `${item.color}` }}
+                            ></div>
+                            <div className={scss.textCategory}>{item.name}</div>
+                          </div>
                         </td>
                         <td className={scss.tableRows__rightText}>
                           {item.amount
@@ -251,11 +253,13 @@ const StatisticForm = () => {
                   : stat.allExpensesByCategory.map(item => (
                       <tr className={scss.tableRows} key={uuidv4()}>
                         <td id={item.name}>
-                          <div
-                            className={scss.squareBefore}
-                            style={{ backgroundColor: `${item.color}` }}
-                          ></div>
-                          {item.name}
+                          <div className={scss.squareAndText}>
+                            <div
+                              className={scss.squareBefore}
+                              style={{ backgroundColor: `${item.color}` }}
+                            ></div>
+                            <div className={scss.textCategory}>{item.name}</div>
+                          </div>
                         </td>
                         <td className={scss.tableRows__rightText}>
                           {item.amount
