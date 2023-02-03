@@ -153,12 +153,14 @@ const HomeTabMobile = ({
                 </li>
                 <li className={userColorUi(item)}>
                   <span className={s.mobileTableHeader}>Sum</span>
-                  <span className={colorOfSum(item)}>{item.amount}</span>
+                  <span className={colorOfSum(item)}>
+                    {(Math.round(item.amount * 100) / 100).toFixed(2)}
+                  </span>
                 </li>
                 <li className={userColorUi(item)}>
                   <span className={s.mobileTableHeader}>Balance</span>
                   <span className={s.mobileTableInfo}>
-                    {item.remainingBalance}
+                    {(Math.round(item.remainingBalance * 100) / 100).toFixed(2)}
                   </span>
                 </li>
               </ul>
