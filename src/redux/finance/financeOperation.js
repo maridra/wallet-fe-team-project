@@ -65,7 +65,7 @@ export const addTransaction = createAsyncThunk(
         const transaction = data.data.transaction;
         const transactions = getState().finance.data;
         const rdyTransactions = [transaction, ...transactions];
-        rdyTransactions.splice(-1);
+        // rdyTransactions.splice(-1);
         const totalBalance = data.data.totalBalance;
 
         return { rdyTransactions, totalBalance };
