@@ -16,6 +16,10 @@ const SettingsRemoveCategory = () => {
   sortedCategory.splice(itemToReplace, 1);
 
   const dispatch = useDispatch();
+  const itemStyle = item => ({
+    backgroundColor: `${item?.color}`,
+    borderRadius: `25px`,
+  });
 
   function deleteCategory(id) {
     dispatch(userOperations.removeCategory(id));
@@ -28,27 +32,28 @@ const SettingsRemoveCategory = () => {
       </p>
       <ul className={s.categoriesList}>
         {sortedCategory.map(item => (
-          <li
-            key={item._id}
-            className={
-              item._id !== '10'
-                ? s.categoriesItem
-                : `${s.otherExpenses} ${s.categoriesItem}`
-            }
-            id={item._id}
-          >
-            <p>{item.name}</p>
-            {item._id !== '10' ? (
-              <button
-                onClick={() => deleteCategory(item._id)}
-                type="button"
-                className={s.buttonDelete}
-              >
-                <svg className={s.svg}>
-                  <use href={`${sprite}#icon-cancel-circle`}></use>
-                </svg>
-              </button>
-            ) : null}
+          <li key={item._id} style={itemStyle(item)}>
+            <div
+              className={
+                item._id !== '10'
+                  ? `${s.categoriesItem}`
+                  : `${s.otherExpenses} ${s.categoriesItem}`
+              }
+              id={item._id}
+            >
+              <p>{item.name}</p>
+              {item._id !== '10' ? (
+                <button
+                  onClick={() => deleteCategory(item._id)}
+                  type="button"
+                  className={s.buttonDelete}
+                >
+                  <svg className={s.svg}>
+                    <use href={`${sprite}#icon-cancel-circle`}></use>
+                  </svg>
+                </button>
+              ) : null}
+            </div>
           </li>
         ))}
       </ul>
