@@ -14,6 +14,7 @@ import financeOperation from 'redux/finance/financeOperation';
 
 const schema = yup.object().shape({
   amount: yup.number().min(0.01).max(2500000).required(),
+  comment: yup.string().matches(/(^[а-яА-ЯёЁa-zA-ZЇїІіЄєҐґ ]+$)/u),
 });
 const initialValues = {
   amount: '',
@@ -30,12 +31,18 @@ const ModalAddTransactionForm = prop => {
 
   const dispatch = useDispatch();
 
+  const today = new Date();
+  const disableFutureDt = current => {
+    return current.isBefore(today);
+  };
+
   const createDate = ({ _d }) => {
     setBekDate(_d.toISOString());
     setDate(getDate(_d));
   };
 
   const handleOpen = () => {
+    console.log('Hi');
     setOpen(!open);
   };
 
@@ -91,10 +98,9 @@ const ModalAddTransactionForm = prop => {
     return;
   };
 
-  // const CloseBlur = () => {
-  //   addValueCategory();
-  //   setOpen(false);
-  // };
+  const CloseBlur = e => {
+    setOpen(false);
+  };
 
   const renderCalendarInput = (props, openCalendar) => {
     return (
@@ -114,11 +120,6 @@ const ModalAddTransactionForm = prop => {
         </button>
       </div>
     );
-  };
-
-  const today = new Date();
-  const disableFutureDt = current => {
-    return current.isBefore(today);
   };
 
   return (
@@ -141,7 +142,6 @@ const ModalAddTransactionForm = prop => {
                 autoComplete="off"
                 readOnly
               ></Field>
-
               <button
                 className={scss.openMenuBtn}
                 type="button"
@@ -157,10 +157,10 @@ const ModalAddTransactionForm = prop => {
                   ></HiOutlineChevronUp>
                 )}
               </button>
-
               {open && (
                 <ModalAddTransactionFormMenu
                   handleCategory={addValueCategory}
+                  // handleBlur={CloseBlur}
                 ></ModalAddTransactionFormMenu>
               )}
             </label>
@@ -178,8 +178,8 @@ const ModalAddTransactionForm = prop => {
               name="amount"
               component="div"
               render={() => (
-                <div className={scss.error}>
-                  Please, enter an amount from 0.01 to 2500000
+                <div className={scss.errorSum}>
+                  Please, enter an amount from 0.01 to 2500000!
                 </div>
               )}
             ></ErrorMessage>
@@ -195,12 +195,24 @@ const ModalAddTransactionForm = prop => {
               onChange={createDate}
             />
           </label>
-          <Field
-            className={scss.addFormTextarea}
-            name="comment"
-            component="textarea"
-            placeholder="Comment"
-          ></Field>
+          <label className={scss.commentBox}>
+            <Field
+              className={scss.addFormTextarea}
+              name="comment"
+              component="textarea"
+              placeholder="Comment"
+            ></Field>
+            <ErrorMessage
+              className={scss.errorMessage}
+              name="amount"
+              component="div"
+              render={() => (
+                <div className={scss.errorComment}>
+                  Please, enter only letters!
+                </div>
+              )}
+            ></ErrorMessage>
+          </label>
         </div>
         <button type="submit" className={scss.addBtn}>
           Add
