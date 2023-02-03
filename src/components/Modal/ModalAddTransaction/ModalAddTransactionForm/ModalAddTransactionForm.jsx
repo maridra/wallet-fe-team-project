@@ -13,12 +13,16 @@ import ModalAddTransactionFormMenu from './ModalAddTransactionFormMenu/ModalAddT
 import financeOperation from 'redux/finance/financeOperation';
 
 const schema = yup.object().shape({
-  amount: yup.number().min(0.01).max(2500000).required(),
+  amount: yup
+    .number()
+    .min(0.01, 'Please, enter an amount min 0.01')
+    .max(2500000, 'Please, enter an amount max 2500000!')
+    .required('Amount is required'),
   comment: yup
     .string()
-    .trim()
-    .max(100)
-    .matches(/(^[а-яА-ЯёЁa-zA-ZЇїІіЄєҐґ ]+$)/u),
+    .trim('', 'Please, no space')
+    .max(100, 'Maximum 100 symbols')
+    .matches(/(^[а-яА-ЯёЁa-zA-ZЇїІіЄєҐґ ]+$)/u, 'Please, enter only letters'),
 });
 const initialValues = {
   amount: '',
@@ -126,6 +130,17 @@ const ModalAddTransactionForm = prop => {
     );
   };
 
+  const createValidateMessageAmount = r => {
+    if (
+      r === 'Please, enter an amount min 0.01' ||
+      r === 'Please, enter an amount max 2500000!' ||
+      r === 'Amount is required'
+    ) {
+      return <div className={scss.errorSum}>{r}</div>;
+    }
+    return <div className={scss.errorSum}>Only numbers</div>;
+  };
+
   return (
     <Formik
       initialValues={initialValues}
@@ -181,11 +196,7 @@ const ModalAddTransactionForm = prop => {
               className={scss.errorMessage}
               name="amount"
               component="div"
-              render={() => (
-                <div className={scss.errorSum}>
-                  Please, enter an amount from 0.01 to 2500000!
-                </div>
-              )}
+              render={createValidateMessageAmount}
             ></ErrorMessage>
           </label>
           <label className={scss.dateBox}>
@@ -215,11 +226,9 @@ const ModalAddTransactionForm = prop => {
               className={scss.errorMessage}
               name="comment"
               component="div"
-              render={() => (
-                <div className={scss.errorComment}>
-                  Please, enter only letters max 100 symbols not enter!
-                </div>
-              )}
+              render={r => {
+                return <div className={scss.errorComment}>{r}</div>;
+              }}
             ></ErrorMessage>
           </label>
         </div>
