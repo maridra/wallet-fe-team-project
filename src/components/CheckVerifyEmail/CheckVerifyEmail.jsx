@@ -36,12 +36,18 @@ const CheckVerifyEmail = () => {
         {!isVerified && !isLoading && (
           <div className={s.containerCheck}>
             <ErrorIcon className={s.successIcon} />
-            <h1 className={s.textMsg}>404 Not Found</h1>
+            <div className={s.wrapper}>
+              <h1 className={s.textMsg}>404 Not Found</h1>
+              <Link to="/login" className={s.link}>
+                LOGIN
+              </Link>
+            </div>
+  
           </div>
         )}
       </PageWrapper>
     </>
-  );
-};
+  )
+}
 
 export default CheckVerifyEmail;
