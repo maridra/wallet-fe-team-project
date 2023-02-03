@@ -4,7 +4,7 @@ import scss from './OptionElement.module.scss';
 import { months, years } from '../../assets/variables/selectorData';
 
 export const SelectForStatisticMonth = props => {
-  const { handleMonth, blurHandler } = props;
+  const { handleMonth, blurHandlerMonth } = props;
   const ulFocus = useRef(null);
   useEffect(() => ulFocus.current.focus(), []);
 
@@ -15,7 +15,7 @@ export const SelectForStatisticMonth = props => {
       className={scss.menuMonth}
       onBlur={() =>
         setTimeout(() => {
-          blurHandler();
+          blurHandlerMonth();
         }, 150)
       }
     >
@@ -33,7 +33,7 @@ export const SelectForStatisticMonth = props => {
 };
 
 export const SelectForStatisticYear = props => {
-  const { handleYear, blurHandler } = props;
+  const { handleYear, blurHandlerYear } = props;
 
   const ulFocus = useRef(null);
   useEffect(() => ulFocus.current.focus(), []);
@@ -43,7 +43,7 @@ export const SelectForStatisticYear = props => {
       tabIndex="1"
       onBlur={() =>
         setTimeout(() => {
-          blurHandler();
+          blurHandlerYear();
         }, 150)
       }
       className={scss.menuYear}

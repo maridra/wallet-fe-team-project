@@ -79,11 +79,12 @@ const StatisticForm = () => {
     handleOpenMonthSelect();
   };
 
-  const blurHandler = () => {
+  const blurHandlerMonth = () => {
     setOpenMonth(false);
+  };
+  const blurHandlerYear = () => {
     setOpenYear(false);
   };
-
   const stat = useSelector(statisticSelectors.getStatistic);
 
   const data = {
@@ -212,7 +213,8 @@ const StatisticForm = () => {
                   openYear={openYear}
                   handleMonthChange={handleMonthChange}
                   handleYearChange={handleYearChange}
-                  blurHandler={blurHandler}
+                  blurHandlerMonth={blurHandlerMonth}
+                  blurHandlerYear={blurHandlerYear}
                 />
               </div>
             ) : (

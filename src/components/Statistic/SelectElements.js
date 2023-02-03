@@ -16,7 +16,8 @@ export const SelectElements = props => {
     openYear,
     handleMonthChange,
     handleYearChange,
-    blurHandler,
+    blurHandlerYear,
+    blurHandlerMonth,
   } = props;
 
   return (
@@ -92,14 +93,14 @@ export const SelectElements = props => {
       {openMonth && (
         <SelectForStatisticMonth
           handleMonth={handleMonthChange}
-          blurHandler={blurHandler}
+          blurHandlerMonth={blurHandlerMonth}
           // onClick={handleClickOutside}
         ></SelectForStatisticMonth>
       )}
       {openYear && (
         <SelectForStatisticYear
           handleYear={handleYearChange}
-          blurHandler={blurHandler}
+          blurHandlerYear={blurHandlerYear}
         ></SelectForStatisticYear>
       )}
     </div>
