@@ -79,16 +79,12 @@ const StatisticForm = () => {
     handleOpenMonthSelect();
   };
 
-  // const blurHandler = () => {
-
-  // setOpenMonth(false);
-  // setOpenYear(!openYear);
-
-  //   setOpenMonth(false);
-  //   setOpenYear(!openYear);
-
-  // };
-
+  const blurHandlerMonth = () => {
+    setOpenMonth(false);
+  };
+  const blurHandlerYear = () => {
+    setOpenYear(false);
+  };
   const stat = useSelector(statisticSelectors.getStatistic);
 
   const data = {
@@ -170,7 +166,12 @@ const StatisticForm = () => {
               onClick={handleOpenAllTransactions}
             >
               {!openAllTransactions ? (
-                <div className={scss.textAllTransaction}>
+                <div
+                  className={scss.textAllTransaction}
+                  // onBlur={() => {
+                  //   console.log('hey');
+                  // }}
+                >
                   <div>
                     <IconContext.Provider
                       value={{
@@ -212,6 +213,8 @@ const StatisticForm = () => {
                   openYear={openYear}
                   handleMonthChange={handleMonthChange}
                   handleYearChange={handleYearChange}
+                  blurHandlerMonth={blurHandlerMonth}
+                  blurHandlerYear={blurHandlerYear}
                 />
               </div>
             ) : (
@@ -232,11 +235,13 @@ const StatisticForm = () => {
                   ? stat.expensesByPeriod.map(item => (
                       <tr className={scss.tableRows} key={uuidv4()}>
                         <td id={item.name}>
-                          <div
-                            className={scss.squareBefore}
-                            style={{ backgroundColor: `${item.color}` }}
-                          ></div>
-                          {item.name}
+                          <div className={scss.squareAndText}>
+                            <div
+                              className={scss.squareBefore}
+                              style={{ backgroundColor: `${item.color}` }}
+                            ></div>
+                            <div className={scss.textCategory}>{item.name}</div>
+                          </div>
                         </td>
                         <td className={scss.tableRows__rightText}>
                           {item.amount
@@ -251,11 +256,13 @@ const StatisticForm = () => {
                   : stat.allExpensesByCategory.map(item => (
                       <tr className={scss.tableRows} key={uuidv4()}>
                         <td id={item.name}>
-                          <div
-                            className={scss.squareBefore}
-                            style={{ backgroundColor: `${item.color}` }}
-                          ></div>
-                          {item.name}
+                          <div className={scss.squareAndText}>
+                            <div
+                              className={scss.squareBefore}
+                              style={{ backgroundColor: `${item.color}` }}
+                            ></div>
+                            <div className={scss.textCategory}>{item.name}</div>
+                          </div>
                         </td>
                         <td className={scss.tableRows__rightText}>
                           {item.amount

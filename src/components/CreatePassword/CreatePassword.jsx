@@ -44,15 +44,7 @@ const CreatePassword = () => {
 
   const SignUpSchema = Yup.object().shape({
     password: Yup.string()
-      .matches(
-        /(?=.*[a-z])/,
-        'Must contain at least 1 lowerCase alphabetical character'
-      )
-      .matches(
-        /(?=.*[A-Z])/,
-        'Must contain at least 1 UpperCase alphabetical character'
-      )
-      .matches(/(?=.*[0-9])/, 'Must contain at least 1 numeric character')
+      .matches(/(^[a-zA-Z0-9]+$)/, "Can only include numbers and latin letters")
       .min(6, 'Minimum 6 characters required')
       .max(12, 'Maximum 12 characters')
       .required('Required field'),

@@ -9,7 +9,9 @@ import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import authOperations from 'redux/auth/authOperations';
 import classNames from 'classnames';
-import { BiHide, BiShow } from "react-icons/bi";
+import { BiHide, BiShow } from 'react-icons/bi';
+
+import { ReactComponent as Google } from '../../assets/Images/login/google.svg';
 
 const LoginForm = () => {
   const initialValues = {
@@ -29,25 +31,22 @@ const LoginForm = () => {
   const [type, setType] = useState('password');
 
   const showPassword = () => {
-    setType("text")
-  }
+    setType('text');
+  };
 
   const hidePassword = () => {
-    setType("password")
-  }
-
+    setType('password');
+  };
 
   const SignUpSchema = Yup.object().shape({
     email: Yup.string()
-      .matches(
-        /^\w+([\\.-]?\w+)*@\w+([\\.-]?\w+)*(\.\w{2,3})+$/,
-        'Must be a valid email!'
-      )
+      .matches(/^\w+[\w-.]*\w@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/, "Must be a valid email (latin letters). For example: example123@example.com")
       .email('Must be a valid email!')
       .min(10)
       .max(63)
       .required('Required field'),
     password: Yup.string()
+      .matches(/(^[a-zA-Z0-9]+$)/, "Can only include numbers and latin letters")
       .min(6, 'Minimum 6 characters required')
       .max(12, 'Maximum 12 characters')
       .required('Required field'),
@@ -109,11 +108,23 @@ const LoginForm = () => {
               {errors.password && touched.password && (
                 <div className={s.errorField}>{errors.password}</div>
               )}
-              {(type === "password")
-                ? <span className={s.hideIcon}>
-                <BiHide className={s.icon} onMouseDown={showPassword} onTouchStart={showPassword}/></span>
-                : <span className={s.showIcon} onMouseUp={hidePassword} onTouchEnd={hidePassword}>
-                <BiShow className={s.icon} /></span>}
+              {type === 'password' ? (
+                <span className={s.hideIcon}>
+                  <BiHide
+                    className={s.icon}
+                    onMouseDown={showPassword}
+                    onTouchStart={showPassword}
+                  />
+                </span>
+              ) : (
+                <span
+                  className={s.showIcon}
+                  onMouseUp={hidePassword}
+                  onTouchEnd={hidePassword}
+                >
+                  <BiShow className={s.icon} />
+                </span>
+              )}
             </label>
             <button type="submit" className={s.loginBtn}>
               log in
@@ -121,6 +132,12 @@ const LoginForm = () => {
             <Link to="/SignUp" className={s.registerBtn}>
               register
             </Link>
+            <div className={s.googleBtn}>
+              <a href="https://leaopards-team.onrender.com/api/auth/google">
+                Continue with
+              </a>
+              <Google className={s.googleIcon} />
+            </div>
             <Link to="/forgot-password" className={s.forgotLink}>
               Forgot password?
             </Link>

@@ -5,38 +5,46 @@ import hardcoreLogout from 'redux/utils/hardcoreLogout';
 
 export const updateTransactionsNew = createAsyncThunk(
   'finance/updateNew',
-  async (credentials, thunkAPI) => {
+  async (credentials, { rejectWithValue, dispatch, getState }) => {
     try {
       const transactions = [
-        ...thunkAPI.getState().finance.data,
+        ...getState().finance.data,
         ...credentials.data.transactions,
       ];
 
-      return { transactions };
+      const totalBalance = transactions[0]?.remainingBalance;
+      const quantityTransactions = credentials.data.transactionsCount;
+
+      return { transactions, totalBalance, quantityTransactions };
     } catch (e) {
+      hardcoreLogout(e, dispatch);
       Notify.failure(e.message, { position: 'center-top' });
-      return thunkAPI.rejectWithValue(e.message);
+      return rejectWithValue(e.message);
     }
   }
 );
 
 export const updateTransactions = createAsyncThunk(
   'finance/update',
-  async (_, { dispatch }) => {
+  async (_, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await axiosBaseUrl.get(`transactions?page=1&limit=20`);
       const transactions = data.data.transactions;
+      const totalBalance = transactions[0]?.remainingBalance;
+      const quantityTransactions = data.data.transactionsCount;
 
-      return { transactions };
+      return { transactions, totalBalance, quantityTransactions };
     } catch (e) {
       hardcoreLogout(e, dispatch);
+      Notify.failure(e.message);
+      return rejectWithValue(e.message);
     }
   }
 );
 
 export const addTransaction = createAsyncThunk(
   'finance/addTransaction',
-  async (credentials, { dispatch, getState }) => {
+  async (credentials, { rejectWithValue, dispatch, getState }) => {
     try {
       const dateToday = new Date()
         .toISOString()
@@ -57,6 +65,7 @@ export const addTransaction = createAsyncThunk(
         const transaction = data.data.transaction;
         const transactions = getState().finance.data;
         const rdyTransactions = [transaction, ...transactions];
+        // rdyTransactions.splice(-1);
         const totalBalance = data.data.totalBalance;
 
         return { rdyTransactions, totalBalance };
@@ -64,6 +73,7 @@ export const addTransaction = createAsyncThunk(
     } catch (e) {
       hardcoreLogout(e, dispatch);
       Notify.failure(e.message);
+      return rejectWithValue(e.message);
     }
   }
 );

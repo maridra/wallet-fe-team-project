@@ -11,6 +11,7 @@ const initialState = {
   totalBalance: null,
   isLoading: false,
   data: [],
+  totalQuantityTransactions: '',
 };
 
 const handlePending = state => {
@@ -36,8 +37,8 @@ export const financeSlice = createSlice({
       })
       .addCase(updateTransactionsNew.fulfilled, (state, action) => {
         state.data = action.payload?.transactions;
-        state.totalBalance =
-          action.payload?.transactions[0]?.owner?.totalBalance;
+        state.totalBalance = action.payload?.totalBalance;
+        state.totalQuantityTransactions = action.payload?.quantityTransactions;
         state.isLoggedIn = true;
         state.isLoading = false;
       })
@@ -46,8 +47,8 @@ export const financeSlice = createSlice({
       .addCase(updateTransactions.rejected, handleRejected)
       .addCase(updateTransactions.fulfilled, (state, action) => {
         state.data = action.payload?.transactions;
-        state.totalBalance =
-          action.payload?.transactions[0]?.owner?.totalBalance;
+        state.totalBalance = action.payload?.totalBalance;
+        state.totalQuantityTransactions = action.payload?.quantityTransactions;
         state.isLoggedIn = true;
         state.isLoading = false;
       })
