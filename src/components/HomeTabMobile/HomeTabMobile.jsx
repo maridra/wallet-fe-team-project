@@ -144,7 +144,7 @@ const HomeTabMobile = ({
                     {' '}
                     <EllipsisText
                       text={item.comment || ''}
-                      length={20}
+                      length={16}
                       onClick={() => {
                         Notify.info(item.comment);
                       }}
