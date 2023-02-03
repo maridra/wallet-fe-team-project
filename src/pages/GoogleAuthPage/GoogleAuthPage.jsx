@@ -9,7 +9,7 @@ import { token } from 'redux/tokenSettingsAxios';
 import userOperations from 'redux/user/userOperations';
 import { googleAuth } from 'redux/auth/authSlice';
 
-const GoogleAuth = () => {
+const GoogleAuthPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -37,4 +37,4 @@ const GoogleAuth = () => {
   );
 };
 
-export default GoogleAuth;
+export default GoogleAuthPage;

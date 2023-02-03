@@ -3,7 +3,7 @@ import CurrencyPage from 'pages/CurrencyPage/CurrencyPage';
 
 import { lazy, Suspense, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Header, Loader, GoogleAuth } from '../components';
+import { Header, Loader } from '../components';
 
 import { useDispatch } from 'react-redux';
 import authOperations from 'redux/auth/authOperations';
@@ -26,6 +26,9 @@ const CreatePasswordPage = lazy(() =>
 
 const CheckVerifyEmail = lazy(() =>
   import('../components/CheckVerifyEmail/CheckVerifyEmail')
+);
+const GoogleAuthPage = lazy(() =>
+  import('../pages/GoogleAuthPage/GoogleAuthPage')
 );
 
 export const App = () => {
@@ -86,7 +89,9 @@ export const App = () => {
           />
           <Route
             path="/google-auth"
-            element={<PublicRoute redirectTo="/" children={<GoogleAuth />} />}
+            element={
+              <PublicRoute redirectTo="/" children={<GoogleAuthPage />} />
+            }
           />
           <Route path="*" element={<NotFound />} />
         </Routes>
