@@ -124,7 +124,7 @@ const resendVerification = createAsyncThunk(
     try {
       const { data } = await axiosBaseUrl.post('/users/verify', credentials);
       return data;
-    } catch (error) { 
+    } catch (error) {
       return rejectWithValue(error.message);
     }
   }

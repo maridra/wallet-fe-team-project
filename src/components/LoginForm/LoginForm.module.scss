@@ -20,7 +20,7 @@
   justify-content: center;
   margin-bottom: 60px;
 
-  @include mq(tab){
+  @include mq(tab) {
     justify-content: flex-start;
     margin-left: 101px;
   }
@@ -48,10 +48,9 @@
   border-bottom: 1px solid #e0e0e0;
   outline: none;
 
-  font-family: "Circe";
+  font-family: 'Circe';
   font-size: 18px;
   line-height: 1.5;
-  
 }
 
 .errorInput {
@@ -132,12 +131,41 @@
   padding-right: 55px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+  margin-bottom: 20px;
 
   @include mq(tab) {
     width: 300px;
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+.googleBtn {
+  @extend %btnTransperentBlue;
+  height: 50px;
+  border-radius: 20px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  padding-left: 13px;
+  padding-right: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 18px;
+
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  justify-content: center;
+
+  @include mq(tab) {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.googleIcon {
+  align-self: center;
 }
 
 .forgotLink {
