@@ -24,7 +24,8 @@
   }
 
   @include mq(mob-only) {
-    width: 280px;
+    width: 100%;
+    max-width: 402;
   }
   @include mq(tab) {
     width: 402px;

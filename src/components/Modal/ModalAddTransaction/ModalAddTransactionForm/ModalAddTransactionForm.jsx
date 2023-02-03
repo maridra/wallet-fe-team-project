@@ -13,7 +13,16 @@ import ModalAddTransactionFormMenu from './ModalAddTransactionFormMenu/ModalAddT
 import financeOperation from 'redux/finance/financeOperation';
 
 const schema = yup.object().shape({
-  amount: yup.number().min(0.01).max(2500000).required(),
+  amount: yup
+    .number()
+    .min(0.01, 'Please, enter an amount min 0.01')
+    .max(2500000, 'Please, enter an amount max 2500000!')
+    .required('Amount is required'),
+  comment: yup
+    .string()
+    .trim()
+    .max(100, 'Maximum 100 symbols')
+    .matches(/(^[а-яА-ЯёЁa-zA-ZЇїІіЄєҐґ ]+$)/u, 'Please, enter only letters'),
 });
 const initialValues = {
   amount: '',
@@ -30,18 +39,24 @@ const ModalAddTransactionForm = prop => {
 
   const dispatch = useDispatch();
 
+  const today = new Date();
+  const disableFutureDt = current => {
+    return current.isBefore(today);
+  };
+
   const createDate = ({ _d }) => {
     setBekDate(_d.toISOString());
     setDate(getDate(_d));
   };
 
-  const handleOpen = () => {
-    setOpen(!open);
+  const handleOpen = e => {
+    setOpen(true);
   };
 
   const addValueCategory = (_id, name) => {
     setCategoryId(_id);
     setCategoryValue(name);
+    handleClose();
   };
 
   const handleSubmit = (values, { resetForm }) => {
@@ -91,10 +106,9 @@ const ModalAddTransactionForm = prop => {
     return;
   };
 
-  // const CloseBlur = () => {
-  //   addValueCategory();
-  //   setOpen(false);
-  // };
+  const handleClose = e => {
+    setOpen(false);
+  };
 
   const renderCalendarInput = (props, openCalendar) => {
     return (
@@ -116,9 +130,15 @@ const ModalAddTransactionForm = prop => {
     );
   };
 
-  const today = new Date();
-  const disableFutureDt = current => {
-    return current.isBefore(today);
+  const createValidateMessageAmount = r => {
+    if (
+      r === 'Please, enter an amount min 0.01' ||
+      r === 'Please, enter an amount max 2500000!' ||
+      r === 'Amount is required'
+    ) {
+      return <div className={scss.errorSum}>{r}</div>;
+    }
+    return <div className={scss.errorSum}>Only numbers</div>;
   };
 
   return (
@@ -137,15 +157,14 @@ const ModalAddTransactionForm = prop => {
                 placeholder="Select a category"
                 name="category"
                 value={categoryValue}
-                onClick={handleOpen}
+                onClick={open ? handleClose : handleOpen}
                 autoComplete="off"
                 readOnly
-              ></Field>
-
+              />
               <button
                 className={scss.openMenuBtn}
                 type="button"
-                onClick={handleOpen}
+                onClick={open ? handleClose : handleOpen}
               >
                 {!open ? (
                   <HiOutlineChevronDown
@@ -157,10 +176,10 @@ const ModalAddTransactionForm = prop => {
                   ></HiOutlineChevronUp>
                 )}
               </button>
-
               {open && (
                 <ModalAddTransactionFormMenu
                   handleCategory={addValueCategory}
+                  handleBlur={handleClose}
                 ></ModalAddTransactionFormMenu>
               )}
             </label>
@@ -177,11 +196,7 @@ const ModalAddTransactionForm = prop => {
               className={scss.errorMessage}
               name="amount"
               component="div"
-              render={() => (
-                <div className={scss.error}>
-                  Please, enter an amount from 0.01 to 2500000
-                </div>
-              )}
+              render={createValidateMessageAmount}
             ></ErrorMessage>
           </label>
           <label className={scss.dateBox}>
@@ -195,12 +210,27 @@ const ModalAddTransactionForm = prop => {
               onChange={createDate}
             />
           </label>
-          <Field
-            className={scss.addFormTextarea}
-            name="comment"
-            component="textarea"
-            placeholder="Comment"
-          ></Field>
+          <label className={scss.commentBox}>
+            <Field
+              className={scss.addFormTextarea}
+              name="comment"
+              component="textarea"
+              placeholder="Comment"
+              onKeyPress={e => {
+                if (e.charCode === 13) {
+                  e.preventDefault();
+                }
+              }}
+            ></Field>
+            <ErrorMessage
+              className={scss.errorMessage}
+              name="comment"
+              component="div"
+              render={r => {
+                return <div className={scss.errorComment}>{r}</div>;
+              }}
+            ></ErrorMessage>
+          </label>
         </div>
         <button type="submit" className={scss.addBtn}>
           Add

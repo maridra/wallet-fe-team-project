@@ -9,19 +9,27 @@ import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { axiosBaseUrl } from '../../redux/tokenSettingsAxios';
 import { Loader } from 'components';
+import EllipsisText from 'react-ellipsis-text';
+import { Notify } from 'notiflix';
 
 const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
   const dispatch = useDispatch();
   const transactionArea = useRef();
   const isLoading = useSelector(financeSelectors.isLoading);
+  const totalCountTransactions = useSelector(
+    financeSelectors.totalCountTransactions
+  );
+  const transactionsCheck = useSelector(financeSelectors.getTransactions);
 
   async function fetchData(currentPage, dispatch) {
-    const { data } = await axiosBaseUrl.get(
-      `transactions?page=${currentPage}&limit=20`
-    );
-    await dispatch(financeOperation.updateTransactionsNew(data));
-    setCurrentPage(prevState => prevState + 1);
-    setFetching(false);
+    if (totalCountTransactions > transactionsCheck.length) {
+      const { data } = await axiosBaseUrl.get(
+        `transactions?page=${currentPage}&limit=20`
+      );
+      await dispatch(financeOperation.updateTransactionsNew(data));
+      setCurrentPage(prevState => prevState + 1);
+      setFetching(false);
+    }
   }
 
   useEffect(() => {
@@ -88,6 +96,7 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
     const formatDate = leftPart + rightPart;
     return formatDate;
   }
+
   return (
     <>
       {isLoading ? (
@@ -137,7 +146,13 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
                   {item.category?.name ? item.category.name : 'Income'}
                 </td>
                 <td className={`${s.tableRowItem} ${s.comment}`}>
-                  {item.comment}
+                  <EllipsisText
+                    text={item.comment || ''}
+                    length={16}
+                    onClick={() => {
+                      Notify.info(item.comment);
+                    }}
+                  />
                 </td>
                 <td className={colorOfSum(item)}>
                   {(Math.round(item.amount * 100) / 100).toFixed(2)}
