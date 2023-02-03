@@ -168,9 +168,9 @@ const StatisticForm = () => {
               {!openAllTransactions ? (
                 <div
                   className={scss.textAllTransaction}
-                  onBlur={() => {
-                    console.log('hey');
-                  }}
+                  // onBlur={() => {
+                  //   console.log('hey');
+                  // }}
                 >
                   <div>
                     <IconContext.Provider
