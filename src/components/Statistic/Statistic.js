@@ -79,15 +79,10 @@ const StatisticForm = () => {
     handleOpenMonthSelect();
   };
 
-  // const blurHandler = () => {
-
-  // setOpenMonth(false);
-  // setOpenYear(!openYear);
-
-  //   setOpenMonth(false);
-  //   setOpenYear(!openYear);
-
-  // };
+  const blurHandler = () => {
+    setOpenMonth(false);
+    setOpenYear(false);
+  };
 
   const stat = useSelector(statisticSelectors.getStatistic);
 
@@ -170,7 +165,12 @@ const StatisticForm = () => {
               onClick={handleOpenAllTransactions}
             >
               {!openAllTransactions ? (
-                <div className={scss.textAllTransaction}>
+                <div
+                  className={scss.textAllTransaction}
+                  onBlur={() => {
+                    console.log('hey');
+                  }}
+                >
                   <div>
                     <IconContext.Provider
                       value={{
@@ -212,6 +212,7 @@ const StatisticForm = () => {
                   openYear={openYear}
                   handleMonthChange={handleMonthChange}
                   handleYearChange={handleYearChange}
+                  blurHandler={blurHandler}
                 />
               </div>
             ) : (
