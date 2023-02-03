@@ -9,7 +9,10 @@ import { IoStatsChartOutline, IoStatsChartSharp } from 'react-icons/io5';
 
 import { SelectElements } from './SelectElements';
 import scss from './Statistic.module.scss';
-import { getStatistic } from '../../redux/statistic/statisticOperation';
+import {
+  getStatistic,
+  getStatisticCategory,
+} from '../../redux/statistic/statisticOperation';
 import { statisticSelectors } from 'redux/statistic/statisticSelectors';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
@@ -86,6 +89,14 @@ const StatisticForm = () => {
     setOpenYear(false);
   };
   const stat = useSelector(statisticSelectors.getStatistic);
+
+  const categories = useSelector(statisticSelectors.getStatisticCategory);
+  const itemToReplace = categories.findIndex(i => i.name === 'Other expenses');
+  const sortedCategory = [
+    ...categories,
+    [...categories].splice(itemToReplace, 1).pop(),
+  ];
+  sortedCategory.splice(itemToReplace, 1);
 
   const data = {
     labels: stat.expensesByPeriod.map(item => item.name),
@@ -227,7 +238,7 @@ const StatisticForm = () => {
               </thead>
               <tbody className={scss.tbody}>
                 {!openAllTransactions
-                  ? stat.expensesByPeriod.map(item => (
+                  ? sortedCategory.map(item => (
                       <tr className={scss.tableRows} key={uuidv4()}>
                         <td id={item.name}>
                           <div className={scss.squareAndText}>
@@ -248,7 +259,7 @@ const StatisticForm = () => {
                         </td>
                       </tr>
                     ))
-                  : stat.allExpensesByCategory.map(item => (
+                  : sortedCategory.map(item => (
                       <tr className={scss.tableRows} key={uuidv4()}>
                         <td id={item.name}>
                           <div className={scss.squareAndText}>
