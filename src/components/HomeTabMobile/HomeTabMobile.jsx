@@ -6,8 +6,9 @@ import { useEffect } from 'react';
 import { financeSelectors } from 'redux/finance/financeSelectors';
 import { axiosBaseUrl } from '../../redux/tokenSettingsAxios';
 import { Loader } from 'components';
-
+import EllipsisText from 'react-ellipsis-text';
 import { useSelector } from 'react-redux';
+import { Notify } from 'notiflix';
 
 const HomeTabMobile = ({
   currentPage,
@@ -139,7 +140,16 @@ const HomeTabMobile = ({
                 </li>
                 <li className={userColorUi(item)}>
                   <span className={s.mobileTableHeader}>Comment</span>
-                  <span className={s.mobileTableInfo}>{item.comment}</span>
+                  <span className={s.mobileTableInfo}>
+                    {' '}
+                    <EllipsisText
+                      text={item.comment || ''}
+                      length={20}
+                      onClick={() => {
+                        Notify.info(item.comment);
+                      }}
+                    />
+                  </span>
                 </li>
                 <li className={userColorUi(item)}>
                   <span className={s.mobileTableHeader}>Sum</span>

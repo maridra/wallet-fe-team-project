@@ -97,10 +97,6 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
     return formatDate;
   }
 
-  function showFullComment(item) {
-    Notify.info(item.comment);
-  }
-
   return (
     <>
       {isLoading ? (
@@ -154,7 +150,7 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
                     text={item.comment || ''}
                     length={20}
                     onClick={() => {
-                      showFullComment(item);
+                      Notify.info(item.comment);
                     }}
                   />
                 </td>
