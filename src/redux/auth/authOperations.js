@@ -130,66 +130,11 @@ const resendVerification = createAsyncThunk(
   }
 );
 
-/* const addCategory = createAsyncThunk(
-  'auth/addCategory',
-  async (credentials, { _, getState }) => {
-    const newCategory = credentials;
-    try {
-      const data = await axiosBaseUrl.post('/categories', {
-        category: newCategory,
-      });
-      const oldCategories = getState().auth.user.categories;
-      const newCategories = [...oldCategories, data.data.data];
-      Notify.success('Category succesfully added');
-      return newCategories;
-    } catch (error) {
-      Notify.failure('It seems like this category already exist');
-      return getState().auth.user.categories;
-    }
-  }
-); */
-
-/* const removeCategory = createAsyncThunk(
-  'auth/removeCategory',
-  async (credentials, { _, getState }) => {
-    const id = credentials;
-    try {
-      await axiosBaseUrl.delete(`/categories/${id}`);
-      const oldCategories = getState().auth.user.categories;
-      const newCategories = [...oldCategories].filter(item => id !== item._id);
-      Notify.success('Category succesfully deleted');
-      return newCategories;
-    } catch (error) {
-      Notify.failure('Opps, something went wrong');
-      return getState().auth.user.categories;
-    }
-  }
-);
- */
-/* const updateAvatar = createAsyncThunk(
-  'auth/updateAvatar',
-  async (data, thunkAPI) => {
-    try {
-      const response = await axiosBaseUrl.patch('/users/avatars', data, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-
-      return response.data.data.avatarURL;
-    } catch (e) {
-      Notify.failure(e.message);
-      return thunkAPI.rejectWithValue(e.message);
-    }
-  }
-); */
-
 const authOperations = {
   register,
   logIn,
   logOut,
   refresh,
-  /*   updateAvatar, */
   verifyEmail,
   resendVerification,
 };

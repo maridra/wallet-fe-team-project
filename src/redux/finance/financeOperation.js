@@ -5,24 +5,25 @@ import hardcoreLogout from 'redux/utils/hardcoreLogout';
 
 export const updateTransactionsNew = createAsyncThunk(
   'finance/updateNew',
-  async (credentials, thunkAPI) => {
+  async (credentials, { rejectWithValue, dispatch, getState }) => {
     try {
       const transactions = [
-        ...thunkAPI.getState().finance.data,
+        ...getState().finance.data,
         ...credentials.data.transactions,
       ];
 
       return { transactions };
     } catch (e) {
+      hardcoreLogout(e, dispatch);
       Notify.failure(e.message, { position: 'center-top' });
-      return thunkAPI.rejectWithValue(e.message);
+      return rejectWithValue(e.message);
     }
   }
 );
 
 export const updateTransactions = createAsyncThunk(
   'finance/update',
-  async (_, { dispatch }) => {
+  async (_, { rejectWithValue, dispatch }) => {
     try {
       const { data } = await axiosBaseUrl.get(`transactions?page=1&limit=20`);
       const transactions = data.data.transactions;
@@ -30,13 +31,15 @@ export const updateTransactions = createAsyncThunk(
       return { transactions };
     } catch (e) {
       hardcoreLogout(e, dispatch);
+      Notify.failure(e.message);
+      return rejectWithValue(e.message);
     }
   }
 );
 
 export const addTransaction = createAsyncThunk(
   'finance/addTransaction',
-  async (credentials, { dispatch, getState }) => {
+  async (credentials, { rejectWithValue, dispatch, getState }) => {
     try {
       const dateToday = new Date()
         .toISOString()
@@ -64,6 +67,7 @@ export const addTransaction = createAsyncThunk(
     } catch (e) {
       hardcoreLogout(e, dispatch);
       Notify.failure(e.message);
+      return rejectWithValue(e.message);
     }
   }
 );
