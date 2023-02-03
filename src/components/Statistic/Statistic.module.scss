@@ -4,9 +4,9 @@
   @include mq(mob-only) {
     max-width: 440px;
   }
-  @include mq(tab) {
-    width: 704px;
-  }
+  // @include mq(tab) {
+  //   width: 704px;
+  // }
   @include mq(desk) {
     width: 715px;
   }
@@ -30,6 +30,7 @@
   @include mq(desk) {
     line-height: 1;
     padding-left: 15px;
+    // padding-right: 10px;
   }
 }
 
@@ -79,13 +80,13 @@
   font-weight: 700;
   font-size: 18px;
   line-height: 1.5;
-  color: #000000;
+  color: var(--text-main-color);
   // number-format: '###,##0.00', 'price';
 }
 
 .doughnutMonthNoValue {
   border-radius: 50%;
-  border: 43px solid rgb(215, 215, 235);
+  border: 43px solid var(--border-doughnut);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,7 +130,7 @@
     padding-left: 20px;
   }
 
-  border: 1px solid #000000;
+  border: 1px solid var(--text-main-colo);
   border-radius: 30px;
 
   font-family: 'Circe';
@@ -137,14 +138,14 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  color: #000000;
+  color: var(--text-main-colo);
   background: transparent;
 }
 
 .selectOption {
-  background: rgba(255, 255, 255, 0.7);
-  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(25px);
+  background: var(--background-color-dropdown);
+  box-shadow: var(--shadow-dropdown);
+  backdrop-filter: var(--filter-dropdown);
   /* Note: backdrop-filter has minimal browser support */
   position: absolute;
   top: 0;
@@ -157,7 +158,7 @@
   border-radius: 20px;
   &:hover {
     outline: none;
-    background: black;
+    background: var(--text-main-color);
   }
 }
 .select {
@@ -183,16 +184,22 @@
 }
 
 .selectClosed {
-  filter: blur(2px);
+  filter: var(--filter-dropdown-display-none);
   pointer-events: none;
 }
+
 .statisticData {
   position: relative;
   @include mq(mob-only) {
     display: flex;
     flex-direction: column;
   }
+  @include mq(tab) {
+    bottom: 45px;
+    right: 8px;
+  }
 }
+
 .table {
   border-spacing: 0;
   border-collapse: collapse;
@@ -215,7 +222,7 @@
 
 .thead {
   border-spacing: 0;
-  background: #ffffff;
+  background: var(--text-white-color);
   height: 58px;
   padding: 0;
   border: none;
@@ -225,6 +232,7 @@
 
     @include mq(mob-only) {
       padding-left: 20px;
+      height: 58px;
     }
     @include mq(tab) {
       padding-left: 20px;
@@ -238,6 +246,7 @@
     text-align: right;
     @include mq(mob-only) {
       padding-right: 20px;
+      height: 58px;
     }
     @include mq(tab) {
       padding-right: 20px;
@@ -254,6 +263,7 @@
 
   height: 52px;
 }
+
 .tableRows__rightText {
   text-align: right;
   padding-right: 29px;
@@ -267,9 +277,11 @@
     padding-right: 29px;
   }
 }
+
 .footer {
-  height: 46px;
+  height: 55px;
 }
+
 .tableFooter {
   font-family: 'Circe';
   font-style: normal;
@@ -409,32 +421,34 @@
     text-align: center;
   }
   @include mq(tab) {
-    top: 356px;
+    top: 410px;
     right: 370px;
   }
   @include mq(desk) {
-    top: 310px;
-    right: 410px;
+    top: 350px;
+    right: 400px;
   }
 }
+
 .textAllTransaction {
   display: flex;
   gap: 10px;
   align-items: center;
 }
-// @include mq(mob-only) {
-//   width: 280px;
-//   height: 280px;
-// }
 
-// @include mq(tab) {
-//   width: 336px;
-//   height: 336px;
-// }
-// @include mq(desk) {
-//   width: 288px;
-//   height: 288px;
-// }
+.squareAndText {
+  // position: absolute;
+  display: flex;
+  align-items: center;
+  // justify-content: center;
+  // border: 0;
+  vertical-align: middle;
+}
+
+.textCategory {
+  display: inline-block;
+}
+
 .squareBefore {
   @extend %square;
 }

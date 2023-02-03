@@ -28,6 +28,7 @@ const SettingsAddCategory = () => {
         <p className={s.inputText}>Type new category here:</p>
         <div className={s.inputWrapper}>
           <input
+            maxLength={18}
             type="text"
             name="newCategory"
             id="New category"

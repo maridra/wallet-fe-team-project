@@ -27,6 +27,9 @@ const CreatePasswordPage = lazy(() =>
 const CheckVerifyEmail = lazy(() =>
   import('../components/CheckVerifyEmail/CheckVerifyEmail')
 );
+const GoogleAuthPage = lazy(() =>
+  import('../pages/GoogleAuthPage/GoogleAuthPage')
+);
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -82,6 +85,12 @@ export const App = () => {
             path="/create-password"
             element={
               <PublicRoute redirectTo="/" children={<CreatePasswordPage />} />
+            }
+          />
+          <Route
+            path="/google-auth"
+            element={
+              <PublicRoute redirectTo="/" children={<GoogleAuthPage />} />
             }
           />
           <Route path="*" element={<NotFound />} />

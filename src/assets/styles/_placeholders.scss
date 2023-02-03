@@ -114,10 +114,10 @@
 %menu {
   position: absolute;
   border-radius: 20px;
-
-  background-color: var(--background-color-dropdown);
+  background-color: var(--backgroud-color-dropdown-second);
+  // background-color: var(--background-color-dropdown);
   box-shadow: var(--shadow-dropdown);
-  backdrop-filter: var(--filter-dropdown);
+  // backdrop-filter: var(--filter-dropdown);
   overflow: auto;
   z-index: 100;
 
@@ -138,7 +138,8 @@
   }
 
   @include mq(mob-only) {
-    width: 280px;
+    width: 100%;
+    max-width: 440px;
     height: 157px;
     overflow: auto;
   }
