@@ -6,8 +6,9 @@ import { useEffect } from 'react';
 import { financeSelectors } from 'redux/finance/financeSelectors';
 import { axiosBaseUrl } from '../../redux/tokenSettingsAxios';
 import { Loader } from 'components';
-
+import EllipsisText from 'react-ellipsis-text';
 import { useSelector } from 'react-redux';
+import { Notify } from 'notiflix';
 
 const HomeTabMobile = ({
   currentPage,
@@ -17,14 +18,20 @@ const HomeTabMobile = ({
 }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(financeSelectors.isLoading);
+  const totalCountTransactions = useSelector(
+    financeSelectors.totalCountTransactions
+  );
+  const transactionsCheck = useSelector(financeSelectors.getTransactions);
 
   async function fetchData(currentPage, dispatch) {
-    const { data } = await axiosBaseUrl.get(
-      `transactions?page=${currentPage}&limit=20`
-    );
-    await dispatch(financeOperation.updateTransactionsNew(data));
-    setCurrentPage(prevState => prevState + 1);
-    setFetching(false);
+    if (totalCountTransactions > transactionsCheck.length) {
+      const { data } = await axiosBaseUrl.get(
+        `transactions?page=${currentPage}&limit=20`
+      );
+      await dispatch(financeOperation.updateTransactionsNew(data));
+      setCurrentPage(prevState => prevState + 1);
+      setFetching(false);
+    }
   }
 
   useEffect(() => {
@@ -133,16 +140,27 @@ const HomeTabMobile = ({
                 </li>
                 <li className={userColorUi(item)}>
                   <span className={s.mobileTableHeader}>Comment</span>
-                  <span className={s.mobileTableInfo}>{item.comment}</span>
+                  <span className={s.mobileTableInfo}>
+                    {' '}
+                    <EllipsisText
+                      text={item.comment || ''}
+                      length={16}
+                      onClick={() => {
+                        Notify.info(item.comment);
+                      }}
+                    />
+                  </span>
                 </li>
                 <li className={userColorUi(item)}>
                   <span className={s.mobileTableHeader}>Sum</span>
-                  <span className={colorOfSum(item)}>{item.amount}</span>
+                  <span className={colorOfSum(item)}>
+                    {(Math.round(item.amount * 100) / 100).toFixed(2)}
+                  </span>
                 </li>
                 <li className={userColorUi(item)}>
                   <span className={s.mobileTableHeader}>Balance</span>
                   <span className={s.mobileTableInfo}>
-                    {item.remainingBalance}
+                    {(Math.round(item.remainingBalance * 100) / 100).toFixed(2)}
                   </span>
                 </li>
               </ul>
