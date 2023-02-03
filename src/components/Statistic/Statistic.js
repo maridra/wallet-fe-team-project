@@ -12,6 +12,7 @@ import scss from './Statistic.module.scss';
 import {
   getStatistic,
   getStatisticCategory,
+  getStatisticCategoryAll,
 } from '../../redux/statistic/statisticOperation';
 import { statisticSelectors } from 'redux/statistic/statisticSelectors';
 
@@ -97,6 +98,16 @@ const StatisticForm = () => {
     [...categories].splice(itemToReplace, 1).pop(),
   ];
   sortedCategory.splice(itemToReplace, 1);
+
+  const categoriesAll = useSelector(statisticSelectors.getStatisticCategoryAll);
+  const itemToReplace2 = categoriesAll.findIndex(
+    i => i.name === 'Other expenses'
+  );
+  const sortedCategoryAll = [
+    ...categoriesAll,
+    [...categoriesAll].splice(itemToReplace2, 1).pop(),
+  ];
+  sortedCategoryAll.splice(itemToReplace2, 1);
 
   const data = {
     labels: stat.expensesByPeriod.map(item => item.name),
@@ -259,7 +270,7 @@ const StatisticForm = () => {
                         </td>
                       </tr>
                     ))
-                  : sortedCategory.map(item => (
+                  : sortedCategoryAll.map(item => (
                       <tr className={scss.tableRows} key={uuidv4()}>
                         <td id={item.name}>
                           <div className={scss.squareAndText}>
