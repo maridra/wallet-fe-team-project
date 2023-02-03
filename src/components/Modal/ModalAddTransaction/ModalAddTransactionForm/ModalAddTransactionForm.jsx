@@ -14,7 +14,11 @@ import financeOperation from 'redux/finance/financeOperation';
 
 const schema = yup.object().shape({
   amount: yup.number().min(0.01).max(2500000).required(),
-  comment: yup.string().matches(/(^[а-яА-ЯёЁa-zA-ZЇїІіЄєҐґ ]+$)/u),
+  comment: yup
+    .string()
+    .trim()
+    .max(100)
+    .matches(/(^[а-яА-ЯёЁa-zA-ZЇїІіЄєҐґ ]+$)/u),
 });
 const initialValues = {
   amount: '',
@@ -201,6 +205,11 @@ const ModalAddTransactionForm = prop => {
               name="comment"
               component="textarea"
               placeholder="Comment"
+              onKeyPress={e => {
+                if (e.charCode === 13) {
+                  e.preventDefault();
+                }
+              }}
             ></Field>
             <ErrorMessage
               className={scss.errorMessage}
@@ -208,7 +217,7 @@ const ModalAddTransactionForm = prop => {
               component="div"
               render={() => (
                 <div className={scss.errorComment}>
-                  Please, enter only letters!
+                  Please, enter only letters max 100 symbols not enter!
                 </div>
               )}
             ></ErrorMessage>
