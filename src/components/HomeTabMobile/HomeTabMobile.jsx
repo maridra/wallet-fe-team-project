@@ -17,14 +17,20 @@ const HomeTabMobile = ({
 }) => {
   const dispatch = useDispatch();
   const isLoading = useSelector(financeSelectors.isLoading);
+  const totalCountTransactions = useSelector(
+    financeSelectors.totalCountTransactions
+  );
+  const transactionsCheck = useSelector(financeSelectors.getTransactions);
 
   async function fetchData(currentPage, dispatch) {
-    const { data } = await axiosBaseUrl.get(
-      `transactions?page=${currentPage}&limit=20`
-    );
-    await dispatch(financeOperation.updateTransactionsNew(data));
-    setCurrentPage(prevState => prevState + 1);
-    setFetching(false);
+    if (totalCountTransactions > transactionsCheck.length) {
+      const { data } = await axiosBaseUrl.get(
+        `transactions?page=${currentPage}&limit=20`
+      );
+      await dispatch(financeOperation.updateTransactionsNew(data));
+      setCurrentPage(prevState => prevState + 1);
+      setFetching(false);
+    }
   }
 
   useEffect(() => {
