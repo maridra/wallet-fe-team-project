@@ -41,14 +41,15 @@ const ModalAddTransactionForm = prop => {
     setDate(getDate(_d));
   };
 
-  const handleOpen = () => {
+  const handleOpen = e => {
     console.log('Hi');
-    setOpen(!open);
+    setOpen(true);
   };
 
   const addValueCategory = (_id, name) => {
     setCategoryId(_id);
     setCategoryValue(name);
+    handleClose();
   };
 
   const handleSubmit = (values, { resetForm }) => {
@@ -98,7 +99,7 @@ const ModalAddTransactionForm = prop => {
     return;
   };
 
-  const CloseBlur = e => {
+  const handleClose = e => {
     setOpen(false);
   };
 
@@ -138,14 +139,14 @@ const ModalAddTransactionForm = prop => {
                 placeholder="Select a category"
                 name="category"
                 value={categoryValue}
-                onClick={handleOpen}
+                onClick={open ? handleClose : handleOpen}
                 autoComplete="off"
                 readOnly
-              ></Field>
+              />
               <button
                 className={scss.openMenuBtn}
                 type="button"
-                onClick={handleOpen}
+                onClick={open ? handleClose : handleOpen}
               >
                 {!open ? (
                   <HiOutlineChevronDown
@@ -160,7 +161,8 @@ const ModalAddTransactionForm = prop => {
               {open && (
                 <ModalAddTransactionFormMenu
                   handleCategory={addValueCategory}
-                  // handleBlur={CloseBlur}
+                  handleBlur={handleClose}
+                  handleOpen={handleOpen}
                 ></ModalAddTransactionFormMenu>
               )}
             </label>
@@ -204,7 +206,7 @@ const ModalAddTransactionForm = prop => {
             ></Field>
             <ErrorMessage
               className={scss.errorMessage}
-              name="amount"
+              name="comment"
               component="div"
               render={() => (
                 <div className={scss.errorComment}>
