@@ -37,7 +37,7 @@
   @include mq(mob-only) {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 65px;
     align-items: stretch;
   }
   @include mq(tab) {
@@ -83,6 +83,27 @@
   // number-format: '###,##0.00', 'price';
 }
 
+.doughnutMonthNoValue {
+  border-radius: 50%;
+  border: 43px solid rgb(215, 215, 235);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include mq(mob-only) {
+    width: 280px;
+    height: 280px;
+  }
+
+  @include mq(tab) {
+    width: 336px;
+    height: 336px;
+  }
+  @include mq(desk) {
+    width: 288px;
+    height: 288px;
+  }
+}
+
 .selectItem {
   cursor: pointer;
   /* Reset */
@@ -118,35 +139,6 @@
   line-height: 24px;
   color: #000000;
   background: transparent;
-  // @include mq(mob-only) {
-  //   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
-  //     20px center / 18px;
-  // }
-  // @include mq(tab) {
-  //   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
-  //     20px center / 16px;
-  // }
-  // @include mq(desk) {
-  //   background: url(../../assets/icons/statistic/arrow-down.svg) no-repeat right
-  //     20px center / 18px;
-  // }
-
-  // &:focus {
-  // transform: rotateX(5deg);
-
-  //   @include mq(mob-only) {
-  //     background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
-  //       20px center / 18px;
-  //   }
-  //   @include mq(tab) {
-  //     background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
-  //       20px center / 16px;
-  //   }
-  //   @include mq(desk) {
-  //     background: url(../../assets/icons/statistic/arrow-up.svg) no-repeat right
-  //       20px center / 18px;
-  //   }
-  // }
 }
 
 .selectOption {
@@ -189,7 +181,13 @@
     gap: 32px;
   }
 }
+
+.selectClosed {
+  filter: blur(2px);
+  pointer-events: none;
+}
 .statisticData {
+  position: relative;
   @include mq(mob-only) {
     display: flex;
     flex-direction: column;
@@ -367,26 +365,7 @@
     right: 225px;
   }
 }
-.doughnutMonthNoValue {
-  border-radius: 50%;
-  border: 43px solid rgb(215, 215, 235);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @include mq(mob-only) {
-    width: 280px;
-    height: 280px;
-  }
 
-  @include mq(tab) {
-    width: 336px;
-    height: 336px;
-  }
-  @include mq(desk) {
-    width: 288px;
-    height: 288px;
-  }
-}
 .openMenuBtnYear {
   @extend %openMenuBtn;
 
@@ -404,6 +383,58 @@
   }
 }
 
+.openAllTranscation {
+  position: absolute;
+  display: flex;
+
+  justify-content: flex-start;
+
+  gap: 10px;
+  background-color: transparent;
+  border: 0;
+  width: 300px;
+  cursor: pointer;
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+  @include mq(mob-only) {
+    top: -48px;
+    // right: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  @include mq(tab) {
+    top: 356px;
+    right: 370px;
+  }
+  @include mq(desk) {
+    top: 310px;
+    right: 410px;
+  }
+}
+.textAllTransaction {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+// @include mq(mob-only) {
+//   width: 280px;
+//   height: 280px;
+// }
+
+// @include mq(tab) {
+//   width: 336px;
+//   height: 336px;
+// }
+// @include mq(desk) {
+//   width: 288px;
+//   height: 288px;
+// }
 .squareBefore {
   @extend %square;
 }

@@ -11,7 +11,11 @@ const Balance = () => {
     <div className={css.balanceContainer}>
       <p>Your balance</p>
       <div className={css.balanceAmount}>
-        <img src={hryvniaLogo} alt="logo of hryvnia" />
+        <img
+          className={css.balanceLogo}
+          src={hryvniaLogo}
+          alt="logo of hryvnia"
+        />
         <p>
           {userBalance
             ? (Math.round(userBalance * 100) / 100)

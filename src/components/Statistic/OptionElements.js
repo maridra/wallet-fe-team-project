@@ -1,6 +1,6 @@
 // import { useSelector } from 'react-redux';
 // import { userSelectors } from 'redux/user/userSelectors';
-import scss from './Select.module.scss';
+import scss from './OptionElement.module.scss';
 import { months, years } from '../../assets/variables/selectorData';
 
 export const SelectForStatisticMonth = props => {

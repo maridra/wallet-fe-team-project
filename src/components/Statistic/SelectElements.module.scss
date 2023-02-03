@@ -1,0 +1,93 @@
+@import 'assets/styles/index.scss';
+
+.selectItem {
+  cursor: pointer;
+  /* Reset */
+  appearance: none;
+  border: 0;
+  outline: 0;
+  font: inherit;
+
+  @include mq(mob-only) {
+    min-width: 280px;
+
+    height: 50px;
+    padding-left: 20px;
+  }
+  @include mq(tab) {
+    width: 160px;
+    height: 50px;
+    padding-left: 16px;
+  }
+  @include mq(desk) {
+    width: 182px;
+    height: 50px;
+    padding-left: 20px;
+  }
+
+  border: 1px solid #000000;
+  border-radius: 30px;
+
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  color: #000000;
+  background: transparent;
+}
+
+.openMenuBtnMonth {
+  @extend %openMenuBtn;
+  @include mq(mob-only) {
+    top: 10px;
+    right: 11px;
+  }
+  @include mq(tab) {
+    top: 10px;
+    right: 185px;
+  }
+  @include mq(desk) {
+    top: 10px;
+    right: 225px;
+  }
+}
+
+.openMenuBtnYear {
+  @extend %openMenuBtn;
+
+  @include mq(mob-only) {
+    top: 82px;
+    right: 10px;
+  }
+  @include mq(tab) {
+    top: 10px;
+    right: 10px;
+  }
+  @include mq(desk) {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+.select {
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 30px;
+  position: relative;
+  @include mq(mob-only) {
+    min-width: 280px;
+    gap: 20px;
+    flex-direction: column;
+  }
+  @include mq(tab) {
+    width: 336px;
+    gap: 16px;
+    flex-direction: row;
+  }
+  @include mq(desk) {
+    width: 395px;
+    gap: 32px;
+  }
+}

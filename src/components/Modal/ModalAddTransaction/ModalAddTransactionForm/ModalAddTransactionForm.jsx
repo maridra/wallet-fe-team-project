@@ -91,6 +91,11 @@ const ModalAddTransactionForm = prop => {
     return;
   };
 
+  // const CloseBlur = () => {
+  //   addValueCategory();
+  //   setOpen(false);
+  // };
+
   const renderCalendarInput = (props, openCalendar) => {
     return (
       <div className={scss.dataBox}>
@@ -190,7 +195,6 @@ const ModalAddTransactionForm = prop => {
               onChange={createDate}
             />
           </label>
-
           <Field
             className={scss.addFormTextarea}
             name="comment"
@@ -198,7 +202,6 @@ const ModalAddTransactionForm = prop => {
             placeholder="Comment"
           ></Field>
         </div>
-
         <button type="submit" className={scss.addBtn}>
           Add
         </button>
