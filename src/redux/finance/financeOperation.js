@@ -12,7 +12,10 @@ export const updateTransactionsNew = createAsyncThunk(
         ...credentials.data.transactions,
       ];
 
-      return { transactions };
+      const totalBalance = transactions[0]?.remainingBalance;
+      const quantityTransactions = credentials.data.transactionsCount;
+
+      return { transactions, totalBalance, quantityTransactions };
     } catch (e) {
       hardcoreLogout(e, dispatch);
       Notify.failure(e.message, { position: 'center-top' });
@@ -27,8 +30,10 @@ export const updateTransactions = createAsyncThunk(
     try {
       const { data } = await axiosBaseUrl.get(`transactions?page=1&limit=20`);
       const transactions = data.data.transactions;
+      const totalBalance = transactions[0]?.remainingBalance;
+      const quantityTransactions = data.data.transactionsCount;
 
-      return { transactions };
+      return { transactions, totalBalance, quantityTransactions };
     } catch (e) {
       hardcoreLogout(e, dispatch);
       Notify.failure(e.message);
@@ -60,6 +65,7 @@ export const addTransaction = createAsyncThunk(
         const transaction = data.data.transaction;
         const transactions = getState().finance.data;
         const rdyTransactions = [transaction, ...transactions];
+        rdyTransactions.splice(-1);
         const totalBalance = data.data.totalBalance;
 
         return { rdyTransactions, totalBalance };
