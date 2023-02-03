@@ -34,6 +34,14 @@ export const authSlice = createSlice({
         state.isVerified = initialState.isVerified;
       },
     },
+    googleAuth: {
+      reducer(state, action) {
+        state.token = action.payload.token;
+        state.loading = false;
+        state.isAuth = true;
+        state.isVerified = true;
+      },
+    },
   },
   extraReducers: builder => {
     builder
@@ -88,15 +96,14 @@ export const authSlice = createSlice({
         state.isVerified = true;
         state.token = null;
       })
-    
-    //ResendVerification
+
+      //ResendVerification
       .addCase(authOperations.resendVerification.pending, handlePending)
       .addCase(authOperations.resendVerification.rejected, handleRejected)
       .addCase(authOperations.resendVerification.fulfilled, (state, action) => {
         state.loading = false;
         state.token = action.payload.data.user.verificationToken;
       });
-
 
     /* // ADD CATEGORY
       .addCase(authOperations.addCategory.pending, handlePending)
@@ -153,7 +160,7 @@ const persistConfig = {
   whitelist: ['token', 'user', 'isVerified'],
 };
 
-export const { Unauthorized } = authSlice.actions;
+export const { Unauthorized, googleAuth } = authSlice.actions;
 
 export const persistedAuthReducer = persistReducer(
   persistConfig,

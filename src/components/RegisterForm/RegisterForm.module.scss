@@ -1,11 +1,11 @@
 @import 'assets/styles/index.scss';
 
-.formContainer{
+.formContainer {
   background-color: #ffffff;
 
-  @include mq(tab){
+  @include mq(tab) {
     width: 533px;
-    height: 616px;
+    height: 686px;
     padding-top: 40px;
     padding-bottom: 66px;
     padding-left: 65px;
@@ -20,9 +20,9 @@
   margin-bottom: 60px;
 
   @include mq(tab) {
-      justify-content: flex-start;
-      margin-left: 101px;
-    }
+    justify-content: flex-start;
+    margin-left: 101px;
+  }
 }
 
 .logoIcon {
@@ -47,7 +47,7 @@
   border-bottom: 1px solid #e0e0e0;
   outline: none;
 
-  font-family: "Circe";
+  font-family: 'Circe';
   font-size: 18px;
   line-height: 1.5;
 }
@@ -103,7 +103,7 @@
   color: rgb(255, 55, 55);
 }
 
-.passwordIcon{
+.passwordIcon {
   position: absolute;
   cursor: pointer;
   right: 10px;
@@ -133,6 +133,7 @@
 .loginBtn {
   @extend %btnTransperentBlue;
   height: 50px;
+  margin-bottom: 20px;
   border-radius: 20px;
   padding-top: 13px;
   padding-bottom: 13px;
@@ -146,6 +147,34 @@
     margin-left: auto;
     margin-right: auto;
   }
+}
+
+.googleBtn {
+  @extend %btnTransperentBlue;
+  height: 50px;
+  border-radius: 20px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  padding-left: 13px;
+  padding-right: 13px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 18px;
+
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+  justify-content: center;
+
+  @include mq(tab) {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.googleIcon {
+  align-self: center;
 }
 
 .icon {

@@ -1,51 +1,52 @@
 import React, { useState } from 'react';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import s from "../RegisterForm/RegisterForm.module.scss";
-import { ReactComponent as Email } from "../../assets/Images/login/email.svg";
-import { ReactComponent as PasswordLock } from "../../assets/Images/login/password_lock.svg"
-import { ReactComponent as Name } from "../../assets/Images/login/name.svg";
-import PasswordStrength from "./PasswordStrength";
-import { Link } from "react-router-dom";
-import sprite from "../../assets/Images/login/symbol-defs.svg";
-import { useDispatch } from "react-redux";
-import authOperations from "redux/auth/authOperations";
-import classNames from "classnames";
-import { toggleShowModalSuccessRegistration } from "redux/modal/modalSlice";
-import { BiHide, BiShow } from "react-icons/bi";
+import s from '../RegisterForm/RegisterForm.module.scss';
+import { ReactComponent as Email } from '../../assets/Images/login/email.svg';
+import { ReactComponent as PasswordLock } from '../../assets/Images/login/password_lock.svg';
+import { ReactComponent as Name } from '../../assets/Images/login/name.svg';
+import PasswordStrength from './PasswordStrength';
+import { Link } from 'react-router-dom';
+import sprite from '../../assets/Images/login/symbol-defs.svg';
+import { useDispatch } from 'react-redux';
+import authOperations from 'redux/auth/authOperations';
+import classNames from 'classnames';
+import { toggleShowModalSuccessRegistration } from 'redux/modal/modalSlice';
+import { BiHide, BiShow } from 'react-icons/bi';
+
+import { ReactComponent as Google } from '../../assets/Images/login/google.svg';
 
 const RegisterForm = () => {
   const initialValues = {
     email: '',
     password: '',
     passwordConfirm: '',
-    firstName: ''
-  }
+    firstName: '',
+  };
   const dispatch = useDispatch();
 
-  const onSubmit = ({email, password, firstName}) => {
+  const onSubmit = ({ email, password, firstName }) => {
     const user = {
       email,
       password,
-      firstName
-   }
-    dispatch(authOperations.register(user))
-      .then((response) => {
-        if (response.payload.status === "success") {
-          dispatch(toggleShowModalSuccessRegistration(true))
-        }
-      })
-  }
+      firstName,
+    };
+    dispatch(authOperations.register(user)).then(response => {
+      if (response.payload.status === 'success') {
+        dispatch(toggleShowModalSuccessRegistration(true));
+      }
+    });
+  };
 
   const [type, setType] = useState('password');
 
   const showPassword = () => {
-    setType("text")
-  }
+    setType('text');
+  };
 
   const hidePassword = () => {
-    setType("password")
-  }
+    setType('password');
+  };
 
   const SignUpSchema = Yup.object().shape({
     email: Yup.string()
@@ -70,7 +71,7 @@ const RegisterForm = () => {
       .oneOf([Yup.ref('password')], "Passwords don't match!")
       .required('Required field'),
     firstName: Yup.string()
-      .matches(/(^[а-яА-ЯёЁa-zA-Z0-9]+$)/, "Only letters and numbers")
+      .matches(/(^[а-яА-ЯёЁa-zA-Z0-9]+$)/, 'Only letters and numbers')
       .min(1)
       .max(12, 'Too long name')
       .required('Required field'),
@@ -86,17 +87,22 @@ const RegisterForm = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={SignUpSchema}
-        onSubmit={onSubmit}>
-        {({values, errors, touched, handleChange, handleSubmit }) => (
+        onSubmit={onSubmit}
+      >
+        {({ values, errors, touched, handleChange, handleSubmit }) => (
           <Form className={s.form} onSubmit={handleSubmit}>
-          <label className={s.label}>
+            <label className={s.label}>
               <Field
                 type="email"
                 name="email"
                 placeholder="E-mail"
-                className={classNames(s.input, { [s.errorInput]: errors.email && touched.email, [s.validInput]: !errors.email && touched.email })}
+                className={classNames(s.input, {
+                  [s.errorInput]: errors.email && touched.email,
+                  [s.validInput]: !errors.email && touched.email,
+                })}
                 value={values.email}
-                onChange={handleChange} />
+                onChange={handleChange}
+              />
               <Email className={s.inputIcon} />
               {!errors.email && touched.email && (
                 <Email className={s.validInputIcon} />
@@ -119,20 +125,37 @@ const RegisterForm = () => {
                   [s.validInput]: !errors.password && touched.password,
                 })}
                 value={values.password}
-                onChange={handleChange} />
-               <PasswordLock className={s.inputIcon} />
-              {!errors.password && touched.password && <PasswordLock className={s.validInputIcon} />}
-              {errors.password && touched.password &&<PasswordLock className={s.errorInputIcon} />}
-              {errors.password && touched.password &&
-                <div className={s.errorField}>{errors.password}
-                </div>}
-              {(type === "password")
-                ? <span className={s.hideIcon}>
-                  <BiHide className={s.icon} onMouseDown={showPassword} onTouchStart={showPassword} /></span>
-                : <span className={s.showIcon} onMouseUp={hidePassword} onTouchEnd={hidePassword}>
-                <BiShow className={s.icon} /></span>}
-          </label>
-          <label className={s.label}>
+                onChange={handleChange}
+              />
+              <PasswordLock className={s.inputIcon} />
+              {!errors.password && touched.password && (
+                <PasswordLock className={s.validInputIcon} />
+              )}
+              {errors.password && touched.password && (
+                <PasswordLock className={s.errorInputIcon} />
+              )}
+              {errors.password && touched.password && (
+                <div className={s.errorField}>{errors.password}</div>
+              )}
+              {type === 'password' ? (
+                <span className={s.hideIcon}>
+                  <BiHide
+                    className={s.icon}
+                    onMouseDown={showPassword}
+                    onTouchStart={showPassword}
+                  />
+                </span>
+              ) : (
+                <span
+                  className={s.showIcon}
+                  onMouseUp={hidePassword}
+                  onTouchEnd={hidePassword}
+                >
+                  <BiShow className={s.icon} />
+                </span>
+              )}
+            </label>
+            <label className={s.label}>
               <Field
                 type="password"
                 name="passwordConfirm"
@@ -145,16 +168,26 @@ const RegisterForm = () => {
                     !errors.passwordConfirm && touched.passwordConfirm,
                 })}
                 value={values.confirmPassword}
-                onChange={handleChange} />
+                onChange={handleChange}
+              />
               <PasswordLock className={s.inputIcon} />
-              {!errors.passwordConfirm && touched.passwordConfirm && <PasswordLock className={s.validInputIcon} />}
-              {errors.passwordConfirm && touched.passwordConfirm &&<PasswordLock className={s.errorInputIcon} />}
-              {errors.passwordConfirm && touched.passwordConfirm &&
-                <div className={s.errorFieldConfirmPassword}>{errors.passwordConfirm}
-                </div>}
-              <PasswordStrength password={values.password} className={s.passwordStrength} />
-          </label>
-          <label className={s.label}>
+              {!errors.passwordConfirm && touched.passwordConfirm && (
+                <PasswordLock className={s.validInputIcon} />
+              )}
+              {errors.passwordConfirm && touched.passwordConfirm && (
+                <PasswordLock className={s.errorInputIcon} />
+              )}
+              {errors.passwordConfirm && touched.passwordConfirm && (
+                <div className={s.errorFieldConfirmPassword}>
+                  {errors.passwordConfirm}
+                </div>
+              )}
+              <PasswordStrength
+                password={values.password}
+                className={s.passwordStrength}
+              />
+            </label>
+            <label className={s.label}>
               <Field
                 type="text"
                 name="firstName"
@@ -164,7 +197,8 @@ const RegisterForm = () => {
                   [s.validInput]: !errors.firstName && touched.firstName,
                 })}
                 value={values.firstName}
-                onChange={handleChange} />
+                onChange={handleChange}
+              />
               <Name className={s.inputIcon} />
               {!errors.firstName && touched.firstName && (
                 <Name className={s.validInputIcon} />
@@ -182,6 +216,12 @@ const RegisterForm = () => {
             <Link to="/login" className={s.loginBtn}>
               log in
             </Link>
+            <div className={s.googleBtn}>
+              <a href="https://leaopards-team.onrender.com/api/auth/google">
+                Continue with
+              </a>
+              <Google className={s.googleIcon} />
+            </div>
           </Form>
         )}
       </Formik>
