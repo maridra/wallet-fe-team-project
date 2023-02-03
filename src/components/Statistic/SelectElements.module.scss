@@ -85,9 +85,11 @@
     width: 336px;
     gap: 16px;
     flex-direction: row;
+    padding-bottom: 21px;
   }
   @include mq(desk) {
     width: 395px;
     gap: 32px;
+    padding-bottom: 20px;
   }
 }

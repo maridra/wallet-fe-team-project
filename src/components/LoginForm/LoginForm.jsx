@@ -40,13 +40,16 @@ const LoginForm = () => {
 
   const SignUpSchema = Yup.object().shape({
     email: Yup.string()
-      .matches(/^\w+[\w-.]*\w@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/, "Must be a valid email (latin letters). For example: example123@example.com")
+      .matches(
+        /^\w+[\w-.]*\w@\w+((-\w+)|(\w*))\.[a-z]{2,3}$/,
+        'Must be a valid email (latin letters). For example: example123@example.com'
+      )
       .email('Must be a valid email!')
       .min(10)
       .max(63)
       .required('Required field'),
     password: Yup.string()
-      .matches(/(^[a-zA-Z0-9]+$)/, "Can only include numbers and latin letters")
+      .matches(/(^[a-zA-Z0-9]+$)/, 'Can only include numbers and latin letters')
       .min(6, 'Minimum 6 characters required')
       .max(12, 'Maximum 12 characters')
       .required('Required field'),

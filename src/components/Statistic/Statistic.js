@@ -166,12 +166,7 @@ const StatisticForm = () => {
               onClick={handleOpenAllTransactions}
             >
               {!openAllTransactions ? (
-                <div
-                  className={scss.textAllTransaction}
-                  // onBlur={() => {
-                  //   console.log('hey');
-                  // }}
-                >
+                <div className={scss.textAllTransaction}>
                   <div>
                     <IconContext.Provider
                       value={{
@@ -198,7 +193,7 @@ const StatisticForm = () => {
                       <IoStatsChartOutline></IoStatsChartOutline>
                     </IconContext.Provider>
                   </div>
-                  <div>Show less</div>
+                  <div className={scss.allTransactionText}>Show less</div>
                 </div>
               )}
             </button>
@@ -226,11 +221,11 @@ const StatisticForm = () => {
             <table className={scss.table}>
               <thead className={scss.thead}>
                 <tr>
-                  <th>Category</th>
-                  <th>Sum</th>
+                  <th className={scss.theadText}>Category</th>
+                  <th className={scss.theadText}>Sum</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className={scss.tbody}>
                 {!openAllTransactions
                   ? stat.expensesByPeriod.map(item => (
                       <tr className={scss.tableRows} key={uuidv4()}>
