@@ -103,7 +103,7 @@
   @include mq(desk) {
     display: flex;
     align-items: center;
-    height: 100%;
+    height: 100vh;
     width: auto;
     margin-right: -16px;
     padding-left: 107px;
