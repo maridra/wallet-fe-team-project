@@ -11,8 +11,8 @@ import { SelectElements } from './SelectElements';
 import scss from './Statistic.module.scss';
 import {
   getStatistic,
-  getStatisticCategory,
-  getStatisticCategoryAll,
+  // getStatisticCategory,
+  // getStatisticCategoryAll,
 } from '../../redux/statistic/statisticOperation';
 import { statisticSelectors } from 'redux/statistic/statisticSelectors';
 
