@@ -17,7 +17,7 @@
   @include mq(desk) {
     height: 100vh;
     background-image: url('../../assets/Images/login/Ellipse\ 1_desk.png'),
-        url('../../assets/Images/login/Ellipse\ 2_desk.png');
+      url('../../assets/Images/login/Ellipse\ 2_desk.png');
   }
 }
 
@@ -108,7 +108,7 @@
   @include mq(desk) {
     display: flex;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     width: auto;
     margin-right: -16px;
     padding-left: 107px;
@@ -124,7 +124,7 @@
   .back {
     height: auto;
   }
-  .registerContainer{
+  .registerContainer {
     height: auto;
   }
 }

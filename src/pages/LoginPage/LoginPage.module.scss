@@ -17,7 +17,7 @@
   @include mq(desk) {
     height: 100vh;
     background-image: url('../../assets/Images/login/Ellipse\ 1_desk.png'),
-        url('../../assets/Images/login/Ellipse\ 2_desk.png');
+      url('../../assets/Images/login/Ellipse\ 2_desk.png');
   }
 }
 
@@ -61,7 +61,7 @@
   display: flex;
   width: 100%;
   gap: 36px;
-  
+
   @include mq(desk) {
     display: flex;
     flex-direction: column;
@@ -73,7 +73,7 @@
   margin-top: 60px;
   margin-left: 82px;
 
-  @include mq(desk){
+  @include mq(desk) {
     margin-top: 150px;
     margin-left: 60px;
   }
@@ -103,7 +103,7 @@
   @include mq(desk) {
     display: flex;
     align-items: center;
-    height: 100vh;
+    height: 100%;
     width: auto;
     margin-right: -16px;
     padding-left: 107px;
