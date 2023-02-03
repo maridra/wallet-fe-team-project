@@ -20,7 +20,7 @@ const schema = yup.object().shape({
     .required('Amount is required'),
   comment: yup
     .string()
-    .trim('', 'Please, no space')
+    .trim()
     .max(100, 'Maximum 100 symbols')
     .matches(/(^[а-яА-ЯёЁa-zA-ZЇїІіЄєҐґ ]+$)/u, 'Please, enter only letters'),
 });
