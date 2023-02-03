@@ -36,7 +36,7 @@ export const authSlice = createSlice({
     },
     googleAuth: {
       reducer(state, action) {
-        state.token = action.payload.token;
+        state.token = action.payload;
         state.loading = false;
         state.isAuth = true;
         state.isVerified = true;

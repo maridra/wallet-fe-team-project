@@ -24,7 +24,7 @@ const GoogleAuth = () => {
   token.set(currentToken);
 
   dispatch(userOperations.currentUser())
-    .then(() => dispatch(googleAuth(token)))
+    .then(() => dispatch(googleAuth(currentToken)))
     .catch(error => {
       Notify.failure(error.message);
       navigate('/login', { replace: true });
