@@ -148,19 +148,24 @@ const StatisticForm = () => {
           <div className={scss.doughnut}>
             {!openAllTransactions ? (
               <>
-                <Doughnut data={data} options={options} />
-                <div className={scss.doughnutMonth}>
-                  {stat.expensesPerMonth ? (
-                    `₴ ${stat.expensesPerMonth
-                      .toLocaleString('uk-ua', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })
-                      .replace(/,/g, '.')}`
-                  ) : (
-                    <div className={scss.doughnutMonthNoValue}>₴ 0</div>
-                  )}
-                </div>
+                {stat.expensesPerMonth ? (
+                  <>
+                    <Doughnut data={data} options={options} />
+                    <div className={scss.doughnutMonth}>
+                      ₴&nbsp;
+                      {stat.expensesPerMonth
+                        .toLocaleString('uk-ua', {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })
+                        .replace(/,/g, '.')}
+                    </div>
+                  </>
+                ) : (
+                  <div className={scss.doughnutMonthNoValue}>
+                    <div>₴ 0</div>
+                  </div>
+                )}
               </>
             ) : (
               <>
@@ -180,7 +185,6 @@ const StatisticForm = () => {
               </>
             )}
           </div>
-
           <div className={scss.statisticData}>
             <button
               className={scss.openAllTranscation}

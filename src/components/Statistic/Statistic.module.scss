@@ -60,6 +60,7 @@
   @include mq(mob-only) {
     max-width: 440px;
     max-height: 440px;
+
     display: flex;
     justify-content: center;
   }
@@ -85,22 +86,19 @@
   font-size: 18px;
   line-height: 1.5;
   color: var(--text-main-color);
-  @include mq(desk) {
-    // bottom: 123px;
-  }
-
-  // number-format: '###,##0.00', 'price';
 }
 
 .doughnutMonthNoValue {
   border-radius: 50%;
   border: 43px solid var(--border-doughnut);
   display: flex;
+
   align-items: center;
   justify-content: center;
+
   @include mq(mob-only) {
-    width: 280px;
-    height: 280px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
   }
 
   @include mq(tab) {
@@ -519,3 +517,16 @@
 .squareBefore {
   @extend %square;
 }
+// <Doughnut data={data} options={options} />
+//               <div className={scss.doughnutMonth}>
+//                 {stat.expensesPerMonth ? (
+//                   `₴ ${stat.expensesPerMonth
+//                     .toLocaleString('uk-ua', {
+//                       minimumFractionDigits: 2,
+//                       maximumFractionDigits: 2,
+//                     })
+//                     .replace(/,/g, '.')}`
+//                 ) : (
+//                   <div className={scss.doughnutMonthNoValue}>₴ 0</div>
+//                 )}
+//               </div>
