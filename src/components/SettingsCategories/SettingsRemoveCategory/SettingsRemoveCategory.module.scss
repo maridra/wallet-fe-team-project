@@ -25,25 +25,19 @@
 
 .categoriesItem {
   position: relative;
+  display: flex;
+  justify-content: space-between;
   padding: 10px 50px 10px 15px;
-  // border: 1px solid grey;
+
   border-radius: 25px;
 
-  // background: rgba(232, 232, 232, 0.517);
   box-shadow: 3px 6px 15px rgba(0, 0, 0, 0.2);
 
   background: rgba(255, 255, 255, 0.5);
-  // backdrop-filter: blur(10px);
-  // -webkit-backdrop-filter: blur(10px);
-
   transition-duration: 250ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    // box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-    //   rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
-    //   rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-
     box-shadow: 3px 6px 15px rgba(0, 0, 0, 0.5);
   }
 }
@@ -51,6 +45,13 @@
 .otherExpenses {
   padding: 10px;
   display: flex;
+}
+
+.loader {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .buttonDelete {
