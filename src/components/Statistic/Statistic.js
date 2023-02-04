@@ -52,6 +52,7 @@ const StatisticForm = () => {
   const [openMonth, setOpenMonth] = useState(false);
   const [openYear, setOpenYear] = useState(false);
   const [openAllTransactions, setOpenAllTransactions] = useState(false);
+  const number = 0;
 
   const handleOpenMonthSelect = () => {
     setOpenMonth(!openMonth);
@@ -310,7 +311,12 @@ const StatisticForm = () => {
                             maximumFractionDigits: 2,
                           })
                           .replace(/,/g, '.')
-                      : 0}
+                      : number
+                          .toLocaleString('uk-ua', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })
+                          .replace(/,/g, '.')}
                   </td>
                 </tr>
                 <tr>
@@ -330,7 +336,12 @@ const StatisticForm = () => {
                             maximumFractionDigits: 2,
                           })
                           .replace(/,/g, '.')
-                      : 0}
+                      : number
+                          .toLocaleString('uk-ua', {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2,
+                          })
+                          .replace(/,/g, '.')}
                   </td>
                 </tr>
               </tfoot>
