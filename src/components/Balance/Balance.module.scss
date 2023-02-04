@@ -5,7 +5,7 @@
   max-width: 440px;
   min-width: 280px;
   height: 80px;
-  padding: 10px 32px 22px 38px;
+  padding: 8px 32px 22px 32px;
   font-size: 12px;
   text-transform: uppercase;
   line-height: 1.2;
@@ -15,6 +15,7 @@
 
   @media screen and (min-width: 768px) {
     width: 336px;
+    padding: 8px 32px 22px 38px;
   }
 
   @media screen and (min-width: 1280px) {
@@ -24,15 +25,15 @@
 
 .balanceAmount {
   display: flex;
-  gap: 9px;
+  gap: 6px;
   margin-top: 12px;
   font-weight: 700;
   font-size: 30px;
   line-height: calc(45 / 37);
   color: var(--text-main-color);
   font-family: 'Poppins';
-}
 
-.balanceLogo {
-  padding-bottom: 2px;
+  @media screen and (min-width: 768px) {
+    gap: 9px;
+  }
 }

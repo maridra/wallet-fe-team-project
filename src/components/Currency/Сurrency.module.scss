@@ -4,7 +4,6 @@
   min-width: 280px;
   max-width: 440px;
   min-height: 174px;
-  // padding-right: 2px;
   text-align: center;
   color: var(--text-white-color);
   background-color: var(--main-accent-color-blue);
@@ -15,7 +14,7 @@
   background-size: contain;
 
   @include mq(mob-only) {
-    margin-top: 0px;
+    margin-top: 16px;
   }
 
   @include mq(tab) {
@@ -51,7 +50,7 @@
 }
 
 .tablePurchase {
-  padding-right: 16px;
+  padding-right: 18px;
   @include mq(tab) {
     padding-right: 30px;
   }
@@ -61,6 +60,10 @@
 }
 
 .tableSale {
+  @include mq(mob-only) {
+    padding-right: 5px;
+  }
+
   @include mq(tab-only) {
     padding-right: 12px;
   }
