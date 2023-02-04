@@ -87,6 +87,24 @@ const StatisticForm = () => {
   };
   const stat = useSelector(statisticSelectors.getStatistic);
 
+  const categories = useSelector(statisticSelectors.getStatisticCategory);
+  const itemToReplace = categories.findIndex(i => i.name === 'Other expenses');
+  const sortedCategory = [
+    ...categories,
+    [...categories].splice(itemToReplace, 1).pop(),
+  ];
+  sortedCategory.splice(itemToReplace, 1);
+
+  const categoriesAll = useSelector(statisticSelectors.getStatisticCategoryAll);
+  const itemToReplace2 = categoriesAll.findIndex(
+    i => i.name === 'Other expenses'
+  );
+  const sortedCategoryAll = [
+    ...categoriesAll,
+    [...categoriesAll].splice(itemToReplace2, 1).pop(),
+  ];
+  sortedCategoryAll.splice(itemToReplace2, 1);
+
   const data = {
     labels: stat.expensesByPeriod.map(item => item.name),
     datasets: [
@@ -126,19 +144,24 @@ const StatisticForm = () => {
           <div className={scss.doughnut}>
             {!openAllTransactions ? (
               <>
-                <Doughnut data={data} options={options} />
-                <div className={scss.doughnutMonth}>
-                  {stat.expensesPerMonth ? (
-                    `₴ ${stat.expensesPerMonth
-                      .toLocaleString('uk-ua', {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })
-                      .replace(/,/g, '.')}`
-                  ) : (
-                    <div className={scss.doughnutMonthNoValue}>₴ 0</div>
-                  )}
-                </div>
+                {stat.expensesPerMonth ? (
+                  <>
+                    <Doughnut data={data} options={options} />
+                    <div className={scss.doughnutMonth}>
+                      ₴&nbsp;
+                      {stat.expensesPerMonth
+                        .toLocaleString('uk-ua', {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })
+                        .replace(/,/g, '.')}
+                    </div>
+                  </>
+                ) : (
+                  <div className={scss.doughnutMonthNoValue}>
+                    <div>₴ 0</div>
+                  </div>
+                )}
               </>
             ) : (
               <>
@@ -158,7 +181,6 @@ const StatisticForm = () => {
               </>
             )}
           </div>
-
           <div className={scss.statisticData}>
             <button
               className={scss.openAllTranscation}
@@ -166,12 +188,7 @@ const StatisticForm = () => {
               onClick={handleOpenAllTransactions}
             >
               {!openAllTransactions ? (
-                <div
-                  className={scss.textAllTransaction}
-                  // onBlur={() => {
-                  //   console.log('hey');
-                  // }}
-                >
+                <div className={scss.textAllTransaction}>
                   <div>
                     <IconContext.Provider
                       value={{
@@ -198,7 +215,7 @@ const StatisticForm = () => {
                       <IoStatsChartOutline></IoStatsChartOutline>
                     </IconContext.Provider>
                   </div>
-                  <div>Show less</div>
+                  <div className={scss.allTransactionText}>Show less</div>
                 </div>
               )}
             </button>
@@ -226,13 +243,13 @@ const StatisticForm = () => {
             <table className={scss.table}>
               <thead className={scss.thead}>
                 <tr>
-                  <th>Category</th>
-                  <th>Sum</th>
+                  <th className={scss.theadText}>Category</th>
+                  <th className={scss.theadText}>Sum</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className={scss.tbody}>
                 {!openAllTransactions
-                  ? stat.expensesByPeriod.map(item => (
+                  ? sortedCategory.map(item => (
                       <tr className={scss.tableRows} key={uuidv4()}>
                         <td id={item.name}>
                           <div className={scss.squareAndText}>
@@ -253,7 +270,7 @@ const StatisticForm = () => {
                         </td>
                       </tr>
                     ))
-                  : stat.allExpensesByCategory.map(item => (
+                  : sortedCategoryAll.map(item => (
                       <tr className={scss.tableRows} key={uuidv4()}>
                         <td id={item.name}>
                           <div className={scss.squareAndText}>

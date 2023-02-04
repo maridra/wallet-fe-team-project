@@ -100,14 +100,18 @@
   vertical-align: middle;
   margin-right: 16px;
   float: left;
+  margin-bottom: 3px;
   @include mq(mob-only) {
     margin-left: 20px;
+    margin-bottom: 3px;
   }
   @include mq(tab) {
     margin-left: 15px;
+    margin-bottom: 3px;
   }
   @include mq(desk) {
     margin-left: 28px;
+    margin-bottom: 0;
   }
 }
 
