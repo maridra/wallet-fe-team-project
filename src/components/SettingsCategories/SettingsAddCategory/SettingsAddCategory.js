@@ -12,6 +12,7 @@ const SettingsAddCategory = () => {
   const [newCategory, setNewCategory] = useState('');
   const loading = useSelector(userSelectors.addLoading);
   const dispatch = useDispatch();
+  const lengthCheck = newCategory.length > 18;
 
   function setValue(e) {
     setNewCategory(e.currentTarget.value);
@@ -32,16 +33,21 @@ const SettingsAddCategory = () => {
         <p className={s.inputText}>Type new category here:</p>
         <div className={s.inputWrapper}>
           <input
-            maxLength={18}
             type="text"
             name="newCategory"
             id="New category"
-            className={s.inputStyle}
+            className={
+              lengthCheck ? `${s.inputStyle} ${s.inputStyleRed}` : s.inputStyle
+            }
             autoComplete="off"
             value={newCategory}
             onChange={setValue}
           />
-          <button type="submit" disabled={loading} className={s.submitButton}>
+          <button
+            type="submit"
+            disabled={loading || lengthCheck}
+            className={s.submitButton}
+          >
             {loading ? (
               <div className={s.loader}>
                 <Loader height={'30'} width={'30'} />
@@ -50,6 +56,9 @@ const SettingsAddCategory = () => {
               <p>Add</p>
             )}
           </button>
+          {lengthCheck && (
+            <div className={s.notification}>Too long category</div>
+          )}
         </div>
       </label>
     </form>
