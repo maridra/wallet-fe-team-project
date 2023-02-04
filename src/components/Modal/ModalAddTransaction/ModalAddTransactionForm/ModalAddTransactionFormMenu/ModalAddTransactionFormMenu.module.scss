@@ -26,6 +26,8 @@
   @include mq(mob-only) {
     width: 100%;
     max-width: 402;
+    max-height: 400px;
+    overflow-y: scroll;
   }
   @include mq(tab) {
     width: 402px;

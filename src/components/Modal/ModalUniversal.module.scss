@@ -34,9 +34,11 @@
 
   @include mq(mob-only) {
     width: 100vw;
-    height: 100vh;
+    // height: 100vh;
     padding: 20px 11px 37px 9px;
     margin-top: 60px;
+    height: 100dvh;
+    // overflow-y: scroll;
   }
   @include mq(tab) {
     width: 540px;
