@@ -128,6 +128,7 @@
   width: 140px;
 
   @include mq(desk) {
+    padding-right: 10px;
     width: 146px;
     overflow: auto;
 
