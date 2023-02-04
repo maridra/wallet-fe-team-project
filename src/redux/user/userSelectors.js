@@ -7,6 +7,7 @@ const getTotalBalance = state => state.user.totalBalance;
 const getAvatarURL = state => state.user.avatarURL;
 const isAvatarLoading = state => state.user.avatarLoading;
 const addLoading = state => state.user.addLoading;
+const removeLoading = state => state.user.removeLoading;
 
 export const userSelectors = {
   getId,
@@ -18,4 +19,5 @@ export const userSelectors = {
   getAvatarURL,
   isAvatarLoading,
   addLoading,
+  removeLoading,
 };

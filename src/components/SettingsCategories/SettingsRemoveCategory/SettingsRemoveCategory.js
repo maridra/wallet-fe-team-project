@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import s from './SettingsRemoveCategory.module.scss';
 import sprite from '../../../assets/Images/login/symbol-defs.svg';
 import { useSelector } from 'react-redux';
 import { userSelectors } from 'redux/user/userSelectors';
 import { useDispatch } from 'react-redux';
 import userOperations from 'redux/user/userOperations';
+import { Loader } from 'components';
 
 const SettingsRemoveCategory = () => {
   const categories = useSelector(userSelectors.getCategories);
@@ -15,6 +16,9 @@ const SettingsRemoveCategory = () => {
   ];
   sortedCategory.splice(itemToReplace, 1);
 
+  const removeLoading = useSelector(userSelectors.removeLoading);
+  const [deletingItem, setDeletingItem] = useState('');
+
   const dispatch = useDispatch();
   const itemStyle = item => ({
     backgroundColor: `${item?.color}`,
@@ -22,6 +26,7 @@ const SettingsRemoveCategory = () => {
   });
 
   function deleteCategory(id) {
+    setDeletingItem(id);
     dispatch(userOperations.removeCategory(id));
   }
 
@@ -43,15 +48,21 @@ const SettingsRemoveCategory = () => {
             >
               <p>{item.name}</p>
               {item._id !== '10' ? (
-                <button
-                  onClick={() => deleteCategory(item._id)}
-                  type="button"
-                  className={s.buttonDelete}
-                >
-                  <svg className={s.svg}>
-                    <use href={`${sprite}#icon-cancel-circle`}></use>
-                  </svg>
-                </button>
+                item._id === deletingItem && removeLoading === true ? (
+                  <div className={s.loader}>
+                    <Loader height={'22'} width={'22'} />
+                  </div>
+                ) : (
+                  <button
+                    onClick={() => deleteCategory(item._id)}
+                    type="button"
+                    className={s.buttonDelete}
+                  >
+                    <svg className={s.svg}>
+                      <use href={`${sprite}#icon-cancel-circle`}></use>
+                    </svg>
+                  </button>
+                )
               ) : null}
             </div>
           </li>
