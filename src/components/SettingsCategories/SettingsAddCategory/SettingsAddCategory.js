@@ -12,7 +12,7 @@ const SettingsAddCategory = () => {
   const [newCategory, setNewCategory] = useState('');
   const loading = useSelector(userSelectors.addLoading);
   const dispatch = useDispatch();
-  const lengthCheck = newCategory.length > 18;
+  const lengthCheck = newCategory.trim().length > 18;
 
   function setValue(e) {
     setNewCategory(e.currentTarget.value);
