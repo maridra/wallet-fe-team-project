@@ -13,10 +13,11 @@ const initialState = {
   totalBalance: '',
   avatarLoading: false,
   loading: false,
+  removeLoading: false,
   error: null,
 };
 
-const handlePending = state => {
+const handlePending = (state, action) => {
   state.loading = true;
   state.error = null;
 };
@@ -44,12 +45,19 @@ export const userSlice = createSlice({
       })
 
       // REMOVE CATEGORY
-      .addCase(userOperations.removeCategory.pending, handlePending)
-      .addCase(userOperations.removeCategory.rejected, handleRejected)
+      .addCase(userOperations.removeCategory.pending, (state, action) => {
+        state.removeLoading = true;
+        state.error = null;
+      })
+      .addCase(userOperations.removeCategory.rejected, (state, action) => {
+        state.removeLoading = false;
+        state.error = action.payload;
+      })
       .addCase(
         userOperations.removeCategory.fulfilled,
         (state, { payload }) => {
           state.categories = payload;
+          state.removeLoading = false;
         }
       )
 
