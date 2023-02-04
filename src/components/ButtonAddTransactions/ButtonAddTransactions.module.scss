@@ -3,7 +3,7 @@
 .openBtn {
   @extend %btnGreen;
   position: fixed;
-
+  // -webkit-appearance: none;
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -13,12 +13,21 @@
     right: 20px;
   }
   @include mq(tab) {
-    top: calc(100vh - 84px);
+    top: calc(100% - 84px);
     right: 40px;
   }
   &Icon {
     width: 20px;
     height: 20px;
+    position: absolute;
+    display: flex;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
   }
   z-index: 30000;
+}
+
+.buttonInsideBox {
+  position: relative;
 }

@@ -9,8 +9,12 @@ export const ButtonAddTransactions = () => {
     dispatch(toggleShowModalAddTransaction(true));
   };
   return (
-    <button className={scss.openBtn} type="button" onClick={handleAddBtn}>
-      <HiOutlinePlus className={scss.openBtnIcon}></HiOutlinePlus>
-    </button>
+    <div>
+      <button className={scss.openBtn} type="button" onClick={handleAddBtn}>
+        <div className={scss.buttonInsideBox}>
+          <HiOutlinePlus className={scss.openBtnIcon}></HiOutlinePlus>
+        </div>
+      </button>
+    </div>
   );
 };

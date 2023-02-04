@@ -485,12 +485,13 @@
     text-align: center;
   }
   @include mq(tab) {
-    top: 410px;
-    right: 370px;
+    top: 400px;
+    right: 375px;
   }
   @include mq(desk) {
-    top: 320px;
-    right: 400px;
+    top: 308px;
+    // left: 0;
+    right: 412px;
   }
 }
 
