@@ -237,7 +237,18 @@ const StatisticForm = () => {
               </div>
             ) : (
               <div className={scss.selectClosed}>
-                <SelectElements />
+                <SelectElements
+                  valueMonth={month}
+                  valueYear={year}
+                  onClickMonth={handleOpenMonthSelect}
+                  onClickYear={handleOpenYearSelect}
+                  openMonth={openMonth}
+                  openYear={openYear}
+                  handleMonthChange={handleMonthChange}
+                  handleYearChange={handleYearChange}
+                  blurHandlerMonth={blurHandlerMonth}
+                  blurHandlerYear={blurHandlerYear}
+                />
               </div>
             )}
             {/* table  */}
