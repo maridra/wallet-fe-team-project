@@ -125,14 +125,31 @@
   }
 }
 .category {
-  width: 140px;
+  width: 130px;
+  overflow: auto;
+  margin-right: 15px;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  }
 
   @include mq(desk) {
-    width: 146px;
+    margin-right: 15px;
+    width: 136px;
     overflow: auto;
 
     &::-webkit-scrollbar {
-      width: 4px;
       height: 4px;
     }
 
