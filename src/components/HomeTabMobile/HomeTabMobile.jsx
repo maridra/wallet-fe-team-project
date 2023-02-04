@@ -134,7 +134,9 @@ const HomeTabMobile = ({
                 </li>
                 <li className={`${userColorUi(item)} ${s.category}`}>
                   <span className={s.mobileTableHeader}>Category</span>
-                  <span className={`${s.mobileTableInfo}`}>
+                  <span
+                    className={`${s.mobileTableInfo} ${s.mobileTableInfoCategory}`}
+                  >
                     {item.category?.name ? item.category.name : 'Income'}
                   </span>
                 </li>
