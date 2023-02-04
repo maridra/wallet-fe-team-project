@@ -35,6 +35,17 @@
   line-height: 24px;
   color: #000000;
   background: transparent;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translate(0, 0);
+  &:hover:not(.active) {
+    box-shadow: 0px 3px 10px var(--btn-blue-color-hover);
+    border: 1px solid var(--btn-blue-color-hover);
+  }
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0px 4px 13px var(--btn-blue-color-active);
+  }
 }
 
 .openMenuBtnMonth {

@@ -22,26 +22,6 @@ export const SelectElements = props => {
 
   return (
     <div className={scss.select}>
-      <input
-        className={scss.selectItem}
-        type="text"
-        placeholder="Select a month"
-        name="month"
-        value={valueMonth}
-        onClick={onClickMonth}
-        autoComplete="off"
-        readOnly
-      ></input>
-      <input
-        className={scss.selectItem}
-        type="text"
-        placeholder="Select a year"
-        name="year"
-        value={valueYear}
-        onClick={onClickYear}
-        autoComplete="off"
-        readOnly
-      ></input>
       <button
         className={scss.openMenuBtnMonth}
         type="button"
@@ -90,6 +70,28 @@ export const SelectElements = props => {
           </IconContext.Provider>
         )}
       </button>
+      <input
+        className={scss.selectItem}
+        type="text"
+        placeholder="Select a month"
+        name="month"
+        value={valueMonth}
+        onClick={onClickMonth}
+        autoComplete="off"
+        readOnly
+      ></input>
+      <input
+        className={scss.selectItem}
+        type="text"
+        placeholder="Select a year"
+        name="year"
+        value={valueYear}
+        onClick={onClickYear}
+        autoComplete="off"
+        readOnly
+      ></input>
+      {/*  */}
+
       {openMonth && (
         <SelectForStatisticMonth
           handleMonth={handleMonthChange}
