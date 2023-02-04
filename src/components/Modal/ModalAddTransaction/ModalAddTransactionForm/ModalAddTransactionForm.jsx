@@ -12,9 +12,17 @@ import scss from './ModalAddTransactionForm.module.scss';
 import ModalAddTransactionFormMenu from './ModalAddTransactionFormMenu/ModalAddTransactionFormMenu';
 import financeOperation from 'redux/finance/financeOperation';
 
+let patternTwoDigisAfterComma = /^\d+(\.\d{0,2})?$/;
+
 const schema = yup.object().shape({
   amount: yup
     .number()
+    .test(val => {
+      if (val !== undefined) {
+        return patternTwoDigisAfterComma.test(val);
+      }
+      return true;
+    })
     .min(0.01, 'Please, enter an amount min 0.01')
     .max(2500000, 'Please, enter an amount max 2500000!')
     .required('Amount is required'),
@@ -67,7 +75,7 @@ const ModalAddTransactionForm = prop => {
       if (comment === '') {
         const formValues = {
           transactionType: checkboxStatus,
-          amount: Number(amount),
+          amount: Number(amount).toFixed(2),
           date: bekDate,
         };
         dispatch(financeOperation.addTransaction(formValues));
@@ -139,7 +147,11 @@ const ModalAddTransactionForm = prop => {
     ) {
       return <div className={scss.errorSum}>{r}</div>;
     }
-    return <div className={scss.errorSum}>Only numbers</div>;
+    return (
+      <div className={scss.errorSum}>
+        Digits only, no more than two after the decimal point
+      </div>
+    );
   };
 
   return (
@@ -192,9 +204,6 @@ const ModalAddTransactionForm = prop => {
               placeholder="0.00"
               name="amount"
               autoComplete="off"
-              onChange={e => {
-                console.log(e.target.value);
-              }}
             ></Field>
             <ErrorMessage
               className={scss.errorMessage}
