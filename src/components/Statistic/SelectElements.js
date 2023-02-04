@@ -93,7 +93,6 @@ export const SelectElements = props => {
         autoComplete="off"
         readOnly
       ></input>
-      {/*  */}
 
       {openMonth && (
         <SelectForStatisticMonth
