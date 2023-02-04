@@ -9,7 +9,7 @@
   border-radius: 50%;
 
   @include mq(mob-only) {
-    top: calc(100vh - 64px);
+    top: calc(100% - 64px);
     right: 20px;
   }
   @include mq(tab) {
