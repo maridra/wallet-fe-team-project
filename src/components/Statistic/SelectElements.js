@@ -31,6 +31,7 @@ export const SelectElements = props => {
           <IconContext.Provider
             value={{
               size: '25px',
+              color: 'black',
             }}
           >
             <FiChevronDown
@@ -41,6 +42,7 @@ export const SelectElements = props => {
           <IconContext.Provider
             value={{
               size: '25px',
+              color: 'black',
             }}
           >
             <FiChevronUp className={scss.openMenuBtnMonthIcon}></FiChevronUp>
@@ -56,6 +58,7 @@ export const SelectElements = props => {
           <IconContext.Provider
             value={{
               size: '25px',
+              color: 'black',
             }}
           >
             <FiChevronDown></FiChevronDown>
