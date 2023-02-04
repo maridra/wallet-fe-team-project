@@ -18,6 +18,7 @@ const schema = yup.object().shape({
     .min(0.01, 'Please, enter an amount min 0.01')
     .max(2500000, 'Please, enter an amount max 2500000!')
     .required('Amount is required'),
+
   comment: yup
     .string()
     .trim()
@@ -191,6 +192,9 @@ const ModalAddTransactionForm = prop => {
               placeholder="0.00"
               name="amount"
               autoComplete="off"
+              onChange={e => {
+                console.log(e.target.value);
+              }}
             ></Field>
             <ErrorMessage
               className={scss.errorMessage}
