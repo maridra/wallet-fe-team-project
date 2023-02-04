@@ -76,7 +76,7 @@ const ModalAddTransactionForm = prop => {
       if (comment === '') {
         const formValues = {
           transactionType: checkboxStatus,
-          amount: Number(amount).toFixed(2),
+          amount: Number(amount).toFixed(2) * 1,
           date: bekDate,
         };
         dispatch(financeOperation.addTransaction(formValues));
@@ -86,7 +86,7 @@ const ModalAddTransactionForm = prop => {
       const formValues = {
         transactionType: checkboxStatus,
         comment,
-        amount: Number(amount),
+        amount: Number(amount).toFixed(2) * 1,
         date: bekDate,
       };
       dispatch(financeOperation.addTransaction(formValues));
