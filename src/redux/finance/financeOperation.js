@@ -58,17 +58,26 @@ export const addTransaction = createAsyncThunk(
         const { data } = await axiosBaseUrl.get(`transactions?page=1&limit=20`);
         const rdyTransactions = data.data.transactions;
         const totalBalance = rdyTransactions[0].remainingBalance;
+        const transactionTotalCount =
+          getState().finance.totalQuantityTransactions;
+        const updatedCount = transactionTotalCount + 1;
 
-        return { rdyTransactions, totalBalance };
+        return { rdyTransactions, totalBalance, updatedCount };
       } else {
         const { data } = await axiosBaseUrl.post('/transactions', credentials);
         const transaction = data.data.transaction;
         const transactions = getState().finance.data;
         const rdyTransactions = [transaction, ...transactions];
-        // rdyTransactions.splice(-1);
+        if (rdyTransactions.length === 21) {
+          rdyTransactions.splice(-1);
+        }
+        const transactionTotalCount =
+          getState().finance.totalQuantityTransactions;
+        const updatedCount = transactionTotalCount + 1;
+
         const totalBalance = data.data.totalBalance;
 
-        return { rdyTransactions, totalBalance };
+        return { rdyTransactions, totalBalance, updatedCount };
       }
     } catch (e) {
       hardcoreLogout(e, dispatch);

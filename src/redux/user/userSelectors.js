@@ -6,6 +6,7 @@ const getSubscription = state => state.user.subscription;
 const getTotalBalance = state => state.user.totalBalance;
 const getAvatarURL = state => state.user.avatarURL;
 const isAvatarLoading = state => state.user.avatarLoading;
+const addLoading = state => state.user.addLoading;
 
 export const userSelectors = {
   getId,
@@ -16,4 +17,5 @@ export const userSelectors = {
   getTotalBalance,
   getAvatarURL,
   isAvatarLoading,
+  addLoading,
 };

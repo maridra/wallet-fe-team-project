@@ -11,7 +11,7 @@ const initialState = {
   totalBalance: null,
   isLoading: false,
   data: [],
-  totalQuantityTransactions: '',
+  totalQuantityTransactions: 0,
 };
 
 const handlePending = state => {
@@ -58,6 +58,7 @@ export const financeSlice = createSlice({
       .addCase(addTransaction.fulfilled, (state, action) => {
         state.data = action.payload.rdyTransactions;
         state.totalBalance = action.payload.totalBalance;
+        state.totalQuantityTransactions = action.payload.updatedCount;
         state.isLoading = false;
       });
   },

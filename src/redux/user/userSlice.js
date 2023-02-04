@@ -13,10 +13,12 @@ const initialState = {
   totalBalance: '',
   avatarLoading: false,
   loading: false,
+  removeLoading: false,
+  addLoading: false,
   error: null,
 };
 
-const handlePending = state => {
+const handlePending = (state, action) => {
   state.loading = true;
   state.error = null;
 };
@@ -44,20 +46,33 @@ export const userSlice = createSlice({
       })
 
       // REMOVE CATEGORY
-      .addCase(userOperations.removeCategory.pending, handlePending)
-      .addCase(userOperations.removeCategory.rejected, handleRejected)
+      .addCase(userOperations.removeCategory.pending, (state, action) => {
+        state.removeLoading = true;
+        state.error = null;
+      })
+      .addCase(userOperations.removeCategory.rejected, (state, action) => {
+        state.removeLoading = false;
+        state.error = action.payload;
+      })
       .addCase(
         userOperations.removeCategory.fulfilled,
         (state, { payload }) => {
           state.categories = payload;
+          state.removeLoading = false;
         }
       )
 
       // ADD CATEGORY
-      .addCase(userOperations.addCategory.pending, handlePending)
-      .addCase(userOperations.addCategory.rejected, handleRejected)
+      .addCase(userOperations.addCategory.pending, (state, action) => {
+        state.addLoading = true;
+        state.error = null;
+      })
+      .addCase(userOperations.addCategory.rejected, (state, action) => {
+        state.addLoading = false;
+        state.error = null;
+      })
       .addCase(userOperations.addCategory.fulfilled, (state, { payload }) => {
-        state.loading = false;
+        state.addLoading = false;
         state.categories = payload;
       })
 
