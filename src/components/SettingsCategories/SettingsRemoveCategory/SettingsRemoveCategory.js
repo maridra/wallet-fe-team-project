@@ -22,6 +22,7 @@ const SettingsRemoveCategory = () => {
   const dispatch = useDispatch();
   const itemStyle = item => ({
     backgroundColor: `${item?.color}`,
+    maxWidth: `100%`,
     borderRadius: `25px`,
   });
 
@@ -46,7 +47,7 @@ const SettingsRemoveCategory = () => {
               }
               id={item._id}
             >
-              <p>{item.name}</p>
+              <p className={s.categoryName}>{item.name}</p>
               {item._id !== '10' ? (
                 item._id === deletingItem && removeLoading === true ? (
                   <div className={s.loader}>
