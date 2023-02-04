@@ -49,8 +49,9 @@ const ModalAddTransactionForm = prop => {
   const dispatch = useDispatch();
 
   const today = new Date();
+  const lastYear = new Date('December 31, 2018 23:59:59');
   const disableFutureDt = current => {
-    return current.isBefore(today);
+    return current.isBefore(today) && current.isAfter(lastYear);
   };
 
   const createDate = ({ _d }) => {
