@@ -14,6 +14,7 @@ const initialState = {
   avatarLoading: false,
   loading: false,
   removeLoading: false,
+  addLoading: false,
   error: null,
 };
 
@@ -62,10 +63,16 @@ export const userSlice = createSlice({
       )
 
       // ADD CATEGORY
-      .addCase(userOperations.addCategory.pending, handlePending)
-      .addCase(userOperations.addCategory.rejected, handleRejected)
+      .addCase(userOperations.addCategory.pending, (state, action) => {
+        state.addLoading = true;
+        state.error = null;
+      })
+      .addCase(userOperations.addCategory.rejected, (state, action) => {
+        state.addLoading = false;
+        state.error = null;
+      })
       .addCase(userOperations.addCategory.fulfilled, (state, { payload }) => {
-        state.loading = false;
+        state.addLoading = false;
         state.categories = payload;
       })
 

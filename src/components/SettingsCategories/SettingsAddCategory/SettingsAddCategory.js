@@ -4,9 +4,13 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import userOperations from 'redux/user/userOperations';
 import { Notify } from 'notiflix';
+import { useSelector } from 'react-redux';
+import { userSelectors } from 'redux/user/userSelectors';
+import { Loader } from 'components';
 
 const SettingsAddCategory = () => {
   const [newCategory, setNewCategory] = useState('');
+  const loading = useSelector(userSelectors.addLoading);
   const dispatch = useDispatch();
 
   function setValue(e) {
@@ -37,8 +41,14 @@ const SettingsAddCategory = () => {
             value={newCategory}
             onChange={setValue}
           />
-          <button type="submit" className={s.submitButton}>
-            Add
+          <button type="submit" disabled={loading} className={s.submitButton}>
+            {loading ? (
+              <div className={s.loader}>
+                <Loader height={'30'} width={'30'} />
+              </div>
+            ) : (
+              <p>Add</p>
+            )}
           </button>
         </div>
       </label>
