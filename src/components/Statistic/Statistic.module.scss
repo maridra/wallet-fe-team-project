@@ -468,7 +468,7 @@
   gap: 10px;
   background-color: transparent;
   border: 0;
-  width: 300px;
+  width: 275px;
   cursor: pointer;
   font-family: 'Circe';
   font-style: normal;
@@ -486,12 +486,12 @@
   }
   @include mq(tab) {
     top: 400px;
-    right: 375px;
+    right: 405px;
   }
   @include mq(desk) {
     top: 308px;
     // left: 0;
-    right: 412px;
+    right: 425px;
   }
 }
 
@@ -541,6 +541,26 @@
   font-weight: 400;
   font-size: 16px;
   line-height: 1.125;
+
+  @include mq(mob-only) {
+    width: 110px;
+    overflow-y: hidden;
+
+    &::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    }
+  }
 }
 
 .squareBefore {
