@@ -58,6 +58,7 @@ export const SelectElements = props => {
           <IconContext.Provider
             value={{
               size: '25px',
+              color: 'black',
             }}
           >
             <FiChevronDown></FiChevronDown>
