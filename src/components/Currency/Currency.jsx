@@ -56,14 +56,14 @@ const Currency = () => {
       ) : (
         <div className={css.bodyContainer}>
           <ul className={css.bodyList}>
-            <li>USD</li>
+            <li className={css.currency}>USD</li>
             <li className={css.bodyData}>{USD?.rateBuy.toFixed(2)}</li>
-            <li>{USD?.rateSell.toFixed(2)}</li>
+            <li className={css.rate}>{USD?.rateSell.toFixed(2)}</li>
           </ul>
           <ul className={css.bodyList}>
-            <li>EUR</li>
+            <li className={css.currency}>EUR</li>
             <li className={css.bodyData}>{EUR?.rateBuy.toFixed(2)}</li>
-            <li>{EUR?.rateSell.toFixed(2)}</li>
+            <li className={css.rate}>{EUR?.rateSell.toFixed(2)}</li>
           </ul>
         </div>
       )}

@@ -9,7 +9,7 @@ const Balance = () => {
 
   return (
     <div className={css.balanceContainer}>
-      <p>Your balance</p>
+      <p className={css.text}>Your balance</p>
       <div className={css.balanceAmount}>
         <img
           className={css.balanceLogo}
