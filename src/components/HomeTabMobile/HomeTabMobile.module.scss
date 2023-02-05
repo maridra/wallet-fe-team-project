@@ -21,7 +21,7 @@
 }
 
 .operationItem {
-  height: 282px;
+  height: 329px;
   border-radius: 10px;
   overflow: hidden;
 
@@ -54,7 +54,7 @@
 }
 
 .operationInfo:last-child {
-  padding: 12px 20px 8px 15px;
+  padding: 10px 15px 6px 15px;
 }
 
 .mobileTableHeader {
@@ -105,4 +105,13 @@
 .mobileTableInfoExpence {
   font-weight: 700;
   color: #ff6596;
+}
+
+.mobileDeleteWrapper {
+  padding: 12px;
+}
+
+.mobileDelete {
+  background-color: transparent;
+  border: none;
 }
