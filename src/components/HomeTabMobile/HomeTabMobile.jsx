@@ -8,7 +8,8 @@ import { axiosBaseUrl } from '../../redux/tokenSettingsAxios';
 import { Loader } from 'components';
 import EllipsisText from 'react-ellipsis-text';
 import { useSelector } from 'react-redux';
-import { Notify } from 'notiflix';
+import { Notify, Confirm } from 'notiflix';
+import { MdDelete } from 'react-icons/md';
 
 const HomeTabMobile = ({
   currentPage,
@@ -114,6 +115,24 @@ const HomeTabMobile = ({
     return formatDate;
   }
 
+  function deleteTransaction(item) {
+    Confirm.show(
+      'Confirm deletion',
+      'Do you want to delete this transaction?',
+      'Yes',
+      'No',
+      () => {
+        dispatch(financeOperation.deleteTransaction(item._id));
+      },
+      () => {},
+      {
+        cancelButtonBackground: '#ff6596',
+        okButtonBackground: '#24cca7',
+        titleColor: '#24cca7',
+      }
+    );
+  }
+
   return (
     <>
       <ul className={s.operationList}>
@@ -144,7 +163,6 @@ const HomeTabMobile = ({
                 <li className={userColorUi(item)}>
                   <span className={s.mobileTableHeader}>Comment</span>
                   <span className={s.mobileTableInfo}>
-                    {' '}
                     <EllipsisText
                       text={item.comment || ''}
                       length={16}
@@ -165,6 +183,15 @@ const HomeTabMobile = ({
                   <span className={s.mobileTableInfo}>
                     {(Math.round(item.remainingBalance * 100) / 100).toFixed(2)}
                   </span>
+                </li>
+                <li className={`${userColorUi(item)}`}>
+                  <span className={s.mobileTableHeader}>Edit</span>
+                  <button
+                    className={s.mobileDelete}
+                    onClick={() => deleteTransaction(item)}
+                  >
+                    <MdDelete size={25} />
+                  </button>
                 </li>
               </ul>
             </li>
