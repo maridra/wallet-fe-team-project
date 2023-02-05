@@ -11,6 +11,7 @@ import passwordAPI from 'API/passwordRecoveryAPI';
 import { ReactComponent as PasswordLock } from '../../assets/Images/login/password_lock.svg';
 import sprite from '../../assets/Images/login/symbol-defs.svg';
 import s from '../CreatePassword/CreatePassword.module.scss';
+import { BiHide, BiShow } from 'react-icons/bi';
 
 const CreatePassword = () => {
   const [status, setStatus] = useState(null);
@@ -29,6 +30,16 @@ const CreatePassword = () => {
       .createPasswordAPI(id, token, password)
       .then(res => setStatus(res.code))
       .catch(error => Notify.failure(error.message));
+  };
+
+  const [type, setType] = useState('password');
+
+  const showPassword = () => {
+    setType('text');
+  };
+
+  const hidePassword = () => {
+    setType('password');
   };
 
   const SignUpSchema = Yup.object().shape({
@@ -62,7 +73,7 @@ const CreatePassword = () => {
             <Form className={s.form} onSubmit={handleSubmit}>
               <label className={s.label}>
                 <Field
-                  type="password"
+                  type={type}
                   name="password"
                   placeholder="Password"
                   autoComplete="true"
@@ -82,7 +93,24 @@ const CreatePassword = () => {
                 )}
                 {errors.password && touched.password && (
                   <div className={s.errorField}>{errors.password}</div>
-                )}
+                  )}
+                  {type === 'password' ? (
+                <span className={s.hideIcon}>
+                  <BiHide
+                    className={s.icon}
+                    onMouseDown={showPassword}
+                    onTouchStart={showPassword}
+                  />
+                </span>
+              ) : (
+                <span
+                  className={s.showIcon}
+                  onMouseUp={hidePassword}
+                  onTouchEnd={hidePassword}
+                >
+                  <BiShow className={s.icon} />
+                </span>
+              )}
               </label>
               <label className={s.label}>
                 <Field
