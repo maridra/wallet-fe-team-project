@@ -44,9 +44,7 @@ export default function SettingsAvatar() {
       avatarFormat !== 'jpeg' &&
       avatarFormat !== 'jpg'
     ) {
-      Notify.failure('Invalid image format. It has to be: PNG, JPEG or JPG', {
-        position: 'center-top',
-      });
+      Notify.failure('Invalid image format. It has to be: PNG, JPEG or JPG')
       return;
     }
 
