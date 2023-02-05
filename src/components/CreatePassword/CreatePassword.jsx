@@ -13,8 +13,6 @@ import sprite from '../../assets/Images/login/symbol-defs.svg';
 import s from '../CreatePassword/CreatePassword.module.scss';
 
 const CreatePassword = () => {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [status, setStatus] = useState(null);
   const [searchParams] = useSearchParams();
 
@@ -26,16 +24,7 @@ const CreatePassword = () => {
     passwordConfirm: '',
   };
 
-  const onSubmit = e => {
-    e.preventDefault();
-
-    if (password.length < 6) {
-      return Notify.warning('Password is require');
-    }
-    if (confirmPassword.length < 6) {
-      return Notify.warning('Confirm Password is require');
-    }
-
+  const onSubmit = ({password}) => {
     passwordAPI
       .createPasswordAPI(id, token, password)
       .then(res => setStatus(res.code))
@@ -68,20 +57,21 @@ const CreatePassword = () => {
           </Link>
         </div>
       ) : (
-        <Formik initialValues={initialValues} validationSchema={SignUpSchema}>
-          {({ errors, touched }) => (
-            <Form className={s.form} onSubmit={onSubmit}>
+        <Formik initialValues={initialValues} validationSchema={SignUpSchema} onSubmit={onSubmit}>
+          {({ values, errors, touched, handleChange, handleSubmit }) => (
+            <Form className={s.form} onSubmit={handleSubmit}>
               <label className={s.label}>
                 <Field
                   type="password"
                   name="password"
                   placeholder="Password"
+                  autoComplete="true"
                   className={classNames(s.input, {
                     [s.errorInput]: errors.password && touched.password,
                     [s.validInput]: !errors.password && touched.password,
                   })}
-                  onInput={e => setPassword(e.target.value)}
-                  value={password}
+                  onChange={handleChange}
+                  value={values.password}
                 />
                 <PasswordLock className={s.inputIcon} />
                 {!errors.password && touched.password && (
@@ -99,14 +89,16 @@ const CreatePassword = () => {
                   type="password"
                   name="passwordConfirm"
                   placeholder="Confirm password"
+                  autoComplete="true"
                   className={classNames(s.input, {
                     [s.errorInput]:
                       errors.passwordConfirm && touched.passwordConfirm,
                     [s.validInput]:
                       !errors.passwordConfirm && touched.passwordConfirm,
                   })}
-                  value={confirmPassword}
-                  onInput={e => setConfirmPassword(e.target.value)}
+                    value={values.confirmPassword}
+                    onChange={handleChange}
+
                 />
                 <PasswordLock className={s.inputIcon} />
                 {!errors.passwordConfirm && touched.passwordConfirm && (
@@ -119,7 +111,7 @@ const CreatePassword = () => {
                   <div className={s.errorField}>{errors.passwordConfirm}</div>
                 )}
                 <PasswordStrength
-                  password={password}
+                  password={values.password}
                   className={s.passwordStrength}
                 />
               </label>
