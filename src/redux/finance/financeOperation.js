@@ -87,10 +87,33 @@ export const addTransaction = createAsyncThunk(
   }
 );
 
+export const deleteTransaction = createAsyncThunk(
+  'finance/delete',
+  async (credentials, { rejectWithValue, dispatch }) => {
+    try {
+      const id = credentials;
+      console.log(id);
+      await axiosBaseUrl.delete(`transactions/${id}`);
+      const { data } = await axiosBaseUrl.get(`transactions?page=1&limit=20`);
+
+      const transactions = data.data.transactions;
+      const totalBalance = transactions[0]?.remainingBalance;
+      const quantityTransactions = data.data.transactionsCount;
+
+      return { transactions, totalBalance, quantityTransactions };
+    } catch (e) {
+      hardcoreLogout(e, dispatch);
+      Notify.failure(e.message);
+      return rejectWithValue(e.message);
+    }
+  }
+);
+
 const financeOperation = {
   addTransaction,
   updateTransactionsNew,
   updateTransactions,
+  deleteTransaction,
 };
 
 export default financeOperation;

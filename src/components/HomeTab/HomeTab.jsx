@@ -11,8 +11,13 @@ import { axiosBaseUrl } from '../../redux/tokenSettingsAxios';
 import { Loader } from 'components';
 import EllipsisText from 'react-ellipsis-text';
 import { Notify } from 'notiflix';
+import { useState } from 'react';
+import sprite from '../../assets/Images/login/symbol-defs.svg';
+import { FiEdit2 } from 'react-icons/fi';
+import { ImCross } from 'react-icons/im';
 
 const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
+  const [edit, setEdit] = useState(false);
   const dispatch = useDispatch();
   const transactionArea = useRef();
   const isLoading = useSelector(financeSelectors.isLoading);
@@ -97,6 +102,14 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
     return formatDate;
   }
 
+  function ShowDeleteButton() {
+    setEdit(current => !current);
+  }
+
+  function deleteTransaction(item) {
+    dispatch(financeOperation.deleteTransaction(item._id));
+  }
+
   return (
     <>
       {isLoading ? (
@@ -118,52 +131,90 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
           </div>
         </div>
       ) : (
-        <table className={s.table}>
-          <thead className={s.tableHeaderTh}>
-            <tr className={s.tableHeader}>
-              <th className={`${s.tableTitle} ${s.date}`}>Date</th>
-              <th className={`${s.tableTitle} ${s.type}`}>Type</th>
-              <th className={`${s.tableTitle} ${s.category}`}>Category</th>
-              <th className={`${s.tableTitle} ${s.comment}`}>Comment</th>
-              <th className={`${s.tableTitle} ${s.sum}`}>Sum</th>
-              <th className={`${s.tableTitle} ${s.balance}`}>Balance</th>
-            </tr>
-          </thead>
-          <tbody
-            className={s.tableContent}
-            onScroll={scrollHandler}
-            ref={transactionArea}
+        <div className={s.homeTabWrapper}>
+          <button
+            className={
+              edit
+                ? `${s.buttonShowDeleteYellow} ${s.buttonShowDelete}`
+                : s.buttonShowDelete
+            }
+            onClick={ShowDeleteButton}
           >
-            {sortedTransactions.map(item => (
-              <tr key={item._id} className={s.tableRow}>
-                <td className={`${s.tableRowItem} ${s.date}`}>
-                  {dateMaker(item)}
-                </td>
-                <td className={`${s.tableRowItem} ${s.type}`}>
-                  {typeChanger(item)}
-                </td>
-                <td className={`${s.tableRowItem} ${s.category}`}>
-                  {item.category?.name ? item.category.name : 'Income'}
-                </td>
-                <td className={`${s.tableRowItem} ${s.comment}`}>
-                  <EllipsisText
-                    text={item.comment || ''}
-                    length={16}
-                    onClick={() => {
-                      Notify.info(item.comment);
-                    }}
-                  />
-                </td>
-                <td className={colorOfSum(item)}>
-                  {(Math.round(item.amount * 100) / 100).toFixed(2)}
-                </td>
-                <td className={`${s.tableRowItem} ${s.balance}`}>
-                  {(Math.round(item.remainingBalance * 100) / 100).toFixed(2)}
-                </td>
+            {edit ? (
+              <ImCross color={'#ff6596'} size={14} />
+            ) : (
+              <FiEdit2 size={18} />
+            )}
+          </button>
+          <table className={s.table}>
+            <thead className={s.tableHeaderTh}>
+              <tr className={s.tableHeader}>
+                <th className={`${s.tableTitle} ${s.date}`}>Date</th>
+                <th className={`${s.tableTitle} ${s.type}`}>Type</th>
+                <th className={`${s.tableTitle} ${s.category}`}>Category</th>
+                <th className={`${s.tableTitle} ${s.comment}`}>Comment</th>
+                <th className={`${s.tableTitle} ${s.sum}`}>Sum</th>
+                <th className={`${s.tableTitle} ${s.balance}`}>Balance</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody
+              className={s.tableContent}
+              onScroll={scrollHandler}
+              ref={transactionArea}
+            >
+              {sortedTransactions.map(item => (
+                <tr key={item._id} className={s.tableRow}>
+                  {edit ? (
+                    <td className={s.deleteRow}>
+                      <button
+                        className={s.deleteButton}
+                        onClick={() => deleteTransaction(item)}
+                      >
+                        <svg className={s.deleteSVG}>
+                          <use href={`${sprite}#icon-delete`}></use>
+                        </svg>
+                      </button>
+                    </td>
+                  ) : (
+                    ''
+                  )}
+                  <td
+                    className={`${s.tableRowItem} ${s.date} ${s.textAllignLeft}`}
+                  >
+                    {dateMaker(item)}
+                  </td>
+                  <td
+                    className={`${s.tableRowItem} ${s.type} ${s.textAllignLeft} ${s.typePosition}`}
+                  >
+                    {typeChanger(item)}
+                  </td>
+                  <td
+                    className={`${s.tableRowItem} ${s.category} ${s.textAllignLeft}`}
+                  >
+                    {item.category?.name ? item.category.name : 'Income'}
+                  </td>
+                  <td
+                    className={`${s.tableRowItem} ${s.comment} ${s.textAllignLeft}`}
+                  >
+                    <EllipsisText
+                      text={item.comment || ''}
+                      length={16}
+                      onClick={() => {
+                        Notify.info(item.comment);
+                      }}
+                    />
+                  </td>
+                  <td className={colorOfSum(item)}>
+                    {(Math.round(item.amount * 100) / 100).toFixed(2)}
+                  </td>
+                  <td className={`${s.tableRowItem} ${s.balance}`}>
+                    {(Math.round(item.remainingBalance * 100) / 100).toFixed(2)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </>
   );

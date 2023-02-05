@@ -113,6 +113,7 @@ const HomeTabMobile = ({
     const formatDate = leftPart + rightPart;
     return formatDate;
   }
+
   return (
     <>
       <ul className={s.operationList}>
