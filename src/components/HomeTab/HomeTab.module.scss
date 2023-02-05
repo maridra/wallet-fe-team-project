@@ -1,5 +1,11 @@
 @import 'assets/styles/index.scss';
 
+.homeTabWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
 .table {
   display: block;
   width: 704px;
@@ -24,8 +30,14 @@
 .tableContent {
   display: block;
   max-height: 60vh;
-  overflow-y: auto;
   overflow-x: hidden;
+  overflow-y: auto;
+
+  @include mq(desk) {
+    float: right;
+    width: 740px;
+    padding-left: 26px;
+  }
 
   &::-webkit-scrollbar {
     width: 4px;
@@ -54,7 +66,36 @@
   }
 }
 
+.deleteRow {
+  width: 70px;
+  height: 50px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: -15px;
+}
+
+.deleteButton {
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 48%;
+  transform: translateY(-50%);
+  border: none;
+
+  &:hover {
+    fill: red;
+  }
+}
+
+.deleteSVG {
+  width: 25px;
+  height: 25px;
+}
+
 .tableRow {
+  position: relative;
   display: flex;
   width: 704px;
   height: 52px;
@@ -82,11 +123,11 @@
   line-height: 1.5;
 }
 
-.tableRowItem:nth-child(-n + 4) {
+.textAllignLeft {
   text-align: left;
 }
 
-.tableRowItem:nth-child(2) {
+.typePosition {
   padding-left: 16px;
 }
 
