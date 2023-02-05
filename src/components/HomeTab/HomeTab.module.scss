@@ -1,6 +1,7 @@
 @import 'assets/styles/index.scss';
 
 .homeTabWrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -96,11 +97,9 @@
 
   &:hover,
   &:focus {
-    background-color: #bcc1f7;
     cursor: pointer;
-    fill: red;
-    filter: drop-shadow(0px 1px 3px rgb(74, 86, 226));
-    border: 1px solid rgba(93, 106, 240, 0.8);
+    fill: #f72769;
+    filter: drop-shadow(0px 3px 9px rgb(74, 86, 226));
   }
 }
 
@@ -252,48 +251,30 @@
 }
 
 .buttonShowDelete {
-  text-align: center;
-  letter-spacing: 0.1em;
-  width: 300px;
-  height: 50px;
-  padding: 13px 0;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: -10px;
+  top: -5px;
+  padding: 0;
+  background-color: #dcdcdf;
   border-radius: 20px;
-  text-transform: uppercase;
-  margin-left: auto;
-  margin-right: auto;
+  border: none;
 
-  cursor: pointer;
-  background: var(--btn-green-color);
-  color: var(--btn-text-white);
   display: flex;
-  align-items: center;
   justify-content: center;
-  font-family: 'Circe';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 1.5;
-  border: 0;
-  position: relative;
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translate(0, 0);
+  align-items: center;
+  background-color: rgb(252, 252, 252);
+  border-radius: 50%;
+  border: 1px solid var(--text-modal-grey-color);
+  transition: filter 150ms linear, border 150ms linear;
 
   &:hover {
-    box-shadow: 0px 3px 15px 1px var(--btn-green-color-hover);
+    cursor: pointer;
+    filter: drop-shadow(0px 3px 9px rgb(74, 86, 226));
   }
 }
 
 .buttonShowDeleteYellow {
-  background: transparent;
-  border: 1px solid var(--btn-blue-color);
-  border-radius: 30px;
-  color: var(--btn-text-blue);
-  transition-duration: 150ms;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translate(0, 0);
-
-  &:hover {
-    box-shadow: 0px 3px 10px var(--btn-blue-color-hover);
-  }
+  filter: drop-shadow(0px 3px 9px rgb(74, 86, 226));
 }

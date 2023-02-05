@@ -13,6 +13,8 @@ import EllipsisText from 'react-ellipsis-text';
 import { Notify } from 'notiflix';
 import { useState } from 'react';
 import sprite from '../../assets/Images/login/symbol-defs.svg';
+import { FiEdit2 } from 'react-icons/fi';
+import { ImCross } from 'react-icons/im';
 
 const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
   const [edit, setEdit] = useState(false);
@@ -130,6 +132,20 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
         </div>
       ) : (
         <div className={s.homeTabWrapper}>
+          <button
+            className={
+              edit
+                ? `${s.buttonShowDeleteYellow} ${s.buttonShowDelete}`
+                : s.buttonShowDelete
+            }
+            onClick={ShowDeleteButton}
+          >
+            {edit ? (
+              <ImCross color={'#ff6596'} size={14} />
+            ) : (
+              <FiEdit2 size={18} />
+            )}
+          </button>
           <table className={s.table}>
             <thead className={s.tableHeaderTh}>
               <tr className={s.tableHeader}>
@@ -198,16 +214,6 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
               ))}
             </tbody>
           </table>
-          <button
-            className={
-              edit
-                ? `${s.buttonShowDeleteYellow} ${s.buttonShowDelete}`
-                : s.buttonShowDelete
-            }
-            onClick={ShowDeleteButton}
-          >
-            {edit ? <p>Cancel</p> : <p>Edit</p>}
-          </button>
         </div>
       )}
     </>
