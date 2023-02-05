@@ -138,11 +138,13 @@
 .rate {
   @include mq(tab-only) {
     position: absolute;
+    top: 0;
     left: 260px;
   }
 
   @include mq(desk) {
     position: absolute;
+    top: 0;
     left: 276px;
   }
 }
