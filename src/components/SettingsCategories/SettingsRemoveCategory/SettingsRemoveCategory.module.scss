@@ -93,7 +93,8 @@
     cursor: pointer;
   }
 
-  &:hover .svg {
+  &:hover .svg,
+  &:focus .svg {
     fill: rgb(255, 140, 140);
   }
 }

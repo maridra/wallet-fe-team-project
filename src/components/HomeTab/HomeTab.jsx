@@ -198,7 +198,14 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
               ))}
             </tbody>
           </table>
-          <button onClick={ShowDeleteButton}>
+          <button
+            className={
+              edit
+                ? `${s.buttonShowDeleteYellow} ${s.buttonShowDelete}`
+                : s.buttonShowDelete
+            }
+            onClick={ShowDeleteButton}
+          >
             {edit ? <p>Cancel</p> : <p>Edit</p>}
           </button>
         </div>
