@@ -58,7 +58,6 @@ export const authSlice = createSlice({
       .addCase(authOperations.logIn.pending, handlePending)
       .addCase(authOperations.logIn.rejected, handleRejected)
       .addCase(authOperations.logIn.fulfilled, (state, action) => {
-        /*         state.user = action.payload.data.user; */
         state.token = action.payload.data.token;
         state.loading = false;
         state.isAuth = true;
@@ -69,7 +68,6 @@ export const authSlice = createSlice({
       .addCase(authOperations.logOut.pending, handlePending)
       .addCase(authOperations.logOut.rejected, handleRejected)
       .addCase(authOperations.logOut.fulfilled, state => {
-        // state.user = initialState.user;
         state.token = initialState.token;
         state.loading = initialState.loading;
         state.error = initialState.error;
@@ -104,53 +102,6 @@ export const authSlice = createSlice({
         state.loading = false;
         state.token = action.payload.data.user.verificationToken;
       });
-
-    /* // ADD CATEGORY
-      .addCase(authOperations.addCategory.pending, handlePending)
-      .addCase(authOperations.addCategory.rejected, handleRejected)
-      .addCase(authOperations.addCategory.fulfilled, (state, { payload }) => {
-        state.loading = false;
-        state.user.categories = payload;
-      }) */
-
-    /*       // REMOVE CATEGORY
-      .addCase(authOperations.removeCategory.pending, handlePending)
-      .addCase(authOperations.removeCategory.rejected, handleRejected)
-      .addCase(
-        authOperations.removeCategory.fulfilled,
-        (state, { payload }) => {
-          state.loading = false;
-          state.user.categories = payload;
-        }
-      ) */
-
-    /*       // UPDATE AVATAR
-      .addCase(authOperations.updateAvatar.pending, state => {
-        state.avatarLoading = true;
-        state.error = null;
-      })
-      .addCase(authOperations.updateAvatar.rejected, (state, { payload }) => {
-        state.avatarLoading = false;
-        state.error = payload;
-      })
-      .addCase(authOperations.updateAvatar.fulfilled, (state, { payload }) => {
-        state.avatarLoading = false;
-        state.user.avatarURL = payload;
-      }); */
-
-    /*  // UPDATE USERNAME
-      .addCase(authOperations.updateUserName.pending, state => {
-        state.error = null;
-      })
-      .addCase(authOperations.updateUserName.rejected, (state, { payload }) => {
-        state.error = payload;
-      })
-      .addCase(
-        authOperations.updateUserName.fulfilled,
-        (state, { payload }) => {
-          state.user.firstName = payload;
-        }
-      ); */
   },
 });
 
