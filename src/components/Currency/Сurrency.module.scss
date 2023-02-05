@@ -74,12 +74,17 @@
 
 .bodyContainer {
   padding: 12px 20px;
+
+  @include mq(tab-only) {
+    padding: 16px 20px 12px 20px;
+  }
   @include mq(desk) {
     padding: 22px;
   }
 }
 
 .bodyList {
+  position: relative;
   display: flex;
   justify-content: space-between;
   margin: 0px 0px 12px 0px;
@@ -87,14 +92,26 @@
   line-height: calc(24 / 16);
   list-style: none;
 
+  @include mq(tab-only) {
+    justify-content: start;
+  }
+
   @include mq(desk) {
-    justify-content: space-around;
-    margin-bottom: 20px;
+    justify-content: start;
+    margin-bottom: 24px;
   }
 }
 
 .bodyData {
   padding-left: 3px;
+
+  @include mq(tab-only) {
+    margin-left: 95px;
+  }
+
+  @include mq(desk) {
+    margin-left: 77px;
+  }
 }
 
 .loader {
@@ -102,4 +119,32 @@
   justify-content: center;
   margin-top: 20px;
   opacity: 0.5;
+}
+
+.currency {
+  font-family: 'Circe';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+
+  color: #ffffff;
+
+  @include mq(desk) {
+    padding-left: 37px;
+  }
+}
+
+.rate {
+  @include mq(tab-only) {
+    position: absolute;
+    top: 0;
+    left: 260px;
+  }
+
+  @include mq(desk) {
+    position: absolute;
+    top: 0;
+    left: 276px;
+  }
 }

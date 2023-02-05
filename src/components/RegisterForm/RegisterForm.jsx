@@ -62,7 +62,7 @@ const RegisterForm = () => {
       .max(63)
       .required('Required field'),
     password: Yup.string()
-      .matches(/(^[a-zA-Z0-9]+$)/, "Can only include numbers and latin letters")
+      .matches(/(^[a-zA-Z0-9]+$)/, 'Only numbers and Latin letters are allowed')
       .min(6, 'Minimum 6 characters required')
       .max(12, 'Maximum 12 characters')
       .required('Required field'),

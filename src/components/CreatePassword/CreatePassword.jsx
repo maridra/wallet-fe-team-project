@@ -11,10 +11,9 @@ import passwordAPI from 'API/passwordRecoveryAPI';
 import { ReactComponent as PasswordLock } from '../../assets/Images/login/password_lock.svg';
 import sprite from '../../assets/Images/login/symbol-defs.svg';
 import s from '../CreatePassword/CreatePassword.module.scss';
+import { BiHide, BiShow } from 'react-icons/bi';
 
 const CreatePassword = () => {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [status, setStatus] = useState(null);
   const [searchParams] = useSearchParams();
 
@@ -26,25 +25,26 @@ const CreatePassword = () => {
     passwordConfirm: '',
   };
 
-  const onSubmit = e => {
-    e.preventDefault();
-
-    if (password.length < 6) {
-      return Notify.warning('Password is require');
-    }
-    if (confirmPassword.length < 6) {
-      return Notify.warning('Confirm Password is require');
-    }
-
+  const onSubmit = ({password}) => {
     passwordAPI
       .createPasswordAPI(id, token, password)
       .then(res => setStatus(res.code))
       .catch(error => Notify.failure(error.message));
   };
 
+  const [type, setType] = useState('password');
+
+  const showPassword = () => {
+    setType('text');
+  };
+
+  const hidePassword = () => {
+    setType('password');
+  };
+
   const SignUpSchema = Yup.object().shape({
     password: Yup.string()
-      .matches(/(^[a-zA-Z0-9]+$)/, "Can only include numbers and latin letters")
+      .matches(/(^[a-zA-Z0-9]+$)/, 'Only numbers and Latin letters are allowed')
       .min(6, 'Minimum 6 characters required')
       .max(12, 'Maximum 12 characters')
       .required('Required field'),
@@ -68,20 +68,21 @@ const CreatePassword = () => {
           </Link>
         </div>
       ) : (
-        <Formik initialValues={initialValues} validationSchema={SignUpSchema}>
-          {({ errors, touched }) => (
-            <Form className={s.form} onSubmit={onSubmit}>
+        <Formik initialValues={initialValues} validationSchema={SignUpSchema} onSubmit={onSubmit}>
+          {({ values, errors, touched, handleChange, handleSubmit }) => (
+            <Form className={s.form} onSubmit={handleSubmit}>
               <label className={s.label}>
                 <Field
-                  type="password"
+                  type={type}
                   name="password"
                   placeholder="Password"
+                  autoComplete="true"
                   className={classNames(s.input, {
                     [s.errorInput]: errors.password && touched.password,
                     [s.validInput]: !errors.password && touched.password,
                   })}
-                  onInput={e => setPassword(e.target.value)}
-                  value={password}
+                  onChange={handleChange}
+                  value={values.password}
                 />
                 <PasswordLock className={s.inputIcon} />
                 {!errors.password && touched.password && (
@@ -92,21 +93,40 @@ const CreatePassword = () => {
                 )}
                 {errors.password && touched.password && (
                   <div className={s.errorField}>{errors.password}</div>
-                )}
+                  )}
+                  {type === 'password' ? (
+                <span className={s.hideIcon}>
+                  <BiHide
+                    className={s.icon}
+                    onMouseDown={showPassword}
+                    onTouchStart={showPassword}
+                  />
+                </span>
+              ) : (
+                <span
+                  className={s.showIcon}
+                  onMouseUp={hidePassword}
+                  onTouchEnd={hidePassword}
+                >
+                  <BiShow className={s.icon} />
+                </span>
+              )}
               </label>
               <label className={s.label}>
                 <Field
                   type="password"
                   name="passwordConfirm"
                   placeholder="Confirm password"
+                  autoComplete="true"
                   className={classNames(s.input, {
                     [s.errorInput]:
                       errors.passwordConfirm && touched.passwordConfirm,
                     [s.validInput]:
                       !errors.passwordConfirm && touched.passwordConfirm,
                   })}
-                  value={confirmPassword}
-                  onInput={e => setConfirmPassword(e.target.value)}
+                    value={values.confirmPassword}
+                    onChange={handleChange}
+
                 />
                 <PasswordLock className={s.inputIcon} />
                 {!errors.passwordConfirm && touched.passwordConfirm && (
@@ -119,7 +139,7 @@ const CreatePassword = () => {
                   <div className={s.errorField}>{errors.passwordConfirm}</div>
                 )}
                 <PasswordStrength
-                  password={password}
+                  password={values.password}
                   className={s.passwordStrength}
                 />
               </label>
