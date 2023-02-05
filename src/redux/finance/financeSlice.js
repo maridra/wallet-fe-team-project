@@ -3,6 +3,7 @@ import {
   addTransaction,
   updateTransactionsNew,
   updateTransactions,
+  deleteTransaction,
 } from './financeOperation';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
@@ -59,6 +60,16 @@ export const financeSlice = createSlice({
         state.data = action.payload.rdyTransactions;
         state.totalBalance = action.payload.totalBalance;
         state.totalQuantityTransactions = action.payload.updatedCount;
+        state.isLoading = false;
+      })
+
+      .addCase(deleteTransaction.pending, handlePending)
+      .addCase(deleteTransaction.rejected, handleRejected)
+      .addCase(deleteTransaction.fulfilled, (state, action) => {
+        state.data = action.payload?.transactions;
+        state.totalBalance = action.payload?.totalBalance;
+        state.totalQuantityTransactions = action.payload?.quantityTransactions;
+        state.isLoggedIn = true;
         state.isLoading = false;
       });
   },

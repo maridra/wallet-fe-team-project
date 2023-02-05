@@ -32,6 +32,9 @@
   max-height: 60vh;
   overflow-x: hidden;
   overflow-y: auto;
+  float: right;
+  width: 728px;
+  padding-left: 26px;
 
   @include mq(desk) {
     float: right;
@@ -83,6 +86,7 @@
   top: 48%;
   transform: translateY(-50%);
   border: none;
+  background-color: transparent;
 
   &:hover {
     fill: red;

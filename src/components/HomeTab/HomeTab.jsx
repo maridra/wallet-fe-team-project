@@ -104,6 +104,10 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
     setEdit(current => !current);
   }
 
+  function deleteTransaction(item) {
+    dispatch(financeOperation.deleteTransaction(item._id));
+  }
+
   return (
     <>
       {isLoading ? (
@@ -144,13 +148,20 @@ const HomeTab = ({ currentPage, setCurrentPage, fetching, setFetching }) => {
             >
               {sortedTransactions.map(item => (
                 <tr key={item._id} className={s.tableRow}>
-                  <td className={s.deleteRow}>
-                    <button className={s.deleteButton}>
-                      <svg className={s.deleteSVG}>
-                        <use href={`${sprite}#icon-delete`}></use>
-                      </svg>
-                    </button>
-                  </td>
+                  {edit ? (
+                    <td className={s.deleteRow}>
+                      <button
+                        className={s.deleteButton}
+                        onClick={() => deleteTransaction(item)}
+                      >
+                        <svg className={s.deleteSVG}>
+                          <use href={`${sprite}#icon-delete`}></use>
+                        </svg>
+                      </button>
+                    </td>
+                  ) : (
+                    ''
+                  )}
                   <td
                     className={`${s.tableRowItem} ${s.date} ${s.textAllignLeft}`}
                   >
