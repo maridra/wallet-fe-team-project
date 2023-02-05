@@ -18,7 +18,7 @@ export const updateTransactionsNew = createAsyncThunk(
       return { transactions, totalBalance, quantityTransactions };
     } catch (e) {
       hardcoreLogout(e, dispatch);
-      Notify.failure(e.message, { position: 'center-top' });
+      Notify.failure(e.message);
       return rejectWithValue(e.message);
     }
   }

@@ -130,6 +130,29 @@
   }
 }
 
+.registerBtnLoading {
+  @extend %btnGreen;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  height: 50px;
+  margin-bottom: 20px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  padding-left: 61px;
+  padding-right: 55px;
+  
+    @include mq(tab) {
+      width: 300px;
+      padding-left: 71px;
+      padding-right: 65px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+}
+
 .loginBtn {
   @extend %btnTransperentBlue;
   height: 50px;

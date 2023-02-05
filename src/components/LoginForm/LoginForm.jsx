@@ -5,13 +5,15 @@ import sprite from '../../assets/Images/login/symbol-defs.svg';
 import { ReactComponent as Email } from '../../assets/Images/login/email.svg';
 import { ReactComponent as PasswordLock } from '../../assets/Images/login/password_lock.svg';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import authOperations from 'redux/auth/authOperations';
 import classNames from 'classnames';
 import { BiHide, BiShow } from 'react-icons/bi';
 
 import { ReactComponent as Google } from '../../assets/Images/login/google.svg';
+import { authSelectors } from 'redux/auth/authSelectors';
+import { Loader } from 'components';
 
 const LoginForm = () => {
   const initialValues = {
@@ -22,6 +24,7 @@ const LoginForm = () => {
   const dispatch = useDispatch();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const loading = useSelector(authSelectors.isLoading);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -129,9 +132,10 @@ const LoginForm = () => {
                 </span>
               )}
             </label>
-            <button type="submit" className={s.loginBtn}>
+            {loading === false ? <button type="submit" className={s.loginBtn}>
               log in
-            </button>
+            </button> : <button className={s.loginBtnLoading} disabled><Loader width='25' height='25'/>loading</button>}
+            
             <Link to="/SignUp" className={s.registerBtn}>
               register
             </Link>

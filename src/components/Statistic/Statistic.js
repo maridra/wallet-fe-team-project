@@ -201,7 +201,7 @@ const StatisticForm = () => {
                     </IconContext.Provider>
                   </div>
                   <div className={scss.allTransactionText}>
-                    Show transactions for the all period
+                    View all transactions statistics
                   </div>
                 </div>
               ) : (
