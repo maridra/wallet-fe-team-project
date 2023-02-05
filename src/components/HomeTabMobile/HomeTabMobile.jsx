@@ -185,12 +185,12 @@ const HomeTabMobile = ({
                   </span>
                 </li>
                 <li className={`${userColorUi(item)}`}>
-                  <span className={s.mobileTableHeader}>Edit</span>
+                  <span className={s.mobileTableHeader}>Delete</span>
                   <button
                     className={s.mobileDelete}
                     onClick={() => deleteTransaction(item)}
                   >
-                    <MdDelete size={25} />
+                    <MdDelete size={25} fill={'rgb(110, 120, 232)'} />
                   </button>
                 </li>
               </ul>
