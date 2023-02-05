@@ -120,6 +120,25 @@
   }
 }
 
+.loginBtnLoading {
+@extend %btnGreen;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  height: 50px;
+  margin-bottom: 20px;
+  padding: 13px 98px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+
+  @include mq(tab) {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2px;
+  }
+}
+
 .registerBtn {
   @extend %btnTransperentBlue;
   display: block;
