@@ -8,13 +8,15 @@ import { ReactComponent as Name } from '../../assets/Images/login/name.svg';
 import PasswordStrength from './PasswordStrength';
 import { Link } from 'react-router-dom';
 import sprite from '../../assets/Images/login/symbol-defs.svg';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import authOperations from 'redux/auth/authOperations';
 import classNames from 'classnames';
 import { toggleShowModalSuccessRegistration } from 'redux/modal/modalSlice';
 import { BiHide, BiShow } from 'react-icons/bi';
 
 import { ReactComponent as Google } from '../../assets/Images/login/google.svg';
+import { authSelectors } from 'redux/auth/authSelectors';
+import { Loader } from 'components';
 
 const RegisterForm = () => {
   const initialValues = {
@@ -24,6 +26,7 @@ const RegisterForm = () => {
     firstName: '',
   };
   const dispatch = useDispatch();
+  const loading = useSelector(authSelectors.isLoading);
 
   const onSubmit = ({ email, password, firstName }) => {
     const user = {
@@ -209,9 +212,9 @@ const RegisterForm = () => {
                 <div className={s.errorField}>{errors.firstName}</div>
               )}
             </label>
-            <button type="submit" className={s.registerBtn}>
+            {loading === false ? <button type="submit" className={s.registerBtn}>
               register
-            </button>
+            </button> : <button className={s.registerBtnLoading} disabled><Loader width='25' height='25'/>loading</button>}
             <Link to="/login" className={s.loginBtn}>
               log in
             </Link>
