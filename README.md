@@ -1,4 +1,4 @@
-## Command project - Leopards - (React.js + Node.js) [Presentation](https://docs.google.com/presentation/d/1ghHmu4KxqoAxRfyjh7vbxmoD73I836FVUIqyNHDuXu4/edit?usp=sharing).
+## Team project - Leopards - (React.js + Node.js) [Presentation](https://docs.google.com/presentation/d/1ghHmu4KxqoAxRfyjh7vbxmoD73I836FVUIqyNHDuXu4/edit?usp=sharing).
 
 ### Link to the repository with the backend - [wallet-leopards-team-BACKEND](https://github.com/jekiekolya/wallet-leopards-team-BACKEND).
 
